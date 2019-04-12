@@ -60,6 +60,23 @@ import org.jrimum.vallia.AbstractCPRFValidator.TipoDeCPRF;
  */
 public class CPF extends AbstractCPRF {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5910970842832308496L;
+
+	public CPF(String strCPF) {
+
+		this.autenticadorCP = AbstractCPRFValidator.create(strCPF);
+
+		if (autenticadorCP.isValido()) {
+			init(autenticadorCP.getCodigoDoCadastro());
+		} else {
+			throw new CPFException(new IllegalArgumentException(
+					"O cadastro de pessoa [ " + strCPF + " ] não é válido."));
+		}
+	}
+
 	public CPF(Long numCPF) {
 
 		try {
@@ -69,6 +86,12 @@ public class CPF extends AbstractCPRF {
 
 				this.autenticadorCP = AbstractCPRFValidator.create(fillWithZeroLeft(numCPF, 11));
 
+				if (autenticadorCP.isValido())
+					init(autenticadorCP.getCodigoDoCadastro());
+				else
+					throw new IllegalArgumentException(
+							"O cadastro de pessoa [ " + strCPF
+									+ " ] não é válido.");
 				if (autenticadorCP.isValido()){
 					
 					initFromNumber(numCPF);
