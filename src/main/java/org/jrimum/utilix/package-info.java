@@ -1,5 +1,5 @@
 /*
- * Copyright 2008 JRimum Project
+ * Copyright 2010 JRimum Project
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -9,11 +9,11 @@
  * OF ANY KIND, either express or implied. See the License for the specific
  * language governing permissions and limitations under the License.
  * 
- * Created at: 30/03/2008 - 19:10:51
+ * Created at: 15/08/2010 - 15:37:49
  * 
  * ================================================================================
  * 
- * Direitos autorais 2008 JRimum Project
+ * Direitos autorais 2010 JRimum Project
  * 
  * Licenciado sob a Licença Apache, Versão 2.0 ("LICENÇA"); você não pode usar
  * esse arquivo exceto em conformidade com a esta LICENÇA. Você pode obter uma
@@ -23,45 +23,13 @@
  * TIPO, sejam expressas ou tácitas. Veja a LICENÇA para a redação específica a
  * reger permissões e limitações sob esta LICENÇA.
  * 
- * Criado em: 30/03/2008 - 19:10:51
+ * Criado em: 15/08/2010 - 15:37:49
  * 
  */
-
-package br.com.nordestefomento.jrimum.utilix;
-
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-
 
 /**
+ * Classes utilitárias ou de propósito comum, que são necessárias ao projeto.
  * 
- * <p>
- * Classe responsável pela execução do conjunto de testes do projeto <em>Utilix</em>
- * </p>
- * 
- * 
- * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
- * 
- * @since 0.2
- * 
- * @version 0.2
+ * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
  */
-	
-@RunWith(Suite.class)
-@Suite.SuiteClasses
-( 
-		{ 
-			TestField.class,
-			TestFiller.class,
-			TestDateUtil.class,
-			TestMonetaryId.class,
-			TestPDFUtil.class,
-			TestStringUtil.class
-		}
-)
-public class TestSuiteUtilix {
-	/*
-	 * The class remains completely empty, being used only as a holder for the
-	 * above annotations
-	 */
-}
+package org.jrimum.utilix;
