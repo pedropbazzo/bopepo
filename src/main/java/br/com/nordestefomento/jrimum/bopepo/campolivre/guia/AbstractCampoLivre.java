@@ -35,9 +35,9 @@ import static br.com.nordestefomento.jrimum.utilix.ObjectUtil.isNull;
 import org.apache.log4j.Logger;
 
 import br.com.nordestefomento.jrimum.bopepo.guia.BancoSuportado;
-import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia.Arrecadacao;
-import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia.Convenio;
-import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia.TipoSeguimento;
+import org.jrimum.domkee.financeiro.banco.febraban.guia.Arrecadacao;
+import org.jrimum.domkee.financeiro.banco.febraban.guia.Convenio;
+import org.jrimum.domkee.financeiro.banco.febraban.guia.TipoSeguimento;
 import br.com.nordestefomento.jrimum.utilix.AbstractLineOfFields;
 import br.com.nordestefomento.jrimum.utilix.ObjectUtil;
 

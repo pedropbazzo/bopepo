@@ -30,7 +30,7 @@
 
 package br.com.nordestefomento.jrimum.bopepo.campolivre.guia;
 
-import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia.Arrecadacao;
+import org.jrimum.domkee.financeiro.banco.febraban.guia.Arrecadacao;
 import br.com.nordestefomento.jrimum.utilix.DateUtil;
 import br.com.nordestefomento.jrimum.utilix.Field;
 import br.com.nordestefomento.jrimum.utilix.Filler;

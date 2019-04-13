@@ -30,7 +30,7 @@
 	
 package br.com.nordestefomento.jrimum.bopepo.guia;
 
-import br.com.nordestefomento.jrimum.JRimumException;
+
 
 
 /**
@@ -43,7 +43,7 @@ import br.com.nordestefomento.jrimum.JRimumException;
  * 
  * @author misael
  * 
- * @see br.com.nordestefomento.jrimum.JRimumException
+ * @see br.com.nordestefomento.jrimum.RuntimeException
  * @see br.com.nordestefomento.jrimum.bopepo.GuiaException
  * 
  * @since 0.2
@@ -51,7 +51,7 @@ import br.com.nordestefomento.jrimum.JRimumException;
  * @version 0.2
  */
 
-public class GuiaException extends JRimumException {
+public class GuiaException extends RuntimeException {
 	/**
 	 * 
 	 */

@@ -5,7 +5,7 @@ package br.com.nordestefomento.jrimum.bopepo.campolivre.guia;
 
 import org.apache.commons.lang.StringUtils;
 
-import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia.TipoSeguimento;
+import org.jrimum.domkee.financeiro.banco.febraban.guia.TipoSeguimento;
 
 /**
  * @author misael

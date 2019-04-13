@@ -31,7 +31,7 @@
 	
 package br.com.nordestefomento.jrimum.bopepo.guia;
 
-import br.com.nordestefomento.jrimum.JRimumException;
+
 
 
 /**
@@ -44,14 +44,14 @@ import br.com.nordestefomento.jrimum.JRimumException;
  * @author <a href="mailto:misaelbarreto@gmail.com">Misael Barreto</a> 
  * @author <a href="mailto:romulomail@gmail.com">Rômulo Augusto</a>
  * 
- * @see br.com.nordestefomento.jrimum.JRimumException
+ * @see br.com.nordestefomento.jrimum.RuntimeException
  * @see br.com.nordestefomento.jrimum.bopepo.guia.CodigoDeBarras
  * 
  * @since 0.3
  * 
  * @version 0.3
  */
-public class LinhaDigitavelException extends JRimumException {
+public class LinhaDigitavelException extends RuntimeException {
 
 	/**
 	 * 

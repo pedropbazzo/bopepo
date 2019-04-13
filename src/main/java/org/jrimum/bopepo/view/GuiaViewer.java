@@ -87,25 +87,25 @@ public class GuiaViewer {
      * @throws DocumentException
      * @throws IOException
      */
-    public GuiaViewer(Guia guia) throws JRimumException {
+    public GuiaViewer(Guia guia) throws RuntimeException {
         initViewerPDF(null, null, guia);
     }
 
     /**
      * @param guia
      * @param templatePathName
-     * @throws JRimumException
+     * @throws RuntimeException
      */
-    public GuiaViewer(Guia guia, String templatePathName) throws JRimumException {
+    public GuiaViewer(Guia guia, String templatePathName) throws RuntimeException {
         initViewerPDF(templatePathName, null, guia);
     }
 
     /**
      * @param guia
      * @param template
-     * @throws JRimumException
+     * @throws RuntimeException
      */
-    public GuiaViewer(Guia guia, File template) throws JRimumException {
+    public GuiaViewer(Guia guia, File template) throws RuntimeException {
         initViewerPDF(null, template, guia);
     }
 
@@ -125,11 +125,11 @@ public class GuiaViewer {
      * @param pathName Caminho no qual será gerado o pdf
      * @param guias Guias a serem agrupadas
      * @return Arquivo pdf
-     * @throws JRimumException
+     * @throws RuntimeException
      *
      * @since 0.2
      */
-    public static File groupInOnePDF(String pathName, List<Guia> guias) throws JRimumException {
+    public static File groupInOnePDF(String pathName, List<Guia> guias) throws RuntimeException {
 
         File group = null;
 
@@ -140,7 +140,7 @@ public class GuiaViewer {
         return group;
     }
 
-    public static File groupInOnePDF(String destPathName, List<Guia> guias, String templatePathName) throws JRimumException {
+    public static File groupInOnePDF(String destPathName, List<Guia> guias, String templatePathName) throws RuntimeException {
 
         File group = null;
 
@@ -151,7 +151,7 @@ public class GuiaViewer {
         return group;
     }
 
-    public static File groupInOnePDF(String destPathName, List<Guia> guias, File templateFile) throws JRimumException {
+    public static File groupInOnePDF(String destPathName, List<Guia> guias, File templateFile) throws RuntimeException {
 
         File group = null;
 
@@ -171,11 +171,11 @@ public class GuiaViewer {
      * @param extensao TODO
      * @param guias Guias a partir dos quais serão gerados os arquivos
      * @return Vários arquivos pdf
-     * @throws JRimumException
+     * @throws RuntimeException
      *
      * @since 0.2
      */
-    public static List<File> onePerPDF(String path, String extensao, List<Guia> guias) throws JRimumException {
+    public static List<File> onePerPDF(String path, String extensao, List<Guia> guias) throws RuntimeException {
 
         List<File> files = new ArrayList<File>();
 

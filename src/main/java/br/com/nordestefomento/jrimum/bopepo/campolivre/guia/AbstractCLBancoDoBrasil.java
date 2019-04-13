@@ -30,8 +30,8 @@
 
 package br.com.nordestefomento.jrimum.bopepo.campolivre.guia;
 
-import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia.Arrecadacao;
-import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia.TipoSeguimento;
+import org.jrimum.domkee.financeiro.banco.febraban.guia.Arrecadacao;
+import org.jrimum.domkee.financeiro.banco.febraban.guia.TipoSeguimento;
 
 /**
  * 

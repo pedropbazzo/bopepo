@@ -37,9 +37,9 @@ import org.apache.log4j.Logger;
 
 import br.com.nordestefomento.jrimum.bopepo.campolivre.guia.CampoLivre;
 import br.com.nordestefomento.jrimum.domkee.comum.pessoa.id.cprf.CNPJ;
-import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia.Arrecadacao;
-import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia.CodigoDeIdentificacaoFebraban;
-import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia.TipoSeguimento;
+import org.jrimum.domkee.financeiro.banco.febraban.guia.Arrecadacao;
+import org.jrimum.domkee.financeiro.banco.febraban.guia.CodigoDeIdentificacaoFebraban;
+import org.jrimum.domkee.financeiro.banco.febraban.guia.TipoSeguimento;
 import br.com.nordestefomento.jrimum.utilix.AbstractLineOfFields;
 import br.com.nordestefomento.jrimum.utilix.Field;
 import br.com.nordestefomento.jrimum.utilix.Filler;

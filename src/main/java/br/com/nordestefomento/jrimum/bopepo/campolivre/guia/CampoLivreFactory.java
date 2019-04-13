@@ -32,8 +32,8 @@ package br.com.nordestefomento.jrimum.bopepo.campolivre.guia;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
-import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia.Arrecadacao;
-import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia.TipoSeguimento;
+import org.jrimum.domkee.financeiro.banco.febraban.guia.Arrecadacao;
+import org.jrimum.domkee.financeiro.banco.febraban.guia.TipoSeguimento;
 import br.com.nordestefomento.jrimum.utilix.Field;
 import br.com.nordestefomento.jrimum.utilix.Filler;
 import br.com.nordestefomento.jrimum.utilix.ObjectUtil;

@@ -30,7 +30,7 @@
 	
 package br.com.nordestefomento.jrimum.bopepo.campolivre.guia;
 
-import br.com.nordestefomento.jrimum.JRimumException;
+
 
 /**
  * 
@@ -43,14 +43,14 @@ import br.com.nordestefomento.jrimum.JRimumException;
  * 
  * @author Misael Barreto
  * 
- * @see br.com.nordestefomento.jrimum.JRimumException
+ * @see br.com.nordestefomento.jrimum.RuntimeException
  * @see br.com.nordestefomento.jrimum.bopepo.campolivre.guia.CampoLivre
  * 
  * @since 0.3
  * 
  * @version 0.3
  */
-public class CampoLivreException extends JRimumException {
+public class CampoLivreException extends RuntimeException {
 	/**
 	 * 
 	 */

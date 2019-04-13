@@ -49,11 +49,11 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.log4j.Logger;
 
-import br.com.nordestefomento.jrimum.JRimumException;
+
 import br.com.nordestefomento.jrimum.bopepo.guia.BancoSuportado;
-import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia.Convenio;
-import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia.OrgaoRecebedor;
-import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia.TipoValorReferencia;
+import org.jrimum.domkee.financeiro.banco.febraban.guia.Convenio;
+import org.jrimum.domkee.financeiro.banco.febraban.guia.OrgaoRecebedor;
+import org.jrimum.domkee.financeiro.banco.febraban.guia.TipoValorReferencia;
 import br.com.nordestefomento.jrimum.utilix.DateUtil;
 import br.com.nordestefomento.jrimum.utilix.FileUtil;
 import br.com.nordestefomento.jrimum.utilix.MonetaryUtil;
@@ -143,7 +143,7 @@ class ViewerPDF {
 	 *            
 	 * @return File contendo guias geradas.
 	 * 
-	 * @throws JRimumException
+	 * @throws RuntimeException
 	 *             Quando ocorrer um problema na geração do PDF que está fora do
 	 *             controle da biblioteca.
 	 * 
@@ -169,7 +169,7 @@ class ViewerPDF {
 
 			log.error("Erro durante geração do PDF." + e.getLocalizedMessage(),
 					e);
-			throw new JRimumException(
+			throw new RuntimeException(
 					"Erro durante geração do PDF. Causado por "
 							+ e.getLocalizedMessage(), e);
 
@@ -177,7 +177,7 @@ class ViewerPDF {
 
 			log.error("Erro durante geração do PDF." + e.getLocalizedMessage(),
 					e);
-			throw new JRimumException(
+			throw new RuntimeException(
 					"Erro durante geração do PDF. Causado por "
 							+ e.getLocalizedMessage(), e);
 		}
@@ -232,7 +232,7 @@ class ViewerPDF {
 
 			log.error("Erro ao tentar acessar arquivo inexistente. "
 					+ e.getLocalizedMessage(), e);
-			throw new JRimumException(
+			throw new RuntimeException(
 					"Erro ao tentar acessar arquivo inexistente: [" + pathName
 							+ "]. " + "Causado por " + e.getLocalizedMessage(),
 					e);
@@ -241,7 +241,7 @@ class ViewerPDF {
 
 			log.error("Erro durante a criação do arquivo. "
 					+ e.getLocalizedMessage(), e);
-			throw new JRimumException("Erro durante a criação do arquivo: ["
+			throw new RuntimeException("Erro durante a criação do arquivo: ["
 					+ pathName + "]. " + "Causado por "
 					+ e.getLocalizedMessage(), e);
 
@@ -249,7 +249,7 @@ class ViewerPDF {
 
 			log.error("Erro durante a criação do arquivo. "
 					+ e.getLocalizedMessage(), e);
-			throw new JRimumException("Erro durante a criação do arquivo: ["
+			throw new RuntimeException("Erro durante a criação do arquivo: ["
 					+ pathName + "]. " + "Causado por "
 					+ e.getLocalizedMessage(), e);
 		}
@@ -258,7 +258,7 @@ class ViewerPDF {
 	}
 
 	/**
-	 * @throws JRimumException
+	 * @throws RuntimeException
 	 * 
 	 * @return
 	 */
@@ -276,14 +276,14 @@ class ViewerPDF {
 
 			log.error("Erro durante a criação do stream. "
 					+ e.getLocalizedMessage(), e);
-			throw new JRimumException("Erro durante a criação do stream. "
+			throw new RuntimeException("Erro durante a criação do stream. "
 					+ "Causado por " + e.getLocalizedMessage(), e);
 
 		} catch (DocumentException e) {
 
 			log.error("Erro durante a criação do stream. "
 					+ e.getLocalizedMessage(), e);
-			throw new JRimumException("Erro durante a criação do stream. "
+			throw new RuntimeException("Erro durante a criação do stream. "
 					+ "Causado por " + e.getLocalizedMessage(), e);
 		}
 
@@ -291,7 +291,7 @@ class ViewerPDF {
 	}
 
 	/**
-	 * @throws JRimumException
+	 * @throws RuntimeException
 	 * 
 	 * @return
 	 */
@@ -309,14 +309,14 @@ class ViewerPDF {
 
 			log.error("Erro durante a criação do stream. "
 					+ e.getLocalizedMessage(), e);
-			throw new JRimumException("Erro durante a criação do stream. "
+			throw new RuntimeException("Erro durante a criação do stream. "
 					+ "Causado por " + e.getLocalizedMessage(), e);
 
 		} catch (DocumentException e) {
 
 			log.error("Erro durante a criação do stream. "
 					+ e.getLocalizedMessage(), e);
-			throw new JRimumException("Erro durante a criação do stream. "
+			throw new RuntimeException("Erro durante a criação do stream. "
 					+ "Causado por " + e.getLocalizedMessage(), e);
 		}
 
