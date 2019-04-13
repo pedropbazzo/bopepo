@@ -42,6 +42,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import com.lowagie.text.DocumentException;
+import static org.jrimum.utilix.Objects.isNotNull;
 
 /**
  *
@@ -179,7 +180,7 @@ public class GuiaViewer {
 
         List<File> files = new ArrayList<File>();
 
-        if (isNotNull(path, "path") && isNotNull(guias, "guias")) {
+        if (isNotNull(path) && isNotNull(guias)) {
 
             if (StringUtils.isNotBlank(path)) {
 
@@ -337,7 +338,7 @@ public class GuiaViewer {
      */
     public GuiaViewer setGuia(Guia guia) {
 
-        if (isNotNull(guia, "guia")) {
+        if (isNotNull(guia)) {
             updateViewerPDF(guia);
         }
 
@@ -348,7 +349,7 @@ public class GuiaViewer {
 
         boolean ok = false;
 
-        if (isNotNull(pathName, "pathName")) {
+        if (isNotNull(pathName)) {
 
             if (StringUtils.isNotBlank(pathName)) {
                 ok = true;
@@ -377,7 +378,7 @@ public class GuiaViewer {
 
         boolean ok = false;
 
-        if (isNotNull(guias, "guias")) {
+        if (isNotNull(guias)) {
 
             if (!guias.isEmpty()) {
                 ok = true;
@@ -397,7 +398,7 @@ public class GuiaViewer {
 
     private void initViewerPDF(String templatePathName, File template, Guia guia) {
 
-        if (isNotNull(guia, "guia")) {
+        if (isNotNull(guia)) {
             this.viewerPDF = new ViewerPDF(guia);
         }
 

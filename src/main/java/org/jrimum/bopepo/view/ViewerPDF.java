@@ -26,13 +26,9 @@
  * Criado em: 30/03/2008 - 18:05:16
  * 
  */
-
 package org.jrimum.bopepo.view;
 
 import org.jrimum.bopepo.Guia;
-import org.jrimum.bopepo.view.GuiaViewer;
-import static br.com.nordestefomento.jrimum.utilix.ObjectUtil.isNotNull;
-import static br.com.nordestefomento.jrimum.utilix.ObjectUtil.isNull;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -49,16 +45,9 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.log4j.Logger;
 
-
-import br.com.nordestefomento.jrimum.bopepo.guia.BancoSuportado;
 import org.jrimum.domkee.financeiro.banco.febraban.guia.Convenio;
 import org.jrimum.domkee.financeiro.banco.febraban.guia.OrgaoRecebedor;
 import org.jrimum.domkee.financeiro.banco.febraban.guia.TipoValorReferencia;
-import br.com.nordestefomento.jrimum.utilix.DateUtil;
-import br.com.nordestefomento.jrimum.utilix.FileUtil;
-import br.com.nordestefomento.jrimum.utilix.MonetaryUtil;
-import br.com.nordestefomento.jrimum.utilix.PDFUtil;
-import br.com.nordestefomento.jrimum.utilix.RectanglePDF;
 
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.Image;
@@ -67,695 +56,692 @@ import com.lowagie.text.pdf.BarcodeInter25;
 import com.lowagie.text.pdf.PdfContentByte;
 import com.lowagie.text.pdf.PdfReader;
 import com.lowagie.text.pdf.PdfStamper;
+import org.jrimum.bopepo.BancosSuportados;
+import org.jrimum.utilix.DateUtil;
+import org.jrimum.utilix.FileUtil;
+import org.jrimum.utilix.MonetaryUtil;
+import static org.jrimum.utilix.Objects.isNotNull;
+import static org.jrimum.utilix.Objects.isNull;
+import org.jrimum.utilix.PDFUtil;
+import org.jrimum.utilix.RectanglePDF;
 
 /**
- * 
+ *
  * <p>
  * DEFINIÇÃO DA CLASSE
  * </p>
- * 
+ *
  * <p>
  * OBJETIVO/PROPÓSITO
  * </p>
- * 
+ *
  * <p>
  * EXEMPLO:
  * </p>
- * 
+ *
  * @author misael
- * 
+ *
  * @since 0.3
- * 
+ *
  * @version 0.3
  */
 class ViewerPDF {
 
-	// TODO Teste no teste unitário.
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
-	private static Logger log = Logger.getLogger(ViewerPDF.class);
-
-	private static URL TEMPLATE_PADRAO = ViewerPDF.class.getResource("/pdf/GuiaTemplate.pdf");
-	private static URL TEMPLATE_PADRAO_SEM_BANCO = ViewerPDF.class.getResource("/pdf/GuiaTemplateSemBanco.pdf");
-
-	private PdfReader reader;
-	private PdfStamper stamper;
-	private AcroFields form;
-
-	private ByteArrayOutputStream outputStream;
-
-	private Guia guia;
-
-	private File template;
-
-	/**
-	 *<p>
-	 * Para uso interno do componente
-	 * </p>
-	 */
-	ViewerPDF() {
-	}
-
-	ViewerPDF(Guia guia) {
-		this.guia = guia;
-	}
-
-	ViewerPDF(Guia guia, File template) {
-		this.guia = guia;
-		setTemplate(template);
-	}
-
-	/**
-	 * <p>
-	 * SOBRE O MÉTODO
-	 * </p>
-	 * 
-	 * @param pathName
-	 *            arquivo de destino
-	 * @param guias
-	 *            a serem agrupados
-	 * @param guiaViewer
-	 *            visualizador
-	 *            
-	 * @return File contendo guias geradas.
-	 * 
-	 * @throws RuntimeException
-	 *             Quando ocorrer um problema na geração do PDF que está fora do
-	 *             controle da biblioteca.
-	 * 
-	 * @since 0.3
-	 */
-	protected static File groupInOnePDF(String pathName, List<Guia> guias,
-			GuiaViewer guiaViewer) {
-
-		File arq = null;
-
-		List<byte[]> guiasEmBytes = new ArrayList<byte[]>(guias.size());
-
-		for (Guia guia : guias) {
-			guiasEmBytes.add(guiaViewer.setGuia(guia).getPdfAsByteArray());
-		}
-
-		try {
-
-			arq = FileUtil.bytes2File(pathName, PDFUtil
-					.mergeFiles(guiasEmBytes));
-
-		} catch (FileNotFoundException e) {
-
-			log.error("Erro durante geração do PDF." + e.getLocalizedMessage(),
-					e);
-			throw new RuntimeException(
-					"Erro durante geração do PDF. Causado por "
-							+ e.getLocalizedMessage(), e);
-
-		} catch (IOException e) {
-
-			log.error("Erro durante geração do PDF." + e.getLocalizedMessage(),
-					e);
-			throw new RuntimeException(
-					"Erro durante geração do PDF. Causado por "
-							+ e.getLocalizedMessage(), e);
-		}
-
-		return arq;
-	}
-
-	/**
-	 * <p>
-	 * SOBRE O MÉTODO
-	 * </p>
-	 * 
-	 * @param path
-	 * @param extensao
-	 *            TODO
-	 * @param guias
-	 * @return List<File> com os boletos gerados.
-	 * 
-	 * @since 0.2
-	 */
-	protected static List<File> onePerPDF(String path, String extensao,
-			List<Guia> guias) {
+    // TODO Teste no teste unitário.
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
+
+    private static Logger log = Logger.getLogger(ViewerPDF.class);
+
+    private static URL TEMPLATE_PADRAO = ViewerPDF.class.getResource("/pdf/GuiaTemplate.pdf");
+    private static URL TEMPLATE_PADRAO_SEM_BANCO = ViewerPDF.class.getResource("/pdf/GuiaTemplateSemBanco.pdf");
+
+    private PdfReader reader;
+    private PdfStamper stamper;
+    private AcroFields form;
+
+    private ByteArrayOutputStream outputStream;
+
+    private Guia guia;
+
+    private File template;
+
+    /**
+     * <p>
+     * Para uso interno do componente
+     * </p>
+     */
+    ViewerPDF() {
+    }
+
+    ViewerPDF(Guia guia) {
+        this.guia = guia;
+    }
+
+    ViewerPDF(Guia guia, File template) {
+        this.guia = guia;
+        setTemplate(template);
+    }
+
+    /**
+     * <p>
+     * SOBRE O MÉTODO
+     * </p>
+     *
+     * @param pathName arquivo de destino
+     * @param guias a serem agrupados
+     * @param guiaViewer visualizador
+     *
+     * @return File contendo guias geradas.
+     *
+     * @throws RuntimeException Quando ocorrer um problema na geração do PDF que
+     * está fora do controle da biblioteca.
+     *
+     * @since 0.3
+     */
+    protected static File groupInOnePDF(String pathName, List<Guia> guias,
+            GuiaViewer guiaViewer) {
+
+        File arq = null;
+
+        List<byte[]> guiasEmBytes = new ArrayList<byte[]>(guias.size());
+
+        for (Guia guia : guias) {
+            guiasEmBytes.add(guiaViewer.setGuia(guia).getPdfAsByteArray());
+        }
+
+        try {
+
+            arq = FileUtil.bytes2File(pathName, PDFUtil
+                    .mergeFiles(guiasEmBytes));
+
+        } catch (FileNotFoundException e) {
+
+            log.error("Erro durante geração do PDF." + e.getLocalizedMessage(),
+                    e);
+            throw new RuntimeException(
+                    "Erro durante geração do PDF. Causado por "
+                    + e.getLocalizedMessage(), e);
+
+        } catch (IOException e) {
+
+            log.error("Erro durante geração do PDF." + e.getLocalizedMessage(),
+                    e);
+            throw new RuntimeException(
+                    "Erro durante geração do PDF. Causado por "
+                    + e.getLocalizedMessage(), e);
+        }
+
+        return arq;
+    }
+
+    /**
+     * <p>
+     * SOBRE O MÉTODO
+     * </p>
+     *
+     * @param path
+     * @param extensao TODO
+     * @param guias
+     * @return List<File> com os boletos gerados.
+     *
+     * @since 0.2
+     */
+    protected static List<File> onePerPDF(String path, String extensao,
+            List<Guia> guias) {
 
-		List<File> arquivos = new ArrayList<File>(guias.size());
-		int cont = 1;
+        List<File> arquivos = new ArrayList<File>(guias.size());
+        int cont = 1;
 
-		for (Guia guia : guias) {
-			arquivos.add(new GuiaViewer(guia).getPdfAsFile(path + "Guia"
-					+ cont++ + extensao));
-		}
+        for (Guia guia : guias) {
+            arquivos.add(new GuiaViewer(guia).getPdfAsFile(path + "Guia"
+                    + cont++ + extensao));
+        }
 
-		return arquivos;
-	}
+        return arquivos;
+    }
 
-	/**
-	 * 
-	 * @param pathName
-	 * @return
-	 * @throws IllegalArgumentException
-	 */
-	protected File getFile(String pathName) {
+    /**
+     *
+     * @param pathName
+     * @return
+     * @throws IllegalArgumentException
+     */
+    protected File getFile(String pathName) {
 
-		File file = null;
+        File file = null;
 
-		try {
+        try {
 
-			processarPdf();
+            processarPdf();
 
-			file = FileUtil.bytes2File(pathName, outputStream.toByteArray());
+            file = FileUtil.bytes2File(pathName, outputStream.toByteArray());
 
-		} catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
 
-			log.error("Erro ao tentar acessar arquivo inexistente. "
-					+ e.getLocalizedMessage(), e);
-			throw new RuntimeException(
-					"Erro ao tentar acessar arquivo inexistente: [" + pathName
-							+ "]. " + "Causado por " + e.getLocalizedMessage(),
-					e);
+            log.error("Erro ao tentar acessar arquivo inexistente. "
+                    + e.getLocalizedMessage(), e);
+            throw new RuntimeException(
+                    "Erro ao tentar acessar arquivo inexistente: [" + pathName
+                    + "]. " + "Causado por " + e.getLocalizedMessage(),
+                    e);
 
-		} catch (IOException e) {
+        } catch (IOException e) {
 
-			log.error("Erro durante a criação do arquivo. "
-					+ e.getLocalizedMessage(), e);
-			throw new RuntimeException("Erro durante a criação do arquivo: ["
-					+ pathName + "]. " + "Causado por "
-					+ e.getLocalizedMessage(), e);
+            log.error("Erro durante a criação do arquivo. "
+                    + e.getLocalizedMessage(), e);
+            throw new RuntimeException("Erro durante a criação do arquivo: ["
+                    + pathName + "]. " + "Causado por "
+                    + e.getLocalizedMessage(), e);
 
-		} catch (DocumentException e) {
+        } catch (DocumentException e) {
 
-			log.error("Erro durante a criação do arquivo. "
-					+ e.getLocalizedMessage(), e);
-			throw new RuntimeException("Erro durante a criação do arquivo: ["
-					+ pathName + "]. " + "Causado por "
-					+ e.getLocalizedMessage(), e);
-		}
-
-		return file;
-	}
-
-	/**
-	 * @throws RuntimeException
-	 * 
-	 * @return
-	 */
-	protected ByteArrayOutputStream getStream() {
-
-		ByteArrayOutputStream baos = null;
-
-		try {
-
-			processarPdf();
-
-			baos = FileUtil.bytes2Stream(outputStream.toByteArray());
-
-		} catch (IOException e) {
-
-			log.error("Erro durante a criação do stream. "
-					+ e.getLocalizedMessage(), e);
-			throw new RuntimeException("Erro durante a criação do stream. "
-					+ "Causado por " + e.getLocalizedMessage(), e);
-
-		} catch (DocumentException e) {
-
-			log.error("Erro durante a criação do stream. "
-					+ e.getLocalizedMessage(), e);
-			throw new RuntimeException("Erro durante a criação do stream. "
-					+ "Causado por " + e.getLocalizedMessage(), e);
-		}
-
-		return baos;
-	}
-
-	/**
-	 * @throws RuntimeException
-	 * 
-	 * @return
-	 */
-	protected byte[] getBytes() {
-
-		byte[] bytes = null;
-
-		try {
-
-			processarPdf();
-
-			bytes = outputStream.toByteArray();
-
-		} catch (IOException e) {
-
-			log.error("Erro durante a criação do stream. "
-					+ e.getLocalizedMessage(), e);
-			throw new RuntimeException("Erro durante a criação do stream. "
-					+ "Causado por " + e.getLocalizedMessage(), e);
-
-		} catch (DocumentException e) {
-
-			log.error("Erro durante a criação do stream. "
-					+ e.getLocalizedMessage(), e);
-			throw new RuntimeException("Erro durante a criação do stream. "
-					+ "Causado por " + e.getLocalizedMessage(), e);
-		}
-
-		return bytes;
-	}
-
-	protected File getTemplate() {
-		return template;
-	}
-
-	protected void setTemplate(File template) {
-		this.template = template;
-	}
-
-	protected void setTemplate(String pathname) {
-		setTemplate(new File(pathname));
-	}
-
-	/**
-	 * @return the boleto
-	 * 
-	 * @since 0.2
-	 */
-	protected Guia getGuia() {
-		return this.guia;
-	}
-
-	/**
-	 * <p>
-	 * SOBRE O MÉTODO
-	 * </p>
-	 * 
-	 * @throws IOException
-	 * @throws DocumentException
-	 * 
-	 * @since
-	 */
-	private void processarPdf() throws IOException, DocumentException {
-		inicializar();
-		preencher();
-		finalizar();
-	}
-
-	/**
-	 * <p>
-	 * SOBRE O MÉTODO
-	 * </p>
-	 * 
-	 * @return URL template
-	 * 
-	 * @since
-	 */
-	private URL getTemplateFromResource() {
-		URL templateFromResource = null;
-		
-		if (  isNotNull(guia.getArrecadacao().getConvenio())
-			  && isNotNull(guia.getArrecadacao().getConvenio().getBanco())  ) {
-			templateFromResource = TEMPLATE_PADRAO;
-		} else {
-			templateFromResource = TEMPLATE_PADRAO_SEM_BANCO;			
-		}
-		
-		return templateFromResource;
-	}
-
-	/**
-	 * <p>
-	 * Verifica se o template que será utilizado virá do resource ou é externo,
-	 * ou seja, se o usuário definiu ou não um template.
-	 * </p>
-	 * 
-	 * @return true caso o template que pode ser definido pelo usuário for null;
-	 *         false caso o usuário tenha definido um template.
-	 * 
-	 * @since
-	 */
-	private boolean isTemplateFromResource() {
-		return isNull(getTemplate());
-	}
-
-	/**
-	 * <p>
-	 * SOBRE O MÉTODO
-	 * </p>
-	 * 
-	 * @throws IOException
-	 * @throws DocumentException
-	 * 
-	 * @since
-	 */
-
-	private void inicializar() throws IOException, DocumentException {
-
-		if (isTemplateFromResource()) {
-			reader = new PdfReader(getTemplateFromResource());
-
-		} else {
-			reader = new PdfReader(getTemplate().getAbsolutePath());
-		}
-
-		outputStream = new ByteArrayOutputStream();
-		stamper = new PdfStamper(reader, outputStream);
-		form = stamper.getAcroFields();
-	}
-
-	/**
-	 * <p>
-	 * SOBRE O MÉTODO
-	 * </p>
-	 * 
-	 * @throws DocumentException
-	 * @throws IOException
-	 * 
-	 * @since
-	 */
-	private void finalizar() throws DocumentException, IOException {
-
-		reader.consolidateNamedDestinations();/*
+            log.error("Erro durante a criação do arquivo. "
+                    + e.getLocalizedMessage(), e);
+            throw new RuntimeException("Erro durante a criação do arquivo: ["
+                    + pathName + "]. " + "Causado por "
+                    + e.getLocalizedMessage(), e);
+        }
+
+        return file;
+    }
+
+    /**
+     * @throws RuntimeException
+     *
+     * @return
+     */
+    protected ByteArrayOutputStream getStream() {
+
+        ByteArrayOutputStream baos = null;
+
+        try {
+
+            processarPdf();
+
+            baos = FileUtil.bytes2Stream(outputStream.toByteArray());
+
+        } catch (IOException e) {
+
+            log.error("Erro durante a criação do stream. "
+                    + e.getLocalizedMessage(), e);
+            throw new RuntimeException("Erro durante a criação do stream. "
+                    + "Causado por " + e.getLocalizedMessage(), e);
+
+        } catch (DocumentException e) {
+
+            log.error("Erro durante a criação do stream. "
+                    + e.getLocalizedMessage(), e);
+            throw new RuntimeException("Erro durante a criação do stream. "
+                    + "Causado por " + e.getLocalizedMessage(), e);
+        }
+
+        return baos;
+    }
+
+    /**
+     * @throws RuntimeException
+     *
+     * @return
+     */
+    protected byte[] getBytes() {
+
+        byte[] bytes = null;
+
+        try {
+
+            processarPdf();
+
+            bytes = outputStream.toByteArray();
+
+        } catch (IOException e) {
+
+            log.error("Erro durante a criação do stream. "
+                    + e.getLocalizedMessage(), e);
+            throw new RuntimeException("Erro durante a criação do stream. "
+                    + "Causado por " + e.getLocalizedMessage(), e);
+
+        } catch (DocumentException e) {
+
+            log.error("Erro durante a criação do stream. "
+                    + e.getLocalizedMessage(), e);
+            throw new RuntimeException("Erro durante a criação do stream. "
+                    + "Causado por " + e.getLocalizedMessage(), e);
+        }
+
+        return bytes;
+    }
+
+    protected File getTemplate() {
+        return template;
+    }
+
+    protected void setTemplate(File template) {
+        this.template = template;
+    }
+
+    protected void setTemplate(String pathname) {
+        setTemplate(new File(pathname));
+    }
+
+    /**
+     * @return the boleto
+     *
+     * @since 0.2
+     */
+    protected Guia getGuia() {
+        return this.guia;
+    }
+
+    /**
+     * <p>
+     * SOBRE O MÉTODO
+     * </p>
+     *
+     * @throws IOException
+     * @throws DocumentException
+     *
+     * @since
+     */
+    private void processarPdf() throws IOException, DocumentException {
+        inicializar();
+        preencher();
+        finalizar();
+    }
+
+    /**
+     * <p>
+     * SOBRE O MÉTODO
+     * </p>
+     *
+     * @return URL template
+     *
+     * @since
+     */
+    private URL getTemplateFromResource() {
+        URL templateFromResource = null;
+
+        if (isNotNull(guia.getArrecadacao().getConvenio())
+                && isNotNull(guia.getArrecadacao().getConvenio().getBanco())) {
+            templateFromResource = TEMPLATE_PADRAO;
+        } else {
+            templateFromResource = TEMPLATE_PADRAO_SEM_BANCO;
+        }
+
+        return templateFromResource;
+    }
+
+    /**
+     * <p>
+     * Verifica se o template que será utilizado virá do resource ou é externo,
+     * ou seja, se o usuário definiu ou não um template.
+     * </p>
+     *
+     * @return true caso o template que pode ser definido pelo usuário for null;
+     * false caso o usuário tenha definido um template.
+     *
+     * @since
+     */
+    private boolean isTemplateFromResource() {
+        return isNull(getTemplate());
+    }
+
+    /**
+     * <p>
+     * SOBRE O MÉTODO
+     * </p>
+     *
+     * @throws IOException
+     * @throws DocumentException
+     *
+     * @since
+     */
+    private void inicializar() throws IOException, DocumentException {
+
+        if (isTemplateFromResource()) {
+            reader = new PdfReader(getTemplateFromResource());
+
+        } else {
+            reader = new PdfReader(getTemplate().getAbsolutePath());
+        }
+
+        outputStream = new ByteArrayOutputStream();
+        stamper = new PdfStamper(reader, outputStream);
+        form = stamper.getAcroFields();
+    }
+
+    /**
+     * <p>
+     * SOBRE O MÉTODO
+     * </p>
+     *
+     * @throws DocumentException
+     * @throws IOException
+     *
+     * @since
+     */
+    private void finalizar() throws DocumentException, IOException {
+
+        reader.consolidateNamedDestinations();/*
 											 * Replaces all the local named
 											 * links with the actual
 											 * destinations.
-											 */
+         */
 
-		stamper.setFormFlattening(true);/*
+        stamper.setFormFlattening(true);/*
 										 * Determines if the fields are
 										 * flattened on close.
-										 */
-		stamper.setRotateContents(true);/*
+         */
+        stamper.setRotateContents(true);/*
 										 * Flags the content to be automatically
 										 * adjusted to compensate the original
 										 * page rotation.
-										 */
+         */
 
-		reader.removeFields();/* Removes all the fields from the document. */
+        reader.removeFields();/* Removes all the fields from the document. */
 
-		stamper.setFullCompression();/*
+        stamper.setFullCompression();/*
 									 * Sets the document's compression to the
 									 * new 1.5 mode with object streams and xref
 									 * streams.
-									 */
+         */
 
-		reader.eliminateSharedStreams();/*
+        reader.eliminateSharedStreams();/*
 										 * Eliminates shared streams if they
 										 * exist.
-										 */
+         */
 
-		// Send immediately
-		outputStream.flush();
+        // Send immediately
+        outputStream.flush();
 
-		// close All in this order
-		outputStream.close();
-		reader.close();
-		stamper.close();
-	}
+        // close All in this order
+        outputStream.close();
+        reader.close();
+        stamper.close();
+    }
 
-	/**
-	 * <p>
-	 * SOBRE O MÉTODO
-	 * </p>
-	 * 
-	 * @throws MalformedURLException
-	 * @throws IOException
-	 * @throws DocumentException
-	 * 
-	 * @since
-	 */
-	private void preencher() throws MalformedURLException, IOException,
-			DocumentException {
+    /**
+     * <p>
+     * SOBRE O MÉTODO
+     * </p>
+     *
+     * @throws MalformedURLException
+     * @throws IOException
+     * @throws DocumentException
+     *
+     * @since
+     */
+    private void preencher() throws MalformedURLException, IOException,
+            DocumentException {
 
-		setLogoBanco();
-		setLogoOrgaoRecebedor();
-		setContribuinteNome();
-		setContribuinteCPF();
-		setDescricao();
-		setTitulo();
-		setNossoNumero();
-		setValorDocumento();
-		setDataDocumento();
-		setDataVencimeto();
-		setInstrucaoAoCaixa();
-		setLinhaDigitavel();
-		setCodigoBarra();
+        setLogoBanco();
+        setLogoOrgaoRecebedor();
+        setContribuinteNome();
+        setContribuinteCPF();
+        setDescricao();
+        setTitulo();
+        setNossoNumero();
+        setValorDocumento();
+        setDataDocumento();
+        setDataVencimeto();
+        setInstrucaoAoCaixa();
+        setLinhaDigitavel();
+        setCodigoBarra();
 
-		setCamposExtra();
-		setImagensNosCampos();
-	}
+        setCamposExtra();
+        setImagensNosCampos();
+    }
 
-	private void setCamposExtra() throws IOException, DocumentException {
+    private void setCamposExtra() throws IOException, DocumentException {
 
-		if (isNotNull(guia.getTextosExtras())) {
+        if (isNotNull(guia.getTextosExtras())) {
 
-			for (String campo : guia.getTextosExtras().keySet()) {
-				form.setField(campo, guia.getTextosExtras().get(campo));
-			}
-		}
-	}
+            for (String campo : guia.getTextosExtras().keySet()) {
+                form.setField(campo, guia.getTextosExtras().get(campo));
+            }
+        }
+    }
 
-	private void setCodigoBarra() throws DocumentException {
-		// Montando o código de barras.
-		BarcodeInter25 barCode = new BarcodeInter25();
-		barCode.setCode(guia.getCodigoDeBarras().write());
+    private void setCodigoBarra() throws DocumentException {
+        // Montando o código de barras.
+        BarcodeInter25 barCode = new BarcodeInter25();
+        barCode.setCode(guia.getCodigoDeBarras().write());
 
-		barCode.setExtended(true);
-		barCode.setBarHeight(40);
-		barCode.setFont(null);
-		barCode.setN(3);
+        barCode.setExtended(true);
+        barCode.setBarHeight(40);
+        barCode.setFont(null);
+        barCode.setN(3);
 
-		PdfContentByte cb = null;
+        PdfContentByte cb = null;
 
-		// Verifcando se existe o field(campo) da imagem no template do boleto.
-		float posCampoImgLogo[] = form.getFieldPositions("txtCodigoBarra");
+        // Verifcando se existe o field(campo) da imagem no template do boleto.
+        float posCampoImgLogo[] = form.getFieldPositions("txtCodigoBarra");
 
-		if (isNotNull(posCampoImgLogo)) {
+        if (isNotNull(posCampoImgLogo)) {
 
-			RectanglePDF field = new RectanglePDF(posCampoImgLogo);
+            RectanglePDF field = new RectanglePDF(posCampoImgLogo);
 
-			cb = stamper.getOverContent(field.getPage());
-			Image imgBarCode = barCode.createImageWithBarcode(cb, null, null);
+            cb = stamper.getOverContent(field.getPage());
+            Image imgBarCode = barCode.createImageWithBarcode(cb, null, null);
 
-			PDFUtil.changeField2Image(stamper, field, imgBarCode);
-		}
-	}
+            PDFUtil.changeField2Image(stamper, field, imgBarCode);
+        }
+    }
 
-	private void setDataDocumento() throws IOException, DocumentException {
-		form.setField("txtDataDocumento", DateUtil.FORMAT_DD_MM_YYYY
-				.format(guia.getArrecadacao().getDataDoDocumento()));
-	}
+    private void setDataDocumento() throws IOException, DocumentException {
+        form.setField("txtDataDocumento", DateUtil.FORMAT_DD_MM_YYYY
+                .format(guia.getArrecadacao().getDataDoDocumento()));
+    }
 
-	private void setInstrucaoAoCaixa() throws IOException, DocumentException {
-		form.setField("txtInstrucaoAoCaixa1", guia.getInstrucaoAoCaixa1());
-		form.setField("txtInstrucaoAoCaixa2", guia.getInstrucaoAoCaixa2());
-		form.setField("txtInstrucaoAoCaixa3", guia.getInstrucaoAoCaixa3());
-	}
+    private void setInstrucaoAoCaixa() throws IOException, DocumentException {
+        form.setField("txtInstrucaoAoCaixa1", guia.getInstrucaoAoCaixa1());
+        form.setField("txtInstrucaoAoCaixa2", guia.getInstrucaoAoCaixa2());
+        form.setField("txtInstrucaoAoCaixa3", guia.getInstrucaoAoCaixa3());
+    }
 
-	private void setValorDocumento() throws IOException, DocumentException {
-		String valorStr = null;
-		
-		if (  (guia.getArrecadacao().getTipoValorReferencia() == TipoValorReferencia.VALOR_COBRADO_EM_REAL_COM_DV_MODULO_10)
-				|| (guia.getArrecadacao().getTipoValorReferencia() == TipoValorReferencia.VALOR_COBRADO_EM_REAL_COM_DV_MODULO_11)  ) {
-			valorStr = MonetaryUtil.FORMAT_REAL_COM_PREFIXO.format(guia.getArrecadacao().getValorDocumento());
-		}
-		else {
-			valorStr = MonetaryUtil.FORMAT_REAL.format(guia.getArrecadacao().getValorDocumento());
-		}
-				
-		form.setField("txtValorDocumento1", valorStr);
-		form.setField("txtValorDocumento2",valorStr);
-		form.setField("txtValorDocumento3",valorStr);
-	}
+    private void setValorDocumento() throws IOException, DocumentException {
+        String valorStr = null;
 
-	private void setDataVencimeto() throws IOException, DocumentException {
-		// Obtendo uma string com a data de vencimento formatada
-		// no padrão "dd/mm/yyyy".
-		// Ex: 03/07/2008.
-		String dataFormatada = DateUtil.FORMAT_DD_MM_YYYY.format(guia
-				.getArrecadacao().getDataDoVencimento());
-		
-		form.setField("txtDataVencimento", dataFormatada);
-		form.setField("txtDataVencimento1", dataFormatada);
-		form.setField("txtDataVencimento2", dataFormatada);
-		form.setField("txtDataVencimento3", dataFormatada);
+        if ((guia.getArrecadacao().getTipoValorReferencia() == TipoValorReferencia.VALOR_COBRADO_EM_REAL_COM_DV_MODULO_10)
+                || (guia.getArrecadacao().getTipoValorReferencia() == TipoValorReferencia.VALOR_COBRADO_EM_REAL_COM_DV_MODULO_11)) {
+            valorStr = MonetaryUtil.FORMAT_REAL_COM_PREFIXO.format(guia.getArrecadacao().getValorDocumento());
+        } else {
+            valorStr = MonetaryUtil.FORMAT_REAL.format(guia.getArrecadacao().getValorDocumento());
+        }
 
-	}
+        form.setField("txtValorDocumento1", valorStr);
+        form.setField("txtValorDocumento2", valorStr);
+        form.setField("txtValorDocumento3", valorStr);
+    }
 
-	private void setContribuinteNome() throws IOException, DocumentException {
-		form.setField("txtContribuinteNome", guia.getArrecadacao()
-				.getContribuinte().getNome());
-	}
+    private void setDataVencimeto() throws IOException, DocumentException {
+        // Obtendo uma string com a data de vencimento formatada
+        // no padrão "dd/mm/yyyy".
+        // Ex: 03/07/2008.
+        String dataFormatada = DateUtil.FORMAT_DD_MM_YYYY.format(guia
+                .getArrecadacao().getDataDoVencimento());
 
-	private void setContribuinteCPF() throws IOException, DocumentException {
-		form.setField("txtContribuinteCPF", guia.getArrecadacao()
-				.getContribuinte().getCPF().getCodigoFormatado());
-	}
+        form.setField("txtDataVencimento", dataFormatada);
+        form.setField("txtDataVencimento1", dataFormatada);
+        form.setField("txtDataVencimento2", dataFormatada);
+        form.setField("txtDataVencimento3", dataFormatada);
 
-	private void setDescricao() throws IOException, DocumentException {
-		form.setField("txtDescricao", guia.getArrecadacao().getDescricao());
-	}
+    }
 
-	private void setTitulo() throws IOException, DocumentException {
-		form.setField("txtTitulo", guia.getArrecadacao().getTitulo());
-	}
+    private void setContribuinteNome() throws IOException, DocumentException {
+        form.setField("txtContribuinteNome", guia.getArrecadacao()
+                .getContribuinte().getNome());
+    }
 
-	private void setLinhaDigitavel() throws DocumentException, IOException {
-		form.setField("txtLinhaDigitavel", guia.getLinhaDigitavel().write());
-	}
+    private void setContribuinteCPF() throws IOException, DocumentException {
+        form.setField("txtContribuinteCPF", guia.getArrecadacao()
+                .getContribuinte().getCPF().getCodigoFormatado());
+    }
 
-	private void setLogoBanco() throws MalformedURLException, IOException,
-			DocumentException {
+    private void setDescricao() throws IOException, DocumentException {
+        form.setField("txtDescricao", guia.getArrecadacao().getDescricao());
+    }
 
-		// Através da conta bancária será descoberto a imagem que representa o
-		// banco, com base
-		// no código do banco.
-		Convenio convenio = guia.getArrecadacao().getConvenio();
-		Image imgLogoBanco = null;
+    private void setTitulo() throws IOException, DocumentException {
+        form.setField("txtTitulo", guia.getArrecadacao().getTitulo());
+    }
 
-		// Se há um banco especificado...
-		if (isNotNull(convenio)  && isNotNull(convenio.getBanco())) {
-			
-			if (isNotNull(convenio.getBanco().getImgLogo())) {
-				imgLogoBanco = Image.getInstance(convenio.getBanco().getImgLogo(),
-						null);
-				setImageLogo(imgLogoBanco);
-				
-			} else {
-				if (BancoSuportado.isSuportado(convenio.getBanco()
-						.getCodigoDeCompensacaoBACEN().getCodigoFormatado())) {
-					
-					URL url = this.getClass().getResource(
-							"/img/"
-							+ convenio.getBanco()
-							.getCodigoDeCompensacaoBACEN()
-							.getCodigoFormatado() + ".png");
-					
-					if (isNotNull(url)) {
-						imgLogoBanco = Image.getInstance(url);
-					}
-					
-					if (isNotNull(imgLogoBanco)) {
-						
-						// Esta imagem gerada aqui é do tipo java.awt.Image
-						convenio.getBanco().setImgLogo(ImageIO.read(url));
-					}
-					
-					// Se o banco em questão é suportado nativamente pelo
-					// componente,
-					// então um alerta será exibido.
-					if (log.isDebugEnabled()) {
-						log.debug("Banco sem imagem da logo informada. "
-								+ "Com base no código do banco, uma imagem foi "
-								+ "encontrada no resource e está sendo utilizada.");
-					}
-					
-					setImageLogo(imgLogoBanco);
-					
-				} else {
-					
-					// Sem imagem, um alerta é exibido.
-					log.warn("Banco sem imagem definida. O nome da instituição será usado como logo.");
-					
-					form.setField("txtLogoBanco", convenio.getBanco().getNome());
-				}
-			}
-			
-		}
-		
-		
-	}
+    private void setLinhaDigitavel() throws DocumentException, IOException {
+        form.setField("txtLinhaDigitavel", guia.getLinhaDigitavel().write());
+    }
 
-	
-	private void setLogoOrgaoRecebedor() throws MalformedURLException, IOException,
-			DocumentException {
+    private void setLogoBanco() throws MalformedURLException, IOException,
+            DocumentException {
 
-		Image imgLogoBanco = null;
-		OrgaoRecebedor orgaoRecebedor = guia.getArrecadacao().getOrgaoRecebedor();
-		
-		if (isNotNull(orgaoRecebedor.getImgLogo())) {
-			imgLogoBanco = Image.getInstance(orgaoRecebedor.getImgLogo(),	null);
-			
-			setImagemNoCampo("txtLogoOrgaoRecebedor1", imgLogoBanco);
-			setImagemNoCampo("txtLogoOrgaoRecebedor2", imgLogoBanco);
-		}
-	}
-	
-	
-	/**
-	 * <p>
-	 * Coloca as imagens dos campos no pdf de acordo com o nome dos campos do
-	 * boleto atribuídos no map e templante.
-	 * </p>
-	 * 
-	 * @throws DocumentException
-	 * @throws IOException
-	 * 
-	 * @since 0.2
-	 */
-	private void setImagensNosCampos() throws DocumentException, IOException {
-		if (isNotNull(guia.getImagensExtras())) {
+        // Através da conta bancária será descoberto a imagem que representa o
+        // banco, com base
+        // no código do banco.
+        Convenio convenio = guia.getArrecadacao().getConvenio();
+        Image imgLogoBanco = null;
 
-			for (String campo : guia.getImagensExtras().keySet()) {
-				setImagemNoCampo(campo, Image.getInstance(guia
-						.getImagensExtras().get(campo), null));
-			}
-		}
-	}
+        // Se há um banco especificado...
+        if (isNotNull(convenio) && isNotNull(convenio.getBanco())) {
 
-	/**
-	 * <p>
-	 * Coloca uma imagem no pdf de acordo com o nome do field no templante.
-	 * </p>
-	 * 
-	 * @param nomeDoCampo
-	 * @param imagem
-	 * @throws DocumentException
-	 * 
-	 * @since 0.2
-	 */
-	private void setImagemNoCampo(String nomeDoCampo, Image imagem)
-			throws DocumentException {
+            if (isNotNull(convenio.getBanco().getImgLogo())) {
+                imgLogoBanco = Image.getInstance(convenio.getBanco().getImgLogo(),
+                        null);
+                setImageLogo(imgLogoBanco);
 
-		float posCampoImgLogo[];
+            } else {
+                if (BancosSuportados.isSuportado(convenio.getBanco()
+                        .getCodigoDeCompensacaoBACEN().getCodigoFormatado())) {
 
-		if (StringUtils.isNotBlank(nomeDoCampo)) {
+                    URL url = this.getClass().getResource(
+                            "/img/"
+                            + convenio.getBanco()
+                                    .getCodigoDeCompensacaoBACEN()
+                                    .getCodigoFormatado() + ".png");
 
-			posCampoImgLogo = form.getFieldPositions(nomeDoCampo);
+                    if (isNotNull(url)) {
+                        imgLogoBanco = Image.getInstance(url);
+                    }
 
-			if (isNotNull(posCampoImgLogo)) {
-				PDFUtil.changeField2Image(stamper, posCampoImgLogo, imagem);
-			}
-		}
-	}
+                    if (isNotNull(imgLogoBanco)) {
 
-	/**
-	 * <p>
-	 * Coloca a logo do passada na ficha de compensação do boleto e no recibo do
-	 * sacado.
-	 * </p>
-	 * 
-	 * @param imgLogoBanco
-	 * @throws DocumentException
-	 * 
-	 * @since 0.2
-	 */
-	private void setImageLogo(Image imgLogoBanco) throws DocumentException {
-		setImagemNoCampo("txtLogoBanco", imgLogoBanco);
-	}
+                        // Esta imagem gerada aqui é do tipo java.awt.Image
+                        convenio.getBanco().setImgLogo(ImageIO.read(url));
+                    }
 
-	private void setNossoNumero() throws IOException, DocumentException {
-		form.setField("txtNossoNumero", guia.getArrecadacao().getNossoNumero());
-	}
+                    // Se o banco em questão é suportado nativamente pelo
+                    // componente,
+                    // então um alerta será exibido.
+                    if (log.isDebugEnabled()) {
+                        log.debug("Banco sem imagem da logo informada. "
+                                + "Com base no código do banco, uma imagem foi "
+                                + "encontrada no resource e está sendo utilizada.");
+                    }
 
-	/**
-	 * Exibe os valores de instância.
-	 * 
-	 * @see br.com.nordestefomento.jrimum.utilix.ObjectUtil#toString()
-	 */
-	@Override
-	public String toString() {
-		ToStringBuilder tsb = new ToStringBuilder(this);
-		tsb.append(guia);
-		return tsb.toString();
-	}
+                    setImageLogo(imgLogoBanco);
+
+                } else {
+
+                    // Sem imagem, um alerta é exibido.
+                    log.warn("Banco sem imagem definida. O nome da instituição será usado como logo.");
+
+                    form.setField("txtLogoBanco", convenio.getBanco().getNome());
+                }
+            }
+
+        }
+
+    }
+
+    private void setLogoOrgaoRecebedor() throws MalformedURLException, IOException,
+            DocumentException {
+
+        Image imgLogoBanco = null;
+        OrgaoRecebedor orgaoRecebedor = guia.getArrecadacao().getOrgaoRecebedor();
+
+        if (isNotNull(orgaoRecebedor.getImgLogo())) {
+            imgLogoBanco = Image.getInstance(orgaoRecebedor.getImgLogo(), null);
+
+            setImagemNoCampo("txtLogoOrgaoRecebedor1", imgLogoBanco);
+            setImagemNoCampo("txtLogoOrgaoRecebedor2", imgLogoBanco);
+        }
+    }
+
+    /**
+     * <p>
+     * Coloca as imagens dos campos no pdf de acordo com o nome dos campos do
+     * boleto atribuídos no map e templante.
+     * </p>
+     *
+     * @throws DocumentException
+     * @throws IOException
+     *
+     * @since 0.2
+     */
+    private void setImagensNosCampos() throws DocumentException, IOException {
+        if (isNotNull(guia.getImagensExtras())) {
+
+            for (String campo : guia.getImagensExtras().keySet()) {
+                setImagemNoCampo(campo, Image.getInstance(guia
+                        .getImagensExtras().get(campo), null));
+            }
+        }
+    }
+
+    /**
+     * <p>
+     * Coloca uma imagem no pdf de acordo com o nome do field no templante.
+     * </p>
+     *
+     * @param nomeDoCampo
+     * @param imagem
+     * @throws DocumentException
+     *
+     * @since 0.2
+     */
+    private void setImagemNoCampo(String nomeDoCampo, Image imagem)
+            throws DocumentException {
+
+        float posCampoImgLogo[];
+
+        if (StringUtils.isNotBlank(nomeDoCampo)) {
+
+            posCampoImgLogo = form.getFieldPositions(nomeDoCampo);
+
+            if (isNotNull(posCampoImgLogo)) {
+                PDFUtil.changeField2Image(stamper, posCampoImgLogo, imagem);
+            }
+        }
+    }
+
+    /**
+     * <p>
+     * Coloca a logo do passada na ficha de compensação do boleto e no recibo do
+     * sacado.
+     * </p>
+     *
+     * @param imgLogoBanco
+     * @throws DocumentException
+     *
+     * @since 0.2
+     */
+    private void setImageLogo(Image imgLogoBanco) throws DocumentException {
+        setImagemNoCampo("txtLogoBanco", imgLogoBanco);
+    }
+
+    private void setNossoNumero() throws IOException, DocumentException {
+        form.setField("txtNossoNumero", guia.getArrecadacao().getNossoNumero());
+    }
+
+    /**
+     * Exibe os valores de instância.
+     *
+     * @see br.com.nordestefomento.jrimum.utilix.ObjectUtil#toString()
+     */
+    @Override
+    public String toString() {
+        ToStringBuilder tsb = new ToStringBuilder(this);
+        tsb.append(guia);
+        return tsb.toString();
+    }
 }

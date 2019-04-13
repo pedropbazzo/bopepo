@@ -34,14 +34,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.jrimum.bopepo.campolivre.CampoLivre;
+import org.jrimum.bopepo.campolivre.CampoLivreFactory;
+import org.jrimum.bopepo.campolivre.NotSupportedBancoException;
+import org.jrimum.bopepo.campolivre.NotSupportedCampoLivreException;
 
-import br.com.nordestefomento.jrimum.bopepo.campolivre.guia.CampoLivre;
-import br.com.nordestefomento.jrimum.bopepo.campolivre.guia.CampoLivreFactory;
-import br.com.nordestefomento.jrimum.bopepo.campolivre.guia.CampoLivreUtil;
-import br.com.nordestefomento.jrimum.bopepo.campolivre.guia.NotSupportedBancoException;
-import br.com.nordestefomento.jrimum.bopepo.campolivre.guia.NotSupportedCampoLivreException;
-import br.com.nordestefomento.jrimum.bopepo.guia.CodigoDeBarras;
-import br.com.nordestefomento.jrimum.bopepo.guia.LinhaDigitavel;
+import org.jrimum.domkee.financeiro.banco.febraban.guia.Arrecadacao;
+import org.jrimum.domkee.financeiro.banco.febraban.guia.TipoSeguimento;
+import org.jrimum.utilix.DateUtil;
 import org.jrimum.utilix.Objects;
 import static org.jrimum.utilix.Objects.isNotNull;
 import static org.jrimum.utilix.Objects.isNull;
@@ -168,7 +168,7 @@ public final class Guia {
         }
 
         this.setArrecadacao(arrecadacao);
-        this.setCampoLivre(CampoLivreFactory.create(arrecadacao), arrecadacao.getOrgaoRecebedor().getTipoSeguimento());
+//        this.setCampoLivre(CampoLivreFactory.create(arrecadacao), arrecadacao.getOrgaoRecebedor().getTipoSeguimento());
         this.load();
 
         if (log.isDebugEnabled() || log.isTraceEnabled()) {
@@ -185,7 +185,7 @@ public final class Guia {
 
         if (isNotNull(arrecadacao)) {
             this.setArrecadacao(arrecadacao);
-            this.setCampoLivre(CampoLivreFactory.create(arrecadacao), arrecadacao.getOrgaoRecebedor().getTipoSeguimento());
+//            this.setCampoLivre(CampoLivreFactory.create(arrecadacao), arrecadacao.getOrgaoRecebedor().getTipoSeguimento());
             this.load();
 
             if (log.isDebugEnabled()) {
@@ -243,7 +243,7 @@ public final class Guia {
     }
 
     private void load() {
-        codigoDeBarras = new CodigoDeBarras(arrecadacao, campoLivre);
+//        codigoDeBarras = new CodigoDeBarras(arrecadacao, campoLivre);
         linhaDigitavel = new LinhaDigitavel(codigoDeBarras);
         dataDeProcessamento = new Date();
 
@@ -268,7 +268,7 @@ public final class Guia {
         Objects.checkNotNull(campoLivre);
         Objects.checkNotNull(tipoSeguimento);
 
-        CampoLivreUtil.validar(campoLivre, tipoSeguimento);
+//        CampoLivreUtil.validar(campoLivre, tipoSeguimento);
         this.campoLivre = campoLivre;
     }
 
