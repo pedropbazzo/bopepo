@@ -9,7 +9,7 @@
  * OF ANY KIND, either express or implied. See the License for the specific
  * language governing permissions and limitations under the License.
  * 
- * Created at: Jan 28, 2010 - 1:36:56 PM
+ * Created at: Jan 28, 2010 - 1:43:30 PM
  * 
  * ================================================================================
  * 
@@ -23,7 +23,7 @@
  * TIPO, sejam expressas ou tácitas. Veja a LICENÇA para a redação específica a
  * reger permissões e limitações sob esta LICENÇA.
  * 
- * Criado em: Jan 28, 2010 - 1:36:56 PM
+ * Criado em: Jan 28, 2010 - 1:43:30 PM
  * 
  */
 package org.jrimum.domkee.financeiro.banco.febraban;
@@ -32,11 +32,12 @@ import org.jrimum.domkee.comum.pessoa.id.cprf.CPRF;
 
 /**
  * <p>
- * Representa um Cedente no modelo de negócio financeiro, que é 
- * aquele que realiza a cobrança do título.
+ * Representa um Sacador Avalista no modelo de negócio financeiro, que é o co-responsável
+ * pelo título emitido pelo avalizado (Sacado), ou seja, caso a dívida não seja liquidada pelo Sacado,
+ * cabe ao Sacador Avalista liquidá-la.
  * </p>
  * <p>
- * Cliente que entrega os títulos ao Banco para serem cobrados.
+ * Cedente original do Título.
  * </p>
  * 
  * @author <a href="mailto:romulomail@gmail.com">Rômulo Augusto</a>
@@ -45,17 +46,17 @@ import org.jrimum.domkee.comum.pessoa.id.cprf.CPRF;
  * 
  * @version 0.2
  */
-public class Cedente extends EntidadeDeCobranca {
+public class SacadorAvalista extends EntidadeDeCobranca {
 
-	public Cedente(String nome) {
+	public SacadorAvalista(String nome) {
 		super(nome);
 	}
 	
-	public Cedente(String nome, String cadastroDePessoa) {
+	public SacadorAvalista(String nome, String cadastroDePessoa) {
 		super(nome, cadastroDePessoa);
 	}
 	
-	public Cedente(String nome, CPRF cadastroDePessoa) {
+	public SacadorAvalista(String nome, CPRF cadastroDePessoa) {
 		super(nome, cadastroDePessoa);
 	}
 }

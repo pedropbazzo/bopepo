@@ -28,12 +28,10 @@
  * 
  */
 
-package br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia;
+package org.jrimum.domkee.financeiro.banco.febraban.guia;
 
 import org.apache.commons.lang.StringUtils;
 
-import br.com.nordestefomento.jrimum.utilix.ObjectUtil;
-import javax.swing.Box.Filler;
 
 /**
  * <p>

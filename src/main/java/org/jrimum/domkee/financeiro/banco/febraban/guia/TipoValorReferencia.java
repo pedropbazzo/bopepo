@@ -1,7 +1,7 @@
 /**
  * 
  */
-package br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia;
+package org.jrimum.domkee.financeiro.banco.febraban.guia;
 
 import org.jrimum.vallia.digitoverificador.Modulo;
 import org.jrimum.vallia.digitoverificador.TipoDeModulo;

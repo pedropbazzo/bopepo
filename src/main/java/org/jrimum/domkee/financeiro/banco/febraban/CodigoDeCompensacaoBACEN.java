@@ -28,55 +28,63 @@
  * 
  */
 
-package br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia;
+package org.jrimum.domkee.financeiro.banco.febraban;
 
-import org.apache.commons.lang.StringUtils;
+import static org.jrimum.utilix.text.Strings.fillWithZeroLeft;
 
-import br.com.nordestefomento.jrimum.utilix.ObjectUtil;
-import javax.swing.Box.Filler;
+import org.jrimum.utilix.Objects;
+import org.jrimum.vallia.digitoverificador.CodigoDeCompensacaoBancosBACENDV;
 
 /**
  * <p>
- * Código de identificação dos órgãos/empresas junto à <a href="http://www.febraban.org.br/">FEBRANBAN</a>.
+ * Código de compensação para bancos supervisionados pelo <a
+ * href="http://www.bcb.gov.br/?CHEQUESCOMPE">BACEN</a>
  * </p>
  * 
- * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
- * @author <a href="mailto:misaelbarreto@gmail.com">Misael Barreto</a> 
- * @author <a href="mailto:romulomail@gmail.com">Rômulo Augusto</a>
- * @author <a href="mailto:valdinei@elotech.com.br">Valdinei Troli</a>
+ * @author <a href="http://gilmatryx.googlepages.com">Gilmar P.S.L.</a>
  * 
- * @since 0.3
+ * @since 0.2
  * 
- * @version 0.3
+ * @version 0.2
  */
-public class CodigoDeIdentificacaoFebraban {
+public class CodigoDeCompensacaoBACEN {
 
-
-	private static final long serialVersionUID = 4426867246160868026L;
+	private static final CodigoDeCompensacaoBancosBACENDV dv4Compensacao = new CodigoDeCompensacaoBancosBACENDV();
 	
 	private Integer codigo;
 
+	private Integer digito;
+
 	/**
 	 * @param codigo
 	 */
-	public CodigoDeIdentificacaoFebraban(Integer codigo) {
+	public CodigoDeCompensacaoBACEN(Integer codigo) {
 		super();
+		
 		setCodigo(codigo);
 	}
 
 	/**
 	 * @param codigo
 	 */
-	public CodigoDeIdentificacaoFebraban(String codigo) {
+	public CodigoDeCompensacaoBACEN(String codigo) {
 		super();
+		
 		setCodigo(codigo);
+	}
+
+	private void initDV(){
+		
+		if(dv4Compensacao.isCodigoValido(codigo)){
+			this.digito = dv4Compensacao.calcule(codigo);
+		}
 	}
 	
 	/**
-	 * @return the codigo formatado ex: "0323"
+	 * @return the codigo formatado ex: "001"
 	 */
 	public String getCodigoFormatado() {
-		return Filler.ZERO_LEFT.fill(getCodigo(), 4);
+		return fillWithZeroLeft(getCodigo(), 3);
 	}
 	
 	/**
@@ -90,10 +98,10 @@ public class CodigoDeIdentificacaoFebraban {
 	 * @param codigo the codigo to set
 	 */
 	public void setCodigo(Integer codigo) {
-		if (ObjectUtil.isNull(codigo)) { 	
-			setCodigo("");
-		} else {
-			setCodigo(String.valueOf(codigo));
+		
+		if(dv4Compensacao.isCodigoValido(codigo)){
+			this.codigo = codigo;
+			initDV();
 		}
 	}
 	
@@ -101,29 +109,22 @@ public class CodigoDeIdentificacaoFebraban {
 	 * @param codigo the codigo to set
 	 */
 	public void setCodigo(String codigo) {
-		if(isCodigoValido(codigo)){
-			this.codigo = Integer.parseInt(codigo);
-		} else {
-			throw new IllegalArgumentException("O código de identificação FEBRABAN tem de ser um número inteiro entre 0 e 9999.");
+		
+		if(dv4Compensacao.isCodigoValido(codigo)){
+			this.codigo = Integer.valueOf(codigo);
+			initDV();
 		}
 	}
 
-	private boolean isCodigoValido(String codigo) {
-		boolean result = false;
-		
-		if (  StringUtils.isNotEmpty(codigo)  &&  StringUtils.isNumeric(codigo)  ) {
-			int codigoAsInteger = Integer.parseInt(codigo); 
-			
-			if (codigoAsInteger > 0 && codigoAsInteger < 9999) {
-				result = true;
-			}
-		} 
-		
-		return result; 
+	/**
+	 * @return the digito
+	 */
+	public Integer getDigito() {
+		return digito;
 	}
-	
+
 	@Override
 	public String toString() {
-		return ObjectUtil.toString(this);
+		return Objects.toString(this);
 	}
 }

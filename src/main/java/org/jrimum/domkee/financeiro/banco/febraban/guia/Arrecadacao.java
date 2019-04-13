@@ -1,14 +1,11 @@
 /**
  * 
  */
-package br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia;
+package org.jrimum.domkee.financeiro.banco.febraban.guia;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
-
-
-import br.com.nordestefomento.jrimum.JRimumException;
 import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import static org.jrimum.utilix.Objects.isNotNull;
 
