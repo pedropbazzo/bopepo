@@ -3,8 +3,7 @@
  */
 package org.jrimum.domkee.financeiro.banco.febraban.guia;
 
-import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia.*;
-import br.com.nordestefomento.jrimum.domkee.comum.pessoa.id.cprf.CPF;
+import org.jrimum.domkee.comum.pessoa.id.cprf.CPF;
 
 /**
  * @author misael
