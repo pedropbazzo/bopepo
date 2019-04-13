@@ -27,7 +27,7 @@
  * Criado em: 04/04/2009 - 10:34:47
  * 
  */
-package br.com.nordestefomento.jrimum.utilix;
+package org.jrimum.utilix;
 
 import java.util.Locale;
 

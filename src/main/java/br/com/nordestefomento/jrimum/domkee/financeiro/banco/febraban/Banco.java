@@ -29,7 +29,7 @@
 
 package br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban;
 
-import static br.com.nordestefomento.jrimum.utilix.ObjectUtil.isNotNull;
+import static org.jrimum.utilix.ObjectUtil.isNotNull;
 
 import java.awt.Image;
 import java.util.Collection;

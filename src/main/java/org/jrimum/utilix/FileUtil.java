@@ -28,9 +28,9 @@
  */
 
 
-package br.com.nordestefomento.jrimum.utilix;
+package org.jrimum.utilix;
 
-import static br.com.nordestefomento.jrimum.utilix.ObjectUtil.isNotNull;
+import static org.jrimum.utilix.ObjectUtil.isNotNull;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;

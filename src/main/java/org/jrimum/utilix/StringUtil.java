@@ -26,7 +26,7 @@
  * Criado em: 30/03/2008 - 18:18:19
  * 
  */
-package br.com.nordestefomento.jrimum.utilix;
+package org.jrimum.utilix;
 
 import org.apache.commons.lang.StringUtils;
 import static org.jrimum.utilix.Objects.isNotNull;

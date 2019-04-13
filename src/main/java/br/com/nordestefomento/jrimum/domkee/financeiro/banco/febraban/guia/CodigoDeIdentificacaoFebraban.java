@@ -27,103 +27,102 @@
  * Criado em: 15/06/2008 - 16:11:16
  * 
  */
-
 package br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia;
 
 import org.apache.commons.lang.StringUtils;
+import org.jrimum.utilix.Filler;
 
-import br.com.nordestefomento.jrimum.utilix.ObjectUtil;
-import javax.swing.Box.Filler;
+import org.jrimum.utilix.ObjectUtil;
 
 /**
  * <p>
- * Código de identificação dos órgãos/empresas junto à <a href="http://www.febraban.org.br/">FEBRANBAN</a>.
+ * Código de identificação dos órgãos/empresas junto à
+ * <a href="http://www.febraban.org.br/">FEBRANBAN</a>.
  * </p>
- * 
+ *
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
- * @author <a href="mailto:misaelbarreto@gmail.com">Misael Barreto</a> 
+ * @author <a href="mailto:misaelbarreto@gmail.com">Misael Barreto</a>
  * @author <a href="mailto:romulomail@gmail.com">Rômulo Augusto</a>
  * @author <a href="mailto:valdinei@elotech.com.br">Valdinei Troli</a>
- * 
+ *
  * @since 0.3
- * 
+ *
  * @version 0.3
  */
 public class CodigoDeIdentificacaoFebraban {
 
+    private static final long serialVersionUID = 4426867246160868026L;
 
-	private static final long serialVersionUID = 4426867246160868026L;
-	
-	private Integer codigo;
+    private Integer codigo;
 
-	/**
-	 * @param codigo
-	 */
-	public CodigoDeIdentificacaoFebraban(Integer codigo) {
-		super();
-		setCodigo(codigo);
-	}
+    /**
+     * @param codigo
+     */
+    public CodigoDeIdentificacaoFebraban(Integer codigo) {
+        super();
+        setCodigo(codigo);
+    }
 
-	/**
-	 * @param codigo
-	 */
-	public CodigoDeIdentificacaoFebraban(String codigo) {
-		super();
-		setCodigo(codigo);
-	}
-	
-	/**
-	 * @return the codigo formatado ex: "0323"
-	 */
-	public String getCodigoFormatado() {
-		return Filler.ZERO_LEFT.fill(getCodigo(), 4);
-	}
-	
-	/**
-	 * @return the codigo
-	 */
-	public Integer getCodigo() {
-		return codigo;
-	}
+    /**
+     * @param codigo
+     */
+    public CodigoDeIdentificacaoFebraban(String codigo) {
+        super();
+        setCodigo(codigo);
+    }
 
-	/**
-	 * @param codigo the codigo to set
-	 */
-	public void setCodigo(Integer codigo) {
-		if (ObjectUtil.isNull(codigo)) { 	
-			setCodigo("");
-		} else {
-			setCodigo(String.valueOf(codigo));
-		}
-	}
-	
-	/**
-	 * @param codigo the codigo to set
-	 */
-	public void setCodigo(String codigo) {
-		if(isCodigoValido(codigo)){
-			this.codigo = Integer.parseInt(codigo);
-		} else {
-			throw new IllegalArgumentException("O código de identificação FEBRABAN tem de ser um número inteiro entre 0 e 9999.");
-		}
-	}
+    /**
+     * @return the codigo formatado ex: "0323"
+     */
+    public String getCodigoFormatado() {
+        return Filler.ZERO_LEFT.fill(getCodigo(), 4);
+    }
 
-	private boolean isCodigoValido(String codigo) {
-		boolean result = false;
-		
-		if (  StringUtils.isNotEmpty(codigo)  &&  StringUtils.isNumeric(codigo)  ) {
-			int codigoAsInteger = Integer.parseInt(codigo); 
-			
-			if (codigoAsInteger > 0 && codigoAsInteger < 9999) {
-				result = true;
-			}
-		} 
-		
-		return result; 
-	}
-	
-	@Override
-	public String toString() {
-		return ObjectUtil.toString(this);
-	}
+    /**
+     * @return the codigo
+     */
+    public Integer getCodigo() {
+        return codigo;
+    }
+
+    /**
+     * @param codigo the codigo to set
+     */
+    public void setCodigo(Integer codigo) {
+        if (ObjectUtil.isNull(codigo)) {
+            setCodigo("");
+        } else {
+            setCodigo(String.valueOf(codigo));
+        }
+    }
+
+    /**
+     * @param codigo the codigo to set
+     */
+    public void setCodigo(String codigo) {
+        if (isCodigoValido(codigo)) {
+            this.codigo = Integer.parseInt(codigo);
+        } else {
+            throw new IllegalArgumentException("O código de identificação FEBRABAN tem de ser um número inteiro entre 0 e 9999.");
+        }
+    }
+
+    private boolean isCodigoValido(String codigo) {
+        boolean result = false;
+
+        if (StringUtils.isNotEmpty(codigo) && StringUtils.isNumeric(codigo)) {
+            int codigoAsInteger = Integer.parseInt(codigo);
+
+            if (codigoAsInteger > 0 && codigoAsInteger < 9999) {
+                result = true;
+            }
+        }
+
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return ObjectUtil.toString(this);
+    }
 }

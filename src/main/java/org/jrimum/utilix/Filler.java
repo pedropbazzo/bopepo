@@ -26,11 +26,10 @@
  * Criado em: 30/03/2008 - 18:17:00
  * 
  */
-package br.com.nordestefomento.jrimum.utilix;
+package org.jrimum.utilix;
 
 import java.util.Objects;
 import org.apache.commons.lang.StringUtils;
-import org.jrimum.texgit.TextStream;
 import static org.jrimum.utilix.Objects.isNotNull;
 
 /**
@@ -328,7 +327,7 @@ public class Filler<G> {
      *
      * @see Filler#fill(String, int)
      */
-    public String fill(Object toFill, int length) {
+    public String fillObject(Object toFill, int length) {
 
         String toFillTemp = null;
 
@@ -358,7 +357,7 @@ public class Filler<G> {
      *
      * @see Filler#fill(String, int)
      */
-    public String fill(TextStream toFill, int length) {
+    public String fillStream(TextStream toFill, int length) {
 
         String toFillTemp = null;
 

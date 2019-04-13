@@ -27,9 +27,9 @@
  * 
  */
 
-package br.com.nordestefomento.jrimum.utilix;
+package org.jrimum.utilix;
 
-import static br.com.nordestefomento.jrimum.utilix.ObjectUtil.isNull;
+import static org.jrimum.utilix.ObjectUtil.isNull;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -37,7 +37,7 @@ import java.util.GregorianCalendar;
 
 import org.apache.commons.lang.time.DateUtils;
 
-import br.com.nordestefomento.jrimum.JRimumException;
+import org.jrimum.JRimumException;
 
 /**
  * <p>

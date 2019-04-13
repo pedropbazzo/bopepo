@@ -3,12 +3,11 @@
  */
 package org.jrimum.domkee.financeiro.banco.febraban.guia;
 
-import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia.*;
 import java.io.Serializable;
 import java.util.Date;
 
-import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Agencia;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Banco;
+import org.jrimum.domkee.financeiro.banco.febraban.Agencia;
 
 /**
  * @author i311020

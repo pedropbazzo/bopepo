@@ -26,104 +26,106 @@
  * Criado em: 30/03/2008 - 19:06:56
  * 
  */
-
 package br.com.nordestefomento.jrimum.domkee.comum.pessoa.id.cprf;
 
-import br.com.nordestefomento.jrimum.utilix.Filler;
-import br.com.nordestefomento.jrimum.vallia.AbstractCPRFValidator;
-import br.com.nordestefomento.jrimum.vallia.AbstractCPRFValidator.TipoDeCPRF;
+import org.jrimum.utilix.Filler;
+import org.jrimum.domkee.comum.pessoa.id.cprf.CNPJException;
+import org.jrimum.vallia.AbstractCPRFValidator;
+import org.jrimum.vallia.AbstractCPRFValidator.TipoDeCPRF;
 
 /**
- * 
+ *
  * <p>
  * Representa o cadastro nacional de pssoa jurídica (CNPJ), um número
  * identificador de uma pessoa jurídica junto à Receita Federal, necessário para
  * que a pessoa jurídica tenha capacidade de fazer contratos e processar ou ser
  * processada.
  * </p>
- * 
+ *
  * <p>
  * O formatador do CNPJ é "##.###.###/####-XX", onde XX é o dígito verificador
  * do número.
  * </p>
- * 
- * 
+ *
+ *
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
  * @author Misael Barreto
  * @author Rômulo Augusto
  * @author <a href="http://www.nordeste-fomento.com.br">Nordeste Fomento
- *         Mercantil</a>
- * 
+ * Mercantil</a>
+ *
  * @since 0.2
- * 
+ *
  * @version 0.2
  */
 public class CNPJ extends AbstractCPRF {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -3217977741182481194L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = -3217977741182481194L;
 
-	public CNPJ(String strCNPJ) {
+    public CNPJ(String strCNPJ) {
 
-		this.autenticadorCP = AbstractCPRFValidator.create(strCNPJ);
+        this.autenticadorCP = AbstractCPRFValidator.create(strCNPJ);
 
-		if (autenticadorCP.isValido()) {
-			init(autenticadorCP.getCodigoDoCadastro());
-		} else {
-			throw new CNPJException(new IllegalArgumentException(
-					"O cadastro de pessoa [ " + strCNPJ + " ] não é válido."));
-		}
-	}
+        if (autenticadorCP.isValido()) {
+            init(autenticadorCP.getCodigoDoCadastro());
+        } else {
+            throw new CNPJException(new IllegalArgumentException(
+                    "O cadastro de pessoa [ " + strCNPJ + " ] não é válido."));
+        }
+    }
 
-	public CNPJ(Long numCNPJ) {
+    public CNPJ(Long numCNPJ) {
 
-		try {
+        try {
 
-			if (AbstractCPRFValidator.isParametrosValidos(
-					String.valueOf(numCNPJ), TipoDeCPRF.CNPJ)) {
+            if (AbstractCPRFValidator.isParametrosValidos(
+                    String.valueOf(numCNPJ), TipoDeCPRF.CNPJ)) {
 
-				String strCNPJ = Filler.ZERO_LEFT.fill(numCNPJ, 14);
+                String strCNPJ = Filler.ZERO_LEFT.fill(numCNPJ, 14);
 
-				this.autenticadorCP = AbstractCPRFValidator.create(strCNPJ);
+                this.autenticadorCP = AbstractCPRFValidator.create(strCNPJ);
 
-				if (autenticadorCP.isValido())
-					init(autenticadorCP.getCodigoDoCadastro());
-				else
-					throw new IllegalArgumentException(
-							"O cadastro de pessoa [ " + strCNPJ
-									+ " ] não é válido.");
+                if (autenticadorCP.isValido()) {
+                    init(autenticadorCP.getCodigoDoCadastro());
+                } else {
+                    throw new IllegalArgumentException(
+                            "O cadastro de pessoa [ " + strCNPJ
+                            + " ] não é válido.");
+                }
 
-			}
+            }
 
-		} catch (Exception e) {
-			if (!(e instanceof CNPJException))
-				throw new CNPJException(e);
-		}
+        } catch (Exception e) {
+            if (!(e instanceof CNPJException)) {
+                throw new CNPJException(e);
+            }
+        }
 
-	}
+    }
 
-	private void init(String strCNPJ) {
+    private void init(String strCNPJ) {
 
-		try {
+        try {
 
-			StringBuilder codigoFormatado = null;
+            StringBuilder codigoFormatado = null;
 
-			codigoFormatado = new StringBuilder(strCNPJ);
+            codigoFormatado = new StringBuilder(strCNPJ);
 
-			codigoFormatado.insert(2, '.');
-			codigoFormatado.insert(6, '.');
-			codigoFormatado.insert(10, '/');
-			codigoFormatado.insert(15, '-');
+            codigoFormatado.insert(2, '.');
+            codigoFormatado.insert(6, '.');
+            codigoFormatado.insert(10, '/');
+            codigoFormatado.insert(15, '-');
 
-			this.setCodigoFormatado(codigoFormatado.toString());
-			this.setCodigoFormatadoSemPontuacao(strCNPJ);
-			this.setCodigo(Long.parseLong(strCNPJ));
+            this.setCodigoFormatado(codigoFormatado.toString());
+            this.setCodigoFormatadoSemPontuacao(strCNPJ);
+            this.setCodigo(Long.parseLong(strCNPJ));
 
-		} catch (Exception e) {
-			throw new CNPJException(e);
-		}
-	}
+        } catch (Exception e) {
+            throw new CNPJException(e);
+        }
+    }
 
 }

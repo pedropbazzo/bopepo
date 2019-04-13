@@ -27,7 +27,7 @@
  * 
  */
 
-package br.com.nordestefomento.jrimum.utilix;
+package org.jrimum.utilix;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;

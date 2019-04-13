@@ -29,6 +29,7 @@
  */
 package org.jrimum.domkee.financeiro.banco.febraban.guia;
 
+import org.jrimum.utilix.Filler;
 import org.apache.commons.lang.StringUtils;
 import org.jrimum.utilix.Objects;
 

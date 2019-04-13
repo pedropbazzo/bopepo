@@ -30,6 +30,7 @@
 
 package org.jrimum.domkee.comum.pessoa;
 
+import br.com.nordestefomento.jrimum.domkee.comum.pessoa.id.cprf.AbstractCPRF;
 import java.util.Collection;
 
 import org.jrimum.domkee.comum.pessoa.contato.NumeroDeTelefone;

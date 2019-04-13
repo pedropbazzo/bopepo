@@ -1,4 +1,4 @@
-package br.com.nordestefomento.jrimum.utilix;
+package org.jrimum.utilix;
 
 import com.lowagie.text.Rectangle;
 

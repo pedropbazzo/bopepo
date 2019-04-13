@@ -34,7 +34,6 @@ import static org.jrimum.utilix.text.Strings.fillWithZeroLeft;
 
 import org.jrimum.utilix.Objects;
 import org.jrimum.vallia.digitoverificador.CodigoDeCompensacaoBancosBACENDV;
-
 /**
  * <p>
  * Código de compensação para bancos supervisionados pelo <a
