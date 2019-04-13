@@ -1,7 +1,5 @@
 package org.jrimum.domkee.financeiro.banco.febraban.guia;
 
-import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia.*;
-
 public enum TipoSeguimento {
 
 	PREFEITURA(1, "Prefeituras"),

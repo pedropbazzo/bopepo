@@ -3,8 +3,6 @@
  */
 package org.jrimum.domkee.financeiro.banco.febraban.guia;
 
-import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia.*;
-
 /**
  * @author misael
  *

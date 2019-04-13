@@ -261,10 +261,10 @@ public abstract class AbstractCPRF implements CPRF {
         if (other != null) {
             if (other instanceof AbstractCPRF) {
                 AbstractCPRF cprf = (AbstractCPRF) other;
-                if (this.autenticadorCP.getTipoDeCadastro().equals(cprf.autenticadorCP.getTipoDeCadastro())) {
+                if (this.autenticadorCP.isFisica()) {
                     return this.codigo.compareTo(cprf.codigo);
                 } else {
-                    return this.autenticadorCP.getTipoDeCadastro().compareTo(cprf.autenticadorCP.getTipoDeCadastro());
+                    return this.autenticadorCP.getCodigoDoCadastro().compareTo(cprf.autenticadorCP.getCodigoDoCadastro());
                 }
             } else {
                 return -1;
