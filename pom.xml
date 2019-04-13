@@ -80,7 +80,7 @@
                 <configuration>
                     <signature>
                         <groupId>org.codehaus.mojo.signature</groupId>
-                        <artifactId>java15</artifactId>
+                        <artifactId>java18</artifactId>
                         <version>1.0</version>
                     </signature>
                 </configuration>
@@ -96,12 +96,10 @@
             </plugin>
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
-                <version>2.6</version>
+                <version>2.4</version>
                 <configuration>
                     <descriptors>
                         <descriptor>src/main/assembly/jrimum-bopepo-with-dependencies.xml</descriptor>
-                        <descriptor>src/main/assembly/jrimum-bopepo-with-dependencies-src.xml</descriptor>
-                        <descriptor>src/main/assembly/jrimum-bopepo-examples.xml</descriptor>
                     </descriptors>
                 </configuration>
                 <executions>
@@ -143,7 +141,7 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
+            <!--            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>2.9.1</version>
@@ -162,7 +160,7 @@
                     <docfilessubdirs>true</docfilessubdirs>
                     <show>private</show>
                 </configuration>
-            </plugin>
+            </plugin>-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-deploy-plugin</artifactId>
