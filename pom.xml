@@ -176,14 +176,14 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.jrimum</groupId>
-            <artifactId>jrimum-domkee</artifactId>
-            <version>0.2.3-DEV-SNAPSHOT</version>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
         </dependency>
         <dependency>
-            <groupId>org.jrimum</groupId>
-            <artifactId>jrimum-texgit</artifactId>
-            <version>0.2.3-DEV-SNAPSHOT</version>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.6</version>
         </dependency>
         <dependency>
             <groupId>com.lowagie</groupId>
