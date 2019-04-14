@@ -84,6 +84,9 @@
                         <artifactId>java18</artifactId>
                         <version>1.0</version>
                     </signature>
+                    <ignores>
+                        <ignore>java.nio.*</ignore>
+                    </ignores>
                 </configuration>
                 <executions>
                     <execution>

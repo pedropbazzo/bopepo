@@ -25,7 +25,6 @@
  * 
  * Criado em: 17/02/2011 - 12:40:00
  */
-
 package org.jrimum.bopepo.campolivre;
 
 import org.jrimum.bopepo.BancosSuportados;
@@ -39,60 +38,61 @@ import org.junit.Test;
  * <p>
  * Teste unitário do campo livre do Banco Bancoob para cobrança não registrada.
  * </p>
- * 
+ *
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
  * @author Rômulo Augusto
- * 
+ *
  * @since 0.2
- * 
+ *
  * @version 0.2
  */
-public class TestCLBancoobCobrancaNaoRegistrada extends AbstractCampoLivreBaseTest<CLBancoobCobrancaNaoRegistrada>{
-	
-	private final int NOSSO_NUMERO_LENGTH = 7;
+public class TestCLBancoobCobrancaNaoRegistrada
+        extends AbstractCampoLivreBaseTest<CLBancoobCobrancaNaoRegistrada> {
 
-	@Before
-	public void setUp(){
+    private final int NOSSO_NUMERO_LENGTH = 7;
 
-		titulo.getContaBancaria().setBanco(BancosSuportados.BANCOOB.create());
-		titulo.getContaBancaria().setAgencia(new Agencia(4340));
-		titulo.getContaBancaria().setNumeroDaConta(new NumeroDaConta(1, "0"));
-		titulo.getContaBancaria().setCarteira(new Carteira(1));
-		titulo.setNossoNumero("0200000");
-		titulo.setDigitoDoNossoNumero("1");
+    @Before
+    public void setUp() {
 
-		createCampoLivreToTest();
+        titulo.getContaBancaria().setBanco(BancosSuportados.BANCOOB.create());
+        titulo.getContaBancaria().setAgencia(new Agencia(4340));
+        titulo.getContaBancaria().setNumeroDaConta(new NumeroDaConta(1, "0"));
+        titulo.getContaBancaria().setCarteira(new Carteira(1));
+        titulo.setNossoNumero("0200000");
+        titulo.setDigitoDoNossoNumero("1");
 
-		setCampoLivreEsperadoComoString("1434001000001002000001001");
-	}
-	
-	@Test(expected = CampoLivreException.class)
-	public void seNaoPermiteNossoNumeroComTamanhoDiferenteDe7() {
-		testeSeNaoPermiteNossoNumeroComTamanhoDiferenteDoEspecificado(NOSSO_NUMERO_LENGTH + 1);
-	}
-	
-	@Test(expected = CampoLivreException.class)
-	public void seNaoPermiteDigitoDaContaNulo() {
-		testeSeNaoPermiteDigitoDaContaNulo();
-	}
-	
-	@Test(expected = CampoLivreException.class)
-	public void seNaoPermiteDigitoDaContaNaoNumero() {
-		testeSeNaoPermiteDigitoDaContaNaoNumerico();
-	}
-	
-	@Test(expected = CampoLivreException.class)
-	public void seNaoPermiteDigitoDaContaNegativo() {
-		testeSeNaoPermiteDigitoDaContaNegativo();
-	}
-	
-	@Test(expected = CampoLivreException.class)
-	public void seNaoPermiteDigitoDaContaVazio() {
-		testeSeNaoPermiteDigitoDaContaVazio();
-	}
-	
-	@Test(expected = CampoLivreException.class)
-	public void seNaoPermiteNumeroDaContaMaiorQueSeisDigitos() {
-		testeSeNaoPermiteNumeroDaContaComCodigoAcimaDoLimite(1000000);
-	}
+        createCampoLivreToTest();
+
+        setCampoLivreEsperadoComoString("1434001000001002000001001");
+    }
+
+    @Test(expected = CampoLivreException.class)
+    public void seNaoPermiteNossoNumeroComTamanhoDiferenteDe7() {
+        testeSeNaoPermiteNossoNumeroComTamanhoDiferenteDoEspecificado(NOSSO_NUMERO_LENGTH + 1);
+    }
+
+    @Test(expected = CampoLivreException.class)
+    public void seNaoPermiteDigitoDaContaNulo() {
+        testeSeNaoPermiteDigitoDaContaNulo();
+    }
+
+    @Test(expected = CampoLivreException.class)
+    public void seNaoPermiteDigitoDaContaNaoNumero() {
+        testeSeNaoPermiteDigitoDaContaNaoNumerico();
+    }
+
+    @Test(expected = CampoLivreException.class)
+    public void seNaoPermiteDigitoDaContaNegativo() {
+        testeSeNaoPermiteDigitoDaContaNegativo();
+    }
+
+    @Test(expected = CampoLivreException.class)
+    public void seNaoPermiteDigitoDaContaVazio() {
+        testeSeNaoPermiteDigitoDaContaVazio();
+    }
+
+    @Test(expected = CampoLivreException.class)
+    public void seNaoPermiteNumeroDaContaMaiorQueSeisDigitos() {
+        testeSeNaoPermiteNumeroDaContaComCodigoAcimaDoLimite(1000000);
+    }
 }
