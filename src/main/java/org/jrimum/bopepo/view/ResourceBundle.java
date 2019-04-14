@@ -46,7 +46,7 @@ import org.jrimum.bopepo.pdf.Files;
 import org.jrimum.utilix.ClassLoaders;
 import org.jrimum.utilix.Exceptions;
 import org.jrimum.utilix.Objects;
-import org.jrimum.utilix.text.Strings;
+import org.jrimum.utilix.Strings;
 
 /**
  * Acessa os resources usados pelo Bopepo e os mantém nesta instância para as

@@ -9,7 +9,7 @@
  * OF ANY KIND, either express or implied. See the License for the specific
  * language governing permissions and limitations under the License.
  * 
- * Created at: 30/03/2008 - 18:59:31
+ * Created at: 30/03/2008 - 18:58:20
  * 
  * ================================================================================
  * 
@@ -23,42 +23,82 @@
  * TIPO, sejam expressas ou tácitas. Veja a LICENÇA para a redação específica a
  * reger permissões e limitações sob esta LICENÇA.
  * 
- * Criado em: 30/03/2008 - 18:59:31
+ * Criado em: 30/03/2008 - 18:58:20
  * 
  */
 
-
 package org.jrimum.domkee.comum.pessoa;
+
+import static org.jrimum.utilix.Objects.isNotNull;
+import static org.jrimum.utilix.Objects.isNull;
 
 import java.util.Collection;
 
-import org.jrimum.domkee.comum.pessoa.id.RG;
-
+import org.jrimum.domkee.comum.pessoa.RG;
 
 
 /**
+ * <p>
+ * Representação básica de uma Pessoa Física.
+ * </p>
+ * 
+ * @see Pessoa
+ * @see org.jrimum.domkee.comum.pessoa.CPRF
+ * @see org.jrimum.domkee.comum.pessoa.CPF
  * 
  * @author <a href="http://gilmatryx.googlepages.com">Gilmar P.S.L.</a>
  * @author <a href="mailto:misaelbarreto@gmail.com">Misael Barreto</a>
  * @author <a href="mailto:romulomail@gmail.com">Rômulo Augusto</a>
  * 
- * @see org.jrimum.domkee.financeiro.banco.PessoaFisica
- * 
  * @since 0.2
  * 
  * @version 0.2
  */
-public interface PessoaFisica extends Pessoa {
-	
-	public PessoaFisica getConjuge();
 
-	public void setConjuge(PessoaFisica conjuge);
+public class PessoaFisica extends Pessoa implements
+		org.jrimum.domkee.comum.pessoa.IPessoaFisica {
 
-	public String getEstadoCivil();
+	private org.jrimum.domkee.comum.pessoa.IPessoaFisica conjuge;
 
-	public void setEstadoCivil(String estadoCivil);
-	
-	public Collection<RG> getRgs();
-	
-	public void setRgs(Collection<RG> rgs);
+	private String estadoCivil;
+
+	private Collection<RG> rgs;
+
+	public PessoaFisica() {
+	}
+
+	public org.jrimum.domkee.comum.pessoa.IPessoaFisica getConjuge() {
+
+		return conjuge;
+	}
+
+	public String getEstadoCivil() {
+
+		return estadoCivil;
+	}
+
+	public Collection<RG> getRgs() {
+
+		return rgs;
+	}
+
+	public void setConjuge(
+			org.jrimum.domkee.comum.pessoa.IPessoaFisica conjuge) {
+
+		this.conjuge = conjuge;
+
+		if (isNotNull(conjuge) && isNull(conjuge.getConjuge()))
+			conjuge.setConjuge(this);
+	}
+
+	public void setEstadoCivil(String estadoCivil) {
+
+		this.estadoCivil = estadoCivil;
+	}
+
+	public void setRgs(Collection<RG> rgs) {
+
+		this.rgs = rgs;
+	}
+
 }

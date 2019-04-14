@@ -30,13 +30,13 @@
 
 package org.jrimum.bopepo.campolivre;
 
-import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
+import org.jrimum.domkee.financeiro.banco.Titulo;
 import org.jrimum.texgit.type.component.Fillers;
 import org.jrimum.texgit.type.component.FixedField;
 import org.jrimum.utilix.Exceptions;
-import org.jrimum.utilix.text.Strings;
-import org.jrimum.vallia.digitoverificador.Modulo;
-import org.jrimum.vallia.digitoverificador.TipoDeModulo;
+import org.jrimum.utilix.Strings;
+import org.jrimum.vallia.Modulo;
+import org.jrimum.vallia.TipoDeModulo;
 
 /**
  * <p><strong>*** COBRANÇA SEM REGISTRO ***</strong></p>
@@ -152,7 +152,7 @@ class CLBancoReal extends AbstractCLBancoReal {
 	 * @param contaCorrente
 	 * @return Dígito verficador calculado
 	 * 
-	 * @see org.jrimum.vallia.digitoverificador.Modulo
+	 * @see org.jrimum.vallia.Modulo
 	 * 
 	 * @since 0.2
 	 */	

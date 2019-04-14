@@ -31,13 +31,13 @@ package org.jrimum.bopepo.campolivre;
 
 import static org.jrimum.utilix.Objects.exists;
 
-import org.jrimum.domkee.financeiro.banco.febraban.TipoDeCobranca;
-import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
+import org.jrimum.domkee.financeiro.banco.TipoDeCobranca;
+import org.jrimum.domkee.financeiro.banco.Titulo;
 import org.jrimum.texgit.type.component.Fillers;
 import org.jrimum.texgit.type.component.FixedField;
 import org.jrimum.utilix.Exceptions;
-import org.jrimum.vallia.digitoverificador.Modulo;
-import org.jrimum.vallia.digitoverificador.TipoDeModulo;
+import org.jrimum.vallia.Modulo;
+import org.jrimum.vallia.TipoDeModulo;
 
 /**
  * 

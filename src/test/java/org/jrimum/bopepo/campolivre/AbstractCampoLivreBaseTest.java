@@ -39,13 +39,13 @@ import java.math.RoundingMode;
 
 import org.jrimum.domkee.financeiro.banco.ParametroBancario;
 import org.jrimum.domkee.financeiro.banco.ParametrosBancariosMap;
-import org.jrimum.domkee.financeiro.banco.febraban.Agencia;
-import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
-import org.jrimum.domkee.financeiro.banco.febraban.Cedente;
-import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
-import org.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
-import org.jrimum.domkee.financeiro.banco.febraban.Sacado;
-import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
+import org.jrimum.domkee.financeiro.banco.Agencia;
+import org.jrimum.domkee.financeiro.banco.Carteira;
+import org.jrimum.domkee.financeiro.banco.Cedente;
+import org.jrimum.domkee.financeiro.banco.ContaBancaria;
+import org.jrimum.domkee.financeiro.banco.NumeroDaConta;
+import org.jrimum.domkee.financeiro.banco.Sacado;
+import org.jrimum.domkee.financeiro.banco.Titulo;
 import org.junit.Test;
 
 /**

@@ -36,7 +36,7 @@ import java.awt.Image;
 
 import org.jrimum.utilix.Exceptions;
 import org.jrimum.utilix.Objects;
-import org.jrimum.utilix.text.Strings;
+import org.jrimum.utilix.Strings;
 
 import com.lowagie.text.pdf.BarcodeInter25;
 

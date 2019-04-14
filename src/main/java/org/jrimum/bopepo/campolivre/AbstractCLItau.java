@@ -30,13 +30,13 @@
  */
 	
 package org.jrimum.bopepo.campolivre;
-import static org.jrimum.vallia.digitoverificador.Modulo.MOD10;
+import static org.jrimum.vallia.Modulo.MOD10;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
-import org.jrimum.vallia.digitoverificador.Modulo;
+import org.jrimum.domkee.financeiro.banco.Titulo;
+import org.jrimum.vallia.Modulo;
 
 /**
  *<p>

@@ -1,7 +1,7 @@
 package org.jrimum.bopepo.campolivre;
 
 import org.jrimum.bopepo.parametro.ParametroCECRED;
-import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
+import org.jrimum.domkee.financeiro.banco.Titulo;
 import org.jrimum.texgit.type.component.Fillers;
 import org.jrimum.texgit.type.component.FixedField;
 

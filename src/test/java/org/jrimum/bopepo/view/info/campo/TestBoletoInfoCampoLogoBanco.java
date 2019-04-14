@@ -30,6 +30,7 @@
 
 package org.jrimum.bopepo.view.info.campo;
 
+import org.jrimum.bopepo.view.info.BoletoInfoCampoLogoBanco;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
@@ -37,9 +38,9 @@ import static org.mockito.Mockito.mock;
 import java.awt.Image;
 
 import org.jrimum.bopepo.view.ResourceBundle;
-import org.jrimum.domkee.financeiro.banco.febraban.Banco;
-import org.jrimum.domkee.financeiro.banco.febraban.CodigoDeCompensacaoBACEN;
-import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
+import org.jrimum.domkee.financeiro.banco.Banco;
+import org.jrimum.domkee.financeiro.banco.CodigoDeCompensacaoBACEN;
+import org.jrimum.domkee.financeiro.banco.ContaBancaria;
 import org.junit.Test;
 
 /**

@@ -28,7 +28,7 @@
  */
 
 package org.jrimum.utilix;
-import static org.jrimum.utilix.text.DateFormat.DDMMYYYY_B;
+import static org.jrimum.utilix.DateFormat.DDMMYYYY_B;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;

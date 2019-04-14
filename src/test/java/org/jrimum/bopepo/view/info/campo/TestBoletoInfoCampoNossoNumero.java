@@ -31,11 +31,11 @@
 package org.jrimum.bopepo.view.info.campo;
 
 import static org.hamcrest.Matchers.equalTo;
-import static org.jrimum.bopepo.view.info.campo.BoletoInfoCampoNossoNumero.getTextoNossoNumero;
+import static org.jrimum.bopepo.view.info.BoletoInfoCampoNossoNumero.getTextoNossoNumero;
 import static org.junit.Assert.assertThat;
 
 import org.jrimum.bopepo.excludes.TituloBuilder;
-import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
+import org.jrimum.domkee.financeiro.banco.Titulo;
 import org.junit.Test;
 
 /**

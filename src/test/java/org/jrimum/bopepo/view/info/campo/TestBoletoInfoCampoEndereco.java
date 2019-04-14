@@ -30,14 +30,15 @@
 
 package org.jrimum.bopepo.view.info.campo;
 
+import org.jrimum.bopepo.view.info.BoletoInfoCampoEndereco;
 import static org.apache.commons.lang.StringUtils.EMPTY;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.*;
 
 import org.jrimum.bopepo.excludes.EnderecoBuilder;
-import org.jrimum.domkee.comum.pessoa.endereco.CEP;
-import org.jrimum.domkee.comum.pessoa.endereco.Endereco;
-import org.jrimum.domkee.financeiro.banco.febraban.EntidadeDeCobranca;
+import org.jrimum.domkee.comum.pessoa.CEP;
+import org.jrimum.domkee.comum.pessoa.Endereco;
+import org.jrimum.domkee.financeiro.banco.EntidadeDeCobranca;
 import org.junit.Test;
 
 /**

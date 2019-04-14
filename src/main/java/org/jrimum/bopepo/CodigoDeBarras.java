@@ -34,14 +34,14 @@ import java.util.Date;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.jrimum.bopepo.campolivre.CampoLivre;
-import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
-import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
+import org.jrimum.domkee.financeiro.banco.ContaBancaria;
+import org.jrimum.domkee.financeiro.banco.Titulo;
 import org.jrimum.texgit.type.component.BlockOfFields;
 import org.jrimum.texgit.type.component.Fillers;
 import org.jrimum.texgit.type.component.FixedField;
 import org.jrimum.utilix.Objects;
-import org.jrimum.utilix.text.DecimalFormat;
-import org.jrimum.vallia.digitoverificador.BoletoCodigoDeBarrasDV;
+import org.jrimum.utilix.DecimalFormat;
+import org.jrimum.vallia.BoletoCodigoDeBarrasDV;
 
 /**
  * <p>
@@ -145,7 +145,7 @@ public class CodigoDeBarras extends BlockOfFields {
     /**
      * Mecanismo de autenticação usado no composição de barras.
      *
-     * @see org.jrimum.vallia.digitoverificador.BoletoCodigoDeBarrasDV
+     * @see org.jrimum.vallia.BoletoCodigoDeBarrasDV
      */
     private FixedField<Integer> digitoVerificadorGeral;
 

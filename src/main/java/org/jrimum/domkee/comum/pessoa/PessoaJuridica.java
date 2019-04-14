@@ -9,7 +9,7 @@
  * OF ANY KIND, either express or implied. See the License for the specific
  * language governing permissions and limitations under the License.
  * 
- * Created at: 30/03/2008 - 18:59:41
+ * Created at: 30/03/2008 - 18:58:26
  * 
  * ================================================================================
  * 
@@ -23,7 +23,7 @@
  * TIPO, sejam expressas ou tácitas. Veja a LICENÇA para a redação específica a
  * reger permissões e limitações sob esta LICENÇA.
  * 
- * Criado em: 30/03/2008 - 18:59:41
+ * Criado em: 30/03/2008 - 18:58:26
  * 
  */
 
@@ -31,29 +31,69 @@
 package org.jrimum.domkee.comum.pessoa;
 
 
+
 /**
+ * <p>
+ *  Representação básica de uma Pessoa Jurídica.
+ * </p>
+ * 
+ * @see Pessoa
+ * @see org.jrimum.domkee.comum.pessoa.id.cprf.CPRF
+ * @see org.jrimum.domkee.comum.pessoa.id.cprf.CNPJ
  * 
  * @author <a href="http://gilmatryx.googlepages.com">Gilmar P.S.L.</a>
  * @author <a href="mailto:misaelbarreto@gmail.com">Misael Barreto</a>
  * @author <a href="mailto:romulomail@gmail.com">Rômulo Augusto</a>
  * 
- * @see org.jrimum.domkee.financeiro.banco.PessoaJuridica
- * 
  * @since 0.2
  * 
  * @version 0.2
  */
-public interface PessoaJuridica extends Pessoa {
+public class PessoaJuridica extends Pessoa implements org.jrimum.domkee.comum.pessoa.IPessoaJuridica {
 
-	public String getNomeFantasia();
+	private Long inscricaoEstadual;
+	
+	private Long inscricaoMunicipal;
+	
+	/**
+	 *  Título do estabelecimento, diferente do <code>nome</code> (NOME EMPRESARIAL). 
+	 */
+	private String nomeFantasia;
 
-	public void setNomeFantasia(String nomeFantasia);
+	
+	public Long getInscricaoEstadual() {
 
-	public Long getInscricaoEstadual();
+		return inscricaoEstadual;
+	}
 
-	public void setInscricaoEstadual(Long inscricaoEstadual);
+	
+	public Long getInscricaoMunicipal() {
 
-	public Long getInscricaoMunicipal();
+		return inscricaoMunicipal;
+	}
 
-	public void setInscricaoMunicipal(Long inscricaoMunicipal);
+	
+	public String getNomeFantasia() {
+
+		return nomeFantasia;
+	}
+
+	
+	public void setInscricaoEstadual(Long inscricaoEstadual) {
+
+		this.inscricaoEstadual = inscricaoEstadual;
+	}
+
+	
+	public void setInscricaoMunicipal(Long inscricaoMunicipal) {
+
+		this.inscricaoMunicipal = inscricaoMunicipal;
+	}
+
+	
+	public void setNomeFantasia(String nomeFantasia) {
+
+		this.nomeFantasia = nomeFantasia;
+	}
+
 }

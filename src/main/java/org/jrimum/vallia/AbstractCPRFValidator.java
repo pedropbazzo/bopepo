@@ -35,9 +35,6 @@ import org.apache.commons.lang.StringUtils;
 import org.jrimum.utilix.ObjectUtil;
 import static org.jrimum.utilix.Objects.isNotNull;
 
-import org.jrimum.vallia.digitoverificador.AbstractDigitoVerificador;
-import org.jrimum.vallia.digitoverificador.CNPJDV;
-import org.jrimum.vallia.digitoverificador.CPFDV;
 
 /**
  * <p>

@@ -4,9 +4,9 @@ import static org.jrimum.bopepo.parametro.ParametroBancoSantander.IOF_SEGURADORA
 
 import org.jrimum.bopepo.BancosSuportados;
 import org.jrimum.domkee.financeiro.banco.ParametrosBancariosMap;
-import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
-import org.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
-import org.jrimum.domkee.financeiro.banco.febraban.TipoDeCobranca;
+import org.jrimum.domkee.financeiro.banco.Carteira;
+import org.jrimum.domkee.financeiro.banco.NumeroDaConta;
+import org.jrimum.domkee.financeiro.banco.TipoDeCobranca;
 import org.junit.Before;
 import org.junit.Test;
 

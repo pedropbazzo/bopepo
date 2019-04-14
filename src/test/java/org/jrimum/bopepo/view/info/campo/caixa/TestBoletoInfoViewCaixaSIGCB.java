@@ -1,12 +1,13 @@
 package org.jrimum.bopepo.view.info.campo.caixa;
 
+import org.jrimum.bopepo.view.info.BoletoInfoViewCaixaSIGCB;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 
 import org.jrimum.bopepo.Boleto;
 import org.jrimum.bopepo.excludes.BoletoBuilder;
 import org.jrimum.bopepo.view.ResourceBundle;
-import org.jrimum.domkee.financeiro.banco.febraban.TipoDeCobranca;
+import org.jrimum.domkee.financeiro.banco.TipoDeCobranca;
 import org.junit.Before;
 import org.junit.Test;
 

@@ -30,7 +30,7 @@
 package org.jrimum.bopepo.excludes;
 
 import org.jrimum.bopepo.Boleto;
-import org.jrimum.utilix.text.DateFormat;
+import org.jrimum.utilix.DateFormat;
 
 /**
  * Criação de dados para testes.

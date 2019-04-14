@@ -40,14 +40,14 @@ import java.util.GregorianCalendar;
 
 import org.jrimum.bopepo.campolivre.CampoLivre;
 import org.jrimum.bopepo.campolivre.CampoLivreFactory;
-import org.jrimum.domkee.financeiro.banco.febraban.Agencia;
-import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
-import org.jrimum.domkee.financeiro.banco.febraban.Cedente;
-import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
-import org.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
-import org.jrimum.domkee.financeiro.banco.febraban.Sacado;
-import org.jrimum.domkee.financeiro.banco.febraban.TipoDeMoeda;
-import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
+import org.jrimum.domkee.financeiro.banco.Agencia;
+import org.jrimum.domkee.financeiro.banco.Carteira;
+import org.jrimum.domkee.financeiro.banco.Cedente;
+import org.jrimum.domkee.financeiro.banco.ContaBancaria;
+import org.jrimum.domkee.financeiro.banco.NumeroDaConta;
+import org.jrimum.domkee.financeiro.banco.Sacado;
+import org.jrimum.domkee.financeiro.banco.TipoDeMoeda;
+import org.jrimum.domkee.financeiro.banco.Titulo;
 import org.junit.Before;
 import org.junit.Test;
 

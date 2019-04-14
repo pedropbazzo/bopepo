@@ -1,7 +1,7 @@
 package org.jrimum.bopepo.campolivre;
 
-import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
-import org.jrimum.vallia.digitoverificador.Modulo;
+import org.jrimum.domkee.financeiro.banco.Titulo;
+import org.jrimum.vallia.Modulo;
 
 abstract class AbstractCLUnibanco extends AbstractCampoLivre {
 

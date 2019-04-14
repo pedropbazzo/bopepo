@@ -48,7 +48,7 @@ import java.util.zip.ZipOutputStream;
 
 import org.jrimum.utilix.Exceptions;
 import org.jrimum.utilix.Objects;
-import org.jrimum.utilix.text.Strings;
+import org.jrimum.utilix.Strings;
 
 /**
  * <p>

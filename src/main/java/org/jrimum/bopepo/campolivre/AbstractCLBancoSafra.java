@@ -32,7 +32,7 @@ package org.jrimum.bopepo.campolivre;
 
 import static java.lang.String.format;
 
-import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
+import org.jrimum.domkee.financeiro.banco.Titulo;
 import org.jrimum.texgit.type.component.FixedField;
 import org.jrimum.utilix.Exceptions;
 

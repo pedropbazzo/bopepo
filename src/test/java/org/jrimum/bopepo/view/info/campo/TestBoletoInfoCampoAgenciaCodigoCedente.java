@@ -31,13 +31,13 @@
 package org.jrimum.bopepo.view.info.campo;
 
 import static org.hamcrest.Matchers.equalTo;
-import static org.jrimum.bopepo.view.info.campo.BoletoInfoCampoAgenciaCodigoCedente.getTextoAgenciaCodigoCedente;
+import static org.jrimum.bopepo.view.info.BoletoInfoCampoAgenciaCodigoCedente.getTextoAgenciaCodigoCedente;
 import static org.junit.Assert.*;
 
 import org.jrimum.bopepo.excludes.ContaBancariaBuilder;
-import org.jrimum.domkee.financeiro.banco.febraban.Agencia;
-import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
-import org.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
+import org.jrimum.domkee.financeiro.banco.Agencia;
+import org.jrimum.domkee.financeiro.banco.ContaBancaria;
+import org.jrimum.domkee.financeiro.banco.NumeroDaConta;
 import org.junit.Test;
 
 /**

@@ -31,7 +31,7 @@ package org.jrimum.bopepo;
 
 import static java.lang.String.format;
 import static org.jrimum.utilix.Objects.isNull;
-import static org.jrimum.utilix.text.DateFormat.DDMMYYYY_B;
+import static org.jrimum.utilix.DateFormat.DDMMYYYY_B;
 
 import java.util.Calendar;
 import java.util.Date;

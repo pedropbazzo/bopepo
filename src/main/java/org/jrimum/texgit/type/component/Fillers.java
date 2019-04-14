@@ -29,7 +29,7 @@
 package org.jrimum.texgit.type.component;
 
 import org.jrimum.texgit.TextStream;
-import org.jrimum.utilix.text.Strings;
+import org.jrimum.utilix.Strings;
 
 
 /**

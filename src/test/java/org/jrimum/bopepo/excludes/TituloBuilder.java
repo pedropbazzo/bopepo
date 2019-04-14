@@ -32,10 +32,10 @@ package org.jrimum.bopepo.excludes;
 
 import java.math.BigDecimal;
 
-import org.jrimum.domkee.financeiro.banco.febraban.TipoDeTitulo;
-import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
-import org.jrimum.domkee.financeiro.banco.febraban.Titulo.Aceite;
-import org.jrimum.utilix.text.DateFormat;
+import org.jrimum.domkee.financeiro.banco.TipoDeTitulo;
+import org.jrimum.domkee.financeiro.banco.Titulo;
+import org.jrimum.domkee.financeiro.banco.Titulo.Aceite;
+import org.jrimum.utilix.DateFormat;
 
 /**
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>

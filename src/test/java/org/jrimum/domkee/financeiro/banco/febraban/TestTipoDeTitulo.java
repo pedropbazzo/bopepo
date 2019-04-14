@@ -30,6 +30,7 @@
 
 package org.jrimum.domkee.financeiro.banco.febraban;
 
+import org.jrimum.domkee.financeiro.banco.TipoDeTitulo;
 import static org.junit.Assert.*;
 
 import org.junit.Test;

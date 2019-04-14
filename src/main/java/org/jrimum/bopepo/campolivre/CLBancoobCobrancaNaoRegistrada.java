@@ -31,7 +31,7 @@ package org.jrimum.bopepo.campolivre;
 import static org.jrimum.bopepo.parametro.ParametroBancoob.MODALIDADE_DE_COBRANCA;
 import static org.jrimum.bopepo.parametro.ParametroBancoob.NUMERO_DA_PARCELA;
 
-import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
+import org.jrimum.domkee.financeiro.banco.Titulo;
 import org.jrimum.texgit.type.component.Fillers;
 import org.jrimum.texgit.type.component.FixedField;
 

@@ -1,5 +1,6 @@
 package org.jrimum.bopepo.view.info.campo.caixa;
 
+import org.jrimum.bopepo.view.info.BoletoInfoViewCaixaSICOB14;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 
@@ -8,7 +9,7 @@ import org.jrimum.bopepo.excludes.BoletoBuilder;
 import org.jrimum.bopepo.parametro.ParametroCaixaEconomicaFederal;
 import org.jrimum.bopepo.view.ResourceBundle;
 import org.jrimum.domkee.financeiro.banco.ParametrosBancariosMap;
-import org.jrimum.domkee.financeiro.banco.febraban.Agencia;
+import org.jrimum.domkee.financeiro.banco.Agencia;
 import org.junit.Before;
 import org.junit.Test;
 

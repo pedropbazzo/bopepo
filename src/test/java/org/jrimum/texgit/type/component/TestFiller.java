@@ -34,7 +34,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.jrimum.texgit.TextStream;
 import org.jrimum.texgit.type.component.Filler;
-import org.jrimum.utilix.text.Strings;
+import org.jrimum.utilix.Strings;
 import org.junit.Before;
 import org.junit.Test;
 

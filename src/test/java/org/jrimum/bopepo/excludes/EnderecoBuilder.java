@@ -30,9 +30,9 @@
 
 package org.jrimum.bopepo.excludes;
 
-import org.jrimum.domkee.comum.pessoa.endereco.CEP;
-import org.jrimum.domkee.comum.pessoa.endereco.Endereco;
-import org.jrimum.domkee.comum.pessoa.endereco.UnidadeFederativa;
+import org.jrimum.domkee.comum.pessoa.CEP;
+import org.jrimum.domkee.comum.pessoa.Endereco;
+import org.jrimum.domkee.comum.pessoa.UnidadeFederativa;
 
 /**
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>

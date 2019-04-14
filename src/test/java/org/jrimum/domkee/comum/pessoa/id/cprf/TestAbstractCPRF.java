@@ -30,7 +30,9 @@
 
 package org.jrimum.domkee.comum.pessoa.id.cprf;
 
-import static org.jrimum.utilix.text.Strings.fillWithZeroLeft;
+import org.jrimum.domkee.comum.pessoa.AbstractCPRF;
+import org.jrimum.domkee.comum.pessoa.CPRF;
+import static org.jrimum.utilix.Strings.fillWithZeroLeft;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;

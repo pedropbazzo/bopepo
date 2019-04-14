@@ -50,7 +50,7 @@ import org.apache.log4j.Logger;
 import org.jrimum.utilix.Collections;
 import org.jrimum.utilix.Exceptions;
 import org.jrimum.utilix.Objects;
-import org.jrimum.utilix.text.Strings;
+import org.jrimum.utilix.Strings;
 
 import com.lowagie.text.Image;
 import com.lowagie.text.pdf.AcroFields;

@@ -28,6 +28,7 @@
  */
 package org.jrimum.domkee.financeiro.banco.febraban;
 
+import org.jrimum.domkee.financeiro.banco.Banco;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 

@@ -41,8 +41,6 @@ import org.apache.log4j.Logger;
 import org.jrimum.bopepo.Boleto;
 import org.jrimum.bopepo.view.BoletoCampo;
 import org.jrimum.bopepo.view.ResourceBundle;
-import org.jrimum.bopepo.view.info.campo.BoletoInfoCampoView;
-import org.jrimum.bopepo.view.info.campo.BoletoInfoCampoViewFactory;
 import org.jrimum.utilix.Collections;
 import org.jrimum.utilix.Exceptions;
 import org.jrimum.utilix.Objects;

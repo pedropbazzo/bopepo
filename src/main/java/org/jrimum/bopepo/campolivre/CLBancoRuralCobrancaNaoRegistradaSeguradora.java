@@ -5,11 +5,11 @@ import static org.jrimum.bopepo.parametro.ParametroBancoRural.VALOR_IOS;
 
 import java.math.BigDecimal;
 
-import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
+import org.jrimum.domkee.financeiro.banco.Titulo;
 import org.jrimum.texgit.type.component.Fillers;
 import org.jrimum.texgit.type.component.FixedField;
 import org.jrimum.utilix.Exceptions;
-import org.jrimum.utilix.text.DecimalFormat;
+import org.jrimum.utilix.DecimalFormat;
 
 /**
  * <p>

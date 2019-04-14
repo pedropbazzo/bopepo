@@ -31,8 +31,8 @@
 package org.jrimum.bopepo.campolivre;
 
 import org.jrimum.bopepo.BancosSuportados;
-import org.jrimum.domkee.financeiro.banco.febraban.Agencia;
-import org.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
+import org.jrimum.domkee.financeiro.banco.Agencia;
+import org.jrimum.domkee.financeiro.banco.NumeroDaConta;
 import org.junit.Before;
 
 /**

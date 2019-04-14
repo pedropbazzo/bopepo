@@ -32,9 +32,9 @@ package org.jrimum.bopepo;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.jrimum.domkee.comum.pessoa.id.cprf.CNPJ;
-import org.jrimum.domkee.financeiro.banco.febraban.Banco;
-import org.jrimum.domkee.financeiro.banco.febraban.CodigoDeCompensacaoBACEN;
+import org.jrimum.domkee.comum.pessoa.CNPJ;
+import org.jrimum.domkee.financeiro.banco.Banco;
+import org.jrimum.domkee.financeiro.banco.CodigoDeCompensacaoBACEN;
 
 /**
  * <p>

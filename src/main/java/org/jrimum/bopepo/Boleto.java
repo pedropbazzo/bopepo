@@ -31,7 +31,7 @@ package org.jrimum.bopepo;
 
 import static org.jrimum.utilix.Objects.isNotNull;
 import static org.jrimum.utilix.Objects.isNull;
-import static org.jrimum.utilix.text.DateFormat.DDMMYYYY_B;
+import static org.jrimum.utilix.DateFormat.DDMMYYYY_B;
 
 import java.awt.Image;
 import java.util.Date;
@@ -44,7 +44,7 @@ import org.jrimum.bopepo.campolivre.CampoLivreFactory;
 import org.jrimum.bopepo.campolivre.NotSupportedBancoException;
 import org.jrimum.bopepo.campolivre.NotSupportedCampoLivreException;
 import org.jrimum.bopepo.view.BoletoCampo;
-import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
+import org.jrimum.domkee.financeiro.banco.Titulo;
 import org.jrimum.utilix.Exceptions;
 import org.jrimum.utilix.Objects;
 

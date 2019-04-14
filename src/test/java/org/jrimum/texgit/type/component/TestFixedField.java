@@ -29,7 +29,7 @@
 
 package org.jrimum.texgit.type.component;
 
-import static org.jrimum.utilix.text.DateFormat.DDMMYYYY_B;
+import static org.jrimum.utilix.DateFormat.DDMMYYYY_B;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -42,7 +42,7 @@ import java.util.Date;
 
 import org.apache.commons.lang.StringUtils;
 import org.jrimum.utilix.Dates;
-import org.jrimum.utilix.text.DecimalFormat;
+import org.jrimum.utilix.DecimalFormat;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

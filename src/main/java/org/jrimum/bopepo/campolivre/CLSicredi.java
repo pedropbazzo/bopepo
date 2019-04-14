@@ -34,12 +34,12 @@ import static java.lang.String.format;
 import static java.math.BigDecimal.ZERO;
 import static org.jrimum.bopepo.parametro.ParametroBancoSicredi.POSTO_DA_AGENCIA;
 
-import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
+import org.jrimum.domkee.financeiro.banco.Titulo;
 import org.jrimum.texgit.type.component.Fillers;
 import org.jrimum.texgit.type.component.FixedField;
 import org.jrimum.utilix.Objects;
-import org.jrimum.vallia.digitoverificador.Modulo;
-import org.jrimum.vallia.digitoverificador.TipoDeModulo;
+import org.jrimum.vallia.Modulo;
+import org.jrimum.vallia.TipoDeModulo;
 
 /**
  * <p>

@@ -36,10 +36,10 @@ import static org.apache.commons.lang.StringUtils.isBlank;
 import static org.apache.commons.lang.StringUtils.isNotBlank;
 import static org.apache.commons.lang.StringUtils.trim;
 import static org.jrimum.utilix.Objects.checkNotNull;
-import static org.jrimum.utilix.text.Strings.WHITE_SPACE;
+import static org.jrimum.utilix.Strings.WHITE_SPACE;
 
 import org.jrimum.utilix.Exceptions;
-import org.jrimum.vallia.digitoverificador.BoletoLinhaDigitavelDV;
+import org.jrimum.vallia.BoletoLinhaDigitavelDV;
 
 /**
  * <p>
