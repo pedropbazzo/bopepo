@@ -30,9 +30,9 @@
 
 package org.jrimum.bopepo.view.info.campo;
 
-import org.jrimum.bopepo.view.info.BoletoInfoViewDefault;
-import org.jrimum.bopepo.view.info.BoletoInfoCampoViewFactory;
-import org.jrimum.bopepo.view.info.BoletoInfoCampoView;
+import org.jrimum.bopepo.view.BoletoInfoViewDefault;
+import org.jrimum.bopepo.view.BoletoInfoCampoViewFactory;
+import org.jrimum.bopepo.view.BoletoInfoCampoView;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.junit.Assert.assertThat;
 

@@ -32,8 +32,8 @@ import static org.jrimum.bopepo.parametro.ParametroBancoob.MODALIDADE_DE_COBRANC
 import static org.jrimum.bopepo.parametro.ParametroBancoob.NUMERO_DA_PARCELA;
 
 import org.jrimum.domkee.financeiro.banco.Titulo;
-import org.jrimum.texgit.type.component.Fillers;
-import org.jrimum.texgit.type.component.FixedField;
+import org.jrimum.texgit.Fillers;
+import org.jrimum.texgit.FixedField;
 
 /**
  * <p>

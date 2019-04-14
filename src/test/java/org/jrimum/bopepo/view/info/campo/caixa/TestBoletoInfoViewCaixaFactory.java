@@ -1,17 +1,17 @@
 package org.jrimum.bopepo.view.info.campo.caixa;
 
-import org.jrimum.bopepo.view.info.BoletoInfoViewCaixaSICOB10;
-import org.jrimum.bopepo.view.info.BoletoInfoViewCaixaSINCO;
-import org.jrimum.bopepo.view.info.BoletoInfoViewCaixaSICOB14;
+import org.jrimum.bopepo.view.BoletoInfoViewCaixaSICOB10;
+import org.jrimum.bopepo.view.BoletoInfoViewCaixaSINCO;
+import org.jrimum.bopepo.view.BoletoInfoViewCaixaSICOB14;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 
 import org.jrimum.bopepo.Boleto;
 import org.jrimum.bopepo.excludes.BoletoBuilder;
 import org.jrimum.bopepo.view.ResourceBundle;
-import org.jrimum.bopepo.view.info.BoletoInfoCampoView;
-import org.jrimum.bopepo.view.info.BoletoInfoViewCaixaFactory;
-import org.jrimum.bopepo.view.info.BoletoInfoViewCaixaSIGCB;
+import org.jrimum.bopepo.view.BoletoInfoCampoView;
+import org.jrimum.bopepo.view.BoletoInfoViewCaixaFactory;
+import org.jrimum.bopepo.view.BoletoInfoViewCaixaSIGCB;
 import org.junit.Before;
 import org.junit.Test;
 

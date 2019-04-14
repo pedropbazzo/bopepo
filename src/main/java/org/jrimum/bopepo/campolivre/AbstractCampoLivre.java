@@ -38,10 +38,10 @@ import org.apache.log4j.Logger;
 import org.jrimum.bopepo.BancosSuportados;
 import org.jrimum.domkee.financeiro.banco.ParametroBancario;
 import org.jrimum.domkee.financeiro.banco.Titulo;
-import org.jrimum.texgit.type.FixedField;
-import org.jrimum.texgit.type.component.BlockOfFields;
+import org.jrimum.texgit.BlockOfFields;
 import org.jrimum.utilix.Objects;
 import org.jrimum.utilix.Strings;
+import org.jrimum.texgit.IFixedField;
 
 /**
  * <p>
@@ -322,7 +322,7 @@ abstract class AbstractCampoLivre extends BlockOfFields implements CampoLivre {
 
 		StringBuilder campoLivreAtual = new StringBuilder();
 		
-		for(FixedField<?> f : this){
+		for(IFixedField<?> f : this){
 			campoLivreAtual.append(f.write());
 		}
 		

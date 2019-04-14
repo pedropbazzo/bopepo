@@ -35,8 +35,8 @@ import static org.jrimum.bopepo.parametro.ParametroBancoDeBrasilia.CHAVE_ASBACE_
 
 import org.jrimum.domkee.financeiro.banco.ParametrosBancariosMap;
 import org.jrimum.domkee.financeiro.banco.Titulo;
-import org.jrimum.texgit.type.component.Fillers;
-import org.jrimum.texgit.type.component.FixedField;
+import org.jrimum.texgit.Fillers;
+import org.jrimum.texgit.FixedField;
 import org.jrimum.utilix.Objects;
 import org.jrimum.vallia.Modulo;
 

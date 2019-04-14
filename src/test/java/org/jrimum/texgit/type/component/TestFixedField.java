@@ -29,6 +29,8 @@
 
 package org.jrimum.texgit.type.component;
 
+import org.jrimum.texgit.Fillers;
+import org.jrimum.texgit.FixedField;
 import static org.jrimum.utilix.DateFormat.DDMMYYYY_B;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;

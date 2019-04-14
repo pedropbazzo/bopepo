@@ -37,7 +37,6 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.net.URL;
 
-import org.jrimum.texgit.engine.TexgitManager;
 
 /**
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
@@ -45,7 +44,7 @@ import org.jrimum.texgit.engine.TexgitManager;
  */
 public final class Texgit {
 	
-	public static final FlatFile<Record> createFlatFile(String xmlDefFilePath)
+	public static final IFlatFile<IRecord> createFlatFile(String xmlDefFilePath)
 			throws TexgitException {
 
 		try {
@@ -60,7 +59,7 @@ public final class Texgit {
 		return null;
 	}
 
-	public static final FlatFile<Record> createFlatFile(File xmlDefFile)
+	public static final IFlatFile<IRecord> createFlatFile(File xmlDefFile)
 			throws TexgitException {
 
 		try {
@@ -77,7 +76,7 @@ public final class Texgit {
 		return null;
 	}
 
-	public static final FlatFile<Record> createFlatFile(URL xmlDefUrl)
+	public static final IFlatFile<IRecord> createFlatFile(URL xmlDefUrl)
 			throws TexgitException {
 		
 		try {
@@ -95,7 +94,7 @@ public final class Texgit {
 		return null;
 	}
 
-	public static final FlatFile<Record> createFlatFile(byte[] xmlDefBytes)
+	public static final IFlatFile<IRecord> createFlatFile(byte[] xmlDefBytes)
 			throws TexgitException {
 		
 		try {
@@ -112,7 +111,7 @@ public final class Texgit {
 		return null;
 	}
 	
-	public static final FlatFile<Record> createFlatFile(InputStream xmlDefStream)
+	public static final IFlatFile<IRecord> createFlatFile(InputStream xmlDefStream)
 			throws TexgitException {
 
 		if (isNotNull(xmlDefStream)) {

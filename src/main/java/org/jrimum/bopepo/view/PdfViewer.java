@@ -42,7 +42,6 @@ import org.apache.log4j.Logger;
 import org.jrimum.bopepo.Boleto;
 import org.jrimum.bopepo.pdf.Files;
 import org.jrimum.bopepo.pdf.PdfDocMix;
-import org.jrimum.bopepo.view.info.BoletoInfoViewBuilder;
 import org.jrimum.utilix.Exceptions;
 
 /**

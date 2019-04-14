@@ -1,6 +1,6 @@
 package org.jrimum.bopepo.view.info.campo.caixa;
 
-import org.jrimum.bopepo.view.info.BoletoInfoViewCaixaSICOB10;
+import org.jrimum.bopepo.view.BoletoInfoViewCaixaSICOB10;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 

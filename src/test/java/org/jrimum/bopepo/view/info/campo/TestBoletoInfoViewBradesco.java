@@ -1,6 +1,6 @@
 package org.jrimum.bopepo.view.info.campo;
 
-import org.jrimum.bopepo.view.info.BoletoInfoViewBradesco;
+import org.jrimum.bopepo.view.BoletoInfoViewBradesco;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 

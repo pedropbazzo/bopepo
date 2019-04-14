@@ -30,7 +30,7 @@
 
 package org.jrimum.bopepo.view.info.campo;
 
-import org.jrimum.bopepo.view.info.BoletoInfoCampoEndereco;
+import org.jrimum.bopepo.view.BoletoInfoCampoEndereco;
 import static org.apache.commons.lang.StringUtils.EMPTY;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.*;

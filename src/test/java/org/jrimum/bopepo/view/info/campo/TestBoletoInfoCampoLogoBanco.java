@@ -30,7 +30,7 @@
 
 package org.jrimum.bopepo.view.info.campo;
 
-import org.jrimum.bopepo.view.info.BoletoInfoCampoLogoBanco;
+import org.jrimum.bopepo.view.BoletoInfoCampoLogoBanco;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;

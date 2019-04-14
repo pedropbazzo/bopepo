@@ -33,8 +33,8 @@ import static org.jrimum.utilix.Objects.exists;
 
 import org.jrimum.domkee.financeiro.banco.TipoDeCobranca;
 import org.jrimum.domkee.financeiro.banco.Titulo;
-import org.jrimum.texgit.type.component.Fillers;
-import org.jrimum.texgit.type.component.FixedField;
+import org.jrimum.texgit.Fillers;
+import org.jrimum.texgit.FixedField;
 import org.jrimum.utilix.Exceptions;
 import org.jrimum.vallia.Modulo;
 import org.jrimum.vallia.TipoDeModulo;

@@ -32,8 +32,8 @@ import static org.jrimum.vallia.Modulo.MOD11;
 
 import org.jrimum.domkee.financeiro.banco.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.Titulo;
-import org.jrimum.texgit.type.component.Fillers;
-import org.jrimum.texgit.type.component.FixedField;
+import org.jrimum.texgit.Fillers;
+import org.jrimum.texgit.FixedField;
 import org.jrimum.utilix.Exceptions;
 import org.jrimum.vallia.Modulo;
 

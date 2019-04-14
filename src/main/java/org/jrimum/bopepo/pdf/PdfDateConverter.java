@@ -30,7 +30,7 @@
 package org.jrimum.bopepo.pdf;
 
 import static java.lang.String.format;
-import static org.jrimum.texgit.type.component.Fillers.ZERO_LEFT;
+import static org.jrimum.texgit.Fillers.ZERO_LEFT;
 import static org.jrimum.utilix.Objects.isNotNull;
 
 import java.util.Calendar;

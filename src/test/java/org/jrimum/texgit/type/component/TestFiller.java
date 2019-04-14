@@ -29,11 +29,12 @@
 
 package org.jrimum.texgit.type.component;
 
+import org.jrimum.texgit.Side;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.jrimum.texgit.TextStream;
-import org.jrimum.texgit.type.component.Filler;
+import org.jrimum.texgit.Filler;
 import org.jrimum.utilix.Strings;
 import org.junit.Before;
 import org.junit.Test;

@@ -31,7 +31,7 @@
 package org.jrimum.bopepo.view.info.campo;
 
 import static org.hamcrest.Matchers.equalTo;
-import static org.jrimum.bopepo.view.info.BoletoInfoCampoAgenciaCodigoCedente.getTextoAgenciaCodigoCedente;
+import static org.jrimum.bopepo.view.BoletoInfoCampoAgenciaCodigoCedente.getTextoAgenciaCodigoCedente;
 import static org.junit.Assert.*;
 
 import org.jrimum.bopepo.excludes.ContaBancariaBuilder;

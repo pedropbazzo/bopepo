@@ -31,7 +31,7 @@
 package org.jrimum.bopepo.view.info.campo;
 
 import static org.hamcrest.Matchers.equalTo;
-import static org.jrimum.bopepo.view.info.BoletoInfoCampoNossoNumero.getTextoNossoNumero;
+import static org.jrimum.bopepo.view.BoletoInfoCampoNossoNumero.getTextoNossoNumero;
 import static org.junit.Assert.assertThat;
 
 import org.jrimum.bopepo.excludes.TituloBuilder;

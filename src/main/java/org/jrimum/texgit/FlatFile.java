@@ -28,39 +28,294 @@
  */
 package org.jrimum.texgit;
 
+import static java.lang.String.format;
+import static org.apache.commons.lang.StringUtils.EMPTY;
+import static org.apache.commons.lang.StringUtils.isNotBlank;
+import static org.jrimum.utilix.Objects.isNotNull;
+import static org.jrimum.utilix.Objects.isNull;
+
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+import java.util.Set;
+
 
 /**
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
- * 
- * @param <G>
+ *
  */
-public interface FlatFile<G extends Record> extends TextListStream {
+@SuppressWarnings("serial")
+public class FlatFile implements org.jrimum.texgit.IFlatFile<org.jrimum.texgit.IRecord>{
 
-	// Registros individuais
+	private List<Record> records;
+	
+	private Set<String> repitablesRecords;
+	
+	private List<String> recordsOrder;
+	
+	private IRecordFactory<Record> recordFactory;
 
-	public G createRecord(String idType);
+	public FlatFile(IRecordFactory<Record> iFac4Rec) {
+		
+		this.recordFactory = iFac4Rec;
+		this.records = new ArrayList<Record>();
+	}
 
-	public FlatFile<G> addRecord(G record);
+	public Record getRecord(String idName){
+		
+		Record record = null;
+		
+		if (isNotBlank(idName)) {
+			if (!isRepitable(idName)){	
+				if (!records.isEmpty()) {
+					for (Record rec : records) {
+						if (idName.equals(rec.getName()))
+							record = rec;
+					}
+				}
+			}
+		}
 
-	public G getRecord(String idName);
+		return record;
+	}
+	
+	public boolean isRepitable(String idName){
+		
+		return (isNotNull(repitablesRecords) && !repitablesRecords.isEmpty() && repitablesRecords.contains(idName));
+	}
+	
+	public org.jrimum.texgit.IRecord createRecord(String idName){
+		
+		return recordFactory.create(idName);
+	}
+	
+	public void addRecord(Record record){
+		
+		if(isNotNull(record))
+			if(isMyRecord(record.getName()))
+				records.add(record);
+			else
+				throw new IllegalArgumentException("Record fora de scopo!");
+	}
+	
+	public boolean isMyRecord(String idName){
+		boolean is = false;
+		
+		if (isNotBlank(idName)) {
+			if(!recordsOrder.isEmpty())
+				if(recordsOrder.contains(idName))
+					is = true;
+		}
+		return is;
+	}
 
-	public G removeRecord(String idName);
+	public void read(List<String> str) {
+		
+		if(isNotNull(str)){
+			if(!str.isEmpty()){
+		
+				String line = null;
+				int lineIndex = 0;
+				
+				FixedField<String> typeRecord = null;
+				Record record = null;
+				
+				for(String id : recordsOrder){
+					
+					record = recordFactory.create(id);
+					
+					try{
+						
+						if(isRepitable(id)){
+							
+							boolean read = true;
+							
+							while(read){
+								
+								if(isNull(record))
+									record = recordFactory.create(id);
+								
+								if(lineIndex < str.size())
+									line = str.get(lineIndex);
+								
+								typeRecord = record.readID(line);
+								
+								read = record.getIdType().getValue().equals(typeRecord.getValue()) && (lineIndex < str.size()); 
 
-	// Grupos de Registros (Registros que se repetem)
+								if(read){
+									
+									record.read(line);
+									lineIndex++;
+									addRecord(record);
+									
+									if(record.isHeadOfGroup()){
+										lineIndex = record.readInnerRecords(str,lineIndex,recordFactory);
+									}
+									
+									record = null;
+								}
+							}
+							
+						}else{
+							if((lineIndex < str.size())){
+								
+								line = str.get(lineIndex);
+								typeRecord = record.readID(line);
+								
+								if(record.getIdType().getValue().equals(typeRecord.getValue())){
+									
+									record.read(line);
+									lineIndex++;
+									addRecord(record);
+									
+									if(record.isHeadOfGroup()){
+										lineIndex = record.readInnerRecords(str,lineIndex,recordFactory);
+									}
+									
+									record = null;
+								}
+							}
+						}
+						
+					} catch (Exception e) {
+	
+						throw new IllegalStateException(format(
+								"Erro ao tentar ler o registro \"%s\".", record.getName()), e);
+					}
+				}
+			}
+		}
+	}
 
-	public FlatFile<G> addRecords(String idName, Collection<G> records);
+	public List<String> write() {
+	
+		return write(EMPTY);
+	}
+	
+	public List<String> write(String lineEnding) {
+		
+		ArrayList<String> out = new ArrayList<String>(records.size());
+		
+		for(String id : recordsOrder){
+			
+			if(isRepitable(id)){
+				
+				Record rec = null;
+				
+				for(org.jrimum.texgit.IRecord record : getRecords(id)){
+					
+					rec = Record.class.cast(record);
+					
+					try{
+						
+						out.add(rec.write()+lineEnding);
+						
+					} catch (Exception e) {
+						
+						throw new IllegalStateException(format(
+								"Erro ao tentar escrever o registro \"%s\".", rec.getName()), e);
+					}
+					
+					if(rec.isHeadOfGroup() && rec.hasInnerRecords()){
+						out.addAll(rec.writeInnerRecords(lineEnding));
+					}
+				}
+				
+			}else{
+				
+				Record rec = getRecord(id);
 
-	public FlatFile<G> setRecords(String idName, Collection<G> records);
+				try{
+					
+					out.add(rec.write()+lineEnding);
+					
+				} catch (Exception e) {
+					
+					throw new IllegalStateException(format(
+							"Erro ao tentar escrever o registro \"%s\".", rec.getName()), e);
+				}
+				
+				if(rec.isHeadOfGroup() && rec.hasInnerRecords()){
+					out.addAll(rec.writeInnerRecords(lineEnding));
+				}
+			}
+		}
+		
+		return out;
+	}
 
-	public Collection<G> getRecords(String idName);
+	public org.jrimum.texgit.IFlatFile<org.jrimum.texgit.IRecord> addRecord(org.jrimum.texgit.IRecord record) {
+		
+		if(isNotNull(record)){
+			Record rec = Record.class.cast(record);
+			addRecord(rec);
+		}
+		
+		return this;
+	}
 
-	// Todos os Registros
+	public Collection<org.jrimum.texgit.IRecord> getRecords(String idName) {
 
-	public FlatFile<G> addAllRecords(Collection<G> records);
+		List<org.jrimum.texgit.IRecord> secRecords = new ArrayList<org.jrimum.texgit.IRecord>();
 
-	public FlatFile<G> setAllRecords(Collection<G> records);
+		if (isNotBlank(idName)) {
+			if (isRepitable(idName)) {
+				if (!records.isEmpty()) {
+					for (Record rec : records) {
+						if (idName.equals(rec.getName()))
+							secRecords.add(rec);
+					}
+				}
+			}
+		}
 
-	public Collection<G> getAllRecords();
+		return secRecords;
+	}
+	
+	public org.jrimum.texgit.IFlatFile<org.jrimum.texgit.IRecord> addAllRecords(Collection<org.jrimum.texgit.IRecord> records) {
+		// TODO IMPLEMENTAR
+		throw new UnsupportedOperationException("AINDA NÃO IMPLEMENTADO!");
+	}
 
+	public org.jrimum.texgit.IFlatFile<org.jrimum.texgit.IRecord> addRecords(String idName, Collection<org.jrimum.texgit.IRecord> records) {
+		// TODO IMPLEMENTAR
+		throw new UnsupportedOperationException("AINDA NÃO IMPLEMENTADO!");
+	}
+
+	public Collection<org.jrimum.texgit.IRecord> getAllRecords() {
+		// TODO IMPLEMENTAR
+		throw new UnsupportedOperationException("AINDA NÃO IMPLEMENTADO!");
+	}
+
+	public org.jrimum.texgit.IRecord removeRecord(String idName) {
+		// TODO IMPLEMENTAR
+		throw new UnsupportedOperationException("AINDA NÃO IMPLEMENTADO!");
+	}
+
+	public org.jrimum.texgit.IFlatFile<org.jrimum.texgit.IRecord> setAllRecords(Collection<org.jrimum.texgit.IRecord> records) {
+		// TODO IMPLEMENTAR
+		throw new UnsupportedOperationException("AINDA NÃO IMPLEMENTADO!");
+	}
+
+	public org.jrimum.texgit.IFlatFile<org.jrimum.texgit.IRecord> setRecords(String idName, Collection<org.jrimum.texgit.IRecord> records) {
+		// TODO IMPLEMENTAR
+		throw new UnsupportedOperationException("AINDA NÃO IMPLEMENTADO!");
+	}
+	
+	public Set<String> getRepitablesRecords() {
+		return repitablesRecords;
+	}
+
+	public void setRepitablesRecords(Set<String> repitablesRecords) {
+		this.repitablesRecords = repitablesRecords;
+	}
+
+	public List<String> getRecordsOrder() {
+		return recordsOrder;
+	}
+
+	public void setRecordsOrder(List<String> recordsOrder) {
+		this.recordsOrder = recordsOrder;
+	}
+	
 }

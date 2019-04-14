@@ -34,8 +34,8 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.Date;
 
-import org.jrimum.texgit.type.FixedField;
-import org.jrimum.texgit.type.component.Field;
+import org.jrimum.texgit.Field;
+import org.jrimum.texgit.IFixedField;
 
 /**
  * <p>
@@ -50,7 +50,7 @@ import org.jrimum.texgit.type.component.Field;
  */
 public class TestUtil {
 
-	public static <G> void testEscritaCampo(FixedField<G> campo, Class<G> tipo,
+	public static <G> void testEscritaCampo(IFixedField<G> campo, Class<G> tipo,
 			G valorDeEntrada, String strEsperada, int tamanho) {
 
 		// >>>

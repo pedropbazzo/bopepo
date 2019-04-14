@@ -32,8 +32,8 @@ package org.jrimum.bopepo;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
-import org.jrimum.texgit.type.component.BlockOfFields;
-import org.jrimum.texgit.type.component.FixedField;
+import org.jrimum.texgit.BlockOfFields;
+import org.jrimum.texgit.FixedField;
 import org.jrimum.utilix.Objects;
 import org.jrimum.utilix.Strings;
 import org.jrimum.vallia.BoletoLinhaDigitavelDV;
