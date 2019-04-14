@@ -39,8 +39,8 @@ import static org.junit.Assert.assertThat;
 import org.jrimum.bopepo.Boleto;
 import org.jrimum.bopepo.excludes.BoletoBuilder;
 import org.jrimum.bopepo.view.ResourceBundle;
-import org.jrimum.domkee.financeiro.banco.Banco;
-import org.jrimum.domkee.financeiro.banco.CodigoDeCompensacaoBACEN;
+import org.jrimum.domkee.banco.Banco;
+import org.jrimum.domkee.banco.CodigoDeCompensacaoBACEN;
 import org.junit.Test;
 
 /**

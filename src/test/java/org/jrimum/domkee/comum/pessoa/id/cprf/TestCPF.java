@@ -29,7 +29,7 @@
 
 package org.jrimum.domkee.comum.pessoa.id.cprf;
 
-import org.jrimum.domkee.comum.pessoa.CPF;
+import org.jrimum.domkee.pessoa.CPF;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 

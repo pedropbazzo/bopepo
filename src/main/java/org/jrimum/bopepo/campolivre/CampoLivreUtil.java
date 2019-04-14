@@ -5,7 +5,7 @@ package org.jrimum.bopepo.campolivre;
 
 import org.apache.commons.lang.StringUtils;
 
-import org.jrimum.domkee.financeiro.banco.TipoSeguimento;
+import org.jrimum.domkee.banco.TipoSeguimento;
 
 /**
  * @author misael

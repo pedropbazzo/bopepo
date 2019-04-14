@@ -35,7 +35,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.jrimum.bopepo.view.BoletoInfoCampoPessoa.getTextoNomeCprfDaPessoa;
 import static org.junit.Assert.*;
 
-import org.jrimum.domkee.financeiro.banco.EntidadeDeCobranca;
+import org.jrimum.domkee.banco.EntidadeDeCobranca;
 import org.junit.Test;
 
 

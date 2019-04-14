@@ -31,8 +31,8 @@ package org.jrimum.bopepo.campolivre;
 
 import static org.jrimum.utilix.Objects.exists;
 
-import org.jrimum.domkee.financeiro.banco.TipoDeCobranca;
-import org.jrimum.domkee.financeiro.banco.Titulo;
+import org.jrimum.domkee.banco.TipoDeCobranca;
+import org.jrimum.domkee.banco.Titulo;
 import org.jrimum.texgit.Fillers;
 import org.jrimum.texgit.FixedField;
 import org.jrimum.utilix.Exceptions;

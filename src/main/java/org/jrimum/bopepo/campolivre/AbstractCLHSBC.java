@@ -29,7 +29,7 @@
 
 package org.jrimum.bopepo.campolivre;
 
-import org.jrimum.domkee.financeiro.banco.Titulo;
+import org.jrimum.domkee.banco.Titulo;
 
 /**
  * <p>

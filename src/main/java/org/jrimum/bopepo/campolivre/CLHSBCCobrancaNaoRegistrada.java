@@ -34,9 +34,9 @@ import static org.jrimum.bopepo.parametro.ParametroHSBC.IDENTIFICADOR_CNR;
 import java.util.Calendar;
 import java.util.Date;
 
-import org.jrimum.domkee.financeiro.banco.ParametrosBancariosMap;
-import org.jrimum.domkee.financeiro.banco.ContaBancaria;
-import org.jrimum.domkee.financeiro.banco.Titulo;
+import org.jrimum.domkee.banco.ParametrosBancariosMap;
+import org.jrimum.domkee.banco.ContaBancaria;
+import org.jrimum.domkee.banco.Titulo;
 import org.jrimum.texgit.Fillers;
 import org.jrimum.texgit.FixedField;
 import org.jrimum.utilix.Exceptions;

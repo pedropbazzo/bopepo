@@ -30,6 +30,8 @@
 
 package org.jrimum.domkee.financeiro.banco;
 
+import org.jrimum.domkee.banco.ParametroBancario;
+import org.jrimum.domkee.banco.ParametrosBancariosMap;
 import static org.hamcrest.Matchers.arrayContainingInAnyOrder;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;

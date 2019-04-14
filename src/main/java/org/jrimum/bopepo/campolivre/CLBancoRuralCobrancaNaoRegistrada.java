@@ -2,7 +2,7 @@ package org.jrimum.bopepo.campolivre;
 
 import static org.jrimum.bopepo.parametro.ParametroBancoRural.CODIGO_REDUZIDO;
 
-import org.jrimum.domkee.financeiro.banco.Titulo;
+import org.jrimum.domkee.banco.Titulo;
 import org.jrimum.texgit.Fillers;
 import org.jrimum.texgit.FixedField;
 import org.jrimum.utilix.Exceptions;

@@ -35,9 +35,9 @@ import static org.jrimum.bopepo.view.BoletoInfoCampoAgenciaCodigoCedente.getText
 import static org.junit.Assert.*;
 
 import org.jrimum.bopepo.excludes.ContaBancariaBuilder;
-import org.jrimum.domkee.financeiro.banco.Agencia;
-import org.jrimum.domkee.financeiro.banco.ContaBancaria;
-import org.jrimum.domkee.financeiro.banco.NumeroDaConta;
+import org.jrimum.domkee.banco.Agencia;
+import org.jrimum.domkee.banco.ContaBancaria;
+import org.jrimum.domkee.banco.NumeroDaConta;
 import org.junit.Test;
 
 /**

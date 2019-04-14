@@ -31,13 +31,13 @@ package org.jrimum.bopepo.campolivre;
 
 import static java.lang.String.format;
 import static java.math.BigDecimal.ZERO;
-import static org.jrimum.domkee.financeiro.banco.Banco.isCodigoDeCompensacaoOK;
+import static org.jrimum.domkee.banco.Banco.isCodigoDeCompensacaoOK;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.jrimum.bopepo.BancosSuportados;
-import org.jrimum.domkee.financeiro.banco.ParametroBancario;
-import org.jrimum.domkee.financeiro.banco.Titulo;
+import org.jrimum.domkee.banco.ParametroBancario;
+import org.jrimum.domkee.banco.Titulo;
 import org.jrimum.texgit.BlockOfFields;
 import org.jrimum.utilix.Objects;
 import org.jrimum.utilix.Strings;

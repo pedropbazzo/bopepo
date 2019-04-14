@@ -31,7 +31,7 @@
 package org.jrimum.bopepo.parametro;
 
 import org.jrimum.bopepo.BancosSuportados;
-import org.jrimum.domkee.financeiro.banco.ParametroBancario;
+import org.jrimum.domkee.banco.ParametroBancario;
 
 /**
  * Parâmetros bancários específicos para o {@link BancosSuportados#CECRED}.

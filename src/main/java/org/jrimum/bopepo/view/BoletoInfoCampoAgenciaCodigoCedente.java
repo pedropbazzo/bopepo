@@ -34,7 +34,7 @@ import static org.apache.commons.lang.StringUtils.EMPTY;
 import static org.apache.commons.lang.StringUtils.isNotBlank;
 import static org.jrimum.utilix.Objects.isNotNull;
 
-import org.jrimum.domkee.financeiro.banco.ContaBancaria;
+import org.jrimum.domkee.banco.ContaBancaria;
 
 /**
  * Formata a agência e o número da conta.

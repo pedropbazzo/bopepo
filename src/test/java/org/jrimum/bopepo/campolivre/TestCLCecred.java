@@ -33,9 +33,9 @@ package org.jrimum.bopepo.campolivre;
 import static org.jrimum.bopepo.parametro.ParametroCECRED.CODIGO_DO_CONVENIO;
 
 import org.jrimum.bopepo.BancosSuportados;
-import org.jrimum.domkee.financeiro.banco.ParametrosBancariosMap;
-import org.jrimum.domkee.financeiro.banco.Carteira;
-import org.jrimum.domkee.financeiro.banco.NumeroDaConta;
+import org.jrimum.domkee.banco.ParametrosBancariosMap;
+import org.jrimum.domkee.banco.Carteira;
+import org.jrimum.domkee.banco.NumeroDaConta;
 import org.junit.Before;
 import org.junit.Test;
 

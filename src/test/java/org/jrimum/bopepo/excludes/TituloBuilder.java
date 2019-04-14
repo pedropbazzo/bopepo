@@ -32,9 +32,9 @@ package org.jrimum.bopepo.excludes;
 
 import java.math.BigDecimal;
 
-import org.jrimum.domkee.financeiro.banco.TipoDeTitulo;
-import org.jrimum.domkee.financeiro.banco.Titulo;
-import org.jrimum.domkee.financeiro.banco.Titulo.Aceite;
+import org.jrimum.domkee.banco.TipoDeTitulo;
+import org.jrimum.domkee.banco.Titulo;
+import org.jrimum.domkee.banco.Titulo.Aceite;
 import org.jrimum.utilix.DateFormat;
 
 /**

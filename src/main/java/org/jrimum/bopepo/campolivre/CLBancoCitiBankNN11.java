@@ -30,8 +30,8 @@
 
 package org.jrimum.bopepo.campolivre;
 
-import org.jrimum.domkee.financeiro.banco.ContaBancaria;
-import org.jrimum.domkee.financeiro.banco.Titulo;
+import org.jrimum.domkee.banco.ContaBancaria;
+import org.jrimum.domkee.banco.Titulo;
 
 /**
  * Interface comum para todos os campos livres do CITIBANK

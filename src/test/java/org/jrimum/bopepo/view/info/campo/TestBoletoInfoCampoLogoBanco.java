@@ -38,9 +38,9 @@ import static org.mockito.Mockito.mock;
 import java.awt.Image;
 
 import org.jrimum.bopepo.view.ResourceBundle;
-import org.jrimum.domkee.financeiro.banco.Banco;
-import org.jrimum.domkee.financeiro.banco.CodigoDeCompensacaoBACEN;
-import org.jrimum.domkee.financeiro.banco.ContaBancaria;
+import org.jrimum.domkee.banco.Banco;
+import org.jrimum.domkee.banco.CodigoDeCompensacaoBACEN;
+import org.jrimum.domkee.banco.ContaBancaria;
 import org.junit.Test;
 
 /**

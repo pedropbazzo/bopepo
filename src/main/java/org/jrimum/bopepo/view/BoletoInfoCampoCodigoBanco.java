@@ -30,7 +30,7 @@
 
 package org.jrimum.bopepo.view;
 
-import org.jrimum.domkee.financeiro.banco.ContaBancaria;
+import org.jrimum.domkee.banco.ContaBancaria;
 
 /**
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>

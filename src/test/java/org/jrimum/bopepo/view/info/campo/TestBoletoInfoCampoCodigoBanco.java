@@ -36,7 +36,7 @@ import static org.jrimum.bopepo.view.BoletoInfoCampoCodigoBanco.getTextoCodigoDo
 import static org.junit.Assert.*;
 
 import org.jrimum.bopepo.excludes.ContaBancariaBuilder;
-import org.jrimum.domkee.financeiro.banco.ContaBancaria;
+import org.jrimum.domkee.banco.ContaBancaria;
 import org.junit.Test;
 
 

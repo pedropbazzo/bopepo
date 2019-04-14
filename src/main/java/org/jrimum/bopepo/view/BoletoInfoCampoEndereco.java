@@ -34,8 +34,8 @@ import static org.apache.commons.lang.StringUtils.EMPTY;
 import static org.apache.commons.lang.StringUtils.isNotBlank;
 import static org.jrimum.utilix.Objects.isNotNull;
 
-import org.jrimum.domkee.comum.pessoa.Endereco;
-import org.jrimum.domkee.financeiro.banco.EntidadeDeCobranca;
+import org.jrimum.domkee.pessoa.Endereco;
+import org.jrimum.domkee.banco.EntidadeDeCobranca;
 
 /**
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>

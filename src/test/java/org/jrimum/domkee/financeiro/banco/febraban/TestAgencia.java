@@ -29,7 +29,7 @@
  */
 package org.jrimum.domkee.financeiro.banco.febraban;
 
-import org.jrimum.domkee.financeiro.banco.Agencia;
+import org.jrimum.domkee.banco.Agencia;
 import org.junit.Test;
 
 /**

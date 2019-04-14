@@ -36,15 +36,15 @@ import java.lang.reflect.ParameterizedType;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-import org.jrimum.domkee.financeiro.banco.ParametroBancario;
-import org.jrimum.domkee.financeiro.banco.ParametrosBancariosMap;
-import org.jrimum.domkee.financeiro.banco.Agencia;
-import org.jrimum.domkee.financeiro.banco.Carteira;
-import org.jrimum.domkee.financeiro.banco.Cedente;
-import org.jrimum.domkee.financeiro.banco.ContaBancaria;
-import org.jrimum.domkee.financeiro.banco.NumeroDaConta;
-import org.jrimum.domkee.financeiro.banco.Sacado;
-import org.jrimum.domkee.financeiro.banco.Titulo;
+import org.jrimum.domkee.banco.ParametroBancario;
+import org.jrimum.domkee.banco.ParametrosBancariosMap;
+import org.jrimum.domkee.banco.Agencia;
+import org.jrimum.domkee.banco.Carteira;
+import org.jrimum.domkee.banco.Cedente;
+import org.jrimum.domkee.banco.ContaBancaria;
+import org.jrimum.domkee.banco.NumeroDaConta;
+import org.jrimum.domkee.banco.Sacado;
+import org.jrimum.domkee.banco.Titulo;
 import org.junit.Test;
 
 /**

@@ -34,7 +34,7 @@ import static org.apache.commons.lang.StringUtils.containsAny;
 import static org.apache.commons.lang.StringUtils.isNumeric;
 import static org.apache.commons.lang.StringUtils.strip;
 
-import org.jrimum.domkee.financeiro.banco.Titulo;
+import org.jrimum.domkee.banco.Titulo;
 import org.jrimum.texgit.Fillers;
 import org.jrimum.texgit.FixedField;
 import org.jrimum.utilix.Objects;

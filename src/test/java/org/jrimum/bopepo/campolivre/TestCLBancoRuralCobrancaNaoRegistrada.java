@@ -3,11 +3,11 @@ package org.jrimum.bopepo.campolivre;
 import static org.jrimum.bopepo.parametro.ParametroBancoRural.CODIGO_REDUZIDO;
 
 import org.jrimum.bopepo.BancosSuportados;
-import org.jrimum.domkee.financeiro.banco.ParametrosBancariosMap;
-import org.jrimum.domkee.financeiro.banco.Agencia;
-import org.jrimum.domkee.financeiro.banco.Carteira;
-import org.jrimum.domkee.financeiro.banco.NumeroDaConta;
-import org.jrimum.domkee.financeiro.banco.TipoDeCobranca;
+import org.jrimum.domkee.banco.ParametrosBancariosMap;
+import org.jrimum.domkee.banco.Agencia;
+import org.jrimum.domkee.banco.Carteira;
+import org.jrimum.domkee.banco.NumeroDaConta;
+import org.jrimum.domkee.banco.TipoDeCobranca;
 import org.junit.Before;
 
 /**

@@ -33,10 +33,10 @@ import static org.jrimum.bopepo.parametro.ParametroBancoDeBrasilia.CHAVE_ASBACE_
 import static org.junit.Assert.assertEquals;
 
 import org.jrimum.bopepo.BancosSuportados;
-import org.jrimum.domkee.financeiro.banco.Agencia;
-import org.jrimum.domkee.financeiro.banco.Carteira;
-import org.jrimum.domkee.financeiro.banco.NumeroDaConta;
-import org.jrimum.domkee.financeiro.banco.TipoDeCobranca;
+import org.jrimum.domkee.banco.Agencia;
+import org.jrimum.domkee.banco.Carteira;
+import org.jrimum.domkee.banco.NumeroDaConta;
+import org.jrimum.domkee.banco.TipoDeCobranca;
 import org.junit.Before;
 import org.junit.Test;
 

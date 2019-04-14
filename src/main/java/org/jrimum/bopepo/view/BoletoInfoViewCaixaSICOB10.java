@@ -7,8 +7,8 @@ import org.jrimum.bopepo.Boleto;
 import org.jrimum.bopepo.parametro.ParametroCaixaEconomicaFederal;
 import org.jrimum.bopepo.view.ResourceBundle;
 import org.jrimum.bopepo.view.AbstractBoletoInfoCampoView;
-import org.jrimum.domkee.financeiro.banco.Carteira;
-import org.jrimum.domkee.financeiro.banco.TipoDeCobranca;
+import org.jrimum.domkee.banco.Carteira;
+import org.jrimum.domkee.banco.TipoDeCobranca;
 
 /**
  * View para o convênio SICOB, Nosso número com 10 dígitos, da CAIXA.

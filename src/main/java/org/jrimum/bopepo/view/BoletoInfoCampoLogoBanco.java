@@ -36,7 +36,7 @@ import static org.jrimum.utilix.Objects.isNotNull;
 import java.awt.Image;
 
 import org.jrimum.bopepo.view.ResourceBundle;
-import org.jrimum.domkee.financeiro.banco.ContaBancaria;
+import org.jrimum.domkee.banco.ContaBancaria;
 
 /**
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>

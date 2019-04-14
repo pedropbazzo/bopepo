@@ -30,9 +30,9 @@
 package org.jrimum.bopepo.campolivre;
 
 import org.jrimum.bopepo.BancosSuportados;
-import org.jrimum.domkee.financeiro.banco.Carteira;
-import org.jrimum.domkee.financeiro.banco.NumeroDaConta;
-import org.jrimum.domkee.financeiro.banco.TipoDeCobranca;
+import org.jrimum.domkee.banco.Carteira;
+import org.jrimum.domkee.banco.NumeroDaConta;
+import org.jrimum.domkee.banco.TipoDeCobranca;
 import org.junit.Before;
 
 /**

@@ -32,9 +32,9 @@ package org.jrimum.bopepo;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.jrimum.domkee.comum.pessoa.CNPJ;
-import org.jrimum.domkee.financeiro.banco.Banco;
-import org.jrimum.domkee.financeiro.banco.CodigoDeCompensacaoBACEN;
+import org.jrimum.domkee.pessoa.CNPJ;
+import org.jrimum.domkee.banco.Banco;
+import org.jrimum.domkee.banco.CodigoDeCompensacaoBACEN;
 
 /**
  * <p>
@@ -100,7 +100,7 @@ import org.jrimum.domkee.financeiro.banco.CodigoDeCompensacaoBACEN;
  * 		   Colaborador com o Banco de Brasília (070).
  * 
  * @see org.jrimum.bopepo.campolivre.CampoLivre
- * @see org.jrimum.domkee.financeiro.banco.Banco
+ * @see org.jrimum.domkee.banco.Banco
  * 
  * @since 0.2
  * 

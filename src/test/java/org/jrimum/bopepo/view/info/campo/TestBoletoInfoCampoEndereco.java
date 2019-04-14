@@ -36,9 +36,9 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.*;
 
 import org.jrimum.bopepo.excludes.EnderecoBuilder;
-import org.jrimum.domkee.comum.pessoa.CEP;
-import org.jrimum.domkee.comum.pessoa.Endereco;
-import org.jrimum.domkee.financeiro.banco.EntidadeDeCobranca;
+import org.jrimum.domkee.pessoa.CEP;
+import org.jrimum.domkee.pessoa.Endereco;
+import org.jrimum.domkee.banco.EntidadeDeCobranca;
 import org.junit.Test;
 
 /**

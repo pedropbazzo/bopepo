@@ -30,7 +30,7 @@
 
 package org.jrimum.bopepo.excludes;
 
-import org.jrimum.domkee.financeiro.banco.Cedente;
+import org.jrimum.domkee.banco.Cedente;
 
 /**
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>

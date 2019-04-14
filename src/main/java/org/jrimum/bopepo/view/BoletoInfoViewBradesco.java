@@ -34,9 +34,9 @@ import static org.apache.commons.lang.StringUtils.leftPad;
 
 import org.jrimum.bopepo.Boleto;
 import org.jrimum.bopepo.view.ResourceBundle;
-import org.jrimum.domkee.financeiro.banco.Agencia;
-import org.jrimum.domkee.financeiro.banco.Carteira;
-import org.jrimum.domkee.financeiro.banco.NumeroDaConta;
+import org.jrimum.domkee.banco.Agencia;
+import org.jrimum.domkee.banco.Carteira;
+import org.jrimum.domkee.banco.NumeroDaConta;
 
 /**
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>

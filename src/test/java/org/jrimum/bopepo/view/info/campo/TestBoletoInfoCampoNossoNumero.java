@@ -35,7 +35,7 @@ import static org.jrimum.bopepo.view.BoletoInfoCampoNossoNumero.getTextoNossoNum
 import static org.junit.Assert.assertThat;
 
 import org.jrimum.bopepo.excludes.TituloBuilder;
-import org.jrimum.domkee.financeiro.banco.Titulo;
+import org.jrimum.domkee.banco.Titulo;
 import org.junit.Test;
 
 /**

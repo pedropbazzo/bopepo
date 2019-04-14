@@ -45,9 +45,9 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.log4j.Logger;
 
-import org.jrimum.domkee.financeiro.banco.Convenio;
-import org.jrimum.domkee.financeiro.banco.OrgaoRecebedor;
-import org.jrimum.domkee.financeiro.banco.TipoValorReferencia;
+import org.jrimum.domkee.banco.Convenio;
+import org.jrimum.domkee.banco.OrgaoRecebedor;
+import org.jrimum.domkee.banco.TipoValorReferencia;
 
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.Image;

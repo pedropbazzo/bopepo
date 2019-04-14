@@ -7,7 +7,7 @@ import static org.mockito.Mockito.mock;
 import org.jrimum.bopepo.Boleto;
 import org.jrimum.bopepo.excludes.BoletoBuilder;
 import org.jrimum.bopepo.view.ResourceBundle;
-import org.jrimum.domkee.financeiro.banco.TipoDeCobranca;
+import org.jrimum.domkee.banco.TipoDeCobranca;
 import org.junit.Before;
 import org.junit.Test;
 

@@ -8,8 +8,8 @@ import org.jrimum.bopepo.Boleto;
 import org.jrimum.bopepo.excludes.BoletoBuilder;
 import org.jrimum.bopepo.parametro.ParametroCaixaEconomicaFederal;
 import org.jrimum.bopepo.view.ResourceBundle;
-import org.jrimum.domkee.financeiro.banco.ParametrosBancariosMap;
-import org.jrimum.domkee.financeiro.banco.Agencia;
+import org.jrimum.domkee.banco.ParametrosBancariosMap;
+import org.jrimum.domkee.banco.Agencia;
 import org.junit.Before;
 import org.junit.Test;
 

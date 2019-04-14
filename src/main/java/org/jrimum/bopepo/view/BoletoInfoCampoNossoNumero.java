@@ -33,7 +33,7 @@ package org.jrimum.bopepo.view;
 import static org.apache.commons.lang.StringUtils.EMPTY;
 import static org.apache.commons.lang.StringUtils.isNotBlank;
 
-import org.jrimum.domkee.financeiro.banco.Titulo;
+import org.jrimum.domkee.banco.Titulo;
 
 /**
  * Formata o Nosso Número do Título que é impresso no boleto.

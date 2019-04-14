@@ -33,8 +33,8 @@ import static java.lang.String.format;
 import static org.jrimum.bopepo.parametro.ParametroBancoDeBrasilia.CHAVE_ASBACE_DIGITO1;
 import static org.jrimum.bopepo.parametro.ParametroBancoDeBrasilia.CHAVE_ASBACE_DIGITO2;
 
-import org.jrimum.domkee.financeiro.banco.ParametrosBancariosMap;
-import org.jrimum.domkee.financeiro.banco.Titulo;
+import org.jrimum.domkee.banco.ParametrosBancariosMap;
+import org.jrimum.domkee.banco.Titulo;
 import org.jrimum.texgit.Fillers;
 import org.jrimum.texgit.FixedField;
 import org.jrimum.utilix.Objects;

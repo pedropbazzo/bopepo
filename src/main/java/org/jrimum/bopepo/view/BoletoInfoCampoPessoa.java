@@ -33,7 +33,7 @@ package org.jrimum.bopepo.view;
 import static org.apache.commons.lang.StringUtils.EMPTY;
 import static org.jrimum.utilix.Objects.isNotNull;
 
-import org.jrimum.domkee.financeiro.banco.EntidadeDeCobranca;
+import org.jrimum.domkee.banco.EntidadeDeCobranca;
 
 /**
  * Formata os dados como CPRF e Nome de uma pessoa que são impressos no boleto.

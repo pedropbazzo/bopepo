@@ -33,7 +33,7 @@ package org.jrimum.bopepo.view;
 import org.jrimum.bopepo.Boleto;
 import org.jrimum.bopepo.parametro.ParametroBancoSicredi;
 import org.jrimum.bopepo.view.ResourceBundle;
-import org.jrimum.domkee.financeiro.banco.Titulo.Aceite;
+import org.jrimum.domkee.banco.Titulo.Aceite;
 
 /**
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>

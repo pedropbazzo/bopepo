@@ -35,7 +35,7 @@ import static org.jrimum.vallia.Modulo.MOD10;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.jrimum.domkee.financeiro.banco.Titulo;
+import org.jrimum.domkee.banco.Titulo;
 import org.jrimum.vallia.Modulo;
 
 /**

@@ -39,8 +39,8 @@ import org.jrimum.bopepo.campolivre.CampoLivreFactory;
 import org.jrimum.bopepo.campolivre.NotSupportedBancoException;
 import org.jrimum.bopepo.campolivre.NotSupportedCampoLivreException;
 
-import org.jrimum.domkee.financeiro.banco.Arrecadacao;
-import org.jrimum.domkee.financeiro.banco.TipoSeguimento;
+import org.jrimum.domkee.banco.Arrecadacao;
+import org.jrimum.domkee.banco.TipoSeguimento;
 import org.jrimum.utilix.DateUtil;
 import org.jrimum.utilix.Objects;
 import static org.jrimum.utilix.Objects.isNotNull;

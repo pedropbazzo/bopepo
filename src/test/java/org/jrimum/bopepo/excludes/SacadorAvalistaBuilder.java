@@ -30,9 +30,9 @@
 
 package org.jrimum.bopepo.excludes;
 
-import org.jrimum.domkee.comum.pessoa.Endereco;
-import org.jrimum.domkee.comum.pessoa.UnidadeFederativa;
-import org.jrimum.domkee.financeiro.banco.SacadorAvalista;
+import org.jrimum.domkee.pessoa.Endereco;
+import org.jrimum.domkee.pessoa.UnidadeFederativa;
+import org.jrimum.domkee.banco.SacadorAvalista;
 
 /**
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
