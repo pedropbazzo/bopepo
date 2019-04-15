@@ -15,10 +15,122 @@
  */
 package com.github.braully.boleto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author braully
  */
 public class RemessaFacade {
+
+    public static interface Registro {
+
+    }
+
+    public static class CabecalhoRemessa implements Registro {
+
+        CabecalhoRemessa agencia(String string) {
+            return this;
+        }
+
+        CabecalhoRemessa conta(String string) {
+            return this;
+        }
+
+        CabecalhoRemessa numeroConvenio(String string) {
+            return this;
+        }
+
+        CabecalhoRemessa cedente(String string) {
+            return this;
+        }
+
+        CabecalhoRemessa dataGeracao(String string) {
+            return this;
+        }
+
+        CabecalhoRemessa cedenteCnpj(String string) {
+            return this;
+        }
+    }
+
+    public static class TituloRemessa implements Registro {
+
+        /* 
+                remessa.addTitulo().valor("").vencimento("")
+                .numeroDocumento("").nossoNumero("")
+                .dataEmissao("").carteira("")
+                .sacado("Sacado da Silva Sauro").sacadoCpf("01234567891")
+                .sacadoEndereco("")
+                .instrucao("");
+         */
+        TituloRemessa valor(String string) {
+            return this;
+        }
+
+        TituloRemessa vencimento(String string) {
+            return this;
+        }
+
+        TituloRemessa numeroDocumento(String string) {
+            return this;
+        }
+
+        TituloRemessa nossoNumero(String string) {
+            return this;
+        }
+
+        TituloRemessa dataEmissao(String string) {
+            return this;
+        }
+
+        TituloRemessa carteira(String string) {
+            return this;
+        }
+
+        TituloRemessa sacado(String string) {
+            return this;
+        }
+
+        TituloRemessa sacadoCpf(String string) {
+            return this;
+        }
+
+        TituloRemessa sacadoEndereco(String string) {
+            return this;
+        }
+
+        TituloRemessa instrucao(String string) {
+            return this;
+        }
+    }
+
+    public static class RodapeRemessa implements Registro {
+
+    }
+
+    /* 
+    
+     */
+    List<Registro> registros = new ArrayList<>();
+
+    CabecalhoRemessa addCabecalho() {
+        CabecalhoRemessa cabecalho = new CabecalhoRemessa();
+        this.registros.add(cabecalho);
+        return cabecalho;
+    }
+
+    TituloRemessa addTitulo() {
+        TituloRemessa titulo = new TituloRemessa();
+        this.registros.add(titulo);
+        return titulo;
+    }
+
+    RodapeRemessa addRodape() {
+        RodapeRemessa rodape = new RodapeRemessa();
+        this.registros.add(rodape);
+        return rodape;
+    }
 
 }
