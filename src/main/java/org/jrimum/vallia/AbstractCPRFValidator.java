@@ -31,10 +31,10 @@ package org.jrimum.vallia;
 import java.io.Serializable;
 import java.util.regex.Pattern;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.jrimum.ConfiguracaoJRimum;
 import org.jrimum.utilix.ObjectUtil;
 import static org.jrimum.utilix.Objects.isNotNull;
-
 
 /**
  * <p>
@@ -278,9 +278,11 @@ public abstract class AbstractCPRFValidator {
 
             }
 
-            throw new IllegalArgumentException("O código de cadastro [ "
-                    + codigoDoCadastro
-                    + " ] não está em um formatador válido !");
+            if (ConfiguracaoJRimum.falharEmCPRFInvalido) {
+                throw new IllegalArgumentException("O código de cadastro [ "
+                        + codigoDoCadastro
+                        + " ] não está em um formatador válido !");
+            }
         }
 
         return tipo;

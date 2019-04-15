@@ -1,6 +1,6 @@
 package org.jrimum.bopepo.view;
 
-import static org.apache.commons.lang.StringUtils.EMPTY;
+import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.jrimum.utilix.Objects.isNotNull;
 
 import org.jrimum.bopepo.Boleto;

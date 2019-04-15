@@ -26,15 +26,13 @@
  * Criado em: 30/03/2008 - 18:57:33
  * 
  */
-
 package org.jrimum.domkee.banco;
 
-import static org.apache.commons.lang.StringUtils.EMPTY;
+import static org.apache.commons.lang3.StringUtils.EMPTY;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.jrimum.utilix.Exceptions;
 import org.jrimum.utilix.Objects;
-
 
 /**
  * <p>
@@ -42,78 +40,79 @@ import org.jrimum.utilix.Objects;
  * <br/>
  * Invariantes:
  * <ul>
- * <li>Código: deve ser um inteiro natural (incluindo zero) entre 1 e 5 dígitos</li>
- * <li>Dígito Verificador: alpha-numérico sendo um inteiro natural (incluindo zero)
- * ou caracter não vazio (' ') com um dígito.</li>
+ * <li>Código: deve ser um inteiro natural (incluindo zero) entre 1 e 5
+ * dígitos</li>
+ * <li>Dígito Verificador: alpha-numérico sendo um inteiro natural (incluindo
+ * zero) ou caracter não vazio (' ') com um dígito.</li>
  * </ul>
  * </p>
- * 
- * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a> 
+ *
+ * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
  * @author <a href="mailto:romulomail@gmail.com">Rômulo Augusto</a>
  * @author <a href="mailto:misaelbarreto@gmail.com">Misael Barreto</a>
  * @author <a href="mailto:samuelvalerio@gmail.com">Samuel Valério</a>
- * 
+ *
  * @since 0.2
- * 
+ *
  * @version 0.2
  */
 public class Agencia implements org.jrimum.domkee.banco.IAgencia<Integer, String> {
 
-	private final Integer codigo;
+    private final Integer codigo;
 
-	private final String digitoVerificador;
-	
-	public Agencia(Integer codigo) {
+    private final String digitoVerificador;
 
-		this.codigo = codigo;
-		verifyCodigo();
-		this.digitoVerificador = EMPTY;
-	}
-	
-	public Agencia(Integer codigo, String digito) {
+    public Agencia(Integer codigo) {
 
-		this.codigo = codigo;
-		verifyCodigo();
-		this.digitoVerificador = digito;
-		verifyDv();
-	}
-	
-	public void verifyCodigo() {
+        this.codigo = codigo;
+        verifyCodigo();
+        this.digitoVerificador = EMPTY;
+    }
 
-		if (codigo < 0 ) {
-			Exceptions.throwIllegalArgumentException("O código da agência deve ser um inteiro natural (incluindo zero)");
-		}
-		
-		if (String.valueOf(codigo).length() > 5) {
-			Exceptions.throwIllegalArgumentException("O código da agência deve possuir de 1 a 5 dígitos");
-		}
-	}
-	
-	public void verifyDv(){
-		
-		if (StringUtils.isBlank(digitoVerificador)) {
-			Exceptions.throwIllegalArgumentException("O dígito verificador da agência não pode ser null ou apenas espaços em branco");
-		}
-		
-		if (digitoVerificador.length() > 1) {
-			Exceptions.throwIllegalArgumentException("O dígito verificador da agência deve possuir apenas um dígito");
-		}
-			
-		if (!StringUtils.isAlphanumeric(digitoVerificador)) {
-			Exceptions.throwIllegalArgumentException("O dígito verificador da agência deve ser letra ou dígito");
-		}
-	}
+    public Agencia(Integer codigo, String digito) {
 
-	public Integer getCodigo() {
-		return codigo;
-	}
+        this.codigo = codigo;
+        verifyCodigo();
+        this.digitoVerificador = digito;
+        verifyDv();
+    }
 
-	public String getDigitoVerificador() {
-		return digitoVerificador;
-	}
-	
-	@Override
-	public String toString() {
-		return Objects.toString(this);
-	}
+    public void verifyCodigo() {
+
+        if (codigo < 0) {
+            Exceptions.throwIllegalArgumentException("O código da agência deve ser um inteiro natural (incluindo zero)");
+        }
+
+        if (String.valueOf(codigo).length() > 5) {
+            Exceptions.throwIllegalArgumentException("O código da agência deve possuir de 1 a 5 dígitos");
+        }
+    }
+
+    public void verifyDv() {
+
+        if (StringUtils.isBlank(digitoVerificador)) {
+            Exceptions.throwIllegalArgumentException("O dígito verificador da agência não pode ser null ou apenas espaços em branco");
+        }
+
+        if (digitoVerificador.length() > 1) {
+            Exceptions.throwIllegalArgumentException("O dígito verificador da agência deve possuir apenas um dígito");
+        }
+
+        if (!StringUtils.isAlphanumeric(digitoVerificador)) {
+            Exceptions.throwIllegalArgumentException("O dígito verificador da agência deve ser letra ou dígito");
+        }
+    }
+
+    public Integer getCodigo() {
+        return codigo;
+    }
+
+    public String getDigitoVerificador() {
+        return digitoVerificador;
+    }
+
+    @Override
+    public String toString() {
+        return Objects.toString(this);
+    }
 }

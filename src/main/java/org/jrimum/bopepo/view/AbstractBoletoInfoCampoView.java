@@ -29,8 +29,8 @@
  */
 package org.jrimum.bopepo.view;
 
-import static org.apache.commons.lang.StringUtils.EMPTY;
-import static org.apache.commons.lang.StringUtils.isNotBlank;
+import static org.apache.commons.lang3.StringUtils.EMPTY;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.jrimum.bopepo.view.BoletoInfoCampoAgenciaCodigoCedente.getTextoAgenciaCodigoCedente;
 import static org.jrimum.bopepo.view.BoletoInfoCampoCodigoBanco.getTextoCodigoDoBanco;
 import static org.jrimum.bopepo.view.BoletoInfoCampoEndereco.getTextoEnderecoLinha1;

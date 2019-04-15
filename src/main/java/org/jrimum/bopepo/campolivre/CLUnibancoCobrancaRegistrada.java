@@ -4,7 +4,7 @@ import static org.jrimum.utilix.DateFormat.YYMMDD;
 
 import java.util.Date;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.jrimum.domkee.banco.ContaBancaria;
 import org.jrimum.domkee.banco.Titulo;
 import org.jrimum.texgit.Fillers;

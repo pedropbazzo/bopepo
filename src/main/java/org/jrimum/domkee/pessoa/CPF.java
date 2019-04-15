@@ -28,7 +28,8 @@
  */
 package org.jrimum.domkee.pessoa;
 
-import static org.apache.commons.lang.StringUtils.isNumeric;
+import static org.apache.commons.lang3.StringUtils.isNumeric;
+import org.jrimum.ConfiguracaoJRimum;
 import static org.jrimum.utilix.Strings.fillWithZeroLeft;
 
 import org.jrimum.utilix.Exceptions;
@@ -67,14 +68,22 @@ public class CPF extends AbstractCPRF {
     public CPF(String strCPF) {
         this.autenticadorCP = AbstractCPRFValidator.create(strCPF);
         if (autenticadorCP.isValido()) {
-            if (isNumeric(strCPF)) {
-                initFromNotFormattedString(strCPF);
-            } else {
-                initFromFormattedString(strCPF);
-            }
+            init(strCPF);
         } else {
-            throw new CPFException(new IllegalArgumentException(
-                    "O cadastro de pessoa [ \"" + strCPF + "\" ] não é válido."));
+            if (ConfiguracaoJRimum.falharEmCPRFInvalido) {
+                throw new CPFException(new IllegalArgumentException(
+                        "O cadastro de pessoa [ \"" + strCPF + "\" ] não é válido."));
+            } else {
+                init(strCPF);
+            }
+        }
+    }
+
+    protected void init(String strCPF) {
+        if (isNumeric(strCPF)) {
+            initFromNotFormattedString(strCPF);
+        } else {
+            initFromFormattedString(strCPF);
         }
     }
 

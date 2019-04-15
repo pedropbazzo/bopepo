@@ -71,18 +71,19 @@ public class CPFValidator extends AbstractCPRFValidator {
      */
     @Override
     public boolean isValido() {
+        String cpf = getCodigoDoCadastro();
+        boolean isValido = isValidoCpf(cpf);
 
+        return isValido;
+    }
+
+    protected boolean isValidoCpf(String cpf) throws NumberFormatException, IllegalArgumentException {
         boolean isValido = false;
         int dv = 0;
         int dvCalculado = -1;
-
-        dv = Integer.parseInt(getCodigoDoCadastro().substring(9, 11));
-
-        dvCalculado = digitoVerificador.calcule(getCodigoDoCadastro()
-                .substring(0, 9));
-
+        dv = Integer.parseInt(cpf.substring(9, 11));
+        dvCalculado = digitoVerificador.calcule(cpf.substring(0, 9));
         isValido = (dvCalculado >= 0 && dv == dvCalculado);
-
         return isValido;
     }
 

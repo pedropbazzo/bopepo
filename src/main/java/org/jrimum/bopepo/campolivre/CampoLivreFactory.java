@@ -29,10 +29,10 @@
 
 package org.jrimum.bopepo.campolivre;
 
-import static org.apache.commons.lang.StringUtils.EMPTY;
-import static org.apache.commons.lang.StringUtils.containsAny;
-import static org.apache.commons.lang.StringUtils.isNumeric;
-import static org.apache.commons.lang.StringUtils.strip;
+import static org.apache.commons.lang3.StringUtils.EMPTY;
+import static org.apache.commons.lang3.StringUtils.containsAny;
+import static org.apache.commons.lang3.StringUtils.isNumeric;
+import static org.apache.commons.lang3.StringUtils.strip;
 
 import org.jrimum.domkee.banco.Titulo;
 import org.jrimum.texgit.Fillers;

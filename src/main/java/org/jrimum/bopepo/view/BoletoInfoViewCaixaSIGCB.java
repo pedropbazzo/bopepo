@@ -1,6 +1,6 @@
 package org.jrimum.bopepo.view;
 
-import static org.apache.commons.lang.StringUtils.isBlank;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 
 import org.jrimum.bopepo.Boleto;
 import org.jrimum.bopepo.view.ResourceBundle;

@@ -31,8 +31,8 @@ package org.jrimum.utilix;
 
 import java.io.Serializable;
 
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.log4j.Logger;
 
 /**
@@ -188,7 +188,7 @@ public class ObjectUtil implements Serializable {
 	/**
 	 * Exibe os valores de instância para um objeto JRimum.
 	 * 
-	 * @see org.apache.commons.lang.builder.ToStringBuilder#reflectionToString
+	 * @see org.apache.commons.lang3.builder.ToStringBuilder#reflectionToString
 	 * 
 	 * @since 0.2
 	 * 

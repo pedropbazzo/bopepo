@@ -41,8 +41,8 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.log4j.Logger;
 
 import org.jrimum.domkee.banco.Convenio;

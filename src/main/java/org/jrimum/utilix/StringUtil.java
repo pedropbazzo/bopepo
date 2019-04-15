@@ -28,7 +28,7 @@
  */
 package org.jrimum.utilix;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import static org.jrimum.utilix.Objects.isNotNull;
 
 /**

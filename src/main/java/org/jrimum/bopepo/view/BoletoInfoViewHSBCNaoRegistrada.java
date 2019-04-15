@@ -1,7 +1,7 @@
 package org.jrimum.bopepo.view;
 
-import static org.apache.commons.lang.StringUtils.EMPTY;
-import static org.apache.commons.lang.StringUtils.leftPad;
+import static org.apache.commons.lang3.StringUtils.EMPTY;
+import static org.apache.commons.lang3.StringUtils.leftPad;
 
 import org.jrimum.bopepo.Boleto;
 import org.jrimum.bopepo.view.ResourceBundle;

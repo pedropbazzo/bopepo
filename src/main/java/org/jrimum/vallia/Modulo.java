@@ -32,7 +32,7 @@ package org.jrimum.vallia;
 import static org.jrimum.vallia.TipoDeModulo.MODULO10;
 import static org.jrimum.vallia.TipoDeModulo.MODULO11;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import org.jrimum.utilix.ObjectUtil;
 import static org.jrimum.utilix.ObjectUtil.isNotNull;

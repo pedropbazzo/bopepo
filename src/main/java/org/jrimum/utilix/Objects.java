@@ -29,7 +29,7 @@
 
 package org.jrimum.utilix;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 
 /**
@@ -349,7 +349,7 @@ public final class Objects {
 	/**
 	 * Exibe os valores de instância para um objeto JRimum.
 	 * 
-	 * @see org.apache.commons.lang.builder.ToStringBuilder#reflectionToString
+	 * @see org.apache.commons.lang3.builder.ToStringBuilder#reflectionToString
 	 * 
 	 * @since 0.2
 	 * 

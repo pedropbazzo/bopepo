@@ -31,7 +31,7 @@ package org.jrimum.bopepo;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.jrimum.bopepo.campolivre.CampoLivre;
 import org.jrimum.domkee.banco.ContaBancaria;

@@ -34,8 +34,8 @@ import static org.jrimum.utilix.Objects.isNotNull;
 import java.awt.Image;
 import java.util.Collection;
 
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.log4j.Logger;
 import org.jrimum.domkee.pessoa.NumeroDeTelefone;
 import org.jrimum.domkee.pessoa.Endereco;

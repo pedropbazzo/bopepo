@@ -29,7 +29,7 @@
 package org.jrimum.texgit;
 
 import static java.lang.String.format;
-import static org.apache.commons.lang.StringUtils.EMPTY;
+import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.jrimum.utilix.Objects.isNotNull;
 
 import java.text.Format;

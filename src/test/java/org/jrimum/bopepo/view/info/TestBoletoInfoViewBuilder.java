@@ -29,7 +29,7 @@
 
 package org.jrimum.bopepo.view.info;
 
-import static org.apache.commons.lang.StringUtils.EMPTY;
+import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.jrimum.utilix.Objects.whenNull;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;

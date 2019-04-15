@@ -30,7 +30,7 @@
 
 package org.jrimum.domkee.banco;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.jrimum.utilix.Objects;
 
 
