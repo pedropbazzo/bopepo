@@ -29,6 +29,7 @@
 package org.jrimum.texgit;
 
 import static java.lang.String.format;
+import org.jrimum.ConfiguracaoJRimum;
 import static org.jrimum.utilix.Objects.isNotNull;
 
 import org.jrimum.texgit.AbstractStringOfFields;
@@ -42,187 +43,174 @@ import org.jrimum.texgit.IFixedSize;
  *
  */
 @SuppressWarnings("serial")
-public class BlockOfFields extends AbstractStringOfFields<FixedField<?>> implements IFixedSize, IFixedLength{
+public class BlockOfFields extends AbstractStringOfFields<FixedField<?>> implements IFixedSize, IFixedLength {
 
-	/**
-	 * Definição
-	 */
-	private Integer length;
-	
-	/**
-	 * Definição
-	 */
-	private Integer size;
-	
-	/**
-	 * <p>
-	 * Tamanho da string de escrita do bloco.
-	 * </p>
-	 */
-	private Integer instantLength; 
-	
-	/**
-	 * <p>
-	 * Ao ultrapassar o tamanho, define se pode truncar ou se dispara uma exceção.
-	 * </p>
-	 */
-	private boolean truncate;
-	
-	/**
-	 * 
-	 */
-	public BlockOfFields() {
-		super();
-	}
+    /**
+     * Definição
+     */
+    private Integer length;
 
-	/**
-	 * @param length
-	 * @param size
-	 */
-	public BlockOfFields(Integer length, Integer size) {
+    /**
+     * Definição
+     */
+    private Integer size;
 
-		super(size);
+    /**
+     * <p>
+     * Tamanho da string de escrita do bloco.
+     * </p>
+     */
+    private Integer instantLength;
 
-		Objects.checkNotNull(length, "length");
+    /**
+     * <p>
+     * Ao ultrapassar o tamanho, define se pode truncar ou se dispara uma
+     * exceção.
+     * </p>
+     */
+    private boolean truncate;
 
-		if (length > 0) {
+    /**
+     *
+     */
+    public BlockOfFields() {
+        super();
+    }
 
-			setLength(length);
-			setSize(size);
+    /**
+     * @param length
+     * @param size
+     */
+    public BlockOfFields(Integer length, Integer size) {
 
-		} else
-			throw new IllegalArgumentException(format("O comprimento do bloco [%s] deve ser um número natural > 0!", length));
-	}
-	
-	@Override
-	public BlockOfFields clone() throws CloneNotSupportedException {
-		
-		return(BlockOfFields) super.clone();
-	}
+        super(size);
 
-	@Override
-	public void read(String lineOfFields) {
+        Objects.checkNotNull(length, "length");
 
-		Objects.checkNotNull(lineOfFields, "String de leitura nula!");
+        if (length > 0) {
 
-		Objects.checkNotNull(getFields(), "Fields == null");
-		Collections.checkNotEmpty(getFields(), "Coleção de fields vazia!");
+            setLength(length);
+            setSize(size);
 
-		if (isSizeAsDefinaed() && isLengthWithDefinaed(lineOfFields.length())) {
+        } else {
+            throw new IllegalArgumentException(format("O comprimento do bloco [%s] deve ser um número natural > 0!", length));
+        }
+    }
 
-			StringBuilder builder = new StringBuilder(lineOfFields);
+    @Override
+    public BlockOfFields clone() throws CloneNotSupportedException {
 
-			for (FixedField<?> field : getFields()) {
+        return (BlockOfFields) super.clone();
+    }
 
-				try {
+    @Override
+    public void read(String lineOfFields) {
+        Objects.checkNotNull(lineOfFields, "String de leitura nula!");
+        Objects.checkNotNull(getFields(), "Fields == null");
+        Collections.checkNotEmpty(getFields(), "Coleção de fields vazia!");
 
-					field.read(builder.substring(0, field.getFixedLength()));
-					builder.delete(0, field.getFixedLength());
+        if (isSizeAsDefinaed() && isLengthWithDefinaed(lineOfFields.length())) {
+            StringBuilder builder = new StringBuilder(lineOfFields);
+            for (FixedField<?> field : getFields()) {
+                try {
+                    field.read(builder.substring(0, field.getFixedLength()));
+                    builder.delete(0, field.getFixedLength());
+                } catch (Exception e) {
+                    throw new IllegalStateException(
+                            format("Erro ao tentar ler o campo \"%s\" na posição [%s] no layout do registro.",
+                                    field.getName(), getFields().indexOf(field) + 1), e);
+                }
+            }
+            builder = null;
+        }
+    }
 
-				} catch (Exception e) {
+    @Override
+    public String write() {
+        Objects.checkNotNull(getFields(), "Fields == null");
+        if (ConfiguracaoJRimum.falharEmRegistroVazio) {
+            Collections.checkNotEmpty(getFields(), "Coleção de fields vazia!");
+        }
 
-					throw new IllegalStateException(
-							format(
-									"Erro ao tentar ler o campo \"%s\" na posição [%s] no layout do registro.",
-									field.getName(), getFields().indexOf(field)+1),e);
-				}
-			}
+        String str = null;
+        isSizeAsDefinaed();
+        str = super.write();
+        instantLength = str.length();
 
-			builder = null;
-		}
-	}
-	
-	@Override
-	public String write() {
+        if (isTruncate() && instantLength > getFixedLength()) {
+            str = str.substring(0, getFixedLength());
+            instantLength = getFixedLength();
+        }
 
-		Objects.checkNotNull(getFields(), "Fields == null");
-		Collections.checkNotEmpty(getFields(), "Coleção de fields vazia!");
+        isFixedAsDefined();
+        return str;
+    }
 
-		String str = null;
+    public boolean isFixedAsDefined() throws IllegalStateException {
+        return (isSizeAsDefinaed() && isLengthWithDefinaed());
+    }
 
-		isSizeAsDefinaed();
+    private boolean isLengthWithDefinaed() {
+        return isLengthWithDefinaed(instantLength);
+    }
 
-		str = super.write();
+    private boolean isLengthWithDefinaed(int length) {
+        if (length == getFixedLength()) {
+            return true;
+        } else {
+            throw new IllegalStateException(format("O comprimento da string [%s] é incompátivel com o definido [%s] no layout do registro!", length, getFixedLength()));
+        }
+    }
 
-		instantLength = str.length();
-		
-		if (isTruncate() && instantLength > getFixedLength()) {
-			str = str.substring(0, getFixedLength());
-			instantLength = getFixedLength();
-		}
+    private boolean isSizeAsDefinaed() {
+        if (size() == getFixedSize()) {
+            return true;
+        } else {
+            throw new IllegalStateException(format("O número de fields [%s] é incompátivel com o definido [%s]!", size(), getFixedSize()));
+        }
+    }
 
-		isFixedAsDefined();
+    /**
+     * @return the length
+     */
+    public Integer getFixedLength() {
+        return length;
+    }
 
-		return str;
-	}
-	
-	public boolean isFixedAsDefined() throws IllegalStateException {
-		
-		return (isSizeAsDefinaed() && isLengthWithDefinaed());
-	}
-	
-	private boolean isLengthWithDefinaed(){
-		
-		return isLengthWithDefinaed(instantLength);
-	}
-	
-	private boolean isLengthWithDefinaed(int length){
-		
-		if(length == getFixedLength())
-				return true;
-		else
-			throw new IllegalStateException(format("O comprimento da string [%s] é incompátivel com o definido [%s] no layout do registro!",length,getFixedLength()));
-	}
-	
-	private boolean isSizeAsDefinaed(){
-		
-		if(size() == getFixedSize())
-				return true;
-		else
-			throw new IllegalStateException(format("O número de fields [%s] é incompátivel com o definido [%s]!", size(), getFixedSize()));
-	}
+    /**
+     * @param length the length to set
+     */
+    protected void setLength(Integer length) {
+        if (isNotNull(length)) {
+            this.length = length;
+        } else {
+            throw new IllegalArgumentException(format("Comprimento inválido [%s]!", length));
+        }
+    }
 
-	/**
-	 * @return the length
-	 */
-	public Integer getFixedLength() {
-		return length;
-	}
+    /**
+     * @return the size
+     */
+    public Integer getFixedSize() {
+        return size;
+    }
 
-	/**
-	 * @param length the length to set
-	 */
-	protected void setLength(Integer length) {
-		
-		if (isNotNull(length))
-			this.length = length;
-		else
-			throw new IllegalArgumentException(format("Comprimento inválido [%s]!", length));
-	}
+    /**
+     * @param size the size to set
+     */
+    protected void setSize(Integer size) {
+        if (isNotNull(size)) {
+            this.size = size;
+        } else {
+            throw new IllegalArgumentException(format("Tamanho inválido [%s]!", size));
+        }
+    }
 
-	/**
-	 * @return the size
-	 */
-	public Integer getFixedSize() {
-		return size;
-	}
+    public boolean isTruncate() {
+        return this.truncate;
+    }
 
-	/**
-	 * @param size the size to set
-	 */
-	protected void setSize(Integer size) {
-		
-		if (isNotNull(size))
-			this.size = size;
-		else
-			throw new IllegalArgumentException(format("Tamanho inválido [%s]!", size));
-	}
-	
-	public boolean isTruncate() {
-		return this.truncate;
-	}
-
-	public void setTruncate(boolean truncate) {
-		this.truncate = truncate;
-	}
+    public void setTruncate(boolean truncate) {
+        this.truncate = truncate;
+    }
 }

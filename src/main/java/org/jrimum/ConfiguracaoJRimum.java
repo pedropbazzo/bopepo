@@ -32,4 +32,9 @@ public class ConfiguracaoJRimum {
      */
     public static boolean falharEmCPRFInvalido = false;
 
+    /*
+     Falhar em caso de registro vazio, na geração de arquivo texto
+     */
+    public static boolean falharEmRegistroVazio = false;
+
 }

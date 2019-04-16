@@ -37,7 +37,6 @@ import java.util.List;
 import java.util.ListIterator;
 
 import org.apache.commons.lang3.StringUtils;
-import org.jrimum.texgit.TextStream;
 import org.jrimum.utilix.Collections;
 import org.jrimum.utilix.Objects;
 
@@ -47,286 +46,288 @@ import org.jrimum.utilix.Objects;
  * @param <G>
  */
 @SuppressWarnings("serial")
-public abstract class AbstractStringOfFields<G extends IField<?>> implements TextStream, List<G>, Cloneable{
+public abstract class AbstractStringOfFields<G extends IField<?>> implements TextStream, List<G>, Cloneable {
 
-	/**
-	 * 
-	 */
-	private ArrayList<G> fields;
+    /**
+     *
+     */
+    private ArrayList<G> fields;
 
-	/**
-	 * 
-	 */
-	public AbstractStringOfFields() {
+    /**
+     *
+     */
+    public AbstractStringOfFields() {
 
-		fields = new ArrayList<G>();
-	}
-	
-	/**
-	 * 
-	 */
-	public AbstractStringOfFields(Integer size) {
+        fields = new ArrayList<G>();
+    }
 
-		Objects.checkNotNull(size, "size");
+    /**
+     *
+     */
+    public AbstractStringOfFields(Integer size) {
 
-		if (size > 0) {
-			fields = new ArrayList<G>(size);
-			for (int i = 1; i <= size; i++){
-				fields.add(null);
-			}
-		} else {
-			throw new IllegalArgumentException(format("A quantidade de campos [%s] deve ser um número natural > 0!", size));
-		}
-	}
+        Objects.checkNotNull(size, "size");
 
-	@SuppressWarnings("unchecked")
-	@Override
-	protected AbstractStringOfFields<G> clone() throws CloneNotSupportedException {
-		
-		//Clona apenas com uma referência a fields.
-		AbstractStringOfFields<G> sof = (AbstractStringOfFields<G>) super.clone();
-		
-		//Clonagem real
-		sof.fields = new ArrayList<G>();
-		
-		for(G gf : fields)
-				sof.fields.add((G) gf.clone());
-		
-		return sof;
-	}
+        if (size > 0) {
+            fields = new ArrayList<G>(size);
+            for (int i = 1; i <= size; i++) {
+                fields.add(null);
+            }
+        } else {
+            throw new IllegalArgumentException(format("A quantidade de campos [%s] deve ser um número natural > 0!", size));
+        }
+    }
 
-	/**
-	 * <p>
-	 * A leitrua de uma string, ou melhor, a divisão de uma string em fields,
-	 * não ocorre sem uma lógica. Assim este método deve ser implementado por
-	 * cada subclasse.
-	 * </p>
-	 * 
-	 * @see org.jrimum.texgit.ReadWriteStream#read(Object)
-	 */
-	public abstract void read(String lineOfField);
+    @SuppressWarnings("unchecked")
+    @Override
+    protected AbstractStringOfFields<G> clone() throws CloneNotSupportedException {
 
-	/**
-	 * <p>
-	 * Escreve os campos na ordem em que estão dispostos na lista em uma única linha (string).
-	 * </p>
-	 * 
-	 * @see org.jrimum.texgit.ReadWriteStream#write()
-	 */
-	public String write() {
+        //Clona apenas com uma referência a fields.
+        AbstractStringOfFields<G> sof = (AbstractStringOfFields<G>) super.clone();
 
-		StringBuilder lineOfFields = new StringBuilder(StringUtils.EMPTY);
+        //Clonagem real
+        sof.fields = new ArrayList<G>();
 
-		Objects.checkNotNull(fields, "Fields == null");
-		Collections.checkNotEmpty(fields, "Coleção de fields vazia!");
+        for (G gf : fields) {
+            sof.fields.add((G) gf.clone());
+        }
 
-		for (G field : fields) {
-			
-			try {
+        return sof;
+    }
 
-				lineOfFields.append(field.write());
+    /**
+     * <p>
+     * A leitrua de uma string, ou melhor, a divisão de uma string em fields,
+     * não ocorre sem uma lógica. Assim este método deve ser implementado por
+     * cada subclasse.
+     * </p>
+     *
+     * @see org.jrimum.texgit.ReadWriteStream#read(Object)
+     */
+    public abstract void read(String lineOfField);
 
-			} catch (Exception e) {
+    /**
+     * <p>
+     * Escreve os campos na ordem em que estão dispostos na lista em uma única
+     * linha (string).
+     * </p>
+     *
+     * @see org.jrimum.texgit.ReadWriteStream#write()
+     */
+    public String write() {
 
-				throw new IllegalStateException(
-						format(
-								"Erro ao tentar escrever o campo \"%s\" com valor [%s] na posição [%s] no layout do registro.",
-								field.getName(), field.getValue(), fields
-										.indexOf(field)+1),e);
-			}
-		}
+        StringBuilder lineOfFields = new StringBuilder(StringUtils.EMPTY);
 
-		return lineOfFields.toString();
-	}
+        Objects.checkNotNull(fields, "Fields == null");
+        Collections.checkNotEmpty(fields, "Coleção de fields vazia!");
 
-	/**
-	 * @return the fields
-	 */
-	public List<G> getFields() {
-		return fields;
-	}
+        for (G field : fields) {
 
-	/**
-	 * @see java.util.List#add(java.lang.Object)
-	 */
-	public boolean add(G e) {
+            try {
 
-		return fields.add(e);
-	}
+                lineOfFields.append(field.write());
 
-	/**
-	 * @see java.util.List#add(int, java.lang.Object)
-	 */
-	public void add(int index, G element) {
+            } catch (Exception e) {
 
-		fields.add(index, element);
-	}
+                throw new IllegalStateException(
+                        format(
+                                "Erro ao tentar escrever o campo \"%s\" com valor [%s] na posição [%s] no layout do registro.",
+                                field.getName(), field.getValue(), fields
+                                .indexOf(field) + 1), e);
+            }
+        }
 
-	/**
-	 * @see java.util.List#addAll(java.util.Collection)
-	 */
-	public boolean addAll(Collection<? extends G> c) {
+        return lineOfFields.toString();
+    }
 
-		return fields.addAll(c);
-	}
+    /**
+     * @return the fields
+     */
+    public List<G> getFields() {
+        return fields;
+    }
 
-	/**
-	 * @see java.util.List#addAll(int, java.util.Collection)
-	 */
-	public boolean addAll(int index, Collection<? extends G> c) {
+    /**
+     * @see java.util.List#add(java.lang.Object)
+     */
+    public boolean add(G e) {
 
-		return fields.addAll(index, c);
-	}
+        return fields.add(e);
+    }
 
-	/**
-	 * @see java.util.List#clear()
-	 */
-	public void clear() {
+    /**
+     * @see java.util.List#add(int, java.lang.Object)
+     */
+    public void add(int index, G element) {
 
-		fields.clear();
-	}
+        fields.add(index, element);
+    }
 
-	/**
-	 * @see java.util.List#contains(java.lang.Object)
-	 */
-	public boolean contains(Object o) {
+    /**
+     * @see java.util.List#addAll(java.util.Collection)
+     */
+    public boolean addAll(Collection<? extends G> c) {
 
-		return fields.contains(o);
-	}
+        return fields.addAll(c);
+    }
 
-	/**
-	 * @see java.util.List#containsAll(java.util.Collection)
-	 */
-	public boolean containsAll(Collection<?> c) {
+    /**
+     * @see java.util.List#addAll(int, java.util.Collection)
+     */
+    public boolean addAll(int index, Collection<? extends G> c) {
 
-		return fields.containsAll(c);
-	}
+        return fields.addAll(index, c);
+    }
 
-	/**
-	 * @see java.util.List#get(int)
-	 */
-	public G get(int index) {
+    /**
+     * @see java.util.List#clear()
+     */
+    public void clear() {
 
-		return fields.get(index);
-	}
+        fields.clear();
+    }
 
-	/**
-	 * @see java.util.List#indexOf(java.lang.Object)
-	 */
-	public int indexOf(Object o) {
+    /**
+     * @see java.util.List#contains(java.lang.Object)
+     */
+    public boolean contains(Object o) {
 
-		return fields.indexOf(o);
-	}
+        return fields.contains(o);
+    }
 
-	/**
-	 * @see java.util.List#isEmpty()
-	 */
-	public boolean isEmpty() {
+    /**
+     * @see java.util.List#containsAll(java.util.Collection)
+     */
+    public boolean containsAll(Collection<?> c) {
 
-		return fields.isEmpty();
-	}
+        return fields.containsAll(c);
+    }
 
-	/**
-	 * @see java.util.List#iterator()
-	 */
-	public Iterator<G> iterator() {
+    /**
+     * @see java.util.List#get(int)
+     */
+    public G get(int index) {
 
-		return fields.iterator();
-	}
+        return fields.get(index);
+    }
 
-	/**
-	 * @see java.util.List#lastIndexOf(java.lang.Object)
-	 */
-	public int lastIndexOf(Object o) {
+    /**
+     * @see java.util.List#indexOf(java.lang.Object)
+     */
+    public int indexOf(Object o) {
 
-		return fields.indexOf(o);
-	}
+        return fields.indexOf(o);
+    }
 
-	/**
-	 * @see java.util.List#listIterator()
-	 */
-	public ListIterator<G> listIterator() {
+    /**
+     * @see java.util.List#isEmpty()
+     */
+    public boolean isEmpty() {
 
-		return fields.listIterator();
-	}
+        return fields.isEmpty();
+    }
 
-	/**
-	 * @see java.util.List#listIterator(int)
-	 */
-	public ListIterator<G> listIterator(int index) {
+    /**
+     * @see java.util.List#iterator()
+     */
+    public Iterator<G> iterator() {
 
-		return fields.listIterator(index);
-	}
+        return fields.iterator();
+    }
 
-	/**
-	 * @see java.util.List#remove(int)
-	 */
-	public G remove(int index) {
+    /**
+     * @see java.util.List#lastIndexOf(java.lang.Object)
+     */
+    public int lastIndexOf(Object o) {
 
-		return fields.remove(index);
-	}
+        return fields.indexOf(o);
+    }
 
-	/**
-	 * @see java.util.List#remove(java.lang.Object)
-	 */
-	public boolean remove(Object o) {
+    /**
+     * @see java.util.List#listIterator()
+     */
+    public ListIterator<G> listIterator() {
 
-		return fields.remove(o);
-	}
+        return fields.listIterator();
+    }
 
-	/**
-	 * @see java.util.List#removeAll(java.util.Collection)
-	 */
-	public boolean removeAll(Collection<?> c) {
+    /**
+     * @see java.util.List#listIterator(int)
+     */
+    public ListIterator<G> listIterator(int index) {
 
-		return fields.removeAll(c);
-	}
+        return fields.listIterator(index);
+    }
 
-	/**
-	 * @see java.util.List#retainAll(java.util.Collection)
-	 */
-	public boolean retainAll(Collection<?> c) {
+    /**
+     * @see java.util.List#remove(int)
+     */
+    public G remove(int index) {
 
-		return fields.retainAll(c);
-	}
+        return fields.remove(index);
+    }
 
-	/**
-	 * @see java.util.List#set(int, java.lang.Object)
-	 */
-	public G set(int index, G element) {
+    /**
+     * @see java.util.List#remove(java.lang.Object)
+     */
+    public boolean remove(Object o) {
 
-		return fields.set(index, element);
-	}
+        return fields.remove(o);
+    }
 
-	/**
-	 * @see java.util.List#size()
-	 */
-	public int size() {
+    /**
+     * @see java.util.List#removeAll(java.util.Collection)
+     */
+    public boolean removeAll(Collection<?> c) {
 
-		return fields.size();
-	}
+        return fields.removeAll(c);
+    }
 
-	/**
-	 * @see java.util.List#subList(int, int)
-	 */
-	public List<G> subList(int fromIndex, int toIndex) {
+    /**
+     * @see java.util.List#retainAll(java.util.Collection)
+     */
+    public boolean retainAll(Collection<?> c) {
 
-		return fields.subList(fromIndex, toIndex);
-	}
+        return fields.retainAll(c);
+    }
 
-	/**
-	 * @see java.util.List#toArray()
-	 */
-	public Object[] toArray() {
+    /**
+     * @see java.util.List#set(int, java.lang.Object)
+     */
+    public G set(int index, G element) {
 
-		return fields.toArray();
-	}
+        return fields.set(index, element);
+    }
 
-	/**
-	 * @see java.util.List#toArray(Object[])
-	 */
-	public <T> T[] toArray(T[] a) {
+    /**
+     * @see java.util.List#size()
+     */
+    public int size() {
 
-		return fields.toArray(a);
-	}
+        return fields.size();
+    }
+
+    /**
+     * @see java.util.List#subList(int, int)
+     */
+    public List<G> subList(int fromIndex, int toIndex) {
+
+        return fields.subList(fromIndex, toIndex);
+    }
+
+    /**
+     * @see java.util.List#toArray()
+     */
+    public Object[] toArray() {
+
+        return fields.toArray();
+    }
+
+    /**
+     * @see java.util.List#toArray(Object[])
+     */
+    public <T> T[] toArray(T[] a) {
+
+        return fields.toArray(a);
+    }
 }
