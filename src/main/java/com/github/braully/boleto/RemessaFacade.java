@@ -17,6 +17,7 @@ package com.github.braully.boleto;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.jrimum.texgit.Record;
 
 /**
  *
@@ -24,38 +25,60 @@ import java.util.List;
  */
 public class RemessaFacade {
 
-    public static interface Registro {
+    String render() {
+        StringBuilder sb = new StringBuilder();
+        for (RegistroRemessa r : this.registros) {
+            sb.append(r.render());
+        }
+        return sb.toString();
+    }
+
+    public static abstract class RegistroRemessa extends Record {
+
+        public String render() {
+//            StringBuilder sb = new StringBuilder();
+//            return sb.toString();
+            return this.write();
+        }
+
+        protected RegistroRemessa setValue(String valor) {
+            //TODO: Melhorar isso;
+            String nomeMetodoAnterior = Thread.currentThread().getStackTrace()[2].getMethodName();
+            /* Propriedade a ser setada é o nome do metodo que chamou */
+            this.setValue(nomeMetodoAnterior, valor);
+            return this;
+        }
 
     }
 
-    public static class CabecalhoRemessa implements Registro {
+    public static class CabecalhoRemessa extends RegistroRemessa {
 
         CabecalhoRemessa agencia(String string) {
-            return this;
+            return (CabecalhoRemessa) setValue(string);
         }
 
         CabecalhoRemessa conta(String string) {
-            return this;
+            return (CabecalhoRemessa) setValue(string);
         }
 
         CabecalhoRemessa numeroConvenio(String string) {
-            return this;
+            return (CabecalhoRemessa) setValue(string);
         }
 
         CabecalhoRemessa cedente(String string) {
-            return this;
+            return (CabecalhoRemessa) setValue(string);
         }
 
         CabecalhoRemessa dataGeracao(String string) {
-            return this;
+            return (CabecalhoRemessa) setValue(string);
         }
 
         CabecalhoRemessa cedenteCnpj(String string) {
-            return this;
+            return (CabecalhoRemessa) setValue(string);
         }
     }
 
-    public static class TituloRemessa implements Registro {
+    public static class TituloRemessa extends RegistroRemessa {
 
         /* 
                 remessa.addTitulo().valor("").vencimento("")
@@ -106,14 +129,14 @@ public class RemessaFacade {
         }
     }
 
-    public static class RodapeRemessa implements Registro {
+    public static class RodapeRemessa extends RegistroRemessa {
 
     }
 
     /* 
     
      */
-    List<Registro> registros = new ArrayList<>();
+    List<RegistroRemessa> registros = new ArrayList<>();
 
     CabecalhoRemessa addCabecalho() {
         CabecalhoRemessa cabecalho = new CabecalhoRemessa();

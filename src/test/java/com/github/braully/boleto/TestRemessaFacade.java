@@ -37,5 +37,7 @@ public class TestRemessaFacade {
                 .instrucao("");
 
         remessa.addRodape();
+
+        String remessaStr = remessa.render();
     }
 }

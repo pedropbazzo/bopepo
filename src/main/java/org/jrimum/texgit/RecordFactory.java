@@ -35,64 +35,65 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
-
-
 /**
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
  *
  */
 public class RecordFactory implements org.jrimum.texgit.IRecordFactory<Record> {
 
-	private Map<String, MetaRecord> name_record;
+    private Map<String, MetaRecord> name_record;
 
-	RecordFactory(List<MetaRecord> metaRecords) {
+    RecordFactory(List<MetaRecord> metaRecords) {
 
-		if (isNotNull(metaRecords)) {
-			if (!metaRecords.isEmpty()) {
+        if (isNotNull(metaRecords)) {
+            if (!metaRecords.isEmpty()) {
 
-				name_record = new HashMap<String, MetaRecord>(metaRecords
-						.size());
+                name_record = new HashMap<String, MetaRecord>(metaRecords
+                        .size());
 
-				for (MetaRecord mRecord : metaRecords) {
+                for (MetaRecord mRecord : metaRecords) {
 
-					name_record.put(mRecord.getName(), mRecord);
+                    name_record.put(mRecord.getName(), mRecord);
 
-					if (isNotNull(mRecord.getGroupOfInnerRecords()))
-						loadInnerRecords(name_record, mRecord
-								.getGroupOfInnerRecords().getRecords());
-				}
-			}
-		}
-	}
+                    if (isNotNull(mRecord.getGroupOfInnerRecords())) {
+                        loadInnerRecords(name_record, mRecord
+                                .getGroupOfInnerRecords().getRecords());
+                    }
+                }
+            }
+        }
+    }
 
-	private void loadInnerRecords(Map<String, MetaRecord> name_record,
-			List<MetaRecord> innerMetaRecords) {
+    private void loadInnerRecords(Map<String, MetaRecord> name_record,
+            List<MetaRecord> innerMetaRecords) {
 
-		if (isNotNull(innerMetaRecords)) {
-			if (!innerMetaRecords.isEmpty()) {
+        if (isNotNull(innerMetaRecords)) {
+            if (!innerMetaRecords.isEmpty()) {
 
-				for (MetaRecord iMetaRecord : innerMetaRecords) {
+                for (MetaRecord iMetaRecord : innerMetaRecords) {
 
-					name_record.put(iMetaRecord.getName(), iMetaRecord);
+                    name_record.put(iMetaRecord.getName(), iMetaRecord);
 
-					if (isNotNull(iMetaRecord.getGroupOfInnerRecords()))
-						loadInnerRecords(name_record, iMetaRecord
-								.getGroupOfInnerRecords().getRecords());
-				}
-			}
-		}
+                    if (isNotNull(iMetaRecord.getGroupOfInnerRecords())) {
+                        loadInnerRecords(name_record, iMetaRecord
+                                .getGroupOfInnerRecords().getRecords());
+                    }
+                }
+            }
+        }
 
-	}
+    }
 
-	public Record create(String name) {
+    public Record create(String name) {
 
-		Record record = null;
+        Record record = null;
 
-		if (isNotBlank(name))
-			if (name_record.containsKey(name))
-				record = RecordBuilder.build(name_record.get(name));
+        if (isNotBlank(name)) {
+            if (name_record.containsKey(name)) {
+                record = RecordBuilder.build(name_record.get(name));
+            }
+        }
 
-		return record;
-	}
+        return record;
+    }
 }
