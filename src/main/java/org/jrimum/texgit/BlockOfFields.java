@@ -32,11 +32,8 @@ import static java.lang.String.format;
 import org.jrimum.ConfiguracaoJRimum;
 import static org.jrimum.utilix.Objects.isNotNull;
 
-import org.jrimum.texgit.AbstractStringOfFields;
 import org.jrimum.utilix.Collections;
 import org.jrimum.utilix.Objects;
-import org.jrimum.texgit.IFixedLength;
-import org.jrimum.texgit.IFixedSize;
 
 /**
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
