@@ -37,89 +37,88 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.net.URL;
 
-
 /**
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
- * 
+ *
  */
 public final class Texgit {
-	
-	public static final IFlatFile<IRecord> createFlatFile(String xmlDefFilePath)
-			throws TexgitException {
 
-		try {
+    public static final IFlatFile<IRecord> createFlatFile(String xmlDefFilePath)
+            throws TexgitException {
 
-			if (isNotBlank(xmlDefFilePath))
-				return createFlatFile(new File(xmlDefFilePath));
+        try {
 
-		} catch (Exception e) {
-			throw new TexgitException(e);
-		}
+            if (isNotBlank(xmlDefFilePath)) {
+                return createFlatFile(new File(xmlDefFilePath));
+            }
 
-		return null;
-	}
+        } catch (Exception e) {
+            throw new TexgitException(e);
+        }
 
-	public static final IFlatFile<IRecord> createFlatFile(File xmlDefFile)
-			throws TexgitException {
+        return null;
+    }
 
-		try {
+    public static final IFlatFile<IRecord> createFlatFile(File xmlDefFile)
+            throws TexgitException {
 
-			if (isNotNull(xmlDefFile)) {
-				
-				return createFlatFile(new FileInputStream(xmlDefFile));
-			}
+        try {
 
-		} catch (Exception e) {
-			throw new TexgitException(e);
-		}
+            if (isNotNull(xmlDefFile)) {
 
-		return null;
-	}
+                return createFlatFile(new FileInputStream(xmlDefFile));
+            }
 
-	public static final IFlatFile<IRecord> createFlatFile(URL xmlDefUrl)
-			throws TexgitException {
-		
-		try {
+        } catch (Exception e) {
+            throw new TexgitException(e);
+        }
 
-			if (isNotNull(xmlDefUrl)) {
-				
-				return TexgitManager.buildFlatFile(xmlDefUrl.openStream());
-			}
+        return null;
+    }
 
-		} catch (Exception e) {
-			throw new TexgitException(e);
-		}
-		
-		
-		return null;
-	}
+    public static final IFlatFile<IRecord> createFlatFile(URL xmlDefUrl)
+            throws TexgitException {
 
-	public static final IFlatFile<IRecord> createFlatFile(byte[] xmlDefBytes)
-			throws TexgitException {
-		
-		try {
-			
-			if (isNotNull(xmlDefBytes)) {
-				
-				return TexgitManager.buildFlatFile(new ByteArrayInputStream(xmlDefBytes));
-			}
-			
-		} catch (Exception e) {
-			throw new TexgitException(e);
-		}
-		
-		return null;
-	}
-	
-	public static final IFlatFile<IRecord> createFlatFile(InputStream xmlDefStream)
-			throws TexgitException {
+        try {
 
-		if (isNotNull(xmlDefStream)) {
+            if (isNotNull(xmlDefUrl)) {
 
-			return TexgitManager.buildFlatFile(xmlDefStream);
-		}
+                return TexgitManager.buildFlatFile(xmlDefUrl.openStream());
+            }
 
-		return null;
-	}
+        } catch (Exception e) {
+            throw new TexgitException(e);
+        }
+
+        return null;
+    }
+
+    public static final IFlatFile<IRecord> createFlatFile(byte[] xmlDefBytes)
+            throws TexgitException {
+
+        try {
+
+            if (isNotNull(xmlDefBytes)) {
+
+                return TexgitManager.buildFlatFile(new ByteArrayInputStream(xmlDefBytes));
+            }
+
+        } catch (Exception e) {
+            throw new TexgitException(e);
+        }
+
+        return null;
+    }
+
+    public static final IFlatFile<IRecord> createFlatFile(InputStream xmlDefStream)
+            throws TexgitException {
+
+        if (isNotNull(xmlDefStream)) {
+
+            return TexgitManager.buildFlatFile(xmlDefStream);
+        }
+
+        return null;
+    }
 
 }

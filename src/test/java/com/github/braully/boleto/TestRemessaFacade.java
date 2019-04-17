@@ -15,6 +15,9 @@
  */
 package com.github.braully.boleto;
 
+import org.jrimum.utilix.FileUtil;
+import static org.junit.Assert.assertEquals;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -25,6 +28,26 @@ public class TestRemessaFacade {
 
     @Test
     public void testRemessaSimples() {
+        RemessaFacade remessa = new RemessaFacade();
+        remessa.layout(FileUtil.streamFromClasspath("layouts/remessa/layout-referencia"));
+        remessa.addCabecalho().agencia("").conta("").numeroConvenio("")
+                .cedente("").cedenteCnpj("").dataGeracao("");
+
+        remessa.addTitulo().valor("").vencimento("")
+                .numeroDocumento("").nossoNumero("")
+                .dataEmissao("").carteira("")
+                .sacado("").sacadoCpf("")
+                .sacadoEndereco("")
+                .instrucao("");
+
+        remessa.addRodape();
+
+        String remessaStr = remessa.render();
+    }
+
+    @Ignore
+    @Test
+    public void testRemessaVazia() {
         RemessaFacade remessa = new RemessaFacade();
         remessa.addCabecalho().agencia("").conta("").numeroConvenio("")
                 .cedente("").cedenteCnpj("").dataGeracao("");
@@ -39,5 +62,6 @@ public class TestRemessaFacade {
         remessa.addRodape();
 
         String remessaStr = remessa.render();
+        assertEquals(remessaStr, "");
     }
 }

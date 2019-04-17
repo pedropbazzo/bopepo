@@ -17,6 +17,8 @@ package com.github.braully.boleto;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.log4j.Logger;
+import org.jrimum.texgit.IFlatFile;
 import org.jrimum.texgit.Record;
 
 /**
@@ -25,8 +27,20 @@ import org.jrimum.texgit.Record;
  */
 public class RemessaFacade {
 
+    public static Logger logger = Logger.getLogger(RemessaFacade.class);
+    /*
+    
+     */
+    IFlatFile layoutFlatFile;
+
     String render() {
         StringBuilder sb = new StringBuilder();
+
+        if (layoutFlatFile == null) {
+            logger.warn("Layout de remessa está vazio");
+            return "";
+        }
+
         for (RegistroRemessa r : this.registros) {
             sb.append(r.render());
         }
@@ -37,7 +51,7 @@ public class RemessaFacade {
 
         public String render() {
 //            StringBuilder sb = new StringBuilder();
-//            return sb.toString();
+//            return sb.toString(); 
             return this.write();
         }
 

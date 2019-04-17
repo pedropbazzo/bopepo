@@ -127,6 +127,8 @@ public class BlockOfFields extends AbstractStringOfFields<FixedField<?>> impleme
         Objects.checkNotNull(getFields(), "Fields == null");
         if (ConfiguracaoJRimum.falharEmRegistroVazio) {
             Collections.checkNotEmpty(getFields(), "Coleção de fields vazia!");
+        } else {
+            return "";
         }
 
         String str = null;
