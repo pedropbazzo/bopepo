@@ -576,4 +576,7 @@ public class FileUtil {
         writeLines(new File(pathName), content);
     }
 
+    public static InputStream streamFromClasspath(String classpath) {
+        return Thread.currentThread().getContextClassLoader().getResourceAsStream(classpath);
+    }
 }

@@ -15,9 +15,12 @@
  */
 package com.github.braully.boleto;
 
+import java.text.Format;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.log4j.Logger;
+import org.jrimum.texgit.FixedField;
+import org.jrimum.texgit.IFiller;
 import org.jrimum.texgit.IFlatFile;
 import org.jrimum.texgit.Record;
 
@@ -47,7 +50,14 @@ public class RemessaFacade {
         return sb.toString();
     }
 
-    public static abstract class RegistroRemessa extends Record {
+    public static class RegistroRemessa extends Record {
+
+        public RegistroRemessa() {
+        }
+
+        public RegistroRemessa(TagLayout layoutRegistro) {
+            layoutRegistro.filhos.stream().forEach(l -> add(l));
+        }
 
         public String render() {
 //            StringBuilder sb = new StringBuilder();
@@ -61,6 +71,10 @@ public class RemessaFacade {
             /* Propriedade a ser setada é o nome do metodo que chamou */
             this.setValue(nomeMetodoAnterior, valor);
             return this;
+        }
+
+        private void add(TagLayout l) {
+            super.add(new FixedField(l.nome, l.getAtr("valor"), l.getInt("length"), (Format) l.getObj("format"), (IFiller) l.getObj("filler")));
         }
 
     }
@@ -152,22 +166,8 @@ public class RemessaFacade {
      */
     List<RegistroRemessa> registros = new ArrayList<>();
 
-    CabecalhoRemessa addCabecalho() {
-        CabecalhoRemessa cabecalho = new CabecalhoRemessa();
-        this.registros.add(cabecalho);
-        return cabecalho;
+    RemessaFacade add(RegistroRemessa reg) {
+        registros.add(reg);
+        return this;
     }
-
-    TituloRemessa addTitulo() {
-        TituloRemessa titulo = new TituloRemessa();
-        this.registros.add(titulo);
-        return titulo;
-    }
-
-    RodapeRemessa addRodape() {
-        RodapeRemessa rodape = new RodapeRemessa();
-        this.registros.add(rodape);
-        return rodape;
-    }
-
 }

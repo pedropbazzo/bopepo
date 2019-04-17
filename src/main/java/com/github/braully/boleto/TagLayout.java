@@ -82,13 +82,36 @@ public class TagLayout {
     final List<TagLayout> filhos;
     final Map<String, String> atributos;
 
+    TagLayout get(String strfilho) {
+        TagLayout fi = null;
+        for (TagLayout filho : filhos) {
+            if (filho.nome.equalsIgnoreCase(strfilho)) {
+                fi = filho;
+                break;
+            }
+        }
+        return fi;
+    }
+
+    String getAtr(String stratt) {
+        return atributos.get(stratt);
+    }
+
+    Integer getInt(String stratt) {
+        return Integer.parseInt(atributos.get(stratt));
+    }
+
+    Object getObj(String stratt) {
+        return atributos.get(stratt);
+    }
+
     public TagLayout(String nome) {
         this.nome = nome;
         this.filhos = new ArrayList<>();
         this.atributos = new TreeMap<>();
     }
 
-    public TagLayout attr(String nome, String valor) {
+    public TagLayout atr(String nome, String valor) {
         atributos.put(nome, valor);
         return this;
     }
@@ -135,7 +158,7 @@ public class TagLayout {
         //TODO: Melhorar isso;
         String nomeMetodoAnterior = Thread.currentThread().getStackTrace()[2].getMethodName();
         /* Propriedade a ser setada é o nome do metodo que chamou */
-        this.attr(nomeMetodoAnterior, valor.toString());
+        this.atr(nomeMetodoAnterior, valor.toString());
         return this;
     }
 }

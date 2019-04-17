@@ -26,40 +26,47 @@ import org.junit.Test;
  */
 public class TestRemessaFacade {
 
+    @Ignore
     @Test
     public void testRemessaSimples() {
         RemessaFacade remessa = new RemessaFacade();
-        remessa.layout(FileUtil.streamFromClasspath("layouts/remessa/layout-referencia"));
-        remessa.addCabecalho().agencia("").conta("").numeroConvenio("")
-                .cedente("").cedenteCnpj("").dataGeracao("");
 
-        remessa.addTitulo().valor("").vencimento("")
-                .numeroDocumento("").nossoNumero("")
-                .dataEmissao("").carteira("")
-                .sacado("").sacadoCpf("")
-                .sacadoEndereco("")
-                .instrucao("");
-
-        remessa.addRodape();
-
+//        remessa.layout(FileUtil.streamFromClasspath("layouts/remessa/layout-referencia"));
+//        remessa.addCabecalho().agencia("").conta("").numeroConvenio("")
+//                .cedente("").cedenteCnpj("").dataGeracao("");
+//
+//        remessa.addTitulo().valor("").vencimento("")
+//                .numeroDocumento("").nossoNumero("")
+//                .dataEmissao("").carteira("")
+//                .sacado("").sacadoCpf("")
+//                .sacadoEndereco("")
+//                .instrucao("");
+//
+//        remessa.addRodape();
         String remessaStr = remessa.render();
     }
 
-    @Ignore
     @Test
     public void testRemessaVazia() {
         RemessaFacade remessa = new RemessaFacade();
-        remessa.addCabecalho().agencia("").conta("").numeroConvenio("")
-                .cedente("").cedenteCnpj("").dataGeracao("");
+        LayoutTexgitFacade layout = new LayoutTexgitFacade(null);
+        remessa.add(
+                layout.novoCabecalho().agencia("1")
+                        .conta("1").numeroConvenio("1")
+                        .cedente("ACME S.A LTDA.").cedenteCnpj("1")
+                        .dataGeracao("01/01/2019")
+        );
 
-        remessa.addTitulo().valor("").vencimento("")
-                .numeroDocumento("").nossoNumero("")
-                .dataEmissao("").carteira("")
-                .sacado("").sacadoCpf("")
-                .sacadoEndereco("")
-                .instrucao("");
+        remessa.add(
+                layout.novoTitulo().valor("").vencimento("")
+                        .numeroDocumento("").nossoNumero("")
+                        .dataEmissao("").carteira("")
+                        .sacado("").sacadoCpf("")
+                        .sacadoEndereco("")
+                        .instrucao("")
+        );
 
-        remessa.addRodape();
+        remessa.add(layout.novoRodape());
 
         String remessaStr = remessa.render();
         assertEquals(remessaStr, "");

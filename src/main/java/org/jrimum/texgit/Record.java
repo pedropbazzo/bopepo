@@ -41,406 +41,382 @@ import java.util.Set;
 import org.jrimum.utilix.Objects;
 import org.jrimum.texgit.IField;
 
-
-
 /**
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
  *
  */
 @SuppressWarnings("serial")
-public class Record extends BlockOfFields implements org.jrimum.texgit.IRecord{
+public class Record extends BlockOfFields implements org.jrimum.texgit.IRecord {
 
-	private String name;
-	
-	private String description;
-	
-	private FixedField<String> idType;
-	
-	private FixedField<Long> sequencialNumber;
-	
-	private boolean headOfGroup;
-	
-	private List<org.jrimum.texgit.IRecord> innerRecords;
-	
-	private Set<String> repitablesRecords;
-	
-	private List<String> declaredInnerRecords;
-	
-	public Record() {
-		super();
-	}
-	
-	/**
-	 * @param length
-	 * @param size
-	 */
-	public Record(Integer length, Integer size) {
-		super(length, size);
-	}
+    private String name;
 
-	@Override
-	public Record clone() throws CloneNotSupportedException {
-		//TODO Outros atributos
-		return (Record) super.clone();
-	}
-	
-	@SuppressWarnings("null")
-	public FixedField<String> readID(String lineRecord) {
+    private String description;
 
-		FixedField<String> ffID = null;
-		
-		try {
-			
-			ffID = getIdType().clone();
-			ffID.setName("");
-			
-		} catch (CloneNotSupportedException e) {
-			
-			throw new UnsupportedOperationException(format("Quebra de contrato [%s] não suporta clonagem!",Objects.whenNull(ffID, "FixedField", ffID.getClass())), e);
-		}
-		
-		getIdType().read(lineRecord.substring(getIdPosition(), getIdPosition() + getIdType().getFixedLength())); 
+    private FixedField<String> idType;
 
-		return ffID;
-	}
-	
-	public org.jrimum.texgit.IFixedField<?> getField(String fieldName) {
+    private FixedField<Long> sequencialNumber;
 
-		org.jrimum.texgit.IFixedField<?> field = null;
+    private boolean headOfGroup;
 
-		if (isNotBlank(fieldName))
-			if (!getFields().isEmpty())
-				for (FixedField<?> ff : this.getFields())
-					if (ff.getName().equals(fieldName)) {
-						field = ff;
-						break;
-					}
+    private List<org.jrimum.texgit.IRecord> innerRecords;
 
-		return field;
-	}
+    private Set<String> repitablesRecords;
 
-	public boolean isMyField(String idName){
-		boolean is = false;
-		
-		if (isNotBlank(idName)) {
-			if(!getFields().isEmpty())
-				for(org.jrimum.texgit.IField<?> f : getFields())
-					if(idName.equals(f.getName())){
-						is = true;
-						break;
-					}
-		}
-		return is;
-	}
-	
-	private int getIdPosition(){
-		int pos = 0;
-		
-		for(FixedField<?> ff : this.getFields())
-			if(!ff.getName().equals(idType.getName()))
-				pos += ff.getFixedLength();
-			else
-				break;
-		
-		return pos;
-	}
-	
-	public int readInnerRecords(List<String> lines, int lineIndex, IRecordFactory<Record> iFactory) {
-		
-		return readInnerRecords(this,lines,lineIndex,iFactory);
-	}
-	
-	private int readInnerRecords(Record record, List<String> lines, int lineIndex, IRecordFactory<Record> iFactory) {
-		
-		if(isNotNull(record)){
-			
-			if(isNotNull(record.getDeclaredInnerRecords()) && !record.getDeclaredInnerRecords().isEmpty()){
-				
-				boolean read = true;
-				String line = null;
-				
-				FixedField<String> typeRecord = null;
-				Record innerRec = null;
-				
-				for(String id : record.getDeclaredInnerRecords()){
-					
-					innerRec = iFactory.create(id);
-					
-					try{
-						
-						if(isRepitable(id)){
-							
-							while(read){
-								
-								if(isNull(innerRec))
-									innerRec = iFactory.create(id);
-								
-								if(lineIndex < lines.size())
-									line = lines.get(lineIndex);
-								
-								typeRecord = innerRec.readID(line);
-								
-								read = innerRec.getIdType().getValue().equals(typeRecord.getValue()) && (lineIndex < lines.size()); 
+    private List<String> declaredInnerRecords;
 
-								if(read){
-									
-									innerRec.read(line);
-									lineIndex++;
-									record.addInnerRecord(innerRec);
-									
-									if(innerRec.isHeadOfGroup())
-										innerRec.readInnerRecords(lines,lineIndex,iFactory);
-									
-									innerRec = null;
-								}
-							}
-							
-						}else{
-							if((lineIndex < lines.size())){
-								
-								line = lines.get(lineIndex);
-								typeRecord = innerRec.readID(line);
-								
-								if(innerRec.getIdType().getValue().equals(typeRecord.getValue())){
-									
-									innerRec.read(line);
-									lineIndex++;
-									record.addInnerRecord(innerRec);
-									
-									if(innerRec.isHeadOfGroup())
-										innerRec.readInnerRecords(lines,lineIndex,iFactory);
-									
-									innerRec = null;
-								}
-							}
-						}
-						
-					} catch (Exception e) {
+    public Record() {
+        super();
+    }
 
-						throw new IllegalStateException(format(
-								"Erro ao tentar ler o registro \"%s\".",
-								innerRec.getName()), e);
-					}
-				}
-			}		
-		}
-		
-		return lineIndex;
-	}
+    /**
+     * @param length
+     * @param size
+     */
+    public Record(Integer length, Integer size) {
+        super(length, size);
+    }
 
-	public List<String> writeInnerRecords(){
-		
-		return writeInnerRecords(this,EMPTY);
-	}
-	
-	public List<String> writeInnerRecords(String lineEnding){
-		
-		return writeInnerRecords(this,lineEnding);
-	}
-	
-	private List<String> writeInnerRecords(Record record, String lineEnding){
+    @Override
+    public Record clone() throws CloneNotSupportedException {
+        //TODO Outros atributos
+        return (Record) super.clone();
+    }
 
-		ArrayList<String> out = new ArrayList<String>(record.getInnerRecords().size());
-		
-		for(String id : getDeclaredInnerRecords()){//ordem
-			
-			if(isRepitable(id)){
-					
-				for(Record rec : getRecords(id)){
-					
-					try{
+    @SuppressWarnings("null")
+    public FixedField<String> readID(String lineRecord) {
+        FixedField<String> ffID = null;
+        try {
+            ffID = getIdType().clone();
+            ffID.setName("");
+        } catch (CloneNotSupportedException e) {
+            throw new UnsupportedOperationException(format("Quebra de contrato [%s] não suporta clonagem!", Objects.whenNull(ffID, "FixedField", ffID.getClass())), e);
+        }
+        getIdType().read(lineRecord.substring(getIdPosition(), getIdPosition() + getIdType().getFixedLength()));
+        return ffID;
+    }
 
-						out.add(rec.write()+lineEnding);
-						
-					} catch (Exception e) {
+    public org.jrimum.texgit.IFixedField<?> getField(String fieldName) {
+        org.jrimum.texgit.IFixedField<?> field = null;
+        if (isNotBlank(fieldName)) {
+            if (!getFields().isEmpty()) {
+                for (FixedField<?> ff : this.getFields()) {
+                    if (ff.getName().equals(fieldName)) {
+                        field = ff;
+                        break;
+                    }
+                }
+            }
+        }
+        return field;
+    }
 
-						throw new IllegalStateException(format(
-								"Erro ao tentar escrever o registro \"%s\".", rec.getName()), e);
-					}
-					
-					if(rec.isHeadOfGroup())
-						out.addAll(rec.writeInnerRecords());
-				}
-				
-			}else{
-				
-				Record rec = getRecord(id);
+    public boolean isMyField(String idName) {
+        boolean is = false;
+        if (isNotBlank(idName)) {
+            if (!getFields().isEmpty()) {
+                for (org.jrimum.texgit.IField<?> f : getFields()) {
+                    if (idName.equals(f.getName())) {
+                        is = true;
+                        break;
+                    }
+                }
+            }
+        }
+        return is;
+    }
 
-				try{
-					
-					out.add(rec.write()+lineEnding);
-					
-				} catch (Exception e) {
+    private int getIdPosition() {
+        int pos = 0;
+        for (FixedField<?> ff : this.getFields()) {
+            if (!ff.getName().equals(idType.getName())) {
+                pos += ff.getFixedLength();
+            } else {
+                break;
+            }
+        }
 
-					throw new IllegalStateException(format(
-							"Erro ao tentar escrever o registro \"%s\".", rec.getName()), e);
-				}
-				
-				if(rec.isHeadOfGroup())
-					out.addAll(rec.writeInnerRecords());
-			}
-		}
-		
-		return out;
-	}
-	
-	public Record getRecord(String idName){
-		
-		Record record = null;
-		
-		if (isNotBlank(idName)) {
-			if (!isRepitable(idName)){	
-				if (!getInnerRecords().isEmpty()) {
-					for (org.jrimum.texgit.IRecord iRec : getInnerRecords()) {
-						Record rec = (Record) iRec;
-						if (idName.equals(rec.getName()))
-							record = rec;
-					}
-				}
-			}
-		}
+        return pos;
+    }
 
-		return record;
-	}
+    public int readInnerRecords(List<String> lines, int lineIndex, IRecordFactory<Record> iFactory) {
+        return readInnerRecords(this, lines, lineIndex, iFactory);
+    }
 
-	public List<Record> getRecords(String idName) {
+    private int readInnerRecords(Record record, List<String> lines, int lineIndex, IRecordFactory<Record> iFactory) {
+        if (isNotNull(record)) {
+            if (isNotNull(record.getDeclaredInnerRecords()) && !record.getDeclaredInnerRecords().isEmpty()) {
+                boolean read = true;
+                String line = null;
+                FixedField<String> typeRecord = null;
+                Record innerRec = null;
 
-		List<Record> secRecords = new ArrayList<Record>();
+                for (String id : record.getDeclaredInnerRecords()) {
+                    innerRec = iFactory.create(id);
+                    try {
+                        if (isRepitable(id)) {
+                            while (read) {
+                                if (isNull(innerRec)) {
+                                    innerRec = iFactory.create(id);
+                                }
+                                if (lineIndex < lines.size()) {
+                                    line = lines.get(lineIndex);
+                                }
+                                typeRecord = innerRec.readID(line);
+                                read = innerRec.getIdType().getValue().equals(typeRecord.getValue()) && (lineIndex < lines.size());
+                                if (read) {
+                                    innerRec.read(line);
+                                    lineIndex++;
+                                    record.addInnerRecord(innerRec);
 
-		if (isNotBlank(idName)) {
-			if (isRepitable(idName)) {
-				if (!getInnerRecords().isEmpty()) {
-					for (org.jrimum.texgit.IRecord iRec : getInnerRecords()) {
-						Record rec = (Record) iRec;
-						if (idName.equals(rec.getName()))
-							secRecords.add(rec);
-					}
-				}
-			}
-		}
+                                    if (innerRec.isHeadOfGroup()) {
+                                        innerRec.readInnerRecords(lines, lineIndex, iFactory);
+                                    }
+                                    innerRec = null;
+                                }
+                            }
 
-		return secRecords;
-	}
-	
-	public boolean isRepitable(String idName){
-		
-		return (isNotNull(repitablesRecords) && !repitablesRecords.isEmpty() && repitablesRecords.contains(idName));
-	}
-	
-	public boolean isMyRecord(String idName){
-		boolean is = false;
-		
-		if (isNotBlank(idName)) {
-			if(!getDeclaredInnerRecords().isEmpty())
-				if(getDeclaredInnerRecords().contains(idName))
-					is = true;
-		}
-		return is;
-	}
-	
-	public org.jrimum.texgit.IRecord addInnerRecord(org.jrimum.texgit.IRecord record) {
-		
-		if(isNotNull(record)){
-			if(isNull(this.innerRecords))
-				this.innerRecords = new ArrayList<org.jrimum.texgit.IRecord>();
-		
-		if(isMyRecord(Record.class.cast(record).getName()))
-			this.innerRecords.add(record);
-		else
-			throw new IllegalArgumentException("Record fora de scopo!");
-		
-		}
-		
-		return this;
-	}
+                        } else {
+                            if ((lineIndex < lines.size())) {
+                                line = lines.get(lineIndex);
+                                typeRecord = innerRec.readID(line);
+                                if (innerRec.getIdType().getValue().equals(typeRecord.getValue())) {
+                                    innerRec.read(line);
+                                    lineIndex++;
+                                    record.addInnerRecord(innerRec);
 
-	public List<org.jrimum.texgit.IRecord> getInnerRecords() {
-		
-		return this.innerRecords;
-	}
+                                    if (innerRec.isHeadOfGroup()) {
+                                        innerRec.readInnerRecords(lines, lineIndex, iFactory);
+                                    }
+                                    innerRec = null;
+                                }
+                            }
+                        }
 
-	@SuppressWarnings("unchecked")
-	public <G> G getValue(String fieldName) {
-		
-		G value = null;
-		
-		org.jrimum.texgit.IField<?> f = getField(fieldName);
-		
-		if(isNotNull(f))
-			value = (G) f.getValue();
-		
-		return value;
-	}
+                    } catch (Exception e) {
+                        throw new IllegalStateException(format(
+                                "Erro ao tentar ler o registro \"%s\".",
+                                innerRec.getName()), e);
+                    }
+                }
+            }
+        }
 
-	@SuppressWarnings("unchecked")
-	public <G> org.jrimum.texgit.IRecord setValue(String fieldName, G value) {
-		
-		org.jrimum.texgit.IField<G> f = (IField<G>) getField(fieldName);
-		
-		if(isNotNull(f))
-			f.setValue(value);
-		
-		return this;
-	}
-	
-	public boolean hasInnerRecords(){
-		return getInnerRecords() != null && !getInnerRecords().isEmpty();
-	}
+        return lineIndex;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public List<String> writeInnerRecords() {
+        return writeInnerRecords(this, EMPTY);
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public List<String> writeInnerRecords(String lineEnding) {
+        return writeInnerRecords(this, lineEnding);
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    private List<String> writeInnerRecords(Record record, String lineEnding) {
+        ArrayList<String> out = new ArrayList<String>(record.getInnerRecords().size());
+        for (String id : getDeclaredInnerRecords()) {//ordem
+            if (isRepitable(id)) {
+                for (Record rec : getRecords(id)) {
+                    try {
+                        out.add(rec.write() + lineEnding);
+                    } catch (Exception e) {
+                        throw new IllegalStateException(format(
+                                "Erro ao tentar escrever o registro \"%s\".", rec.getName()), e);
+                    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+                    if (rec.isHeadOfGroup()) {
+                        out.addAll(rec.writeInnerRecords());
+                    }
+                }
 
-	public FixedField<String> getIdType() {
-		return idType;
-	}
+            } else {
 
-	public void setIdType(FixedField<String> idType) {
-		this.idType = idType;
-	}
+                Record rec = getRecord(id);
 
-	public FixedField<Long> getSequencialNumber() {
-		return sequencialNumber;
-	}
+                try {
 
-	public void setSequencialNumber(FixedField<Long> sequencialNumber) {
-		this.sequencialNumber = sequencialNumber;
-	}
+                    out.add(rec.write() + lineEnding);
 
-	public boolean isHeadOfGroup() {
-		return headOfGroup;
-	}
+                } catch (Exception e) {
 
-	public void setHeadOfGroup(boolean headOfGroup) {
-		this.headOfGroup = headOfGroup;
-	}
+                    throw new IllegalStateException(format(
+                            "Erro ao tentar escrever o registro \"%s\".", rec.getName()), e);
+                }
 
-	public List<String> getDeclaredInnerRecords() {
-		return declaredInnerRecords;
-	}
+                if (rec.isHeadOfGroup()) {
+                    out.addAll(rec.writeInnerRecords());
+                }
+            }
+        }
 
-	public void setDeclaredInnerRecords(List<String> declaredInnerRecords) {
-		this.declaredInnerRecords = declaredInnerRecords;
-	}
-	
-	public Set<String> getRepitablesRecords() {
-		return repitablesRecords;
-	}
+        return out;
+    }
 
-	public void setRepitablesRecords(Set<String> repitablesRecords) {
-		this.repitablesRecords = repitablesRecords;
-	}
+    public Record getRecord(String idName) {
+
+        Record record = null;
+
+        if (isNotBlank(idName)) {
+            if (!isRepitable(idName)) {
+                if (!getInnerRecords().isEmpty()) {
+                    for (org.jrimum.texgit.IRecord iRec : getInnerRecords()) {
+                        Record rec = (Record) iRec;
+                        if (idName.equals(rec.getName())) {
+                            record = rec;
+                        }
+                    }
+                }
+            }
+        }
+
+        return record;
+    }
+
+    public List<Record> getRecords(String idName) {
+
+        List<Record> secRecords = new ArrayList<Record>();
+
+        if (isNotBlank(idName)) {
+            if (isRepitable(idName)) {
+                if (!getInnerRecords().isEmpty()) {
+                    for (org.jrimum.texgit.IRecord iRec : getInnerRecords()) {
+                        Record rec = (Record) iRec;
+                        if (idName.equals(rec.getName())) {
+                            secRecords.add(rec);
+                        }
+                    }
+                }
+            }
+        }
+
+        return secRecords;
+    }
+
+    public boolean isRepitable(String idName) {
+
+        return (isNotNull(repitablesRecords) && !repitablesRecords.isEmpty() && repitablesRecords.contains(idName));
+    }
+
+    public boolean isMyRecord(String idName) {
+        boolean is = false;
+
+        if (isNotBlank(idName)) {
+            if (!getDeclaredInnerRecords().isEmpty()) {
+                if (getDeclaredInnerRecords().contains(idName)) {
+                    is = true;
+                }
+            }
+        }
+        return is;
+    }
+
+    public org.jrimum.texgit.IRecord addInnerRecord(org.jrimum.texgit.IRecord record) {
+
+        if (isNotNull(record)) {
+            if (isNull(this.innerRecords)) {
+                this.innerRecords = new ArrayList<org.jrimum.texgit.IRecord>();
+            }
+
+            if (isMyRecord(Record.class.cast(record).getName())) {
+                this.innerRecords.add(record);
+            } else {
+                throw new IllegalArgumentException("Record fora de scopo!");
+            }
+
+        }
+
+        return this;
+    }
+
+    public List<org.jrimum.texgit.IRecord> getInnerRecords() {
+
+        return this.innerRecords;
+    }
+
+    @SuppressWarnings("unchecked")
+    public <G> G getValue(String fieldName) {
+
+        G value = null;
+
+        org.jrimum.texgit.IField<?> f = getField(fieldName);
+
+        if (isNotNull(f)) {
+            value = (G) f.getValue();
+        }
+
+        return value;
+    }
+
+    @SuppressWarnings("unchecked")
+    public <G> org.jrimum.texgit.IRecord setValue(String fieldName, G value) {
+
+        org.jrimum.texgit.IField<G> f = (IField<G>) getField(fieldName);
+
+        if (isNotNull(f)) {
+            f.setValue(value);
+        }
+
+        return this;
+    }
+
+    public boolean hasInnerRecords() {
+        return getInnerRecords() != null && !getInnerRecords().isEmpty();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public FixedField<String> getIdType() {
+        return idType;
+    }
+
+    public void setIdType(FixedField<String> idType) {
+        this.idType = idType;
+    }
+
+    public FixedField<Long> getSequencialNumber() {
+        return sequencialNumber;
+    }
+
+    public void setSequencialNumber(FixedField<Long> sequencialNumber) {
+        this.sequencialNumber = sequencialNumber;
+    }
+
+    public boolean isHeadOfGroup() {
+        return headOfGroup;
+    }
+
+    public void setHeadOfGroup(boolean headOfGroup) {
+        this.headOfGroup = headOfGroup;
+    }
+
+    public List<String> getDeclaredInnerRecords() {
+        return declaredInnerRecords;
+    }
+
+    public void setDeclaredInnerRecords(List<String> declaredInnerRecords) {
+        this.declaredInnerRecords = declaredInnerRecords;
+    }
+
+    public Set<String> getRepitablesRecords() {
+        return repitablesRecords;
+    }
+
+    public void setRepitablesRecords(Set<String> repitablesRecords) {
+        this.repitablesRecords = repitablesRecords;
+    }
 
 }
