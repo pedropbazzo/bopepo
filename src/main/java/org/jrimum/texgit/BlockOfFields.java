@@ -67,6 +67,16 @@ public class BlockOfFields extends AbstractStringOfFields<FixedField<?>> impleme
      */
     private boolean truncate;
 
+    /* Default values, by Braully Rocha */
+    {
+        size = 0;
+        length = 0;
+    }
+
+    protected void incSize() {
+        size++;
+    }
+
     /**
      *
      */
@@ -125,12 +135,7 @@ public class BlockOfFields extends AbstractStringOfFields<FixedField<?>> impleme
     @Override
     public String write() {
         Objects.checkNotNull(getFields(), "Fields == null");
-        if (ConfiguracaoJRimum.falharEmRegistroVazio) {
-            Collections.checkNotEmpty(getFields(), "Coleção de fields vazia!");
-        } else {
-            return "";
-        }
-
+        Collections.checkNotEmpty(getFields(), "Coleção de fields vazia!");
         String str = null;
         isSizeAsDefinaed();
         str = super.write();
@@ -212,4 +217,5 @@ public class BlockOfFields extends AbstractStringOfFields<FixedField<?>> impleme
     public void setTruncate(boolean truncate) {
         this.truncate = truncate;
     }
+
 }

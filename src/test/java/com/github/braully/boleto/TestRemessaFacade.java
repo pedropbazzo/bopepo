@@ -15,9 +15,10 @@
  */
 package com.github.braully.boleto;
 
-import org.jrimum.utilix.FileUtil;
+import static com.github.braully.boleto.TagLayout.TagCreator.*;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import static org.junit.Assert.assertEquals;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -26,49 +27,86 @@ import org.junit.Test;
  */
 public class TestRemessaFacade {
 
-    @Ignore
-    @Test
-    public void testRemessaSimples() {
-        RemessaFacade remessa = new RemessaFacade();
-
-//        remessa.layout(FileUtil.streamFromClasspath("layouts/remessa/layout-referencia"));
-//        remessa.addCabecalho().agencia("").conta("").numeroConvenio("")
-//                .cedente("").cedenteCnpj("").dataGeracao("");
-//
-//        remessa.addTitulo().valor("").vencimento("")
-//                .numeroDocumento("").nossoNumero("")
-//                .dataEmissao("").carteira("")
-//                .sacado("").sacadoCpf("")
-//                .sacadoEndereco("")
-//                .instrucao("");
-//
-//        remessa.addRodape();
-        String remessaStr = remessa.render();
-    }
-
     @Test
     public void testRemessaVazia() {
-        RemessaFacade remessa = new RemessaFacade();
-        LayoutTexgitFacade layout = new LayoutTexgitFacade(null);
-        remessa.add(
-                layout.novoCabecalho().agencia("1")
-                        .conta("1").numeroConvenio("1")
-                        .cedente("ACME S.A LTDA.").cedenteCnpj("1")
-                        .dataGeracao("01/01/2019")
-        );
+        RemessaFacade remessa = new RemessaFacade(layoutFebrabanTest());
+        remessa.addNovoCabecalho().agencia("1")
+                .conta("1").numeroConvenio("1")
+                .cedente("ACME S.A LTDA.").cedenteCnpj("1")
+                .dataGeracao("01/01/2019").setValue("codigoRetorno", "1");
 
-        remessa.add(
-                layout.novoTitulo().valor("").vencimento("")
-                        .numeroDocumento("").nossoNumero("")
-                        .dataEmissao("").carteira("")
-                        .sacado("").sacadoCpf("")
-                        .sacadoEndereco("")
-                        .instrucao("")
-        );
+        remessa.addNovoTitulo().valor("1").vencimento("1")
+                .numeroDocumento("1").nossoNumero("1")
+                .dataEmissao("1").carteira("1")
+                .sacado("Fulano de Tal").sacadoCpf("1")
+                .sacadoEndereco("Rua 1, Numero 1, Cidade Z")
+                .instrucao("Senhor caixa não receber nunca");
 
-        remessa.add(layout.novoRodape());
+        remessa.addNovoRodape().setValue("codigoRetorno", "1");
 
         String remessaStr = remessa.render();
         assertEquals(remessaStr, "");
+    }
+
+    TagLayout layoutFebrabanTest() {
+        TagLayout flatfileLayout = flatfile(
+                /*
+                <layout>
+                <name>Arquivo-Febraban_CNAB400</name>
+                <version>Version 00</version>
+                <description>
+                Layout padrão do Febraban
+                </description>
+                </layout>
+                 */
+                layout(
+                        name("Arquivo-Febraban_CNAB400"),
+                        version("00"),
+                        description("Layout padrão do Febraban")),
+                /*
+                        <GroupOfRecords>
+                        <Record name="cabecalho" description="Protocolo de comunicação">
+                        <GroupOfFields>
+                        <IdType name="CODIGO_REGISTRO" length="1" position="1" value="0" />
+                        <Field name="CODIGO_RETORNO" length="1" />
+                        <Field name="AGENCIA" length="4" type="INTEGER" padding="ZERO_LEFT" />
+                        <Field name="DATA_ARQUIVO" length="6" type="DATE" format="DATE_DDMMYY" />
+                 */
+                cabecalho(
+                        field("codigoRegistro").length(1).position(1).value(0),
+                        field("codigoRetorno").length(1),
+                        field("agencia").length(4).type("integer").padding("zero_left"),
+                        field("conta").length(7),
+                        field("dataGeracao").length(6).type("date").format(new SimpleDateFormat("DDMMYY"))
+                ),
+                titulo(
+                        field("codigoRegistro").length(1).position(1).value(7)
+                ),
+                /*
+                        <Record name="TRAILLER">
+                        <GroupOfFields>
+                        <IdType name="CODIGO_REGISTRO" length="1" position="1"  value="9"/>
+                        <Field name="CODIGO_RETORNO" length="1" />
+                        <Field name="Filler" length="2" />
+                        <Field name="CODIGO_BANCO" length="3" />
+                        <Field name="Filler" length="10" />
+                        <Field name="QUANTIDADE_TITULOS" length="8" type="BIGDECIMAL" format="DECIMAL_DD" />
+                        <Field name="VALOR_TOTAL_TITULOS" length="15" type="BIGDECIMAL" format="DECIMAL_DD" />
+                        <Field name="Filler" length="8" />
+                        </GroupOfFields>
+                        </Record>
+                 */
+                rodape(
+                        field("codigoRegistro").length(1).position(1).value(9),
+                        field("codigoRetorno").length(1),
+                        field("filler").length(2),
+                        field("codigoBanco").length(3),
+                        field("filler").length(10),
+                        field("quantidadeTitulos").length(8).type("bigdecimal").format(new DecimalFormat("DD")),
+                        field("valorTotalTitulos").length(8).type("bigdecimal").format(new DecimalFormat("DD")),
+                        field("filler").length(8)
+                )
+        );
+        return flatfileLayout;
     }
 }

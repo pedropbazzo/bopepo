@@ -15,6 +15,7 @@
  */
 package com.github.braully.boleto;
 
+import java.text.Format;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -80,7 +81,7 @@ public class TagLayout {
 
     String nome, texto;
     final List<TagLayout> filhos;
-    final Map<String, String> atributos;
+    final Map<String, Object> atributos;
 
     TagLayout get(String strfilho) {
         TagLayout fi = null;
@@ -94,11 +95,27 @@ public class TagLayout {
     }
 
     String getAtr(String stratt) {
-        return atributos.get(stratt);
+        String ret = null;
+        Object att = atributos.get(stratt);
+        if (att != null) {
+            ret = att.toString();
+        }
+        return ret;
     }
 
     Integer getInt(String stratt) {
-        return Integer.parseInt(atributos.get(stratt));
+        Integer ret = null;
+        Object obj = atributos.get(stratt);
+        if (obj instanceof Number) {
+            if (obj instanceof Integer) {
+                ret = (Integer) obj;
+            } else {
+                ret = ((Number) obj).intValue();
+            }
+        } else {
+            ret = Integer.parseInt(obj.toString());
+        }
+        return ret;
     }
 
     Object getObj(String stratt) {
@@ -111,7 +128,7 @@ public class TagLayout {
         this.atributos = new TreeMap<>();
     }
 
-    public TagLayout atr(String nome, String valor) {
+    public TagLayout atr(String nome, Object valor) {
         atributos.put(nome, valor);
         return this;
     }
@@ -124,7 +141,7 @@ public class TagLayout {
         return setAttr(padding);
     }
 
-    public TagLayout format(String padding) {
+    public TagLayout format(Format padding) {
         return setAttr(padding);
     }
 
@@ -158,7 +175,7 @@ public class TagLayout {
         //TODO: Melhorar isso;
         String nomeMetodoAnterior = Thread.currentThread().getStackTrace()[2].getMethodName();
         /* Propriedade a ser setada é o nome do metodo que chamou */
-        this.atr(nomeMetodoAnterior, valor.toString());
+        this.atr(nomeMetodoAnterior, valor);
         return this;
     }
 }
