@@ -28,8 +28,8 @@ import org.jrimum.domkee.banco.Sacado;
 import org.jrimum.domkee.banco.Titulo;
 import org.jrimum.domkee.pessoa.CNPJ;
 import org.jrimum.domkee.pessoa.CPF;
+import org.jrimum.texgit.Filler;
 import org.jrimum.utilix.DateUtil;
-import org.jrimum.utilix.Filler;
 
 /**
  *

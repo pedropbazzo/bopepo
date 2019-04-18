@@ -32,8 +32,8 @@ package org.jrimum.vallia;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
+import org.jrimum.texgit.Filler;
 
-import org.jrimum.utilix.Filler;
 
 /**
  * <p>
