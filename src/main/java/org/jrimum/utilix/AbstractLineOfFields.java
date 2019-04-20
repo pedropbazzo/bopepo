@@ -26,8 +26,6 @@
  * Criado em: 30/03/2008 - 18:17:32
  * 
  */
-
-
 package org.jrimum.utilix;
 
 import static org.jrimum.utilix.ObjectUtil.isNotNull;
@@ -40,419 +38,359 @@ import java.util.ListIterator;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
-
+import org.jrimum.texgit.Field;
+import org.jrimum.texgit.TextStream;
 
 /**
- * 
+ *
  * Descrição:
- * 
- * 
+ *
+ *
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
  * @author Misael Barreto
  * @author Rômulo Augusto
  * @author <a href="http://www.nordeste-fomento.com.br">Nordeste Fomento
- *         Mercantil</a>
- * 
+ * Mercantil</a>
+ *
  * @since 0.2
- * 
  * @version 0.2
  */
 public abstract class AbstractLineOfFields implements TextStream, List<Field<?>> {
-	
-	//TODO implementar isConsistent para os methods do tipo List em função de fieldsLength e stringLength.
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 9071816265288953266L;
-	
-	private static Logger log = Logger.getLogger(AbstractLineOfFields.class);
 
-	/**
-	 * 
-	 */
-	private Integer fieldsLength;
-	
-	/**
-	 * 
-	 */
-	private Integer stringLength;
-	
-	/**
-	 * 
-	 */
-	private List<Field<?>> fields;
-	
+    //TODO implementar isConsistent para os methods do tipo List em função de fieldsLength e stringLength.
+    /**
+     *
+     */
+    private static final long serialVersionUID = 9071816265288953266L;
 
-	/**
-	 * @param fieldsLength
-	 * @param stringLength
-	 */
-	protected AbstractLineOfFields(){
-		fields = new ArrayList<Field<?>>();
-	}
-	
-	
-	public AbstractLineOfFields(Integer fieldsLength, Integer stringLength) {
-		
-		if(log.isTraceEnabled())
-			log.trace("Initializing");
-		
-		if(log.isDebugEnabled()){
-			log.debug("Parameters fieldsLength: "+fieldsLength);
-			log.debug("Parameters stringLength: "+stringLength);
-		}
-		
-		if(isNotNull(fieldsLength, "fieldsLength") && isNotNull(stringLength, "stringLength")){
-			
-			if(fieldsLength > 0){
-				if(stringLength > 0){
-					
-					fields = new ArrayList<Field<?>>(fieldsLength);
-					
-					this.fieldsLength = fieldsLength;
-					this.stringLength = stringLength;
-					
-				}else{
-					
-					IllegalArgumentException e = new IllegalArgumentException("O tamanho da String [ " + stringLength + " ] deve ser maior que 0!");
-					
-					log.error(StringUtils.EMPTY, e);
-					
-					throw e;
-				}
-			}else{
-			
-				IllegalArgumentException e = new IllegalArgumentException("O tamanho dos campos [ " + fieldsLength + " ] deve ser maior que 0!");
-				
-				log.error(StringUtils.EMPTY, e);
-				
-				throw e;
-			}
-				
-			
-		}
-		
-		if(log.isTraceEnabled())
-			log.trace("LineOfFields Initialized.");
-		
-		if(log.isDebugEnabled()){
-			log.debug("Instance fieldsLength: "+fieldsLength);
-			log.debug("Instance stringLength: "+stringLength);
-		}
-		
-	}
-	
-	/**
-	 * @param lineOfFields
-	 */
-	public void read(String lineOfFields){
-		
-		if(isNotNull(lineOfFields, "lineOfFields")){
-			
-			isConsistent(lineOfFields);
-			
-			StringBuilder builder = new StringBuilder(lineOfFields);
-			
-			for(Field<?> field : fields){
-				
-				field.read(builder.substring(0, field.getLength()));
-				builder.delete(0, field.getLength());
-			}
-			
-			builder = null;
-		}
-	}
+    private static Logger log = Logger.getLogger(AbstractLineOfFields.class);
 
-	public String write(){
-		
-		StringBuilder lineOfFields = new StringBuilder(StringUtils.EMPTY);
-		
-		if(isNotNull(fields,"fields")){
-			
-			for(Field<?> field : fields)
-				lineOfFields.append(field.write());
-			
-			isConsistent(lineOfFields);
-		
-		}
-		
-		return lineOfFields.toString();
-	}
-	
-	protected final boolean isConsistent(StringBuilder lineOfFields){
-		boolean is = false;
-		
-		if(isConsistent(lineOfFields.toString())){
-			if(fieldsLength == size()){
-				is = true;
-			}else{
-				IllegalStateException e = new IllegalStateException("O tamanho dos campos [ " + size() + " ] é incompatível com o especificado ["+fieldsLength+"]!");
-				
-				log.error(StringUtils.EMPTY, e);
-				
-				throw e;
-			}
-		}
-		return is;
-	}
-	
-	protected final boolean isConsistent(String lineOfFields){
-		boolean is = false;
-		
-		if(lineOfFields.length() == stringLength){
-				is = true;
-		}else{
-			IllegalStateException e = new IllegalStateException("O tamanho da String de campos [ " + lineOfFields.length() + " ] é incompatível com o especificado ["+stringLength+"]!");
-			
-			log.error(StringUtils.EMPTY, e);
-			
-			throw e;
-		}
-		return is;
-	}
-	
-	/**
-	 * @return length of line as string.
-	 */
-	public int stringSize(){
-		
-		return write().length();
-	}
-	
-	/**
-	 * @return the fieldsLength
-	 */
-	public Integer getFieldsLength() {
-		return fieldsLength;
-	}
+    /**
+     *
+     */
+    private Integer fieldsLength;
 
-	/**
-	 * @param fieldsLength the fieldsLength to set
-	 */
-	public void setFieldsLength(Integer fieldsLength) {
-		this.fieldsLength = fieldsLength;
-	}
+    /**
+     *
+     */
+    private Integer stringLength;
 
-	/**
-	 * @return the stringLength
-	 */
-	public Integer getStringLength() {
-		return stringLength;
-	}
+    /**
+     *
+     */
+    private List<Field<?>> fields;
 
-	/**
-	 * @param stringLength the stringLength to set
-	 */
-	public void setStringLength(Integer stringLength) {
-		this.stringLength = stringLength;
-	}
+    /**
+     * @param fieldsLength
+     * @param stringLength
+     */
+    protected AbstractLineOfFields() {
+        fields = new ArrayList<Field<?>>();
+    }
 
-	/**
-	 * @see java.util.List#add(java.lang.Object)
-	 */
+    public AbstractLineOfFields(Integer fieldsLength, Integer stringLength) {
+        if (log.isTraceEnabled()) {
+            log.trace("Initializing");
+        }
+        if (log.isDebugEnabled()) {
+            log.debug("Parameters fieldsLength: " + fieldsLength);
+            log.debug("Parameters stringLength: " + stringLength);
+        }
+        if (isNotNull(fieldsLength, "fieldsLength") && isNotNull(stringLength, "stringLength")) {
 
-	public boolean add(Field<?> e) {
-		
-		return fields.add(e);
-	}
+            if (fieldsLength > 0) {
+                if (stringLength > 0) {
+                    fields = new ArrayList<Field<?>>(fieldsLength);
+                    this.fieldsLength = fieldsLength;
+                    this.stringLength = stringLength;
+                } else {
+                    IllegalArgumentException e = new IllegalArgumentException("O tamanho da String [ " + stringLength + " ] deve ser maior que 0!");
+                    log.error(StringUtils.EMPTY, e);
+                    throw e;
+                }
+            } else {
+                IllegalArgumentException e = new IllegalArgumentException("O tamanho dos campos [ " + fieldsLength + " ] deve ser maior que 0!");
+                log.error(StringUtils.EMPTY, e);
+                throw e;
+            }
+        }
 
-	/**
-	 * @see java.util.List#add(int, java.lang.Object)
-	 */
+        if (log.isTraceEnabled()) {
+            log.trace("LineOfFields Initialized.");
+        }
 
-	public void add(int index, Field<?> element) {
-		
-		fields.add(index, element);
-	}
+        if (log.isDebugEnabled()) {
+            log.debug("Instance fieldsLength: " + fieldsLength);
+            log.debug("Instance stringLength: " + stringLength);
+        }
+    }
 
-	/**
-	 * @see java.util.List#addAll(java.util.Collection)
-	 */
+    /**
+     * @param lineOfFields
+     */
+    public void read(String lineOfFields) {
 
-	public boolean addAll(Collection<? extends Field<?>> c) {
-		
-		return fields.addAll(c);
-	}
+        if (isNotNull(lineOfFields, "lineOfFields")) {
 
-	/**
-	 * @see java.util.List#addAll(int, java.util.Collection)
-	 */
+            isConsistent(lineOfFields);
 
-	public boolean addAll(int index, Collection<? extends Field<?>> c) {
-		
-		return fields.addAll(index, c);
-	}
+            StringBuilder builder = new StringBuilder(lineOfFields);
 
-	/**
-	 * @see java.util.List#clear()
-	 */
+            for (Field<?> field : fields) {
 
-	public void clear() {
-		
-		fields.clear();
-	}
+                field.read(builder.substring(0, field.getLength()));
+                builder.delete(0, field.getLength());
+            }
 
-	/**
-	 * @see java.util.List#contains(java.lang.Object)
-	 */
+            builder = null;
+        }
+    }
 
-	public boolean contains(Object o) {
-		
-		return fields.contains(o);
-	}
+    public String write() {
+        StringBuilder lineOfFields = new StringBuilder(StringUtils.EMPTY);
+        if (isNotNull(fields, "fields")) {
+            for (Field<?> field : fields) {
+                lineOfFields.append(field.write());
+            }
+            isConsistent(lineOfFields);
+        }
+        return lineOfFields.toString();
+    }
 
-	/**
-	 * @see java.util.List#containsAll(java.util.Collection)
-	 */
+    protected final boolean isConsistent(StringBuilder lineOfFields) {
+        boolean is = false;
+        if (isConsistent(lineOfFields.toString())) {
+            if (fieldsLength == size()) {
+                is = true;
+            } else {
+                IllegalStateException e = new IllegalStateException("O tamanho dos campos [ " + size() + " ] é incompatível com o especificado [" + fieldsLength + "]!");
+                log.error(StringUtils.EMPTY, e);
+                throw e;
+            }
+        }
+        return is;
+    }
 
-	public boolean containsAll(Collection<?> c) {
-		
-		return fields.containsAll(c);
-	}
+    protected final boolean isConsistent(String lineOfFields) {
+        boolean is = false;
+        if (lineOfFields.length() == stringLength) {
+            is = true;
+        } else {
+            IllegalStateException e = new IllegalStateException("O tamanho da String de campos [ " + lineOfFields.length() + " ] é incompatível com o especificado [" + stringLength + "]!");
+            log.error(StringUtils.EMPTY, e);
+            throw e;
+        }
+        return is;
+    }
 
-	/**
-	 * @see java.util.List#get(int)
-	 */
+    /**
+     * @return length of line as string.
+     */
+    public int stringSize() {
+        return write().length();
+    }
 
-	public Field<?> get(int index) {
-		
-		return fields.get(index);
-	}
+    /**
+     * @return the fieldsLength
+     */
+    public Integer getFieldsLength() {
+        return fieldsLength;
+    }
 
-	/**
-	 * @see java.util.List#indexOf(java.lang.Object)
-	 */
+    /**
+     * @param fieldsLength the fieldsLength to set
+     */
+    public void setFieldsLength(Integer fieldsLength) {
+        this.fieldsLength = fieldsLength;
+    }
 
-	public int indexOf(Object o) {
-		
-		return fields.indexOf(o);
-	}
+    /**
+     * @return the stringLength
+     */
+    public Integer getStringLength() {
+        return stringLength;
+    }
 
-	/**
-	 * @see java.util.List#isEmpty()
-	 */
+    /**
+     * @param stringLength the stringLength to set
+     */
+    public void setStringLength(Integer stringLength) {
+        this.stringLength = stringLength;
+    }
 
-	public boolean isEmpty() {
-		
-		return fields.isEmpty();
-	}
+    /**
+     * @see java.util.List#add(java.lang.Object)
+     */
+    public boolean add(Field<?> e) {
 
-	/**
-	 * @see java.util.List#iterator()
-	 */
+        return fields.add(e);
+    }
 
-	public Iterator<Field<?>> iterator() {
-		
-		return fields.iterator();
-	}
+    /**
+     * @see java.util.List#add(int, java.lang.Object)
+     */
+    public void add(int index, Field<?> element) {
+        fields.add(index, element);
+    }
 
-	/**
-	 * @see java.util.List#lastIndexOf(java.lang.Object)
-	 */
+    /**
+     * @see java.util.List#addAll(java.util.Collection)
+     */
+    public boolean addAll(Collection<? extends Field<?>> c) {
+        return fields.addAll(c);
+    }
 
-	public int lastIndexOf(Object o) {
-		
-		return fields.indexOf(o);
-	}
+    /**
+     * @see java.util.List#addAll(int, java.util.Collection)
+     */
+    public boolean addAll(int index, Collection<? extends Field<?>> c) {
+        return fields.addAll(index, c);
+    }
 
-	/**
-	 * @see java.util.List#listIterator()
-	 */
+    /**
+     * @see java.util.List#clear()
+     */
+    public void clear() {
+        fields.clear();
+    }
 
-	public ListIterator<Field<?>> listIterator() {
-		
-		return fields.listIterator();
-	}
+    /**
+     * @see java.util.List#contains(java.lang.Object)
+     */
+    public boolean contains(Object o) {
+        return fields.contains(o);
+    }
 
-	/**
-	 * @see java.util.List#listIterator(int)
-	 */
+    /**
+     * @see java.util.List#containsAll(java.util.Collection)
+     */
+    public boolean containsAll(Collection<?> c) {
+        return fields.containsAll(c);
+    }
 
-	public ListIterator<Field<?>> listIterator(int index) {
-		
-		return fields.listIterator(index);
-	}
+    /**
+     * @see java.util.List#get(int)
+     */
+    public Field<?> get(int index) {
+        return fields.get(index);
+    }
 
-	/**
-	 * @see java.util.List#remove(int)
-	 */
+    /**
+     * @see java.util.List#indexOf(java.lang.Object)
+     */
+    public int indexOf(Object o) {
+        return fields.indexOf(o);
+    }
 
-	public Field<?> remove(int index) {
-		
-		return fields.remove(index);
-	}
+    /**
+     * @see java.util.List#isEmpty()
+     */
+    public boolean isEmpty() {
+        return fields.isEmpty();
+    }
 
-	/**
-	 * @see java.util.List#remove(java.lang.Object)
-	 */
+    /**
+     * @see java.util.List#iterator()
+     */
+    public Iterator<Field<?>> iterator() {
 
-	public boolean remove(Object o) {
-		
-		return fields.remove(o);
-	}
+        return fields.iterator();
+    }
 
-	/**
-	 * @see java.util.List#removeAll(java.util.Collection)
-	 */
+    /**
+     * @see java.util.List#lastIndexOf(java.lang.Object)
+     */
+    public int lastIndexOf(Object o) {
 
-	public boolean removeAll(Collection<?> c) {
-		
-		return fields.removeAll(c);
-	}
+        return fields.indexOf(o);
+    }
 
-	/**
-	 * @see java.util.List#retainAll(java.util.Collection)
-	 */
+    /**
+     * @see java.util.List#listIterator()
+     */
+    public ListIterator<Field<?>> listIterator() {
 
-	public boolean retainAll(Collection<?> c) {
-		
-		return fields.retainAll(c);
-	}
+        return fields.listIterator();
+    }
 
-	/**
-	 * @see java.util.List#set(int, java.lang.Object)
-	 */
+    /**
+     * @see java.util.List#listIterator(int)
+     */
+    public ListIterator<Field<?>> listIterator(int index) {
 
-	public Field<?> set(int index, Field<?> element) {
-		
-		return fields.set(index, element);
-	}
+        return fields.listIterator(index);
+    }
 
-	/**
-	 * @see java.util.List#size()
-	 */
+    /**
+     * @see java.util.List#remove(int)
+     */
+    public Field<?> remove(int index) {
 
-	public int size() {
-		
-		return fields.size();
-	}
+        return fields.remove(index);
+    }
 
-	/**
-	 * @see java.util.List#subList(int, int)
-	 */
+    /**
+     * @see java.util.List#remove(java.lang.Object)
+     */
+    public boolean remove(Object o) {
 
-	public List<Field<?>> subList(int fromIndex, int toIndex) {
-		
-		return fields.subList(fromIndex, toIndex);
-	}
+        return fields.remove(o);
+    }
 
-	/**
-	 * @see java.util.List#toArray()
-	 */
+    /**
+     * @see java.util.List#removeAll(java.util.Collection)
+     */
+    public boolean removeAll(Collection<?> c) {
 
-	public Object[] toArray() {
-		
-		return fields.toArray();
-	}
+        return fields.removeAll(c);
+    }
 
-	/**
-	 * @see java.util.List#toArray(Object[])
-	 */
+    /**
+     * @see java.util.List#retainAll(java.util.Collection)
+     */
+    public boolean retainAll(Collection<?> c) {
 
-	public <T> T[] toArray(T[] a) {
-		
-		return fields.toArray(a);
-	}
+        return fields.retainAll(c);
+    }
+
+    /**
+     * @see java.util.List#set(int, java.lang.Object)
+     */
+    public Field<?> set(int index, Field<?> element) {
+
+        return fields.set(index, element);
+    }
+
+    /**
+     * @see java.util.List#size()
+     */
+    public int size() {
+
+        return fields.size();
+    }
+
+    /**
+     * @see java.util.List#subList(int, int)
+     */
+    public List<Field<?>> subList(int fromIndex, int toIndex) {
+
+        return fields.subList(fromIndex, toIndex);
+    }
+
+    /**
+     * @see java.util.List#toArray()
+     */
+    public Object[] toArray() {
+
+        return fields.toArray();
+    }
+
+    /**
+     * @see java.util.List#toArray(Object[])
+     */
+    public <T> T[] toArray(T[] a) {
+
+        return fields.toArray(a);
+    }
 
 }

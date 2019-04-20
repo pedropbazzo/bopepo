@@ -29,7 +29,6 @@
 package org.jrimum.texgit;
 
 import static java.lang.String.format;
-import static org.jrimum.utilix.Objects.isNotNull;
 
 import java.lang.reflect.Constructor;
 import java.math.BigDecimal;
@@ -42,7 +41,9 @@ import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNumeric;
 import org.jrimum.utilix.Dates;
+import static org.jrimum.utilix.ObjectUtil.isNotNull;
 import org.jrimum.utilix.Objects;
+import org.jrimum.utilix.StringUtil;
 
 /**
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
@@ -50,7 +51,7 @@ import org.jrimum.utilix.Objects;
  * @param <G>
  */
 @SuppressWarnings("serial")
-public class Field<G> implements org.jrimum.texgit.IField<G> {
+public class Field<G> implements org.jrimum.texgit.IField<G>, TextStream  {
 
     /**
      * <p>
@@ -58,6 +59,11 @@ public class Field<G> implements org.jrimum.texgit.IField<G> {
      * </p>
      */
     private String name;
+
+    /**
+     *
+     */
+    private Integer length;
 
     /**
      * <p>
@@ -72,6 +78,11 @@ public class Field<G> implements org.jrimum.texgit.IField<G> {
      * </p>
      */
     private Format formatter;
+
+    /**
+     * Preenchedor do value utilizado na hora da escrita.
+     */
+    private Filler<?> filler;
 
     /**
      * <p>
@@ -106,7 +117,6 @@ public class Field<G> implements org.jrimum.texgit.IField<G> {
      * @param formatter
      */
     public Field(G value, Format formatter) {
-
         setValue(value);
         setFormatter(formatter);
     }
@@ -148,46 +158,34 @@ public class Field<G> implements org.jrimum.texgit.IField<G> {
     }
 
     public void read(String str) {
-
         Objects.checkNotNull(str, "String inválida [null]!");
+        if (str.length() != length) {
+            throw new IllegalArgumentException("O tamanho da String [ "
+                    + str + " ] é incompatível com o especificado [ " + length + " ]!");
+        }
 
         try {
-
             if (this.value instanceof TextStream) {
-
                 TextStream reader = (TextStream) this.value;
                 reader.read(str);
-
             } else if (this.value instanceof BigDecimal) {
-
                 readDecimalField(str);
-
             } else if (this.value instanceof Date) {
-
                 readDateField(str);
-
             } else if (this.value instanceof Character) {
-
                 readCharacter(str);
-
             } else {
-
                 readStringOrNumericField(str);
             }
-
         } catch (Exception e) {
-
             throw new IllegalStateException(format("Falha na leitura do campo! %s", toString()), e);
         }
     }
 
     @SuppressWarnings("unchecked")
     private void readCharacter(String str) {
-
         if (str.length() == 1) {
-
             value = (G) new Character(str.charAt(0));
-
         } else {
             throw new IllegalArgumentException("String com mais de 1 character!");
         }
@@ -195,61 +193,39 @@ public class Field<G> implements org.jrimum.texgit.IField<G> {
 
     @SuppressWarnings("unchecked")
     private void readDecimalField(String str) {
-
         DecimalFormat decimalFormat = (DecimalFormat) formatter;
-
         try {
-
             String number = parseNumber(str);
-
             Long parsedValue = (Long) formatter.parseObject(number);
-
             BigDecimal decimalValue = new BigDecimal(parsedValue.longValue());
-
             decimalValue = decimalValue.movePointLeft(decimalFormat.getMaximumFractionDigits());
-
             value = (G) decimalValue;
-
         } catch (ParseException e) {
-
             throwReadError(e, str);
         }
     }
 
     @SuppressWarnings("unchecked")
     private void readDateField(String str) {
-
         try {
-
             if (isBlank(str)) {
-
                 if (isBlankAccepted()) {
-
                     value = (G) Dates.invalidDate();
-
                 } else {
-
                     new IllegalArgumentException(format("Campo data vazio não permitido: [%s]!", str));
                 }
-
             } else {
-
                 value = (G) formatter.parseObject(str);
             }
-
         } catch (ParseException e) {
-
             throwReadError(e, str);
         }
     }
 
     @SuppressWarnings("unchecked")
     private void readStringOrNumericField(String str) {
-
         str = parseNumber(str);
-
         Class<?> clazz = value.getClass();
-
         if (clazz.equals(String.class)) {
             value = (G) str;
         } else {
@@ -259,18 +235,12 @@ public class Field<G> implements org.jrimum.texgit.IField<G> {
 
     @SuppressWarnings("unchecked")
     private void readNumeric(Class<?> clazz, String str) {
-
         for (Constructor<?> cons : clazz.getConstructors()) {
-
             if (cons.getParameterTypes().length == 1) {
-
                 if (cons.getParameterTypes()[0].equals(String.class)) {
                     try {
-
                         value = (G) cons.newInstance(str);
-
                     } catch (Exception e) {
-
                         throwReadError(e, str);
                     }
                 }
@@ -278,58 +248,52 @@ public class Field<G> implements org.jrimum.texgit.IField<G> {
         }
     }
 
+    private String fill(String str) {
+        if (length != null && isNotNull(filler)) {
+            str = filler.fill(str, length);
+        }
+        return str;
+    }
+
     public String write() {
-
         try {
-
             String str = null;
-
             if (value instanceof TextStream) {
-
                 TextStream its = (TextStream) value;
-
                 str = its.write();
-
             } else if (value instanceof Date) {
-
                 str = writeDateField();
             } else if (value instanceof BigDecimal) {
                 str = writeDecimalField();
             } else {
                 str = value.toString();
             }
-
-            return str;
-
+            str = fill(str);
+            if (length != null && str.length() != length) {
+                throw new IllegalArgumentException("O campo [ " + str
+                        + " ] é incompatível com o especificado [" + length + "]!");
+            }
+            return StringUtil.eliminateAccent(str).toUpperCase();
         } catch (Exception e) {
-
             throw new IllegalStateException(format("Falha na escrita do campo escrita! %s", toString()), e);
         }
     }
 
     private String writeDecimalField() {
-
         BigDecimal decimalValue = (BigDecimal) value;
-
         decimalValue = decimalValue.movePointRight(((DecimalFormat) formatter).getMaximumFractionDigits());
-
         return decimalValue.toString();
     }
 
     private String writeDateField() {
-
         if (!Dates.equalsInvalidDate((Date) value)) {
-
             return formatter.format(value);
         }
-
         return EMPTY;
     }
 
     private String parseNumber(String str) {
-
         if (isBlank(str)) {
-
             if (isBlankAccepted()) {
                 str = "0";
             } else {
@@ -338,7 +302,6 @@ public class Field<G> implements org.jrimum.texgit.IField<G> {
         } else if (!isNumeric(str)) {
             new IllegalArgumentException(format("O campo deve ser numérico e não: [%s]!", str));
         }
-
         return str;
     }
 
@@ -376,6 +339,21 @@ public class Field<G> implements org.jrimum.texgit.IField<G> {
         }
     }
 
+    public Integer getLength() {
+        return length;
+    }
+
+    public void setLength(Integer length) {
+
+        if (length > 0) {
+            this.length = length;
+
+        } else {
+            throw new IllegalArgumentException("Tamanho inválido [ " + length + " ]!");
+        }
+
+    }
+
     public Format getFormatter() {
         return formatter;
     }
@@ -386,6 +364,20 @@ public class Field<G> implements org.jrimum.texgit.IField<G> {
             this.formatter = formatter;
         } else {
             throw new IllegalArgumentException(format("Formato inválido: [%s]!", formatter));
+        }
+    }
+
+    public Filler<?> getFiller() {
+        return filler;
+    }
+
+    public void setFiller(Filler<?> filler) {
+
+        if (isNotNull(filler)) {
+            this.filler = filler;
+
+        } else {
+            throw new IllegalArgumentException("Filler inválido [ " + filler + " ]!");
         }
     }
 
