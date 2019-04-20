@@ -26,7 +26,6 @@
  * Criado em: 30/03/2008 - 18:09:58
  * 
  */
-
 package org.jrimum.bopepo.campolivre;
 
 import static org.apache.commons.lang3.StringUtils.EMPTY;
@@ -40,95 +39,96 @@ import org.jrimum.texgit.FixedField;
 import org.jrimum.utilix.Objects;
 import org.jrimum.utilix.Strings;
 
-
 /**
  * <p>
  * Esta classe tem como finalidade encapsular toda a lógica de criação de um
  * campo livre e de fornecer para o pacote
- * <code>org.jrimum.bopepo.campolivre</code> 
- * um único ponto de acesso ao mesmo.
+ * <code>org.jrimum.bopepo.campolivre</code> um único ponto de acesso ao mesmo.
  * </p>
- * 
- * 
+ *
+ *
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
- * @author <a href="mailto:misaelbarreto@gmail.com">Misael Barreto</a> 
+ * @author <a href="mailto:misaelbarreto@gmail.com">Misael Barreto</a>
  * @author <a href="mailto:romulomail@gmail.com">Rômulo Augusto</a>
- * @author <a href="http://www.nordestefomento.com.br">Nordeste Fomento Mercantil</a>
- * 
+ * @author <a href="http://www.nordestefomento.com.br">Nordeste Fomento
+ * Mercantil</a>
+ *
  * @since 0.2
- * 
+ *
  * @version 0.2
  */
 public final class CampoLivreFactory {
 
-	/**
-	 * <p>
-	 * Devolve um <code>CampoLivre</code> de acordo com o Banco contido na conta bancária do título.
-	 * </p> 
-	 * <p>
-	 * Caso exista implementação para o banco o retorno terá uma referência não nula.
-	 * </p>
-	 * 
-	 * @param titulo
-	 * 
-	 * @return Uma referência para um CampoLivre.
-	 * @throws NotSupportedBancoException 
-	 * @throws NotSupportedCampoLivreException 
-	 */
-	public static CampoLivre create(Titulo titulo) throws NotSupportedBancoException, NotSupportedCampoLivreException {
+    /**
+     * <p>
+     * Devolve um <code>CampoLivre</code> de acordo com o Banco contido na conta
+     * bancária do título.
+     * </p>
+     * <p>
+     * Caso exista implementação para o banco o retorno terá uma referência não
+     * nula.
+     * </p>
+     *
+     * @param titulo
+     *
+     * @return Uma referência para um CampoLivre.
+     * @throws NotSupportedBancoException
+     * @throws NotSupportedCampoLivreException
+     */
+    public static CampoLivre create(Titulo titulo) throws NotSupportedBancoException, NotSupportedCampoLivreException {
 
-		return AbstractCampoLivre.create(titulo);
-	}
-	
-	/**
-	 * Devolve um CampoLivre a partir de uma String.
-	 * 
-	 * @param strCampoLivre
-	 * 
-	 * @return Referência para uma instância anônima de CampoLivre.
-	 * 
-	 * @throws NullPointerException
-	 * @throws IllegalArgumentException
-	 */
-	public static CampoLivre create(String strCampoLivre) {
-		Objects.checkNotNull(strCampoLivre);
-		
-		strCampoLivre = strip(strCampoLivre);
-		
-		Strings.checkNotBlank(strCampoLivre, "O Campo Livre não deve ser vazio!");
-		 
-		Objects.checkArgument(strCampoLivre.length() == CampoLivre.STRING_LENGTH, "O tamanho do Campo Livre [ " + strCampoLivre + " ] deve ser igual a 25 e não ["+strCampoLivre.length()+"]!");
-		Objects.checkArgument(!containsAny(strCampoLivre, " "), "O Campo Livre [ " + strCampoLivre + " ] não deve conter espaços em branco!");
-		Objects.checkArgument(isNumeric(strCampoLivre),"O Campo Livre [ " + strCampoLivre + " ] deve ser uma String numérica!");
+        return AbstractCampoLivre.create(titulo);
+    }
 
-		return valueOf(strCampoLivre);
-	}
+    /**
+     * Devolve um CampoLivre a partir de uma String.
+     *
+     * @param strCampoLivre
+     *
+     * @return Referência para uma instância anônima de CampoLivre.
+     *
+     * @throws NullPointerException
+     * @throws IllegalArgumentException
+     */
+    public static CampoLivre create(String strCampoLivre) {
+        Objects.checkNotNull(strCampoLivre);
 
-	private static CampoLivre valueOf(String strCampoLivre) {
-		 CampoLivre campoLivre = new CampoLivre() {
-			private static final long serialVersionUID = -7592488081807235080L;
+        strCampoLivre = strip(strCampoLivre);
 
-			FixedField<String> campo = new FixedField<String>(EMPTY,
-					STRING_LENGTH, Fillers.ZERO_LEFT);
+        Strings.checkNotBlank(strCampoLivre, "O Campo Livre não deve ser vazio!");
 
-			public void read(String str) {
-				campo.read(str);
-			}
+        Objects.checkArgument(strCampoLivre.length() == CampoLivre.STRING_LENGTH, "O tamanho do Campo Livre [ " + strCampoLivre + " ] deve ser igual a 25 e não [" + strCampoLivre.length() + "]!");
+        Objects.checkArgument(!containsAny(strCampoLivre, " "), "O Campo Livre [ " + strCampoLivre + " ] não deve conter espaços em branco!");
+        Objects.checkArgument(isNumeric(strCampoLivre), "O Campo Livre [ " + strCampoLivre + " ] deve ser uma String numérica!");
 
-			public String write() {
-				return campo.write();
-			}
-		};
-		campoLivre.read(strCampoLivre);
-		return campoLivre;
-	}
+        return valueOf(strCampoLivre);
+    }
 
-	/**
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return Objects.toString(this);
-	}
-	
+    private static CampoLivre valueOf(String strCampoLivre) {
+        CampoLivre campoLivre = new CampoLivre() {
+            private static final long serialVersionUID = -7592488081807235080L;
+
+            FixedField<String> campo = new FixedField<String>(EMPTY,
+                    STRING_LENGTH, Fillers.ZERO_LEFT);
+
+            public void read(String str) {
+                campo.read(str);
+            }
+
+            public String write() {
+                return campo.write();
+            }
+        };
+        campoLivre.read(strCampoLivre);
+        return campoLivre;
+    }
+
+    /**
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return Objects.toString(this);
+    }
+
 }
