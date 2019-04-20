@@ -16,7 +16,6 @@
 package com.github.braully.boleto;
 
 import static com.github.braully.boleto.TagLayout.TagCreator.*;
-import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -45,9 +44,14 @@ public class TestRemessaFacade {
                 .sacadoEndereco("Rua 1, Numero 1, Cidade Z")
                 .instrucao("Senhor caixa não receber nunca");
 
-        remessa.addNovoRodape().setValue("codigoRetorno", "1");
+        remessa.addNovoRodape()
+                .banco("1")
+                .quantidadeTitulos(1)
+                .valorTotalTitulos(1)
+                .setValue("codigoRetorno", "1");
 
         String remessaStr = remessa.render();
+        System.err.println(remessaStr);
         assertEquals(remessaStr, "");
     }
 
@@ -103,11 +107,11 @@ public class TestRemessaFacade {
                         field("codigoRegistro").length(1).position(1).value(9),
                         field("codigoRetorno").length(1),
                         field("").filler(Fillers.ZERO_LEFT).length(2),
-                        field("codigoBanco").length(3),
-                        field("filler").length(10),
-                        field("quantidadeTitulos").length(8).type(BigDecimal.class).format(new DecimalFormat("DD")),
-                        field("valorTotalTitulos").length(8).type(BigDecimal.class).format(new DecimalFormat("DD")),
-                        field("filler").length(8)
+                        field("banco").filler(Fillers.ZERO_LEFT).length(3),
+                        field("").filler(Fillers.ZERO_LEFT).length(10),
+                        field("quantidadeTitulos").length(8).type(Number.class).format(new DecimalFormat("00000000")),
+                        field("valorTotalTitulos").length(8).type(Number.class).format(new DecimalFormat("00000000")),
+                        field("").filler(Fillers.ZERO_LEFT).length(8)
                 )
         );
         return flatfileLayout;

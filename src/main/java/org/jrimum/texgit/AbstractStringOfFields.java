@@ -124,11 +124,10 @@ public abstract class AbstractStringOfFields<G extends IField<?>> implements Tex
                 lineOfFields.append(field.write());
             } catch (Exception e) {
                 e.printStackTrace();
-                throw new IllegalStateException(
-                        format(
-                                "Erro ao tentar escrever o campo \"%s\" com valor [%s] na posição [%s] no layout do registro.",
-                                field.getName(), field.getValue(), fields
-                                .indexOf(field) + 1), e);
+                throw new IllegalStateException(format(
+                        "Erro ao tentar escrever o campo \"%s\" com valor [%s] na posição [%s] no layout do registro.",
+                        field.getName(), field.getValue(), fields
+                        .indexOf(field) + 1), e);
             }
         }
         return lineOfFields.toString();

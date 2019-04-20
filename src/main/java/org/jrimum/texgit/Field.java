@@ -51,7 +51,7 @@ import org.jrimum.utilix.StringUtil;
  * @param <G>
  */
 @SuppressWarnings("serial")
-public class Field<G> implements org.jrimum.texgit.IField<G>, TextStream  {
+public class Field<G> implements org.jrimum.texgit.IField<G>, TextStream {
 
     /**
      * <p>
@@ -263,7 +263,7 @@ public class Field<G> implements org.jrimum.texgit.IField<G>, TextStream  {
                 str = its.write();
             } else if (value instanceof Date) {
                 str = writeDateField();
-            } else if (value instanceof BigDecimal) {
+            } else if (value instanceof Number) {
                 str = writeDecimalField();
             } else {
                 str = value.toString();
@@ -280,9 +280,16 @@ public class Field<G> implements org.jrimum.texgit.IField<G>, TextStream  {
     }
 
     private String writeDecimalField() {
-        BigDecimal decimalValue = (BigDecimal) value;
-        decimalValue = decimalValue.movePointRight(((DecimalFormat) formatter).getMaximumFractionDigits());
-        return decimalValue.toString();
+        String ret = "" + value;
+
+        if (value instanceof BigDecimal) {
+            BigDecimal decimalValue = (BigDecimal) value;
+            decimalValue = decimalValue.movePointRight(((DecimalFormat) formatter).getMaximumFractionDigits());
+            ret = decimalValue.toString();
+        } else if (value instanceof Number && formatter != null) {
+            ret = formatter.format(value);
+        }
+        return ret;
     }
 
     private String writeDateField() {

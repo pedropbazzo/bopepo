@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-import org.jrimum.texgit.Fillers;
 import org.jrimum.texgit.IFiller;
 
 /**

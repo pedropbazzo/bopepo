@@ -72,13 +72,13 @@ public class FileUtil {
      */
     private static final long serialVersionUID = 1227314921804015225L;
 
-    private static final int EOF = -1;
+    public static final int EOF = -1;
 
-    private static final int CARRIAGE_RETURN = 1;
+    public static final int CARRIAGE_RETURN = 1;
 
-    private static final int NEXT_LINE = 2;
+    public static final int NEXT_LINE = 2;
 
-    private static final String NEW_LINE = "\r\n";
+    public static final String NEW_LINE = "\r\n";
 
     /**
      * Retorna o conteúdo de um arquivo em um array de bytes.
@@ -291,37 +291,24 @@ public class FileUtil {
     }
 
     public static void writeLines(File file, List<String> lines) {
-
         FileChannel fc = null;
         ByteBuffer bybff = null;
         ByteBuffer[] bybffArray = null;
         String line = null;
-
         if (isNotNull(lines) && !lines.isEmpty()) {
-
             bybffArray = new ByteBuffer[lines.size()];
-
             for (int i = 0; i < lines.size(); i++) {
-
                 line = lines.get(i);
-
                 bybff = ByteBuffer.allocate(line.length() + NEXT_LINE);
-
                 line += NEW_LINE;
-
                 bybff.put(line.getBytes());
                 bybff.rewind();
-
                 bybffArray[i] = bybff;
             }
-
             fc = getWriteFileChannel(file);
-
             try {
-
                 fc.write(bybffArray);
                 fc.close();
-
             } catch (IOException e) {
                 e.printStackTrace();
             }

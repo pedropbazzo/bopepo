@@ -23,6 +23,7 @@ import org.apache.log4j.Logger;
 import org.jrimum.texgit.FixedField;
 import org.jrimum.texgit.IFiller;
 import org.jrimum.texgit.Record;
+import org.jrimum.utilix.FileUtil;
 import org.jrimum.utilix.Objects;
 
 /**
@@ -30,80 +31,91 @@ import org.jrimum.utilix.Objects;
  * @author braully
  */
 public class RemessaFacade {
-    
+
     public static Logger logger = Logger.getLogger(RemessaFacade.class);
     /*
     
      */
     TagLayout template;
-    
+
     public RemessaFacade(TagLayout template) {
         this.template = template;
     }
-    
+
     CabecalhoRemessa addNovoCabecalho() {
         CabecalhoRemessa cabecalho = novoCabecalho();
         this.add(cabecalho);
         return cabecalho;
     }
-    
+
     CabecalhoRemessa novoCabecalho() {
         CabecalhoRemessa cabecalho = new CabecalhoRemessa(template.get("cabecalho"));
         return cabecalho;
     }
-    
+
     TituloRemessa addNovoTitulo() {
         TituloRemessa titulo = this.novoTitulo();
         this.add(titulo);
         return titulo;
     }
-    
+
     TituloRemessa novoTitulo() {
         TituloRemessa titulo = new TituloRemessa(template.get("titulo"));
         return titulo;
     }
-    
+
     RodapeRemessa addNovoRodape() {
         RodapeRemessa rodape = this.novoRodape();
         this.add(rodape);
         return rodape;
     }
-    
+
     RodapeRemessa novoRodape() {
         RodapeRemessa rodape = new RodapeRemessa(template.get("rodape"));
         return rodape;
     }
-    
+
     public RegistroRemessa novoRegistro(String tipoRegistro) {
         TagLayout layoutRegistro = template.get(tipoRegistro);
         return new RegistroRemessa(layoutRegistro);
     }
-    
-    String render() {
-        StringBuilder sb = new StringBuilder();
-        
+
+    public List<String> renderLinhas() {
+        List<String> linhas = new ArrayList<>();
         for (RegistroRemessa r : this.registros) {
-            sb.append(r.render());
+            String render = r.render();
+            linhas.add(render);
+        }
+        return linhas;
+    }
+
+    //TODO: Melhorar isso
+    public String render() {
+        StringBuilder sb = new StringBuilder();
+        List<String> linhas = this.renderLinhas();
+        for (String linha : linhas) {
+            sb.append(linha);
+            sb.append(FileUtil.NEW_LINE);
         }
         return sb.toString();
     }
-    
+
     public static class RegistroRemessa extends Record {
-        
+
         public RegistroRemessa() {
         }
-        
+
         public RegistroRemessa(TagLayout layoutRegistro) {
             this.setName(layoutRegistro.nome);
             layoutRegistro.filhos.stream().forEach(l -> add(l));
         }
-        
+
         public String render() {
 //            StringBuilder sb = new StringBuilder();
 //            return sb.toString(); 
             return this.write();
         }
-        
+
         protected RegistroRemessa setValue(Object valor) {
             //TODO: Melhorar isso;
             String nomeMetodoAnterior = Thread.currentThread().getStackTrace()[2].getMethodName();
@@ -111,7 +123,7 @@ public class RemessaFacade {
             this.setValue(nomeMetodoAnterior, valor);
             return this;
         }
-        
+
         private void add(TagLayout l) {
             FixedField fixedField = new FixedField();
             if (isValid(l.nome)) {
@@ -132,6 +144,8 @@ public class RemessaFacade {
             IFiller filler = (IFiller) l.getObj("filler");
             if (Objects.isNotNull(filler)) {
                 fixedField.setFiller(filler);
+                fixedField.setBlankAccepted(true);
+                fixedField.setValue("");
             }
             filler = (IFiller) l.getObj("padding");
             if (Objects.isNotNull(filler)) {
@@ -141,49 +155,49 @@ public class RemessaFacade {
             super.incLength(len);
             super.incSize();
         }
-        
+
         private boolean isValid(String nome) {
-            return nome != null && !nome.trim().isEmpty();
+            return nome != null;
         }
     }
-    
+
     public static class CabecalhoRemessa extends RegistroRemessa {
-        
+
         private CabecalhoRemessa(TagLayout get) {
             super(get);
         }
-        
+
         CabecalhoRemessa agencia(String string) {
             return (CabecalhoRemessa) setValue(string);
         }
-        
+
         CabecalhoRemessa conta(String string) {
             return (CabecalhoRemessa) setValue(string);
         }
-        
+
         CabecalhoRemessa numeroConvenio(String string) {
             return (CabecalhoRemessa) setValue(string);
         }
-        
+
         CabecalhoRemessa cedente(String string) {
             return (CabecalhoRemessa) setValue(string);
         }
-        
+
         CabecalhoRemessa dataGeracao(String string) {
             return (CabecalhoRemessa) setValue(string);
         }
-        
+
         CabecalhoRemessa dataGeracao(Date data) {
             return (CabecalhoRemessa) setValue(data);
         }
-        
+
         CabecalhoRemessa cedenteCnpj(String string) {
             return (CabecalhoRemessa) setValue(string);
         }
     }
-    
+
     public static class TituloRemessa extends RegistroRemessa {
-        
+
         private TituloRemessa(TagLayout get) {
             super(get);
         }
@@ -199,48 +213,60 @@ public class RemessaFacade {
         TituloRemessa valor(String string) {
             return (TituloRemessa) setValue(string);
         }
-        
+
         TituloRemessa vencimento(String string) {
             return (TituloRemessa) setValue(string);
         }
-        
+
         TituloRemessa numeroDocumento(String string) {
             return (TituloRemessa) setValue(string);
         }
-        
+
         TituloRemessa nossoNumero(String string) {
             return (TituloRemessa) setValue(string);
         }
-        
+
         TituloRemessa dataEmissao(String string) {
             return (TituloRemessa) setValue(string);
         }
-        
+
         TituloRemessa carteira(String string) {
             return (TituloRemessa) setValue(string);
         }
-        
+
         TituloRemessa sacado(String string) {
             return (TituloRemessa) setValue(string);
         }
-        
+
         TituloRemessa sacadoCpf(String string) {
             return (TituloRemessa) setValue(string);
         }
-        
+
         TituloRemessa sacadoEndereco(String string) {
             return (TituloRemessa) setValue(string);
         }
-        
+
         TituloRemessa instrucao(String string) {
             return (TituloRemessa) setValue(string);
         }
     }
-    
+
     public static class RodapeRemessa extends RegistroRemessa {
-        
+
         private RodapeRemessa(TagLayout get) {
             super(get);
+        }
+
+        RodapeRemessa banco(String string) {
+            return (RodapeRemessa) setValue(string);
+        }
+
+        RodapeRemessa quantidadeTitulos(Number valorQuantidade) {
+            return (RodapeRemessa) setValue(valorQuantidade);
+        }
+
+        RodapeRemessa valorTotalTitulos(Number valorTotal) {
+            return (RodapeRemessa) setValue(valorTotal);
         }
     }
 
@@ -248,7 +274,7 @@ public class RemessaFacade {
     
      */
     List<RegistroRemessa> registros = new ArrayList<>();
-    
+
     RemessaFacade add(RegistroRemessa reg) {
         registros.add(reg);
         return this;
