@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import org.jrimum.texgit.IFiller;
 
 /**
  *
@@ -137,7 +138,7 @@ public class TagLayout {
         return setAttr(tipo);
     }
 
-    public TagLayout padding(String padding) {
+    public TagLayout padding(IFiller padding) {
         return setAttr(padding);
     }
 

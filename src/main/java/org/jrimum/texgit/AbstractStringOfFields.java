@@ -115,18 +115,13 @@ public abstract class AbstractStringOfFields<G extends IField<?>> implements Tex
      * @see org.jrimum.texgit.ReadWriteStream#write()
      */
     public String write() {
-
         StringBuilder lineOfFields = new StringBuilder(StringUtils.EMPTY);
-
         Objects.checkNotNull(fields, "Fields == null");
         Collections.checkNotEmpty(fields, "Coleção de fields vazia!");
 
         for (G field : fields) {
-
             try {
-
                 lineOfFields.append(field.write());
-
             } catch (Exception e) {
                 e.printStackTrace();
                 throw new IllegalStateException(
@@ -136,7 +131,6 @@ public abstract class AbstractStringOfFields<G extends IField<?>> implements Tex
                                 .indexOf(field) + 1), e);
             }
         }
-
         return lineOfFields.toString();
     }
 

@@ -18,6 +18,7 @@ package com.github.braully.boleto;
 import static com.github.braully.boleto.TagLayout.TagCreator.*;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import org.jrimum.texgit.Fillers;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
@@ -75,8 +76,8 @@ public class TestRemessaFacade {
                 cabecalho(
                         field("codigoRegistro").length(1).position(1).value(0),
                         field("codigoRetorno").length(1),
-                        field("agencia").length(4).type("integer").padding("zero_left"),
-                        field("conta").length(7),
+                        field("agencia").length(4).type("integer").padding(Fillers.ZERO_LEFT),
+                        field("conta").length(7).padding(Fillers.ZERO_LEFT),
                         field("dataGeracao").length(6).type("date").format(new SimpleDateFormat("DDMMYY"))
                 ),
                 titulo(

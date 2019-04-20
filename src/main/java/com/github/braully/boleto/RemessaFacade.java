@@ -131,6 +131,10 @@ public class RemessaFacade {
             if (Objects.isNotNull(filler)) {
                 fixedField.setFiller(filler);
             }
+            filler = (IFiller) l.getObj("padding");
+            if (Objects.isNotNull(filler)) {
+                fixedField.setFiller(filler);
+            }
             super.add(fixedField);
             super.incSize();
         }
