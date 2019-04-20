@@ -17,6 +17,7 @@ package com.github.braully.boleto;
 
 import java.text.Format;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import org.apache.log4j.Logger;
 import org.jrimum.texgit.FixedField;
@@ -102,7 +103,7 @@ public class RemessaFacade {
             return this.write();
         }
 
-        protected RegistroRemessa setValue(String valor) {
+        protected RegistroRemessa setValue(Object valor) {
             //TODO: Melhorar isso;
             String nomeMetodoAnterior = Thread.currentThread().getStackTrace()[2].getMethodName();
             /* Propriedade a ser setada é o nome do metodo que chamou */
@@ -168,6 +169,10 @@ public class RemessaFacade {
 
         CabecalhoRemessa dataGeracao(String string) {
             return (CabecalhoRemessa) setValue(string);
+        }
+
+        CabecalhoRemessa dataGeracao(Date data) {
+            return (CabecalhoRemessa) setValue(data);
         }
 
         CabecalhoRemessa cedenteCnpj(String string) {

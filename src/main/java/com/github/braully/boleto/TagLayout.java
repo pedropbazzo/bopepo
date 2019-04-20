@@ -134,7 +134,7 @@ public class TagLayout {
         return this;
     }
 
-    public TagLayout type(String tipo) {
+    public TagLayout type(Class tipo) {
         return setAttr(tipo);
     }
 

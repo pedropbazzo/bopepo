@@ -16,8 +16,10 @@
 package com.github.braully.boleto;
 
 import static com.github.braully.boleto.TagLayout.TagCreator.*;
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import org.jrimum.texgit.Fillers;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
@@ -34,7 +36,7 @@ public class TestRemessaFacade {
         remessa.addNovoCabecalho().agencia("1")
                 .conta("1").numeroConvenio("1")
                 .cedente("ACME S.A LTDA.").cedenteCnpj("1")
-                .dataGeracao("01/01/2019").setValue("codigoRetorno", "1");
+                .dataGeracao(new Date()).setValue("codigoRetorno", "1");
 
         remessa.addNovoTitulo().valor("1").vencimento("1")
                 .numeroDocumento("1").nossoNumero("1")
@@ -76,9 +78,9 @@ public class TestRemessaFacade {
                 cabecalho(
                         field("codigoRegistro").length(1).position(1).value(0),
                         field("codigoRetorno").length(1),
-                        field("agencia").length(4).type("integer").padding(Fillers.ZERO_LEFT),
+                        field("agencia").length(4).type(Integer.class).padding(Fillers.ZERO_LEFT),
                         field("conta").length(7).padding(Fillers.ZERO_LEFT),
-                        field("dataGeracao").length(6).type("date").format(new SimpleDateFormat("DDMMYY"))
+                        field("dataGeracao").length(6).type(Date.class).format(new SimpleDateFormat("ddMMYY"))
                 ),
                 titulo(
                         field("codigoRegistro").length(1).position(1).value(7)
@@ -103,8 +105,8 @@ public class TestRemessaFacade {
                         field("filler").length(2),
                         field("codigoBanco").length(3),
                         field("filler").length(10),
-                        field("quantidadeTitulos").length(8).type("bigdecimal").format(new DecimalFormat("DD")),
-                        field("valorTotalTitulos").length(8).type("bigdecimal").format(new DecimalFormat("DD")),
+                        field("quantidadeTitulos").length(8).type(BigDecimal.class).format(new DecimalFormat("DD")),
+                        field("valorTotalTitulos").length(8).type(BigDecimal.class).format(new DecimalFormat("DD")),
                         field("filler").length(8)
                 )
         );

@@ -39,14 +39,13 @@ import java.util.List;
 import java.util.Set;
 
 import org.jrimum.utilix.Objects;
-import org.jrimum.texgit.IField;
 
 /**
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
  *
  */
 @SuppressWarnings("serial")
-public class Record extends BlockOfFields implements org.jrimum.texgit.IRecord {
+public class Record extends BlockOfFields implements IRecord {
 
     private String name;
 
@@ -58,7 +57,7 @@ public class Record extends BlockOfFields implements org.jrimum.texgit.IRecord {
 
     private boolean headOfGroup;
 
-    private List<org.jrimum.texgit.IRecord> innerRecords;
+    private List<IRecord> innerRecords;
 
     private Set<String> repitablesRecords;
 
@@ -95,8 +94,8 @@ public class Record extends BlockOfFields implements org.jrimum.texgit.IRecord {
         return ffID;
     }
 
-    public org.jrimum.texgit.IFixedField<?> getField(String fieldName) {
-        org.jrimum.texgit.IFixedField<?> field = null;
+    public IFixedField<?> getField(String fieldName) {
+        IFixedField<?> field = null;
         if (isNotBlank(fieldName)) {
             if (!getFields().isEmpty()) {
                 for (FixedField<?> ff : this.getFields()) {
@@ -114,7 +113,7 @@ public class Record extends BlockOfFields implements org.jrimum.texgit.IRecord {
         boolean is = false;
         if (isNotBlank(idName)) {
             if (!getFields().isEmpty()) {
-                for (org.jrimum.texgit.IField<?> f : getFields()) {
+                for (IField<?> f : getFields()) {
                     if (idName.equals(f.getName())) {
                         is = true;
                         break;
@@ -259,7 +258,7 @@ public class Record extends BlockOfFields implements org.jrimum.texgit.IRecord {
         if (isNotBlank(idName)) {
             if (!isRepitable(idName)) {
                 if (!getInnerRecords().isEmpty()) {
-                    for (org.jrimum.texgit.IRecord iRec : getInnerRecords()) {
+                    for (IRecord iRec : getInnerRecords()) {
                         Record rec = (Record) iRec;
                         if (idName.equals(rec.getName())) {
                             record = rec;
@@ -279,7 +278,7 @@ public class Record extends BlockOfFields implements org.jrimum.texgit.IRecord {
         if (isNotBlank(idName)) {
             if (isRepitable(idName)) {
                 if (!getInnerRecords().isEmpty()) {
-                    for (org.jrimum.texgit.IRecord iRec : getInnerRecords()) {
+                    for (IRecord iRec : getInnerRecords()) {
                         Record rec = (Record) iRec;
                         if (idName.equals(rec.getName())) {
                             secRecords.add(rec);
@@ -310,11 +309,11 @@ public class Record extends BlockOfFields implements org.jrimum.texgit.IRecord {
         return is;
     }
 
-    public org.jrimum.texgit.IRecord addInnerRecord(org.jrimum.texgit.IRecord record) {
+    public IRecord addInnerRecord(IRecord record) {
 
         if (isNotNull(record)) {
             if (isNull(this.innerRecords)) {
-                this.innerRecords = new ArrayList<org.jrimum.texgit.IRecord>();
+                this.innerRecords = new ArrayList<IRecord>();
             }
 
             if (isMyRecord(Record.class.cast(record).getName())) {
@@ -328,7 +327,7 @@ public class Record extends BlockOfFields implements org.jrimum.texgit.IRecord {
         return this;
     }
 
-    public List<org.jrimum.texgit.IRecord> getInnerRecords() {
+    public List<IRecord> getInnerRecords() {
 
         return this.innerRecords;
     }
@@ -338,7 +337,7 @@ public class Record extends BlockOfFields implements org.jrimum.texgit.IRecord {
 
         G value = null;
 
-        org.jrimum.texgit.IField<?> f = getField(fieldName);
+        IField<?> f = getField(fieldName);
 
         if (isNotNull(f)) {
             value = (G) f.getValue();
@@ -348,9 +347,9 @@ public class Record extends BlockOfFields implements org.jrimum.texgit.IRecord {
     }
 
     @SuppressWarnings("unchecked")
-    public <G> org.jrimum.texgit.IRecord setValue(String fieldName, G value) {
+    public <G> IRecord setValue(String fieldName, G value) {
 
-        org.jrimum.texgit.IField<G> f = (IField<G>) getField(fieldName);
+        IField<G> f = (IField<G>) getField(fieldName);
 
         if (isNotNull(f)) {
             f.setValue(value);
