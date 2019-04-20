@@ -102,7 +102,7 @@ public class TestRemessaFacade {
                 rodape(
                         field("codigoRegistro").length(1).position(1).value(9),
                         field("codigoRetorno").length(1),
-                        field("filler").length(2),
+                        field("").filler(Fillers.ZERO_LEFT).length(2),
                         field("codigoBanco").length(3),
                         field("filler").length(10),
                         field("quantidadeTitulos").length(8).type(BigDecimal.class).format(new DecimalFormat("DD")),

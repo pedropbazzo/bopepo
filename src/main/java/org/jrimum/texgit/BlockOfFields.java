@@ -29,7 +29,6 @@
 package org.jrimum.texgit;
 
 import static java.lang.String.format;
-import org.jrimum.ConfiguracaoJRimum;
 import static org.jrimum.utilix.Objects.isNotNull;
 
 import org.jrimum.utilix.Collections;
@@ -75,6 +74,12 @@ public class BlockOfFields extends AbstractStringOfFields<FixedField<?>> impleme
 
     protected void incSize() {
         size++;
+    }
+
+    protected void incLength(Integer len) {
+        if (len != null) {
+            length = length + len;
+        }
     }
 
     /**
