@@ -39,11 +39,27 @@ public class TagLayout {
             return tagin().with(filhos);
         }
 
+        public static TagLayout cabecalhoLote(TagLayout... filhos) {
+            return tagin().with(filhos);
+        }
+
         public static TagLayout titulo(TagLayout... filhos) {
             return tagin().with(filhos);
         }
 
+        public static TagLayout tituloJ(TagLayout... filhos) {
+            return tagin().with(filhos);
+        }
+
+        public static TagLayout tituloJ52(TagLayout... filhos) {
+            return tagin().with(filhos);
+        }
+
         public static TagLayout rodape(TagLayout... filhos) {
+            return tagin().with(filhos);
+        }
+
+        public static TagLayout rodapeLote(TagLayout... filhos) {
             return tagin().with(filhos);
         }
 
