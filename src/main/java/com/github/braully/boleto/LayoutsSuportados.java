@@ -31,12 +31,12 @@ import org.jrimum.texgit.Fillers;
  */
 public class LayoutsSuportados {
 
-    public static TagLayout LAYOUT_FEBRABAN_REMESSA_COBRANCA_CNAB240 = flatfile(
-            layout(nome("Arquivo-Remessa-Febraban-CNAB240"),
-                    versao("05"),
+    public static TagLayout LAYOUT_FEBRABAN_CNAB240 = flatfile(
+            layout(nome("Febraban-CNAB240"),
                     cnab(CNAB_240),
                     servico(COBRANCA_REMESSA),
-                    tag("url").value("https://portal.febraban.org.br/pagina/3053/33/pt-br/layout-240")
+                    tag("url").value("https://portal.febraban.org.br/pagina/3053/33/pt-br/layout-240"),
+                    versao("05")
             ),
             cabecalho(
                     //Controle: Banco, lote e registro
@@ -68,7 +68,7 @@ public class LayoutsSuportados {
                     //para  verificação  da autenticidade do par Código da Agência / Número da Conta Corrente.
                     //Para os Bancos que se utilizam de duas posições para o Dígito Verificador 
                     //do Número da Conta Corrente, preencher este campo com a 2ª posição deste dígito. 
-                    fdac(), fcedente().length(30), fbanco().length(30),
+                    fdac(), fcedenteNome().length(30), fbancoNome().length(30),
                     //Uso Exclusivo FEBRABAN / CNAB
                     fbranco().length(10),
                     //Código Remessa / Retorno1431431-NumG015
@@ -82,9 +82,9 @@ public class LayoutsSuportados {
                     field("horaGeracao").length(6).format(new SimpleDateFormat("hhmmss")),
                     //Número Seqüencial do Arquivo1581636-Num*G018
                     fsequencialArquivo().length(6),
-                    field("versaoLayoutArquivo").value("103"),
+                    field("versaoLayoutArquivo").valLen("103"),
                     //Densidade de gravação (BPI), do arquivo encaminhado. Domínio:1600 BPI ou 6250 BPI
-                    field("densidadeArquivo").length(5).padding(Fillers.ZERO_LEFT),
+                    field("densidadeArquivo").value(0).length(5).padding(Fillers.ZERO_LEFT),
                     //Para Uso Reservado do Banco17219120-AlfaG021
                     fbranco().length(20),
                     //Para Uso Reservado da Empresa19221120-AlfaG022
@@ -96,7 +96,8 @@ public class LayoutsSuportados {
                     //Controle: Banco, lote e registro
                     //Banco: Código do Banco na Compensação133-NumG001
                     fbancoCodigo(),
-                    flote(),
+                    //Valor default para o primeiro lote, demais devem ser alterados
+                    flote().value(1),
                     fcodigoRegistro().value("1"),
                     //Código adotado pela FEBRABAN para identificar a transação que será realizada com os registros detalhe do lote.
                     /* 
@@ -109,7 +110,7 @@ public class LayoutsSuportados {
                         'R' = Arquivo Remessa
                         'T' = Arquivo Retorno
                      */
-                    field("operacao").length(1),
+                    foperacao(),
                     //Código adotado pela FEBRABAN para indicar o tipo de serviço / produto (processo) contido no arquivo / lote.
                     /*
                     TODO: Fazer um enum
@@ -148,34 +149,9 @@ public class LayoutsSuportados {
                             '90' = Pagamento Benefícios
                             '98' = Pagamentos Diversos                     
                      */
-                    field("servico").length(2).padding(Fillers.WHITE_SPACE_LEFT),
+                    fservico(),
                     //Código adotado pela FEBRABAN para identificar a operação que está contida no lote.
-                    /**
-                     * Domínio: '01' = Crédito em Conta Corrente/Salário '02' =
-                     * Cheque Pagamento / Administrativo '03' = DOC/TED (1) (2)
-                     * '04' = Cartão Salário (somente para Tipo de Serviço =
-                     * '30') '05' = Crédito em Conta Poupança '10' = OP à
-                     * Disposição ‘11’ = Pagamento de Contas e Tributos com
-                     * Código de Barras ‘16’ = Tributo - DARF Normal ‘17’ =
-                     * Tributo - GPS (Guia da Previdência Social) ‘18’ = Tributo
-                     * - DARF Simples ‘19’ = Tributo - IPTU – Prefeituras '20' =
-                     * Pagamento com Autenticação ‘21’ = Tributo – DARJ ‘22’ =
-                     * Tributo - GARE-SP ICMS ‘23’ = Tributo - GARE-SP DR ‘24’ =
-                     * Tributo - GARE-SP ITCMD ‘25’ = Tributo - IPVA ‘26’ =
-                     * Tributo - Licenciamento ‘27’ = Tributo – DPVAT '30' =
-                     * Liquidação de Títulos do Próprio Banco '31' = Pagamento
-                     * de Títulos de Outros Bancos '40' = Extrato de Conta
-                     * Corrente '41' = TED – Outra Titularidade (1) '43' = TED –
-                     * Mesma Titularidade (1) ‘44’ = TED para Transferência de
-                     * Conta Investimento '50' = Débito em Conta Corrente '70' =
-                     * Extrato para Gestão de Caixa ‘71’ = Depósito Judicial em
-                     * Conta Corrente ‘72’ = Depósito Judicial em Poupança ‘73’
-                     * = Extrato de Conta Investimento ‘80’= Pagamento de
-                     * tributos municipais ISS – LCP 157 – próprio Banco ‘81’=
-                     * Pagamento de Tributos Municipais ISS – LCP 157 – outros
-                     * Bancos
-                     */
-                    field("forma").length(2),
+                    fforma(),
                     field("versaoLayoutLote").value("040").length(3),
                     //Uso Exclusivo da FEBRABAN/CNAB 17 17 1 - Alfa Brancos G004
                     fbranco().length(1),
@@ -197,7 +173,7 @@ public class LayoutsSuportados {
                     //Para os Bancos que se utilizam de duas posições para o Dígito Verificador 
                     //do Número da Conta Corrente, preencher este campo com a 2ª posição deste dígito. 
                     fdac(), //Conta com DV
-                    fcedente().length(30),
+                    fcedenteNome().length(30),
                     //Texto referente a mensagens que serão impressas nos documentos e/ou avisos a serem emitidos.
                     //Informação 1: Genérica. Quando informada constará em todos os avisos e/ou
                     //documentos originados dos detalhes desse lote. Informada no Header do Lote.
@@ -206,7 +182,7 @@ public class LayoutsSuportados {
                     //Uso Exclusivo da FEBRABAN/CNAB
                     fbranco().length(8),
                     //Código das Ocorrências p/ Retorno
-                    focorrencias().filler(Fillers.WHITE_SPACE_LEFT)
+                    focorrencias()
             ),
             //Registro Detalhe - Segmento J (Obrigatório - Remessa / Retorno)
             tituloJ(
@@ -252,20 +228,20 @@ public class LayoutsSuportados {
                     //'40' = Alegação do Pagador
                     //'99' = Exclusão do Registro Detalhe Incluído Anteriormente
                     field("movimentoCodigo").value("00").length(2),
-                    field("codigoBarras").length(44),
-                    fsacado().length(30),
+                    fcodigoBarras().length(44),
+                    fsacadoNome().length(30),
                     fdataVencimento(),
                     fvalor().length(15),
                     //Valor do Desconto + Abatimento
                     //Valor de desconto (bonificação) sobre o valor nominal do documento, somado ao Valor
                     //do abatimento concedido pelo Beneficiário, expresso em moeda corrente.
-                    fvalorDesconto().length(15),
+                    fvalorDesconto().value(0).length(15),
                     //Valor da Mora + Multa
                     //Valor do juros de mora somado ao Valor da multa, expresso em moeda corrente
-                    fvalorAcrescimo().length(15),
+                    fvalorAcrescimo().value(0).length(15),
                     fdataPagamento(), fvalorPagamento().length(15),
                     //Número de unidades do tipo de moeda identificada para cálculo do valor do documento. G041
-                    field("qtdeMoeda").length(15),
+                    field("qtdeMoeda").filler(Fillers.ZERO_LEFT).value(1).length(15),
                     //Referência Pagador Nº do Docto Atribuído pela Empresa 183 202 20 - Alfa G064
                     fnumeroDocumento().length(20),
                     //Nosso Número Nº do Docto Atribuído pelo Banco 203 222 20 - Alfa *G043
@@ -478,36 +454,40 @@ public class LayoutsSuportados {
                     //                   '2'  =  CGC / CNPJ
                     //                   '3'  =  PIS / PASEP
                     //                   '9'  =   Outros
-                    field("tipoInscricaoSacado").value("1"),
+                    field("tipoInscricaoSacado").valLen("1"),
                     fsacadoCpf().length(15),
-                    fsacado().length(40),
+                    fsacadoNome().length(40),
                     //DADOS DO BENEFICIARIO
-                    field("tipoInscricaoCedente").value("2"),
+                    field("tipoInscricaoCedente").valLen("2"),
                     fcedenteCnpj().length(15),
-                    fcedente().length(40),
+                    fcedenteNome().length(40),
                     //DADOS DO PAGADORR
                     //Pagadorr - Dados sobre o Beneficiário responsável pela emissão do título original
-                    field("tipoInscricaoPagadorr").value("2"),
-                    field("pagadorrInscricao").length(15).padding(Fillers.ZERO_LEFT),
-                    field("pagadorr").length(40)
+                    field("tipoInscricaoPagadorr").valLen("2"),
+                    field("pagadorrInscricao").length(15).filler(Fillers.ZERO_LEFT),
+                    field("pagadorr").length(40).filler(Fillers.WHITE_SPACE_LEFT)
             ),
             rodapeLote(
                     //Controle: Banco, lote e registro
                     //Banco: Código do Banco na Compensação133-NumG001
-                    fbancoCodigo(), flote(), fcodigoRegistro().value("5"),
+                    fbancoCodigo(),
+                    flote().value(1), // o mesmo do cabeçalho do lote
+                    fcodigoRegistro().value("5"),
                     //04.5 CNAB Uso Exclusivo FEBRABAN/CNAB 9 17 9 - Alfa Brancos G004
                     fbranco().length(9),
                     //Quantidade de Registros do Lote 18 23 6 - Num *G057
                     fquantidadeRegistros().length(6), fvalorTotalRegistros().length(18),
+                    //Qtde de Moeda Somatória de Quantidade de Moedas 42 59 13 5 Num G058
                     //G058 Somatória de Quantidade de Moedas
                     //Valor obtido pela somatória das quantidades de moeda dos registros de detalhe
                     //(Registro = '3' / Código de Segmento = {'A' / 'J'}).
-                    field("qtedMoedas").padding(Fillers.ZERO_LEFT).length(5),
+                    field("qtedMoedas").length(18).padding(Fillers.ZERO_LEFT).value(1),
                     //08.5 Número Aviso Débito Número Aviso Débito 60 65 6 - Num G066
                     //Número do Aviso de Débito
                     //Número atribuído pelo Banco para identificar um Débito efetuado na Conta Corrente a
                     //partir do(s) pagamento(s) efetivado(s), visando facilitar a Conciliação Bancária.
-                    field("numAvisoDebito"), fbranco().length(165),
+                    field("numAvisoDebito").length(6).filler(Fillers.ZERO_LEFT),
+                    fbranco().length(165),
                     //Código das Ocorrências para Retorno/Remessa G0059
                     focorrencias()
             ),
@@ -522,7 +502,13 @@ public class LayoutsSuportados {
                     //Qtde. de RegistrosQuantidade de Registros do Arquivo24296-NumG0
                     fquantidadeRegistros().length(6),
                     //Qtde. de Contas Concil.Qtde de Contas p/ Conc. (Lotes)30356-Num*G037
-                    field("qtedContas").padding(Fillers.ZERO_LEFT).length(6),
+                    /**
+                     * Número indicativo de lotes de Conciliação Bancária
+                     * enviados no arquivo. Somatória dos registros de tipo 1 e
+                     * Tipo de Operação = 'E'. Campo específico para o serviço
+                     * de Conciliação Bancária
+                     */
+                    field("qtedContas").value(0).padding(Fillers.ZERO_LEFT).length(6),
                     //Uso Exclusivo FEBRABAN/CNAB9179-AlfaBrancosG004
                     fbranco().length(205)
             )
@@ -566,7 +552,7 @@ public class LayoutsSuportados {
                     <Field name="NumeroSequencialRegistro" type="INTEGER" length="6" padding="ZERO_LEFT" /> 
                      */
                     field("").length(8).filler(Fillers.WHITE_SPACE_LEFT),
-                    fcedente().length(30).padding(Fillers.WHITE_SPACE_RIGHT),
+                    fcedenteNome().length(30).padding(Fillers.WHITE_SPACE_RIGHT),
                     field("comp-banco").value("341BANCO ITAU SA"),
                     field("dataGeracao").length(6).type(Date.class).format(new SimpleDateFormat("ddMMYY")),
                     field("").length(294).filler(Fillers.WHITE_SPACE_LEFT),

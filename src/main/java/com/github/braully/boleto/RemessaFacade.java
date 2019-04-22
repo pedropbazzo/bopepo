@@ -19,6 +19,7 @@ import java.text.Format;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import static com.github.braully.boleto.TagLayout.TagCreator.*;
 import org.apache.log4j.Logger;
 import org.jrimum.texgit.FixedField;
 import org.jrimum.texgit.IFiller;
@@ -43,40 +44,73 @@ public class RemessaFacade {
     }
 
     CabecalhoRemessa addNovoCabecalho() {
-        CabecalhoRemessa cabecalho = novoCabecalho();
+        CabecalhoRemessa cabecalho = novoCabecalho("cabecalho");
         this.add(cabecalho);
         return cabecalho;
     }
 
-    CabecalhoRemessa novoCabecalho() {
-        CabecalhoRemessa cabecalho = new CabecalhoRemessa(template.get("cabecalho"));
+    CabecalhoRemessa addNovoCabecalhoLote() {
+        CabecalhoRemessa cabecalho = novoCabecalho("cabecalhoLote");
+        this.add(cabecalho);
+        return cabecalho;
+    }
+
+    CabecalhoRemessa novoCabecalho(String tipoCabecalho) {
+        CabecalhoRemessa cabecalho = new CabecalhoRemessa(template.get(tipoCabecalho));
         return cabecalho;
     }
 
     TituloRemessa addNovoTitulo() {
-        TituloRemessa titulo = this.novoTitulo();
+        TituloRemessa titulo = this.novoTitulo("titulo");
         this.add(titulo);
         return titulo;
     }
 
-    TituloRemessa novoTitulo() {
-        TituloRemessa titulo = new TituloRemessa(template.get("titulo"));
+    TituloRemessa addNovoTituloJ() {
+        TituloRemessa titulo = this.novoTitulo("tituloJ");
+        this.add(titulo);
+        return titulo;
+    }
+
+    TituloRemessa addNovoTituloJ52() {
+        TituloRemessa titulo = this.novoTitulo("tituloJ52");
+        this.add(titulo);
+        return titulo;
+    }
+
+    TituloRemessa novoTitulo(String tipoTitulo) {
+        TituloRemessa titulo = new TituloRemessa(template.get(tipoTitulo));
         return titulo;
     }
 
     RodapeRemessa addNovoRodape() {
-        RodapeRemessa rodape = this.novoRodape();
+        RodapeRemessa rodape = this.novoRodape("rodape");
         this.add(rodape);
         return rodape;
     }
 
-    RodapeRemessa novoRodape() {
-        RodapeRemessa rodape = new RodapeRemessa(template.get("rodape"));
+    RodapeRemessa addNovoRodapeLote() {
+        RodapeRemessa rodape = this.novoRodape("rodapeLote");
+        this.add(rodape);
         return rodape;
+    }
+
+    RodapeRemessa novoRodape(String tipoRodape) {
+        RodapeRemessa rodape = new RodapeRemessa(template.get(tipoRodape));
+        return rodape;
+    }
+
+    public RegistroRemessa addNovoRegistro(String tipoRegistro) {
+        RegistroRemessa novoRegistro = novoRegistro(tipoRegistro);
+        this.add(novoRegistro);
+        return novoRegistro;
     }
 
     public RegistroRemessa novoRegistro(String tipoRegistro) {
         TagLayout layoutRegistro = template.get(tipoRegistro);
+        if (layoutRegistro == null) {
+            throw new IllegalArgumentException("Não existe registro do tipo " + tipoRegistro + " no layout " + template);
+        }
         return new RegistroRemessa(layoutRegistro);
     }
 
@@ -116,8 +150,50 @@ public class RemessaFacade {
             return this.write();
         }
 
+        /* Campos comuns na maioria dos registros na maioria dos layouts */
+        RegistroRemessa sequencialRegistro(Integer seq) {
+            setValue(fsequencialRegistro().nome, seq);
+            return this;
+        }
+
+        RegistroRemessa banco(String codigo, String nome) {
+            setValue(fbancoCodigo().nome, codigo).setValue(fbancoNome().nome, nome);
+            return this;
+        }
+
+        RegistroRemessa cedente(String nome, String cnpj) {
+            setValue(fcedenteNome().nome, nome).setValue(fcedenteCnpj().nome, cnpj);
+            return this;
+        }
+
+        RegistroRemessa convenio(String convenio, String agencia, String conta, String dac) {
+            this.convenio(convenio).agencia(agencia).conta(conta).dac(dac);
+            return this;
+        }
+
+        RegistroRemessa convenio(String convenio) {
+            return setValue(convenio);
+        }
+
+        RegistroRemessa agencia(String agencia) {
+            return setValue(agencia);
+        }
+
+        RegistroRemessa conta(String conta) {
+            return setValue(conta);
+        }
+
+        RegistroRemessa dac(String dac) {
+            return setValue(dac);
+        }
+
+        RegistroRemessa setVal(String nomeAtributo, Object valor) {
+            this.setValue(nomeAtributo, valor);
+            return this;
+        }
+
         protected RegistroRemessa setValue(Object valor) {
-            //TODO: Melhorar isso;
+            //TODO: Melhorar isso; perda de performance
             String nomeMetodoAnterior = Thread.currentThread().getStackTrace()[2].getMethodName();
             /* Propriedade a ser setada é o nome do metodo que chamou */
             this.setValue(nomeMetodoAnterior, valor);
@@ -136,6 +212,8 @@ public class RemessaFacade {
             Integer len = l.getInt("length");
             if (Objects.isNotNull(len)) {
                 fixedField.setFixedLength(len);
+            } else if ("field".equals(l.nome)) {
+                throw new IllegalArgumentException("Field " + l + " sem comprimento (lenght) ");
             }
             Format format = (Format) l.getObj("format");
             if (Objects.isNotNull(format)) {
@@ -161,6 +239,7 @@ public class RemessaFacade {
         }
     }
 
+    /* Reune atributos recorrentes nos registros do tipo cabecalho */
     public static class CabecalhoRemessa extends RegistroRemessa {
 
         private CabecalhoRemessa(TagLayout get) {
@@ -194,6 +273,26 @@ public class RemessaFacade {
         CabecalhoRemessa cedenteCnpj(String string) {
             return (CabecalhoRemessa) setValue(string);
         }
+
+        CabecalhoRemessa sequencialArquivo(Integer i) {
+            setValue(fsequencialArquivo().nome, i);
+            return this;
+        }
+
+        CabecalhoRemessa operacao(Object op) {
+            setValue(foperacao().nome, op);
+            return this;
+        }
+
+        CabecalhoRemessa servico(Object op) {
+            setValue(fservico().nome, op);
+            return this;
+        }
+
+        CabecalhoRemessa forma(Object op) {
+            setValue(fforma().nome, op);
+            return this;
+        }
     }
 
     public static class TituloRemessa extends RegistroRemessa {
@@ -210,24 +309,45 @@ public class RemessaFacade {
                 .sacadoEndereco("")
                 .instrucao("");
          */
-        TituloRemessa valor(String string) {
-            return (TituloRemessa) setValue(string);
+        TituloRemessa sacado(String nome, String cpf) {
+            setValue(fsacadoNome().nome, nome).setValue(fsacadoCpf().nome, cpf);
+            return this;
+        }
+
+        TituloRemessa valor(Object string) {
+            return (TituloRemessa) setValue(fvalor().nome, string);
+        }
+
+        TituloRemessa valorDesconto(Object string) {
+            return (TituloRemessa) setValue(fvalorDesconto().nome, string);
+        }
+
+        TituloRemessa valorAcrescimo(Object string) {
+            return (TituloRemessa) setValue(fvalorAcrescimo().nome, string);
         }
 
         TituloRemessa vencimento(String string) {
             return (TituloRemessa) setValue(string);
         }
 
-        TituloRemessa numeroDocumento(String string) {
+        TituloRemessa numeroDocumento(Object string) {
             return (TituloRemessa) setValue(string);
         }
 
-        TituloRemessa nossoNumero(String string) {
+        TituloRemessa codigoBarras(String codigoBarras) {
+            return (TituloRemessa) setVal(fcodigoBarras().nome, codigoBarras);
+        }
+
+        TituloRemessa nossoNumero(Object string) {
             return (TituloRemessa) setValue(string);
         }
 
-        TituloRemessa dataEmissao(String string) {
-            return (TituloRemessa) setValue(string);
+        TituloRemessa dataVencimento(Object vencimento) {
+            return (TituloRemessa) setValue(vencimento);
+        }
+
+        TituloRemessa dataEmissao(Object emissao) {
+            return (TituloRemessa) setValue(emissao);
         }
 
         TituloRemessa carteira(String string) {
@@ -257,15 +377,11 @@ public class RemessaFacade {
             super(get);
         }
 
-        RodapeRemessa banco(String string) {
-            return (RodapeRemessa) setValue(string);
-        }
-
-        RodapeRemessa quantidadeTitulos(Number valorQuantidade) {
+        RodapeRemessa quantidadeRegistros(Number valorQuantidade) {
             return (RodapeRemessa) setValue(valorQuantidade);
         }
 
-        RodapeRemessa valorTotalTitulos(Number valorTotal) {
+        RodapeRemessa valorTotalRegistros(Number valorTotal) {
             return (RodapeRemessa) setValue(valorTotal);
         }
     }

@@ -43,8 +43,8 @@ public class TagLayout {
             return field("bancoCodigo").padding(Fillers.ZERO_LEFT).length(3);
         }
 
-        public static TagLayout fbanco() {
-            return field("banco").padding(Fillers.WHITE_SPACE_RIGHT);
+        public static TagLayout fbancoNome() {
+            return field("bancoNome").padding(Fillers.WHITE_SPACE_RIGHT);
         }
 
         public static TagLayout fagencia() {
@@ -55,16 +55,24 @@ public class TagLayout {
             return field("dac").length(1);
         }
 
-        public static TagLayout fsacado() {
-            return field("sacado").padding(Fillers.WHITE_SPACE_RIGHT).length(30);
+        /**
+         * Código de Barras Código adotado pela FEBRABAN para identificar o
+         * Título. Especificações do Código de Barras do Boleto de Pagamento de
+         * Cobrança - Ficha de Compensação (Modelo CADOC 24044-4, Carta-Circular
+         * Bacen Nrº 2.926, de 25.07.2000).
+         *
+         * @return
+         */
+        public static TagLayout fcodigoBarras() {
+            return field("codigoBarras").padding(Fillers.ZERO_LEFT);
+        }
+
+        public static TagLayout fsacadoNome() {
+            return field("sacadoNome").padding(Fillers.WHITE_SPACE_RIGHT).length(30);
         }
 
         public static TagLayout fsacadoCpf() {
             return field("sacadoCpf").length(14).padding(Fillers.ZERO_LEFT);
-        }
-
-        public static TagLayout fcedente() {
-            return field("cedente").padding(Fillers.WHITE_SPACE_RIGHT).length(30);
         }
 
         public static TagLayout fconvenio() {
@@ -75,12 +83,20 @@ public class TagLayout {
          * Tipo de Inscrição: '0' = Isento / Não Informado '1' = CPF '2' = CGC /
          * CNPJ '3' = PIS / PASEP '9' = Outros
          */
+        public static TagLayout ftipoInscricaoCedente() {
+            return field("tipoInscricaoCedente").length(1).padding(Fillers.ZERO_LEFT);
+        }
+
         public static TagLayout ftipoInscricao() {
-            return field("tipoInscricao").padding(Fillers.ZERO_LEFT);
+            return field("tipoInscricao").length(1).padding(Fillers.ZERO_LEFT);
         }
 
         public static TagLayout fcedenteCnpj() {
             return field("cedenteCnpj").padding(Fillers.ZERO_LEFT).length(14);
+        }
+
+        public static TagLayout fcedenteNome() {
+            return field("cedenteNome").padding(Fillers.WHITE_SPACE_RIGHT).length(30);
         }
 
         public static TagLayout fquantidadeRegistros() {
@@ -92,9 +108,20 @@ public class TagLayout {
         }
 
         public static TagLayout focorrencias() {
-            return field("ocorrencias").length(10);
+            return field("ocorrencias").filler(Fillers.WHITE_SPACE_LEFT).length(10);
         }
 
+        /**
+         * Lote de Serviço Número seqüencial para identificar univocamente um
+         * lote de serviço. Criado e controlado pelo responsável pela geração
+         * magnética dos dados contidos no arquivo. Preencher com '0001' para o
+         * primeiro lote do arquivo. Para os demais: número do lote anterior
+         * acrescido de 1. O número não poderá ser repetido dentro do arquivo.
+         * Se registro for Header do Arquivo preencher com '0000' Se registro
+         * for Trailer do Arquivo preencher com '9999'
+         *
+         * @return
+         */
         public static TagLayout flote() {
             return field("lote").length(4).type(Number.class).padding(Fillers.ZERO_LEFT);
         }
@@ -104,7 +131,7 @@ public class TagLayout {
         }
 
         public static TagLayout fvalorPagamento() {
-            return field("valorPagamento").type(Number.class).padding(Fillers.ZERO_LEFT);
+            return field("valorPagamento").type(Number.class).filler(Fillers.ZERO_LEFT);
         }
 
         public static TagLayout fvalorDesconto() {
@@ -139,6 +166,30 @@ public class TagLayout {
             return field("codigoMoeda").value("09").length(2);
         }
 
+        /**
+         * Domínio: '01' = Crédito em Conta Corrente/Salário '02' = Cheque
+         * Pagamento / Administrativo '03' = DOC/TED (1) (2) '04' = Cartão
+         * Salário (somente para Tipo de Serviço = '30') '05' = Crédito em Conta
+         * Poupança '10' = OP à Disposição ‘11’ = Pagamento de Contas e Tributos
+         * com Código de Barras ‘16’ = Tributo - DARF Normal ‘17’ = Tributo -
+         * GPS (Guia da Previdência Social) ‘18’ = Tributo - DARF Simples ‘19’ =
+         * Tributo - IPTU – Prefeituras '20' = Pagamento com Autenticação ‘21’ =
+         * Tributo – DARJ ‘22’ = Tributo - GARE-SP ICMS ‘23’ = Tributo - GARE-SP
+         * DR ‘24’ = Tributo - GARE-SP ITCMD ‘25’ = Tributo - IPVA ‘26’ =
+         * Tributo - Licenciamento ‘27’ = Tributo – DPVAT '30' = Liquidação de
+         * Títulos do Próprio Banco '31' = Pagamento de Títulos de Outros Bancos
+         * '40' = Extrato de Conta Corrente '41' = TED – Outra Titularidade (1)
+         * '43' = TED – Mesma Titularidade (1) ‘44’ = TED para Transferência de
+         * Conta Investimento '50' = Débito em Conta Corrente '70' = Extrato
+         * para Gestão de Caixa ‘71’ = Depósito Judicial em Conta Corrente ‘72’
+         * = Depósito Judicial em Poupança ‘73’ = Extrato de Conta Investimento
+         * ‘80’= Pagamento de tributos municipais ISS – LCP 157 – próprio Banco
+         * ‘81’= Pagamento de Tributos Municipais ISS – LCP 157 – outros Bancos
+         */
+        public static TagLayout fforma() {
+            return field("forma").length(2).padding(Fillers.ZERO_LEFT);
+        }
+
         public static TagLayout fzero() {
             return field("").filler(Fillers.ZERO_LEFT);
         }
@@ -151,8 +202,53 @@ public class TagLayout {
             return field("conta").padding(Fillers.ZERO_LEFT);
         }
 
+        /**
+         * Código adotado pela FEBRABAN para identificar o tipo de registro.
+         * Domínio: '0' = Header de Arquivo '1' = Header de Lote '2' = Registros
+         * Iniciais do Lote '3' = Detalhe '4' = Registros Finais do Lote '5' =
+         * Trailer de Lote '9' = Trailer de Arquivo
+         *
+         * @return
+         */
         public static TagLayout fcodigoRegistro() {
             return field("codigoRegistro").length(1);
+        }
+
+        /**
+         * Domínio: 'C' = Lançamento a Crédito 'D' = Lançamento a Débito 'E' =
+         * Extrato para Conciliação 'G' = Extrato para Gestão de Caixa 'I' =
+         * Informações de Títulos Capturados do Próprio Banco 'R' = Arquivo
+         * Remessa 'T' = Arquivo Retorno
+         *
+         * @return
+         */
+        public static TagLayout foperacao() {
+            return field("operacao").length(1);
+        }
+
+        /**
+         * Domínio: '01' = Cobrança '03' = Boleto de Pagamento Eletrônico '04' =
+         * Conciliação Bancária '05' = Débitos '06' = Custódia de Cheques '07' =
+         * Gestão de Caixa '08' = Consulta/Informação Margem '09' = Averbação da
+         * Consignação/Retenção '10' = Pagamento Dividendos ‘11’ = Manutenção da
+         * Consignação ‘12’ = Consignação de Parcelas ‘13’ = Glosa da
+         * Consignação (INSS) ‘14’ = Consulta de Tributos a pagar '20' =
+         * Pagamento Fornecedor ‘22’ = Pagamento de Contas, Tributos e Impostos
+         * ‘23’ = Interoperabilidade entre Contas de Instituições de Pagamentos
+         * ‘25’ = Compror ‘26’ = Compror Rotativo '29' = Alegação do Pagador
+         * '30' = Pagamento Salários ‘32’ = Pagamento de honorários ‘33’ =
+         * Pagamento de bolsa auxílio ‘34’ = Pagamento de prebenda (remuneração
+         * a padres e sacerdotes) '40' = Vendor '41' = Vendor a Termo '50' =
+         * Pagamento Sinistros Segurados '60' = Pagamento Despesas Viajante em
+         * Trânsito '70' = Pagamento Autorizado '75' = Pagamento Credenciados
+         * ‘77’ = Pagamento de Remuneração '80' = Pagamento Representantes /
+         * Vendedores Autorizados '90' = Pagamento Benefícios '98' = Pagamentos
+         * Diversos
+         *
+         * @return
+         */
+        public static TagLayout fservico() {
+            return field("servico").length(2).padding(Fillers.ZERO_LEFT);
         }
 
         public static TagLayout fcodigoRetorno() {
@@ -175,8 +271,15 @@ public class TagLayout {
             return field("dataVencimento").length(8).format(new SimpleDateFormat("ddMMyyyy"));
         }
 
+        /**
+         * Data Pagamento Data do Pagamento 145 152 8 - Num P009 Data do
+         * Pagamento Data do pagamento do compromisso. Utilizar o formato
+         * DDMMAAAA, onde: DD = dia MM = mês AAAA = ano
+         *
+         * @return
+         */
         public static TagLayout fdataPagamento() {
-            return field("dataPagamento").length(8).format(new SimpleDateFormat("ddMMyyyy"));
+            return field("dataPagamento").filler(Fillers.ZERO_LEFT).length(8).format(new SimpleDateFormat("ddMMyyyy"));
         }
 
         public static TagLayout cabecalho(TagLayout... filhos) {
@@ -281,6 +384,9 @@ public class TagLayout {
     Integer getInt(String stratt) {
         Integer ret = null;
         Object obj = atributos.get(stratt);
+        if (obj == null) {
+            return null;
+        }
         if (obj instanceof Number) {
             if (obj instanceof Integer) {
                 ret = (Integer) obj;
@@ -315,6 +421,10 @@ public class TagLayout {
         this.atributos = new TreeMap<>();
     }
 
+    public TagLayout setAttr(String nome, Object valor) {
+        return this.atr(nome, valor);
+    }
+
     public TagLayout atr(String nome, Object valor) {
         atributos.put(nome, valor);
         return this;
@@ -336,6 +446,15 @@ public class TagLayout {
         return setAttr(padding);
     }
 
+    /**
+     * Set value and lenght from string val
+     */
+    public TagLayout valLen(String val) {
+        this.value(val);
+        this.length(val.length());
+        return this;
+    }
+
     public TagLayout length(int len) {
         return setAttr(len);
     }
@@ -355,6 +474,10 @@ public class TagLayout {
 
     public Object getValue() {
         return value;
+    }
+
+    public String getNome() {
+        return nome;
     }
 
     public TagLayout with(TagLayout... filhos) {

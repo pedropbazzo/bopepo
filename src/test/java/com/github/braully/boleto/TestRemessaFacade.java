@@ -16,10 +16,9 @@
 package com.github.braully.boleto;
 
 import static com.github.braully.boleto.TagLayout.TagCreator.*;
-import java.text.DecimalFormat;
 import java.util.Date;
 import org.jrimum.bopepo.BancosSuportados;
-import org.jrimum.texgit.Fillers;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -29,8 +28,58 @@ import org.junit.Test;
 public class TestRemessaFacade {
 
     @Test
+    public void testRemessaCobancaGenericaFebraban240V5() {
+        RemessaFacade remessa = new RemessaFacade(LayoutsSuportados.LAYOUT_FEBRABAN_CNAB240);
+        remessa.addNovoCabecalho()
+                .sequencialArquivo(1)
+                .dataGeracao(new Date()).setVal("horaGeracao", new Date())
+                .banco("0", "Banco").cedente("ACME S.A LTDA.", "1").convenio("1", "1", "1", "1");
+
+        remessa.addNovoCabecalhoLote()
+                .operacao("R")//Operação de remessa
+                .servico(1)//Cobrança
+                .forma(1)//Crédito em Conta Corrente
+                .banco("0", "Banco")
+                .cedente("ACME S.A LTDA.", "1")
+                .convenio("1", "1", "1", "1");
+
+        remessa.addNovoTituloJ()
+                .sacado("Fulano de Tal", "0")
+                .codigoBarras("0")
+                .valor(1)
+                .valorDesconto(0).valorAcrescimo(0)//opcionais
+                .dataVencimento(new Date())
+                .numeroDocumento(1)
+                .nossoNumero(1)
+                .banco("0", "Banco").cedente("ACME S.A LTDA.", "1").convenio("1", "1", "1", "1")
+                .sequencialRegistro(1);
+
+        remessa.addNovoTituloJ52()
+                .sacado("Fulano de Tal", "0")
+                .banco("0", "Banco").cedente("ACME S.A LTDA.", "1").convenio("1", "1", "1", "1")
+                .sequencialRegistro(2);
+
+        remessa.addNovoRodapeLote()
+                .quantidadeRegistros(2)
+                .valorTotalRegistros(1)
+                .banco("0", "Banco")
+                .cedente("ACME S.A LTDA.", "1").convenio("1", "1", "1", "1");
+
+        remessa.addNovoRodape()
+                .quantidadeRegistros(1)
+                .valorTotalRegistros(1)
+                .setVal("codigoRetorno", "1")
+                .banco("0", "Banco").cedente("ACME S.A LTDA.", "1").convenio("1", "1", "1", "1");
+
+        String remessaStr = remessa.render();
+        System.err.println(remessaStr);
+//        assertEquals(remessaStr, "");
+    }
+
+    @Ignore
+    @Test
     public void testRemessaVazia() {
-        RemessaFacade remessa = new RemessaFacade(layoutFebrabanTest());
+        RemessaFacade remessa = new RemessaFacade(layoutGenericoTest());
         remessa.addNovoCabecalho().agencia("1")
                 .conta("1").numeroConvenio("1")
                 .cedente("ACME S.A LTDA.").cedenteCnpj("1")
@@ -44,9 +93,8 @@ public class TestRemessaFacade {
                 .instrucao("Senhor caixa não receber nunca");
 
         remessa.addNovoRodape()
-                .banco("1")
-                .quantidadeTitulos(1)
-                .valorTotalTitulos(1)
+                .quantidadeRegistros(1)
+                .valorTotalRegistros(1)
                 .setValue("codigoRetorno", "1");
 
         String remessaStr = remessa.render();
@@ -54,7 +102,7 @@ public class TestRemessaFacade {
 //        assertEquals(remessaStr, "");
     }
 
-    TagLayout layoutFebrabanTest() {
+    public TagLayout layoutGenericoTest() {
         TagLayout flatfileLayout = flatfile(
                 /*
                 <layout>
@@ -118,5 +166,9 @@ public class TestRemessaFacade {
                 )
         );
         return flatfileLayout;
+    }
+
+    private Object setVal(String horaGeracao, Date date) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
