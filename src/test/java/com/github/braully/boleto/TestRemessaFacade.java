@@ -86,12 +86,12 @@ public class TestRemessaFacade {
                 cabecalho(
                         field("codigoRegistro").length(1).position(1).value(0),
                         field("codigoRetorno").length(1),
-                        field("agencia").length(4).type(Integer.class).padding(Fillers.ZERO_LEFT),
-                        field("conta").length(7).padding(Fillers.ZERO_LEFT),
-                        field("dataGeracao").length(6).type(Date.class).format(new SimpleDateFormat("ddMMYY"))
+                        fagencia().length(4),
+                        fconta().length(7),
+                        fdataGeracao()
                 ),
                 titulo(
-                        field("codigoRegistro").length(1).position(1).value(7)
+                        fcodigoRegistro().value(7)
                 ),
                 /*
                         <Record name="TRAILLER">

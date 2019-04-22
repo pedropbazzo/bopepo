@@ -16,11 +16,14 @@
 package com.github.braully.boleto;
 
 import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import org.jrimum.domkee.banco.IBanco;
+import org.jrimum.texgit.Fillers;
 import org.jrimum.texgit.IFiller;
 
 /**
@@ -33,6 +36,23 @@ public class TagLayout {
 
         public static TagLayout field(String texto) {
             return tag(texto);
+        }
+
+        /* Fields mais comuns */
+        public static TagLayout fagencia() {
+            return field("agencia").padding(Fillers.ZERO_LEFT);
+        }
+
+        public static TagLayout fconta() {
+            return field("conta").padding(Fillers.ZERO_LEFT);
+        }
+
+        public static TagLayout fcodigoRegistro() {
+            return field("codigoRegistro").length(1);
+        }
+
+        public static TagLayout fdataGeracao() {
+            return field("dataGeracao").type(Date.class).format(new SimpleDateFormat("ddMMyyyy")).length(8);
         }
 
         public static TagLayout cabecalho(TagLayout... filhos) {
