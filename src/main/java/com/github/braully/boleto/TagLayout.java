@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import org.jrimum.domkee.banco.IBanco;
 import org.jrimum.texgit.IFiller;
 
 /**
@@ -50,20 +51,32 @@ public class TagLayout {
             return tagin().with(filhos);
         }
 
-        public static TagLayout description(String texto) {
-            return tagin().withText(texto);
+        public static TagLayout descricao(String texto) {
+            return tagin().withValue(texto);
         }
 
-        public static TagLayout version(String texto) {
-            return tagin().withText(texto);
+        public static TagLayout versao(String texto) {
+            return tagin().withValue(texto);
         }
 
-        public static TagLayout name(String texto) {
-            return tagin().withText(texto);
+        public static TagLayout nome(String texto) {
+            return tagin().withValue(texto);
         }
 
         public static TagLayout layout(TagLayout... filhos) {
             return tagin().with(filhos);
+        }
+
+        public static TagLayout banco(IBanco banco) {
+            return tagin().withValue(banco);
+        }
+
+        public static TagLayout servico(CNABServico servico) {
+            return tagin().withValue(servico);
+        }
+
+        public static TagLayout cnab(CNAB cnab) {
+            return tagin().withValue(cnab);
         }
 
         public static TagLayout flatfile(TagLayout... filhos) {
@@ -80,7 +93,8 @@ public class TagLayout {
         }
     }
 
-    String nome, texto;
+    String nome;
+    Object value;
     final List<TagLayout> filhos;
     final Map<String, Object> atributos;
 
@@ -123,6 +137,18 @@ public class TagLayout {
         return atributos.get(stratt);
     }
 
+    Object getValue(String nome) {
+        Object ret = null;
+        ret = this.atributos.get(nome);
+        if (ret == null) {
+            TagLayout fi = this.get(nome);
+            if (fi != null) {
+                ret = fi.getValue();
+            }
+        }
+        return ret;
+    }
+
     public TagLayout(String nome) {
         this.nome = nome;
         this.filhos = new ArrayList<>();
@@ -158,13 +184,17 @@ public class TagLayout {
         return setAttr(len);
     }
 
-    public TagLayout value(int len) {
+    public TagLayout value(Object len) {
         return setAttr(len);
     }
 
-    public TagLayout withText(String texto) {
-        this.texto = texto;
+    public TagLayout withValue(Object texto) {
+        this.value = texto;
         return this;
+    }
+
+    public Object getValue() {
+        return value;
     }
 
     public TagLayout with(TagLayout... filhos) {

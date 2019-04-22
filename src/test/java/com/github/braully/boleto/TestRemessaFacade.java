@@ -19,8 +19,8 @@ import static com.github.braully.boleto.TagLayout.TagCreator.*;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import org.jrimum.bopepo.BancosSuportados;
 import org.jrimum.texgit.Fillers;
-import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 /**
@@ -67,9 +67,13 @@ public class TestRemessaFacade {
                 </layout>
                  */
                 layout(
-                        name("Arquivo-Febraban_CNAB400"),
-                        version("00"),
-                        description("Layout padrão do Febraban")),
+                        nome("Arquivo-Febraban_CNAB400"),
+                        descricao("Layout padrão do Febraban"),
+                        versao("01"),
+                        banco(BancosSuportados.BANCO_DO_BRASIL.create()),
+                        cnab(CNAB.CNAB_400),
+                        servico(CNABServico.COBRANCA_REMESSA)
+                ),
                 /*
                         <GroupOfRecords>
                         <Record name="cabecalho" description="Protocolo de comunicação">

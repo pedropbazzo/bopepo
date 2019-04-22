@@ -6,8 +6,6 @@ package org.jrimum.domkee.banco;
 import java.io.Serializable;
 import java.util.Date;
 
-import org.jrimum.domkee.banco.Agencia;
-import org.jrimum.domkee.banco.IBanco;
 
 /**
  * @author i311020
