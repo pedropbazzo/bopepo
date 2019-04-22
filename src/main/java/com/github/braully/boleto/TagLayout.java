@@ -51,8 +51,36 @@ public class TagLayout {
             return field("agencia").padding(Fillers.ZERO_LEFT);
         }
 
+        public static TagLayout fdac() {
+            return field("dac").length(1);
+        }
+
+        public static TagLayout fsacado() {
+            return field("sacado").padding(Fillers.WHITE_SPACE_RIGHT).length(30);
+        }
+
+        public static TagLayout fsacadoCpf() {
+            return field("sacadoCpf").length(14).padding(Fillers.ZERO_LEFT);
+        }
+
+        public static TagLayout fcedente() {
+            return field("cedente").padding(Fillers.WHITE_SPACE_RIGHT).length(30);
+        }
+
         public static TagLayout fconvenio() {
             return field("convenio").padding(Fillers.ZERO_LEFT);
+        }
+
+        /**
+         * Tipo de Inscrição: '0' = Isento / Não Informado '1' = CPF '2' = CGC /
+         * CNPJ '3' = PIS / PASEP '9' = Outros
+         */
+        public static TagLayout ftipoInscricao() {
+            return field("tipoInscricao").padding(Fillers.ZERO_LEFT);
+        }
+
+        public static TagLayout fcedenteCnpj() {
+            return field("cedenteCnpj").padding(Fillers.ZERO_LEFT).length(14);
         }
 
         public static TagLayout fquantidadeRegistros() {
@@ -61,6 +89,54 @@ public class TagLayout {
 
         public static TagLayout fvalorTotalRegistros() {
             return field("valorTotalRegistros").type(Number.class).padding(Fillers.ZERO_LEFT);
+        }
+
+        public static TagLayout focorrencias() {
+            return field("ocorrencias").length(10);
+        }
+
+        public static TagLayout flote() {
+            return field("lote").length(4).type(Number.class).padding(Fillers.ZERO_LEFT);
+        }
+
+        public static TagLayout fvalor() {
+            return field("valor").type(Number.class).padding(Fillers.ZERO_LEFT);
+        }
+
+        public static TagLayout fvalorPagamento() {
+            return field("valorPagamento").type(Number.class).padding(Fillers.ZERO_LEFT);
+        }
+
+        public static TagLayout fvalorDesconto() {
+            return field("valorDesconto").type(Number.class).padding(Fillers.ZERO_LEFT);
+        }
+
+        public static TagLayout fvalorAcrescimo() {
+            return field("valorAcresciomo").type(Number.class).padding(Fillers.ZERO_LEFT);
+        }
+
+        public static TagLayout fnumeroDocumento() {
+            return field("numeroDocumento").type(Number.class).padding(Fillers.ZERO_LEFT);
+        }
+
+        public static TagLayout fnossoNumero() {
+            return field("nossoNumero").type(Number.class).padding(Fillers.ZERO_LEFT);
+        }
+
+        public static TagLayout fsequencialRegistro() {
+            return field("sequencialRegistro").type(Number.class).padding(Fillers.ZERO_LEFT);
+        }
+
+        /**
+         * Código adotado pela FEBRABAN para identificar a moeda referenciada no
+         * Título. Domínio: '01' = Reservado para Uso Futuro '02' = Dólar
+         * Americano Comercial (Venda) '03' = Dólar Americano Turismo (Venda)
+         * '04' = ITRD '05' = IDTR '06' = UFIR Diária '07' = UFIR Mensal '08' =
+         * FAJ-TR '09' = Real '10' = TR '11' = IGPM '12' = CDI '13' = Percentual
+         * do CDI ‘14’ = Euro
+         */
+        public static TagLayout fcodigoMoeda() {
+            return field("codigoMoeda").value("09").length(2);
         }
 
         public static TagLayout fzero() {
@@ -83,8 +159,24 @@ public class TagLayout {
             return field("codigoRetorno").length(1);
         }
 
+        public static TagLayout fsequencialArquivo() {
+            return field("sequencialArquivo").padding(Fillers.ZERO_LEFT);
+        }
+
+        public static TagLayout fcodigoArquivo() {
+            return field("codigoArquivo").length(1);
+        }
+
         public static TagLayout fdataGeracao() {
             return field("dataGeracao").type(Date.class).format(new SimpleDateFormat("ddMMyyyy")).length(8);
+        }
+
+        public static TagLayout fdataVencimento() {
+            return field("dataVencimento").length(8).format(new SimpleDateFormat("ddMMyyyy"));
+        }
+
+        public static TagLayout fdataPagamento() {
+            return field("dataPagamento").length(8).format(new SimpleDateFormat("ddMMyyyy"));
         }
 
         public static TagLayout cabecalho(TagLayout... filhos) {
