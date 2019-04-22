@@ -39,8 +39,36 @@ public class TagLayout {
         }
 
         /* Fields mais comuns */
+        public static TagLayout fbancoCodigo() {
+            return field("bancoCodigo").padding(Fillers.ZERO_LEFT).length(3);
+        }
+
+        public static TagLayout fbanco() {
+            return field("banco").padding(Fillers.WHITE_SPACE_RIGHT);
+        }
+
         public static TagLayout fagencia() {
             return field("agencia").padding(Fillers.ZERO_LEFT);
+        }
+
+        public static TagLayout fconvenio() {
+            return field("convenio").padding(Fillers.ZERO_LEFT);
+        }
+
+        public static TagLayout fquantidadeRegistros() {
+            return field("quantidadeRegistros").type(Number.class).padding(Fillers.ZERO_LEFT);
+        }
+
+        public static TagLayout fvalorTotalRegistros() {
+            return field("valorTotalRegistros").type(Number.class).padding(Fillers.ZERO_LEFT);
+        }
+
+        public static TagLayout fzero() {
+            return field("").filler(Fillers.ZERO_LEFT);
+        }
+
+        public static TagLayout fbranco() {
+            return field("").filler(Fillers.WHITE_SPACE_LEFT);
         }
 
         public static TagLayout fconta() {
@@ -49,6 +77,10 @@ public class TagLayout {
 
         public static TagLayout fcodigoRegistro() {
             return field("codigoRegistro").length(1);
+        }
+
+        public static TagLayout fcodigoRetorno() {
+            return field("codigoRetorno").length(1);
         }
 
         public static TagLayout fdataGeracao() {

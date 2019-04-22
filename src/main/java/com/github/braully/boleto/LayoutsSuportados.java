@@ -43,11 +43,11 @@ public class LayoutsSuportados {
             cabecalho(
                     //Controle: Banco, lote e registro
                     //Banco: Código do Banco na Compensação133-NumG001
-                    field("bancoCodigo").length(3).filler(Filler.ZERO_LEFT),
+                    fbancoCodigo(),
                     field("lote").value("0000").length(4),
-                    field("codRegistro").value("0").length(1),
+                    fcodigoRegistro().value("0"),
                     //Uso Exclusivo FEBRABAN / CNAB9179-AlfaBrancosG004
-                    field("").filler(Fillers.WHITE_SPACE_LEFT).length(9),
+                    fbranco().length(9),
                     //Tipo de Inscrição: '0'  =  Isento / Não Informado
                     //                   '1'  =  CPF
                     //                   '2'  =  CGC / CNPJ
@@ -57,7 +57,7 @@ public class LayoutsSuportados {
                     field("cedenteCnpj").length(14).padding(Fillers.ZERO_LEFT),
                     //ConvênioCódigo do Convênio no Banco335220-Alfa*G007
                     //Código adotado pelo Banco para identificar o Contrato entre este e a Empresa Cliente.
-                    field("convenio").length(20).padding(Fillers.ZERO_LEFT),
+                    fconvenio().length(20),
                     //Agência Mantenedora da Conta 53 57 5-Num*G008
                     //Dígito Verificador da Agência 58 58 1-Alfa*G009
                     field("agencia").length(6).type(Integer.class
@@ -75,7 +75,7 @@ public class LayoutsSuportados {
                     field("cedente").length(30).padding(Fillers.WHITE_SPACE_RIGHT),
                     field("banco").length(30).padding(Fillers.WHITE_SPACE_RIGHT),
                     //Uso Exclusivo FEBRABAN / CNAB
-                    field("").filler(Fillers.WHITE_SPACE_LEFT).length(10),
+                    fbranco().length(10),
                     //Código Remessa / Retorno1431431-NumG015
                     //Código adotado pela FEBRABAN para qualificar o envio ou devolução de arquivo 
                     //entre a Empresa  Cliente e o Banco prestador dos Serviços.
@@ -102,9 +102,9 @@ public class LayoutsSuportados {
             cabecalhoLote(
                     //Controle: Banco, lote e registro
                     //Banco: Código do Banco na Compensação133-NumG001
-                    field("bancoCodigo").length(3).filler(Filler.ZERO_LEFT),
+                    fbancoCodigo(),
                     field("lote").length(4),
-                    field("codRegistro").value("1").length(1),
+                    fcodigoRegistro().value("1"),
                     //Código adotado pela FEBRABAN para identificar a transação que será realizada com os registros detalhe do lote.
                     /* 
                     Domínio:
@@ -235,7 +235,7 @@ public class LayoutsSuportados {
             tituloJ(
                     //Controle: Banco, lote e registro
                     //Banco: Código do Banco na Compensação133-NumG001
-                    field("bancoCodigo").length(3).filler(Filler.ZERO_LEFT),
+                    fbancoCodigo(),
                     //Número seqüencial para identificar univocamente um lote de serviço. Criado e
                     //controlado pelo responsável pela geração magnética dos dados contidos no arquivo.
                     //Preencher com '0001' para o primeiro lote do arquivo. Para os demais: número do lote
@@ -243,7 +243,7 @@ public class LayoutsSuportados {
                     //Se registro for Header do Arquivo preencher com '0000'
                     //Se registro for Trailer do Arquivo preencher com '9999'
                     field("lote").value(1).length(4).padding(Fillers.ZERO_LEFT),
-                    field("codRegistro").value("3").length(1),
+                    fcodigoRegistro().value("3"),
                     field("sequencialRegistro").length(5),
                     //Código adotado pela FEBRABAN para identificar o segmento do registro.
                     field("segmento").value("J").length(1),
@@ -317,7 +317,7 @@ public class LayoutsSuportados {
                     //‘14’ = Euro
                     field("codigoMoeda").value("09").length(2),
                     //20.3J CNAB Uso Exclusivo FEBRABAN/CNAB 225 230 6 - Alfa Brancos G004
-                    field("").filler(Fillers.WHITE_SPACE_LEFT).length(6),
+                    fbranco().length(6),
                     //Código das Ocorrências para Retorno/Remessa
                     //Código adotado pela FEBRABAN para identificar as ocorrências detectadas no
                     //processamento.
@@ -474,7 +474,7 @@ public class LayoutsSuportados {
             tituloJ52(
                     //Controle: Banco, lote e registro
                     //Banco: Código do Banco na Compensação133-NumG001
-                    field("bancoCodigo").length(3).filler(Filler.ZERO_LEFT),
+                    fbancoCodigo(),
                     //Número seqüencial para identificar univocamente um lote de serviço. Criado e
                     //controlado pelo responsável pela geração magnética dos dados contidos no arquivo.
                     //Preencher com '0001' para o primeiro lote do arquivo. Para os demais: número do lote
@@ -482,7 +482,7 @@ public class LayoutsSuportados {
                     //Se registro for Header do Arquivo preencher com '0000'
                     //Se registro for Trailer do Arquivo preencher com '9999'
                     field("lote").value(1).length(4).padding(Fillers.ZERO_LEFT),
-                    field("codRegistro").value("3").length(1),
+                    fcodigoRegistro().value("3"),
                     field("sequencialRegistro").length(5),
                     //Código adotado pela FEBRABAN para identificar o segmento do registro.
                     field("segmento").value("J").length(1),
@@ -559,11 +559,11 @@ public class LayoutsSuportados {
             rodapeLote(
                     //Controle: Banco, lote e registro
                     //Banco: Código do Banco na Compensação133-NumG001
-                    field("bancoCodigo").length(3).filler(Filler.ZERO_LEFT),
+                    fbancoCodigo(),
                     field("lote").length(4),
-                    field("codRegistro").value("5").length(1),
+                    fcodigoRegistro().value("5"),
                     //04.5 CNAB Uso Exclusivo FEBRABAN/CNAB 9 17 9 - Alfa Brancos G004
-                    field("").filler(Fillers.WHITE_SPACE_LEFT).length(9),
+                    fbranco().length(9),
                     //Quantidade de Registros do Lote 18 23 6 - Num *G057
                     field("qtedRegistros").padding(Fillers.ZERO_LEFT).length(6),
                     field("totalValor").padding(Fillers.ZERO_LEFT).length(18),
@@ -583,11 +583,11 @@ public class LayoutsSuportados {
             rodape(
                     //Controle: Banco, lote e registro
                     //Banco: Código do Banco na Compensação133-NumG001
-                    field("bancoCodigo").length(3).filler(Filler.ZERO_LEFT),
+                    fbancoCodigo(),
                     field("lote").value("9999").length(4),
-                    field("codRegistro").value("9").length(1),
+                    fcodigoRegistro().value("9"),
                     //Uso Exclusivo FEBRABAN/CNAB9179-AlfaBrancosG004
-                    field("").filler(Fillers.WHITE_SPACE_LEFT).length(9),
+                    fbranco().length(9),
                     //Qtde. de LotesQuantidade de Lotes do Arquivo18236-NumG049
                     field("qtdeLotes").value(1).padding(Fillers.ZERO_LEFT).length(6),
                     //Qtde. de RegistrosQuantidade de Registros do Arquivo24296-NumG0
@@ -595,7 +595,7 @@ public class LayoutsSuportados {
                     //Qtde. de Contas Concil.Qtde de Contas p/ Conc. (Lotes)30356-Num*G037
                     field("qtedRegistros").padding(Fillers.ZERO_LEFT).length(6),
                     //Uso Exclusivo FEBRABAN/CNAB9179-AlfaBrancosG004
-                    field("").filler(Fillers.WHITE_SPACE_LEFT).length(205)
+                    fbranco().length(205)
             )
     );
 

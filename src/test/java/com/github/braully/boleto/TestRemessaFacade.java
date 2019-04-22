@@ -17,7 +17,6 @@ package com.github.braully.boleto;
 
 import static com.github.braully.boleto.TagLayout.TagCreator.*;
 import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import org.jrimum.bopepo.BancosSuportados;
 import org.jrimum.texgit.Fillers;
@@ -84,8 +83,8 @@ public class TestRemessaFacade {
                         <Field name="DATA_ARQUIVO" length="6" type="DATE" format="DATE_DDMMYY" />
                  */
                 cabecalho(
-                        field("codigoRegistro").length(1).position(1).value(0),
-                        field("codigoRetorno").length(1),
+                        fcodigoRegistro().value(0),
+                        fcodigoRetorno(),
                         fagencia().length(4),
                         fconta().length(7),
                         fdataGeracao()
@@ -108,14 +107,14 @@ public class TestRemessaFacade {
                         </Record>
                  */
                 rodape(
-                        field("codigoRegistro").length(1).position(1).value(9),
-                        field("codigoRetorno").length(1),
-                        field("").filler(Fillers.ZERO_LEFT).length(2),
-                        field("banco").filler(Fillers.ZERO_LEFT).length(3),
-                        field("").filler(Fillers.ZERO_LEFT).length(10),
-                        field("quantidadeTitulos").length(8).type(Number.class).format(new DecimalFormat("00000000")),
-                        field("valorTotalTitulos").length(8).type(Number.class).format(new DecimalFormat("00000000")),
-                        field("").filler(Fillers.ZERO_LEFT).length(8)
+                        fcodigoRegistro().value(9),
+                        fcodigoRetorno(),
+                        fzero().length(2),
+                        fbranco().length(3),
+                        fzero().length(10),
+                        fquantidadeRegistros().length(8),
+                        fvalorTotalRegistros().length(8),
+                        fzero().length(8)
                 )
         );
         return flatfileLayout;
