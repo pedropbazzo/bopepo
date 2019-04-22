@@ -18,12 +18,12 @@ package com.github.braully.boleto;
 import static com.github.braully.boleto.CNAB.*;
 import static com.github.braully.boleto.CNABServico.*;
 import static com.github.braully.boleto.TagLayout.TagCreator.*;
-import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import static org.jrimum.bopepo.BancosSuportados.*;
+import org.jrimum.texgit.Filler;
 import org.jrimum.texgit.Fillers;
 
 /**
@@ -31,6 +31,88 @@ import org.jrimum.texgit.Fillers;
  * @author Braully Rocha da Silva
  */
 public class LayoutsSuportados {
+
+    public static TagLayout LAYOUT_FEBRABAN_REMESSA_COBRANCA_CNAB240 = flatfile(
+            layout(nome("Arquivo-Remessa-Febraban-CNAB240"),
+                    versao("05"),
+                    cnab(CNAB_240),
+                    servico(COBRANCA_REMESSA)
+            ),
+            cabecalho(
+                    //Controle: Banco, lote e registro
+                    //Banco: Código do Banco na Compensação133-NumG001
+                    field("bancoCodigo").length(3).filler(Filler.ZERO_LEFT),
+                    field("lote").value("0000").length(4),
+                    field("codRegistro").value("0").length(1),
+                    //Uso Exclusivo FEBRABAN / CNAB9179-AlfaBrancosG004
+                    field("").filler(Fillers.WHITE_SPACE_LEFT).length(9),
+                    //Tipo de Inscrição: '0'  =  Isento / Não Informado
+                    //                   '1'  =  CPF
+                    //                   '2'  =  CGC / CNPJ
+                    //                   '3'  =  PIS / PASEP
+                    //                   '9'  =   Outros
+                    field("tipoInscricao").value("2").value(""),
+                    field("cedenteCnpj").length(14).padding(Fillers.ZERO_LEFT),
+                    //ConvênioCódigo do Convênio no Banco335220-Alfa*G007
+                    //Código adotado pelo Banco para identificar o Contrato entre este e a Empresa Cliente.
+                    field("convenio").length(20).padding(Fillers.ZERO_LEFT),
+                    //Agência Mantenedora da Conta 53 57 5-Num*G008
+                    //Dígito Verificador da Agência 58 58 1-Alfa*G009
+                    field("agencia").length(6).type(Integer.class).padding(Fillers.ZERO_LEFT),
+                    //Número da Conta Corrente5970 12-Num*G010
+                    //Dígito Verificador da Conta7171 1-Alfa*G011
+                    field("conta").length(13).padding(Fillers.ZERO_LEFT), //Conta com DV
+                    //Dígito Verificador da Ag/Conta72721-Alfa*G012
+                    //Dígito Verificador da Agência / Conta CorrenteCódigo  
+                    //adotado  pelo  Banco  responsável  pela  conta  corrente,
+                    //para  verificação  da autenticidade do par Código da Agência / Número da Conta Corrente.
+                    //Para os Bancos que se utilizam de duas posições para o Dígito Verificador 
+                    //do Número da Conta Corrente, preencher este campo com a 2ª posição deste dígito. 
+                    field("dac").length(1), //Conta com DV
+                    field("cedente").length(30).padding(Fillers.WHITE_SPACE_RIGHT),
+                    field("banco").length(30).padding(Fillers.WHITE_SPACE_RIGHT),
+                    //Uso Exclusivo FEBRABAN / CNAB
+                    field("").filler(Fillers.WHITE_SPACE_LEFT).length(10),
+                    //Código Remessa / Retorno1431431-NumG015
+                    //Código adotado pela FEBRABAN para qualificar o envio ou devolução de arquivo 
+                    //entre a Empresa  Cliente e o Banco prestador dos Serviços.
+                    //Domínio:'1'  =  Remessa (Cliente -> Banco) '2'  =  Retorno (Banco -> Cliente)
+                    field("codigoArquivo").value(1).length(1),
+                    //Data de Geração do Arquivo1441518-Num
+                    field("dataGeracao").length(8).type(Date.class)
+                            .format(new SimpleDateFormat("ddMMyyyy")),
+                    //Hora de Geração do Arquivo1521576
+                    field("horaGeracao").length(6).format(new SimpleDateFormat("hhmmss")),
+                    //Número Seqüencial do Arquivo1581636-Num*G018
+                    field("sequencialArquivo").length(6).padding(Fillers.ZERO_LEFT),
+                    field("versaoLayoutArquivo").value("103"),
+                    //Densidade de gravação (BPI), do arquivo encaminhado. Domínio:1600 BPI ou 6250 BPI
+                    field("densidadeArquivo").length(5).padding(Fillers.ZERO_LEFT),
+                    //Para Uso Reservado do Banco17219120-AlfaG021
+                    field("").length(20).filler(Fillers.WHITE_SPACE_LEFT),
+                    //Para Uso Reservado da Empresa19221120-AlfaG022
+                    field("").length(20).filler(Fillers.WHITE_SPACE_LEFT),
+                    //Uso Exclusivo FEBRABAN / CNAB21224029-AlfaBrancosG004
+                    field("").length(29).filler(Fillers.WHITE_SPACE_LEFT)
+            ),
+            rodape(
+                    //Controle: Banco, lote e registro
+                    //Banco: Código do Banco na Compensação133-NumG001
+                    field("bancoCodigo").length(3).filler(Filler.ZERO_LEFT),
+                    field("lote").value("9999").length(4),
+                    field("codRegistro").value("9").length(1),
+                    //Uso Exclusivo FEBRABAN/CNAB9179-AlfaBrancosG004
+                    field("").filler(Fillers.WHITE_SPACE_LEFT).length(9),
+                    //Qtde. de LotesQuantidade de Lotes do Arquivo18236-NumG049
+                    field("qtdeLotes").value(1).padding(Fillers.ZERO_LEFT).length(6),
+                    //Qtde. de RegistrosQuantidade de Registros do Arquivo24296-NumG0
+                    field("qtedRegistros").padding(Fillers.ZERO_LEFT).length(6),
+                    //Qtde. de Contas Concil.Qtde de Contas p/ Conc. (Lotes)30356-Num*G037
+                    field("qtedRegistros").padding(Fillers.ZERO_LEFT).length(6),
+                    //Uso Exclusivo FEBRABAN/CNAB9179-AlfaBrancosG004
+                    field("").filler(Fillers.WHITE_SPACE_LEFT).length(205)
+            )
+    );
 
     /*
      Baseado no arquivo: LayoutItauCNAB400Envio.txg
