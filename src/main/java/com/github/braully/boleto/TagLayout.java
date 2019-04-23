@@ -42,17 +42,27 @@ public class TagLayout implements Serializable {
         }
 
         /* Fields mais comuns */
+        /**
+         * Codigo de 3 digitos do banco na FEBRABAN
+         *
+         * @return
+         */
         public static TagLayout fbancoCodigo() {
             return field("bancoCodigo").padding(Fillers.ZERO_LEFT).length(3);
         }
 
+        /**
+         * Nome do banco
+         *
+         * @return
+         */
         public static TagLayout fbancoNome() {
             return field("bancoNome").padding(Fillers.WHITE_SPACE_RIGHT);
         }
 
         /**
-         * Agência Mantenedora da Conta 53 57 5-Num*G008. Dígito Verificador da
-         * Agência 58 58 1-Alfa*G009
+         * Agência Mantenedora da Conta 53 57 5-Num*G008. Com Dígito Verificador
+         * da Agência 58 58 1-Alfa*G009
          *
          * @return
          */
@@ -93,6 +103,41 @@ public class TagLayout implements Serializable {
          */
         public static TagLayout fsacadoNome() {
             return field("sacadoNome").padding(Fillers.WHITE_SPACE_RIGHT).length(30);
+        }
+
+        /**
+         * C004: Código de Movimento Remessa Código adotado pela FEBRABAN, para
+         * identificar o tipo de movimentação enviado nos //registros do arquivo
+         * de remessa. Cada Banco definirá os campos a serem alterados para o
+         * código de movimento '31'
+         *
+         * Domínio: '01' = Entrada de Títulos '02' = Pedido de Baixa ‘03’ =
+         * Protesto para Fins Falimentares '04' = Concessão de Abatimento '05' =
+         * Cancelamento de Abatimento '06' = Alteração de Vencimento '07' =
+         * Concessão de Desconto '08' = Cancelamento de Desconto '09' =
+         * Protestar '10' = Sustar Protesto e Baixar Título '11' = Sustar
+         * Protesto e Manter em Carteira ‘12’ = Alteração de Juros de Mora ‘13’
+         * = Dispensar Cobrança de Juros de Mora ‘14’ = Alteração de
+         * Valor/Percentual de Multa ‘15’ = Dispensar Cobrança de Multa ‘16’ =
+         * Alteração de Valor/Data de Desconto ‘17’ = Não conceder Desconto ‘18’
+         * = Alteração do Valor de Abatimento ‘19’ = Prazo Limite de Recebimento
+         * - Alterar ‘20’ = Prazo Limite de Recebimento - Dispensar ‘21’ =
+         * Alterar número do título dado pelo Beneficiário ‘22’ = Alterar número
+         * controle do Participante ‘23’ = Alterar dados do Pagador ‘24’ =
+         * Alterar dados do Sacador/Avalista '30' = Recusa da Alegação do
+         * Pagador '31' = Alteração de Outros Dados '33' = Alteração dos Dados
+         * do Rateio de Crédito '34' = Pedido de Cancelamento dos Dados do
+         * Rateio de Crédito '35' = Pedido de Desagendamento do Débito
+         * Automático '40' = Alteração de Carteira ‘41’ = Cancelar protesto ‘42’
+         * = Alteração de Espécie de Título ‘43’ = Transferência de
+         * carteira/modalidade de cobrança ‘44’ = Alteração de contrato de
+         * cobrança ‘45’ = Negativação Sem Protesto ‘46’ = Solicitação de Baixa
+         * de Título Negativado Sem Protesto ‘47’ = Alteração do Valor Nominal
+         * do Título ‘48’ = Alteração do Valor Mínimo/ Percentual ‘49’ =
+         * Alteração do Valor Máximo/Percentual
+         */
+        public static TagLayout fmovimentoCodigo() {
+            return field("movimentoCodigo").length(2);
         }
 
         /**
@@ -154,7 +199,115 @@ public class TagLayout implements Serializable {
             return field("valorTotalRegistros").type(Number.class).padding(Fillers.ZERO_LEFT);
         }
 
+        /**
+         *
+         * Código das Ocorrências para Retorno/Remessa.
+         *
+         * Código adotado pela FEBRABAN para identificar as ocorrências
+         * detectadas no processamento. Pode-se informar até 5 ocorrências
+         * simultaneamente, cada uma delas codificada com dois dígitos, conforme
+         * relação abaixo.
+         *
+         * Domínio: '00' = Crédito ou Débito Efetivado → Este código indica que
+         * o pagamento foi confirmado '01' = Insuficiência de Fundos - Débito
+         * Não Efetuado '02' = Crédito ou Débito Cancelado pelo Pagador/Credor
+         * '03' = Débito Autorizado pela Agência - Efetuado 'AA' = Controle
+         * Inválido 'AB' = Tipo de Operação Inválido 'AC' = Tipo de Serviço
+         * Inválido 'AD' = Forma de Lançamento Inválida 'AE' = Tipo/Número de
+         * Inscrição Inválido 'AF' = Código de Convênio Inválido 'AG' =
+         * Agência/Conta Corrente/DV Inválido 'AH' = Nº Seqüencial do Registro
+         * no Lote Inválido 'AI' = Código de Segmento de Detalhe Inválido 'AJ' =
+         * Tipo de Movimento Inválido 'AK' = Código da Câmara de Compensação do
+         * Banco Favorecido/Depositário Inválido 'AL' = Código do Banco
+         * Favorecido, Instituição de Pagamento ou Depositário Inválido 'AM' =
+         * Agência Mantenedora da Conta Corrente do Favorecido Inválida 'AN' =
+         * Conta Corrente/DV/Conta de Pagamento do Favorecido Inválido 'AO' =
+         * Nome do Favorecido Não Informado 'AP' = Data Lançamento Inválido 'AQ'
+         * = Tipo/Quantidade da Moeda Inválido 'AR' = Valor do Lançamento
+         * Inválido 'AS' = Aviso ao Favorecido - Identificação Inválida 'AT' =
+         * Tipo/Número de Inscrição do Favorecido Inválido 'AU' = Logradouro do
+         * Favorecido Não Informado 'AV' = Nº do Local do Favorecido Não
+         * Informado 'AW' = Cidade do Favorecido Não Informada 'AX' =
+         * CEP/Complemento do Favorecido Inválido 'AY' = Sigla do Estado do
+         * Favorecido Inválida 'AZ' = Código/Nome do Banco Depositário Inválido
+         * 'BA' = Código/Nome da Agência Depositária Não Informado 'BB' = Seu
+         * Número Inválido 'BC' = Nosso Número Inválido 'BD' = Inclusão Efetuada
+         * com Sucesso 'BE' = Alteração Efetuada com Sucesso 'BF' = Exclusão
+         * Efetuada com Sucesso 'BG' = Agência/Conta Impedida Legalmente ‘BH’=
+         * Empresa não pagou salário ‘BI’ = Falecimento do mutuário ‘BJ’ =
+         * Empresa não enviou remessa do mutuário ‘BK’= Empresa não enviou
+         * remessa no vencimento ‘BL’ = Valor da parcela inválida ‘BM’=
+         * Identificação do contrato inválida ‘BN’ = Operação de Consignação
+         * Incluída com Sucesso ‘BO’ = Operação de Consignação Alterada com
+         * Sucesso ‘BP’ = Operação de Consignação Excluída com Sucesso ‘BQ’ =
+         * Operação de Consignação Liquidada com Sucesso ‘BR’ = Reativação
+         * Efetuada com Sucesso ‘BS’ = Suspensão Efetuada com Sucesso 'CA' =
+         * Código de Barras - Código do Banco Inválido 'CB' = Código de Barras -
+         * Código da Moeda Inválido 'CC' = Código de Barras - Dígito Verificador
+         * Geral Inválido 'CD' = Código de Barras - Valor do Título Inválido
+         * 'CE' = Código de Barras - Campo Livre Inválido 'CF' = Valor do
+         * Documento Inválido 'CG' = Valor do Abatimento Inválido 'CH' = Valor
+         * do Desconto Inválido 'CI' = Valor de Mora Inválido 'CJ' = Valor da
+         * Multa Inválido 'CK' = Valor do IR Inválido 'CL' = Valor do ISS
+         * Inválido 'CM' = Valor do IOF Inválido 'CN' = Valor de Outras Deduções
+         * Inválido 'CO' = Valor de Outros Acréscimos Inválido 'CP' = Valor do
+         * INSS Inválido 'HA' = Lote Não Aceito 'HB' = Inscrição da Empresa
+         * Inválida para o Contrato 'HC' = Convênio com a Empresa
+         * Inexistente/Inválido para o Contrato 'HD' = Agência/Conta Corrente da
+         * Empresa Inexistente/Inválido para o Contrato 'HE' = Tipo de Serviço
+         * Inválido para o Contrato 'HF' = Conta Corrente da Empresa com Saldo
+         * Insuficiente 'HG' = Lote de Serviço Fora de Seqüência 'HH' = Lote de
+         * Serviço Inválido `HI` = Arquivo não aceito `HJ` = Tipo de Registro
+         * Inválido `HK` = Código Remessa / Retorno Inválido `HL` = Versão de
+         * layout inválida `HM` = Mutuário não identificado `HN` = Tipo do
+         * beneficio não permite empréstimo `HO` = Beneficio cessado/suspenso
+         * `HP` = Beneficio possui representante legal `HQ` = Beneficio é do
+         * tipo PA (Pensão alimentícia) `HR` = Quantidade de contratos permitida
+         * excedida `HS` = Beneficio não pertence ao Banco informado `HT` =
+         * Início do desconto informado já ultrapassado `HU`= Número da parcela
+         * inválida `HV`= Quantidade de parcela inválida `HW`= Margem
+         * consignável excedida para o mutuário dentro do prazo do contrato `HX`
+         * = Empréstimo já cadastrado `HY` = Empréstimo inexistente `HZ` =
+         * Empréstimo já encerrado `H1` = Arquivo sem trailer `H2` = Mutuário
+         * sem crédito na competência `H3` = Não descontado – outros motivos
+         * `H4` = Retorno de Crédito não pago `H5` = Cancelamento de empréstimo
+         * retroativo `H6` = Outros Motivos de Glosa ‘H7’ = Margem consignável
+         * excedida para o mutuário acima do prazo do contrato ‘H8’ = Mutuário
+         * desligado do empregador ‘H9’ = Mutuário afastado por licença ‘IA’ =
+         * Primeiro nome do mutuário diferente do primeiro nome do movimento do
+         * censo ou diferente da base de Titular do Benefício ‘IB’ = Benefício
+         * suspenso/cessado pela APS ou Sisobi ‘IC’ = Benefício suspenso por
+         * dependência de cálculo ‘ID’ = Benefício suspenso/cessado pela
+         * inspetoria/auditoria ‘IE’ = Benefício bloqueado para empréstimo pelo
+         * beneficiário ‘IF’ = Benefício bloqueado para empréstimo por TBM ‘IG’
+         * = Benefício está em fase de concessão de PA ou desdobramento ‘IH’ =
+         * Benefício cessado por óbito ‘II’ = Benefício cessado por fraude ‘IJ’
+         * = Benefício cessado por concessão de outro benefício ‘IK’ = Benefício
+         * cessado: estatutário transferido para órgão de origem ‘IL’ =
+         * Empréstimo suspenso pela APS ‘IM’ = Empréstimo cancelado pelo banco
+         * ‘IN’ = Crédito transformado em PAB ‘IO’ = Término da consignação foi
+         * alterado ‘IP’ = Fim do empréstimo ocorreu durante período de
+         * suspensão ou concessão ‘IQ’ = Empréstimo suspenso pelo banco ‘IR’ =
+         * Não averbação de contrato – quantidade de parcelas/competências
+         * informadas ultrapassou a data limite da extinção de cota do
+         * dependente titular de benefícios 'TA' = Lote Não Aceito - Totais do
+         * Lote com Diferença 'YA' = Título Não Encontrado 'YB' = Identificador
+         * Registro Opcional Inválido 'YC' = Código Padrão Inválido 'YD' =
+         * Código de Ocorrência Inválido 'YE' = Complemento de Ocorrência
+         * Inválido 'YF' = Alegação já Informada Observação: As ocorrências
+         * iniciadas com 'ZA' tem caráter informativo para o cliente 'ZA' =
+         * Agência / Conta do Favorecido Substituída ‘ZB’ = Divergência entre o
+         * primeiro e último nome do beneficiário versus primeiro e último nome
+         * na Receita Federal ‘ZC’ = Confirmação de Antecipação de Valor ‘ZD’ =
+         * Antecipação parcial de valor ‘ZE’ = Título bloqueado na base ‘ZF’ =
+         * Sistema em contingência – título valor maior que referência ‘ZG’ =
+         * Sistema em contingência – título vencido ‘ZH’ = Sistema em
+         * contingência – título indexado ‘ZI’ = Beneficiário divergente ‘ZJ’ =
+         * Limite de pagamentos parciais excedido ‘ZK’ = Boleto já liquidado
+         *
+         */
         public static TagLayout focorrencias() {
+            //TODO: Melhorar isso, criar um Enum
             return field("ocorrencias").filler(Fillers.WHITE_SPACE_LEFT).length(10);
         }
 
@@ -202,6 +355,17 @@ public class TagLayout implements Serializable {
         }
 
         /**
+         * Código adotado pela FEBRABAN, para identificar o tipo de movimentação
+         * enviada no arquivo. Domínio: '0' = Indica INCLUSÃO ‘1’ = Indica
+         * CONSULTA ‘2’ = Indica SUSPENSÃO '3' = Indica ESTORNO (somente para
+         * retorno) ‘4’ = Indica REATIVAÇÃO '5' = Indica ALTERAÇÃO ‘7` = Indica
+         * LIQUIDAÇAO '9' = Indica EXCLUSÃO
+         */
+        public static TagLayout fmovimentoTipo() {
+            return field("movimentoTipo").length(1);
+        }
+
+        /**
          * Código adotado pela FEBRABAN para identificar a moeda referenciada no
          * Título. Domínio: '01' = Reservado para Uso Futuro '02' = Dólar
          * Americano Comercial (Venda) '03' = Dólar Americano Turismo (Venda)
@@ -237,14 +401,38 @@ public class TagLayout implements Serializable {
             return field("forma").length(2).padding(Fillers.ZERO_LEFT);
         }
 
+        /**
+         * Esse field ira gerar zeros conforme o tamanho do Length.
+         *
+         * @return
+         */
         public static TagLayout fzero() {
             return field("").filler(Fillers.ZERO_LEFT);
         }
 
+        /**
+         * Esse field ira gerar espaços em branco.
+         *
+         * @return
+         */
         public static TagLayout fbranco() {
             return field("").filler(Fillers.WHITE_SPACE_LEFT);
         }
 
+        /**
+         * G010 Número da Conta Corrente G010
+         *
+         * Número adotado pelo Banco, para identificar univocamente a conta
+         * corrente utilizada pelo Cliente. G011 Dígito Verificador da Conta
+         * G011 Código adotado pelo responsável pela conta corrente, para
+         * verificação da autenticidade do Número da Conta Corrente. Para os
+         * Bancos que se utilizam de duas posições para o Dígito Verificador do
+         * Número da Conta Corrente, preencher este campo com a 1a posição deste
+         * dígito. Exemplo : Número C/C = 45981-36 Neste caso → Dígito
+         * Verificador da Conta = 3
+         *
+         * @return
+         */
         public static TagLayout fconta() {
             return field("conta").padding(Fillers.ZERO_LEFT);
         }

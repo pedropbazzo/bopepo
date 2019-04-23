@@ -195,33 +195,11 @@ public class LayoutsSuportados {
                     //Código adotado pela FEBRABAN para identificar o segmento do registro.
                     field("segmento").value("J").length(1),
                     //Código adotado pela FEBRABAN, para identificar o tipo de movimentação enviada no arquivo.
-                    // Domínio: '0' = Indica INCLUSÃO
-                    //          ‘1’ = Indica CONSULTA
-                    //          ‘2’ = Indica SUSPENSÃO
-                    //          '3' = Indica ESTORNO (somente para retorno)
-                    //          ‘4’ = Indica REATIVAÇÃO
-                    //          '5' = Indica ALTERAÇÃO
-                    //          ‘7` = Indica LIQUIDAÇAO
-                    //          '9' = Indica EXCLUSÃO
-                    field("movimentoTipo").value(0).length(1),
+                    fmovimentoTipo().value(0),
                     //Código da Instrução para Movimento
                     //Código adotado pela FEBRABAN, para identificar a ação a ser realizada com o
                     //lançamento enviado no arquivo. 
-                    //Domínio:
-                    //'00' = Inclusão de Registro Detalhe Liberado
-                    //'09' = Inclusão do Registro Detalhe Bloqueado
-                    //'10' = Alteração do Pagamento Liberado para Bloqueado (Bloqueio)
-                    //'11' = Alteração do Pagamento Bloqueado para Liberado (Liberação)
-                    //'17' = Alteração do Valor do Título
-                    //'19' = Alteração da Data de Pagamento
-                    //'23' = Pagamento Direto ao Fornecedor - Baixar
-                    //'25' = Manutenção em Carteira - Não Pagar
-                    //'27' = Retirada de Carteira - Não Pagar
-                    //'33' = Estorno por Devolução da Câmara Centralizadora (somente para Tipo de
-                    //Movimento = '3')
-                    //'40' = Alegação do Pagador
-                    //'99' = Exclusão do Registro Detalhe Incluído Anteriormente
-                    field("movimentoCodigo").value("00").length(2),
+                    fmovimentoCodigo().value("00"),
                     fcodigoBarras().length(44),
                     fsacadoNome().length(30),
                     fdataVencimento(),
@@ -244,21 +222,6 @@ public class LayoutsSuportados {
                     fnossoNumero().length(20),
                     //G065 Código da Moeda
                     //Código adotado pela FEBRABAN para identificar a moeda referenciada no Título
-                    //Domínio:
-                    //'01' = Reservado para Uso Futuro
-                    //'02' = Dólar Americano Comercial (Venda)
-                    //'03' = Dólar Americano Turismo (Venda)
-                    //'04' = ITRD
-                    //'05' = IDTR
-                    //'06' = UFIR Diária
-                    //'07' = UFIR Mensal
-                    //'08' = FAJ-TR
-                    //'09' = Real
-                    //'10' = TR
-                    //'11' = IGPM
-                    //'12' = CDI
-                    //'13' = Percentual do CDI
-                    //‘14’ = Euro
                     fcodigoMoeda(),
                     //20.3J CNAB Uso Exclusivo FEBRABAN/CNAB 225 230 6 - Alfa Brancos G004
                     fbranco().length(6),
@@ -409,37 +372,7 @@ public class LayoutsSuportados {
                     //Código adotado pela FEBRABAN, para identificar o tipo de movimentação enviado nos
                     //registros do arquivo de remessa.
                     //Cada Banco definirá os campos a serem alterados para o código de movimento '31'
-                    /**
-                     * Domínio: '01' = Entrada de Títulos '02' = Pedido de Baixa
-                     * ‘03’ = Protesto para Fins Falimentares '04' = Concessão
-                     * de Abatimento '05' = Cancelamento de Abatimento '06' =
-                     * Alteração de Vencimento '07' = Concessão de Desconto '08'
-                     * = Cancelamento de Desconto '09' = Protestar '10' = Sustar
-                     * Protesto e Baixar Título '11' = Sustar Protesto e Manter
-                     * em Carteira ‘12’ = Alteração de Juros de Mora ‘13’ =
-                     * Dispensar Cobrança de Juros de Mora ‘14’ = Alteração de
-                     * Valor/Percentual de Multa ‘15’ = Dispensar Cobrança de
-                     * Multa ‘16’ = Alteração de Valor/Data de Desconto ‘17’ =
-                     * Não conceder Desconto ‘18’ = Alteração do Valor de
-                     * Abatimento ‘19’ = Prazo Limite de Recebimento - Alterar
-                     * ‘20’ = Prazo Limite de Recebimento - Dispensar ‘21’ =
-                     * Alterar número do título dado pelo Beneficiário ‘22’ =
-                     * Alterar número controle do Participante ‘23’ = Alterar
-                     * dados do Pagador ‘24’ = Alterar dados do Sacador/Avalista
-                     * '30' = Recusa da Alegação do Pagador '31' = Alteração de
-                     * Outros Dados '33' = Alteração dos Dados do Rateio de
-                     * Crédito '34' = Pedido de Cancelamento dos Dados do Rateio
-                     * de Crédito '35' = Pedido de Desagendamento do Débito
-                     * Automático '40' = Alteração de Carteira ‘41’ = Cancelar
-                     * protesto ‘42’ = Alteração de Espécie de Título ‘43’ =
-                     * Transferência de carteira/modalidade de cobrança ‘44’ =
-                     * Alteração de contrato de cobrança ‘45’ = Negativação Sem
-                     * Protesto ‘46’ = Solicitação de Baixa de Título Negativado
-                     * Sem Protesto ‘47’ = Alteração do Valor Nominal do Título
-                     * ‘48’ = Alteração do Valor Mínimo/ Percentual ‘49’ =
-                     * Alteração do Valor Máximo/Percentual
-                     */
-                    field("movimentoCodigo").value("00").length(2),
+                    fmovimentoCodigo().value("00"),
                     //08.4.J52 Código Reg. Opcional Identificação Registro Opcional 18 19 2 - Num “52” G067
                     field("idRegOpcional").length(2).value("52"),
                     //DADOS DO PAGADOR
@@ -536,119 +469,6 @@ public class LayoutsSuportados {
 
     public static final TagLayout LAYOUT_FEBRABAN_CNAB240_COBRANCA_RETORNO
             = _LAYOUT_FEBRABAN_CNAB240_COBRANCA_RETORNO.cloneReadonly();
-
-    /*
-     Baseado no arquivo: LayoutItauCNAB400Envio.txg
-     
-     */
-    public static TagLayout LAYOUT_ITAU_REMESSA_COBRANCA_CNAB400 = flatfile(
-            layout(nome("Arquivo-Remessa_ItauCNAB400"),
-                    versao("01"),
-                    banco(BANCO_ITAU.create()),
-                    cnab(CNAB_400),
-                    servico(COBRANCA_REMESSA)
-            ),
-            cabecalho(
-                    /*
-                    <IdType name="IDReg" value="0" length="1" position="1" />
-                    <Field name="IdentificacaoRemessa" value="1" length="1" />
-                    <Field name="LiteralRemessa" value="REMESSA" length="7" />
-                    <Field name="CodigoDeServico" value="01" length="2" />
-                    <Field name="LiteralServico" value="COBRANCA" length="15" />
-                    <Field name="Agencia" length="4" type="INTEGER" padding="ZERO_LEFT" />
-                    <Field name="Zeros" value="00" length="2"  />
-                    <Field name="Conta" length="5" type="INTEGER" padding="ZERO_LEFT" />
-                    <Field name="DacConta" length="1" type="INTEGER" />
-                     */
-                    field("id-ident-literal").length(26).value("01REMESSA01COBRANCA"),
-                    field("agencia").length(4).type(Integer.class).padding(Fillers.ZERO_LEFT),
-                    field("").value("00"),
-                    field("conta").length(6).padding(Fillers.ZERO_LEFT), //Conta com DV
-                    field("dataGeracao").length(6).type(Date.class).format(new SimpleDateFormat("ddMMYY")),
-                    /*
-                    <Field name="Brancos1" length="8" blankAccepted="true"  /><!--Enviar 8 Brancos -->
-                    <Field name="NomeEmpresa" length="30" type="CHARACTER" />
-                    <Field name="CodigoCompensacao" value="341" length="3" />
-                    <Field name="NomeBanco" value="BANCO ITAU SA" length="15" />
-                    <Field name="DataGeracao" length="6" type="DATE" format="DATE_DDMMYY" />
-                    <Field name="Brancos2" length="294" blankAccepted="true" /><!--Enviar 294 Brancos -->
-                    <Field name="NumeroSequencialRegistro" type="INTEGER" length="6" padding="ZERO_LEFT" /> 
-                     */
-                    field("").length(8).filler(Fillers.WHITE_SPACE_LEFT),
-                    fcedenteNome().length(30).padding(Fillers.WHITE_SPACE_RIGHT),
-                    field("comp-banco").value("341BANCO ITAU SA"),
-                    field("dataGeracao").length(6).type(Date.class).format(new SimpleDateFormat("ddMMYY")),
-                    field("").length(294).filler(Fillers.WHITE_SPACE_LEFT),
-                    fsequencialRegistro().type(Number.class).length(6).padding(Fillers.ZERO_LEFT)
-            ),
-            titulo(
-                    /* 
-                    <IdType name="IDReg" value="1" length="1" position="1" />
-                    <Field name="CodigoInscricao" length="2" value="02" type="INTEGER" /> */
-                    field("codigoRegistro").length(3).value("102"),
-                    /*
-                    <Field name="NumeroInscricao" length="14" type="INTEGER"  /><!-- CNPJ EMPRESA -->
-                    <Field name="Agencia" length="4" padding="ZERO_LEFT" type="INTEGER" />
-                    <Field name="Zeros" value="00" length="2"  />
-                    <Field name="Conta" length="5" type="INTEGER" padding="ZERO_LEFT" />
-                    <Field name="DacConta" length="1" type="INTEGER" />*/
-                    fcedenteCnpj().length(14),
-                    field("agencia").length(4).type(Integer.class).padding(Fillers.ZERO_LEFT),
-                    field("").value("00"),
-                    field("conta").length(6).padding(Fillers.ZERO_LEFT) //Conta com DV                    
-            /*
-                    <Field name="Brancos1" length="4" type="CHARACTER"  /><!--Enviar 4 Brancos -->										
-                    <Field name="InstrucaoAlegacao" length="4" type="INTEGER" /> 
-                    <Field name="UsoDaEmpresa" length="25" type="CHARACTER" /> 
-                    <Field name="NossoNumeroComDigito" length="8" type="INTEGER" />
-                    <Field name="QtdMoeda" length="13" type="BIGDECIMAL" value="0" format="DECIMAL_DD" padding="ZERO_LEFT" />					
-                    <Field name="NrCarteira" length="3" type="INTEGER" />
-                    <Field name="UsoDoBanco" length="21" type="CHARACTER" />
-                    <Field name="CodigoCarteira" length="1" type="CHARACTER" value="I" />					
-                    <Field name="CodigoDeOcorrencia" length="2" type="INTEGER" padding="ZERO_LEFT" />
-                    <Field name="NumeroDoDocumento" length="10" />
-                    <Field name="Vencimento" length="6" type="DATE" format="DATE_DDMMYY" padding="ZERO_LEFT" />
-                    <Field name="Valor" length="13" value="0" format="DECIMAL_DD" padding="ZERO_LEFT" /> 
-                    <Field name="CodigoCompensacaoBancoRecebedor" value="341" length="3" padding="ZERO_LEFT" />
-                    <Field name="AgenciaCobradora" length="5" value="00000" type="INTEGER" padding="ZERO_LEFT" />
-                    <Field name="EspecieDeTitulo" length="2" type="CHARACTER" padding="ZERO_LEFT" />
-                    <Field name="Aceite" length="1" type="CHARACTER" /><!-- A = Aceite N = Não Aceite -->
-                    <Field name="Emissao" length="6" type="DATE" format="DATE_DDMMYY" padding="ZERO_LEFT" />
-                    <Field name="Instrucao1" length="2" type="CHARACTER" />
-                    <Field name="Instrucao2" length="2" type="CHARACTER" />
-                    <Field name="JurosDeMora" type="BIGDECIMAL" length="13" value="0" format="DECIMAL_DD" padding="ZERO_LEFT" />
-                    <Field name="DataDesconto" length="6" type="DATE" format="DATE_DDMMYY" padding="ZERO_LEFT" />
-                    <Field name="DescontoConcedido" type="BIGDECIMAL" length="13" value="0" format="DECIMAL_DD" padding="ZERO_LEFT" />
-                    <Field name="IOF_Devido" type="BIGDECIMAL" length="13" value="0" format="DECIMAL_DD" padding="ZERO_LEFT" />
-                    <Field name="AbatimentoConcedido" type="BIGDECIMAL" length="13" value="0" format="DECIMAL_DD" padding="ZERO_LEFT" />
-                    <Field name="TipoInscricaoSacado" length="2" type="INTEGER" padding="ZERO_LEFT" />
-                    <Field name="NumeroInscricaoSacado" length="14" type="INTEGER" padding="ZERO_LEFT" />
-                    <Field name="NomeSacado" length="30" type="CHARACTER"  />										
-                    <Field name="Brancos2" length="10" type="CHARACTER"  /><!--Enviar 10 Brancos -->
-                    <Field name="LogradouroSacado" length="40" type="CHARACTER"  />										
-                    <Field name="BairroSacado" length="12" type="CHARACTER"  />
-                    <Field name="CepSacado" length="8" type="INTEGER"  />
-                    <Field name="Cidade" length="15" type="CHARACTER"  />
-                    <Field name="Estado" length="2" type="CHARACTER"  />
-                    <Field name="SacadorAvalista" length="30" type="CHARACTER"  />
-                    <Field name="Brancos3" length="4" type="CHARACTER"  /><!--Enviar 4 Brancos -->										
-                    <Field name="DataDeMora" length="6" type="DATE" format="DATE_DDMMYY" padding="ZERO_LEFT" />
-                    <Field name="Prazo" length="2" type="INTEGER"  />
-                    <Field name="Brancos4" length="1" type="CHARACTER"  /><!--Enviar 1 Branco -->													
-                    <Field name="NumeroSequencialRegistro" type="INTEGER" length="6" padding="ZERO_LEFT" />
-             */
-            ),
-            rodape(
-                    /*
-                    <IdType name="IDReg" value="9" length="1" position="1" />
-                    <Field name="Filler" length="393" />
-                    <SequencialNumber name="sequencia" type="INTEGER" length="6" position="3" padding="ZERO_LEFT" />
-                     */
-                    field("id").length(1).value(9),
-                    field("").length(393).filler(Fillers.WHITE_SPACE_LEFT),
-                    fsequencialRegistro().type(Number.class).padding(Fillers.ZERO_LEFT).length(6)
-            )
-    );
 
     /*
     
