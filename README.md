@@ -1,4 +1,26 @@
+Objetivo desse fork:
+      
+Unificar as bibliotecas do projeto JRimum.
 
+Disponiblizar uma versão estável no repositorio maven central.
+
+
+Suporte a boletos com registro dos principais bancos.
+Banco do Brasil
+Bradesco
+Caixa
+Itau
+Santander
+Sicredi
+
+Suporte para remessa de boletos
+
+
+Suporte para retorno de boletos
+
+ 
+
+ 
 
 Fusão das branches 'master', 'helio' e 'litio' e dos projetos 'bopepo', 
 'domkee', 'utilix', 'vallia', 'texgit' e 'texgit-febraban'.

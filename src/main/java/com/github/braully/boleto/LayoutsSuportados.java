@@ -28,7 +28,7 @@ import org.jrimum.texgit.Fillers;
  * @author Braully Rocha da Silva
  */
 public class LayoutsSuportados {
-
+    
     private static final TagLayout _LAYOUT_FEBRABAN_CNAB240 = flatfile(
             layout(nome("Layout Padrão Febraban CNAB240"),
                     cnab(CNAB_240),
@@ -317,7 +317,7 @@ public class LayoutsSuportados {
                     fbranco().length(205)
             )
     );
-
+    
     public static final TagLayout LAYOUT_FEBRABAN_CNAB240
             = _LAYOUT_FEBRABAN_CNAB240.cloneReadonly();
 
@@ -326,24 +326,24 @@ public class LayoutsSuportados {
      */
     private static final TagLayout _LAYOUT_FEBRABAN_CNAB240_COBRANCA_REMESSA
             = _LAYOUT_FEBRABAN_CNAB240.clone();
-
+    
     static {
         _LAYOUT_FEBRABAN_CNAB240_COBRANCA_REMESSA.get(cabecalho())
                 .get(fcodigoArquivo().value('1'));
     }
-
+    
     public static final TagLayout LAYOUT_FEBRABAN_CNAB240_COBRANCA_REMESSA
             = _LAYOUT_FEBRABAN_CNAB240_COBRANCA_REMESSA.cloneReadonly();
-
+    
     private static final TagLayout _LAYOUT_FEBRABAN_CNAB240_COBRANCA_RETORNO
             = _LAYOUT_FEBRABAN_CNAB240.clone();
-
+    
     static {
         _LAYOUT_FEBRABAN_CNAB240_COBRANCA_RETORNO.get(cabecalho())
                 .get(fcodigoArquivo().value('2'));
-
+        
     }
-
+    
     public static final TagLayout LAYOUT_FEBRABAN_CNAB240_COBRANCA_RETORNO
             = _LAYOUT_FEBRABAN_CNAB240_COBRANCA_RETORNO.cloneReadonly();
 
@@ -351,7 +351,7 @@ public class LayoutsSuportados {
     
      */
     private static final List<TagLayout> layoutsSuportados;
-
+    
     static {
         List<TagLayout> layoutsSuportadosTmp = new ArrayList<>();
         /* */
@@ -362,7 +362,7 @@ public class LayoutsSuportados {
         /* */
         layoutsSuportados = Collections.unmodifiableList(layoutsSuportadosTmp);
     }
-
+    
     public static TagLayout getLayoutArquivoBancarioRemessaCobranca(String codBanco, String numConvenio, String agencia, String conta, String carteira, Boolean registrado) {
         return getLayoutArquivoBancario(CNABServico.COBRANCA_REMESSA, CNAB_240,
                 codBanco, numConvenio, agencia, conta, carteira, registrado);
@@ -386,8 +386,10 @@ public class LayoutsSuportados {
         }
         return ret;
     }
-
+    
     public static boolean eq(Object value1, Object value2) {
-        return value1.equals(value2);
+        return value1 == value2
+                || value1 != null && value1.equals(value2)
+                || value2 != null && value2.equals(value1);
     }
 }
