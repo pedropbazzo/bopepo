@@ -43,59 +43,59 @@ public class RemessaFacade {
         this.template = template;
     }
 
-    CabecalhoRemessa addNovoCabecalho() {
+    public CabecalhoRemessa addNovoCabecalho() {
         CabecalhoRemessa cabecalho = novoCabecalho("cabecalho");
         this.add(cabecalho);
         return cabecalho;
     }
 
-    CabecalhoRemessa addNovoCabecalhoLote() {
+    public CabecalhoRemessa addNovoCabecalhoLote() {
         CabecalhoRemessa cabecalho = novoCabecalho("cabecalhoLote");
         this.add(cabecalho);
         return cabecalho;
     }
 
-    CabecalhoRemessa novoCabecalho(String tipoCabecalho) {
+    public CabecalhoRemessa novoCabecalho(String tipoCabecalho) {
         CabecalhoRemessa cabecalho = new CabecalhoRemessa(template.get(tipoCabecalho));
         return cabecalho;
     }
 
-    TituloRemessa addNovoTitulo() {
+    public TituloRemessa addNovoTitulo() {
         TituloRemessa titulo = this.novoTitulo("titulo");
         this.add(titulo);
         return titulo;
     }
 
-    TituloRemessa addNovoTituloJ() {
+    public TituloRemessa addNovoTituloJ() {
         TituloRemessa titulo = this.novoTitulo("tituloJ");
         this.add(titulo);
         return titulo;
     }
 
-    TituloRemessa addNovoTituloJ52() {
+    public TituloRemessa addNovoTituloJ52() {
         TituloRemessa titulo = this.novoTitulo("tituloJ52");
         this.add(titulo);
         return titulo;
     }
 
-    TituloRemessa novoTitulo(String tipoTitulo) {
+    public TituloRemessa novoTitulo(String tipoTitulo) {
         TituloRemessa titulo = new TituloRemessa(template.get(tipoTitulo));
         return titulo;
     }
 
-    RodapeRemessa addNovoRodape() {
+    public RodapeRemessa addNovoRodape() {
         RodapeRemessa rodape = this.novoRodape("rodape");
         this.add(rodape);
         return rodape;
     }
 
-    RodapeRemessa addNovoRodapeLote() {
+    public RodapeRemessa addNovoRodapeLote() {
         RodapeRemessa rodape = this.novoRodape("rodapeLote");
         this.add(rodape);
         return rodape;
     }
 
-    RodapeRemessa novoRodape(String tipoRodape) {
+    public RodapeRemessa novoRodape(String tipoRodape) {
         RodapeRemessa rodape = new RodapeRemessa(template.get(tipoRodape));
         return rodape;
     }
@@ -151,43 +151,43 @@ public class RemessaFacade {
         }
 
         /* Campos comuns na maioria dos registros na maioria dos layouts */
-        RegistroRemessa sequencialRegistro(Integer seq) {
+        public RegistroRemessa sequencialRegistro(Integer seq) {
             setValue(fsequencialRegistro().nome, seq);
             return this;
         }
 
-        RegistroRemessa banco(String codigo, String nome) {
+        public RegistroRemessa banco(String codigo, String nome) {
             setValue(fbancoCodigo().nome, codigo).setValue(fbancoNome().nome, nome);
             return this;
         }
 
-        RegistroRemessa cedente(String nome, String cnpj) {
+        public RegistroRemessa cedente(String nome, String cnpj) {
             setValue(fcedenteNome().nome, nome).setValue(fcedenteCnpj().nome, cnpj);
             return this;
         }
 
-        RegistroRemessa convenio(String convenio, String agencia, String conta, String dac) {
+        public RegistroRemessa convenio(String convenio, String agencia, String conta, String dac) {
             this.convenio(convenio).agencia(agencia).conta(conta).dac(dac);
             return this;
         }
 
-        RegistroRemessa convenio(String convenio) {
+        public RegistroRemessa convenio(String convenio) {
             return setValue(convenio);
         }
 
-        RegistroRemessa agencia(String agencia) {
+        public RegistroRemessa agencia(String agencia) {
             return setValue(agencia);
         }
 
-        RegistroRemessa conta(String conta) {
+        public RegistroRemessa conta(String conta) {
             return setValue(conta);
         }
 
-        RegistroRemessa dac(String dac) {
+        public RegistroRemessa dac(String dac) {
             return setValue(dac);
         }
 
-        RegistroRemessa setVal(String nomeAtributo, Object valor) {
+        public RegistroRemessa setVal(String nomeAtributo, Object valor) {
             this.setValue(nomeAtributo, valor);
             return this;
         }
@@ -246,50 +246,50 @@ public class RemessaFacade {
             super(get);
         }
 
-        CabecalhoRemessa agencia(String string) {
+        public CabecalhoRemessa agencia(String string) {
             return (CabecalhoRemessa) setValue(string);
         }
 
-        CabecalhoRemessa conta(String string) {
+        public CabecalhoRemessa conta(String string) {
             return (CabecalhoRemessa) setValue(string);
         }
 
-        CabecalhoRemessa numeroConvenio(String string) {
+        public CabecalhoRemessa numeroConvenio(String string) {
             return (CabecalhoRemessa) setValue(string);
         }
 
-        CabecalhoRemessa cedente(String string) {
+        public CabecalhoRemessa cedente(String string) {
             return (CabecalhoRemessa) setValue(string);
         }
 
-        CabecalhoRemessa dataGeracao(String string) {
+        public CabecalhoRemessa dataGeracao(String string) {
             return (CabecalhoRemessa) setValue(string);
         }
 
-        CabecalhoRemessa dataGeracao(Date data) {
+        public CabecalhoRemessa dataGeracao(Date data) {
             return (CabecalhoRemessa) setValue(data);
         }
 
-        CabecalhoRemessa cedenteCnpj(String string) {
+        public CabecalhoRemessa cedenteCnpj(String string) {
             return (CabecalhoRemessa) setValue(string);
         }
 
-        CabecalhoRemessa sequencialArquivo(Integer i) {
+        public CabecalhoRemessa sequencialArquivo(Integer i) {
             setValue(fsequencialArquivo().nome, i);
             return this;
         }
 
-        CabecalhoRemessa operacao(Object op) {
+        public CabecalhoRemessa operacao(Object op) {
             setValue(foperacao().nome, op);
             return this;
         }
 
-        CabecalhoRemessa servico(Object op) {
+        public CabecalhoRemessa servico(Object op) {
             setValue(fservico().nome, op);
             return this;
         }
 
-        CabecalhoRemessa forma(Object op) {
+        public CabecalhoRemessa forma(Object op) {
             setValue(fforma().nome, op);
             return this;
         }
@@ -309,64 +309,64 @@ public class RemessaFacade {
                 .sacadoEndereco("")
                 .instrucao("");
          */
-        TituloRemessa sacado(String nome, String cpf) {
+        public TituloRemessa sacado(String nome, String cpf) {
             setValue(fsacadoNome().nome, nome).setValue(fsacadoCpf().nome, cpf);
             return this;
         }
 
-        TituloRemessa valor(Object string) {
+        public TituloRemessa valor(Object string) {
             return (TituloRemessa) setValue(fvalor().nome, string);
         }
 
-        TituloRemessa valorDesconto(Object string) {
+        public TituloRemessa valorDesconto(Object string) {
             return (TituloRemessa) setValue(fvalorDesconto().nome, string);
         }
 
-        TituloRemessa valorAcrescimo(Object string) {
+        public TituloRemessa valorAcrescimo(Object string) {
             return (TituloRemessa) setValue(fvalorAcrescimo().nome, string);
         }
 
-        TituloRemessa vencimento(String string) {
+        public TituloRemessa vencimento(String string) {
             return (TituloRemessa) setValue(string);
         }
 
-        TituloRemessa numeroDocumento(Object string) {
+        public TituloRemessa numeroDocumento(Object string) {
             return (TituloRemessa) setValue(string);
         }
 
-        TituloRemessa codigoBarras(String codigoBarras) {
+        public TituloRemessa codigoBarras(String codigoBarras) {
             return (TituloRemessa) setVal(fcodigoBarras().nome, codigoBarras);
         }
 
-        TituloRemessa nossoNumero(Object string) {
+        public TituloRemessa nossoNumero(Object string) {
             return (TituloRemessa) setValue(string);
         }
 
-        TituloRemessa dataVencimento(Object vencimento) {
+        public TituloRemessa dataVencimento(Object vencimento) {
             return (TituloRemessa) setValue(vencimento);
         }
 
-        TituloRemessa dataEmissao(Object emissao) {
+        public TituloRemessa dataEmissao(Object emissao) {
             return (TituloRemessa) setValue(emissao);
         }
 
-        TituloRemessa carteira(String string) {
+        public TituloRemessa carteira(String string) {
             return (TituloRemessa) setValue(string);
         }
 
-        TituloRemessa sacado(String string) {
+        public TituloRemessa sacado(String string) {
             return (TituloRemessa) setValue(string);
         }
 
-        TituloRemessa sacadoCpf(String string) {
+        public TituloRemessa sacadoCpf(String string) {
             return (TituloRemessa) setValue(string);
         }
 
-        TituloRemessa sacadoEndereco(String string) {
+        public TituloRemessa sacadoEndereco(String string) {
             return (TituloRemessa) setValue(string);
         }
 
-        TituloRemessa instrucao(String string) {
+        public TituloRemessa instrucao(String string) {
             return (TituloRemessa) setValue(string);
         }
     }
@@ -377,11 +377,11 @@ public class RemessaFacade {
             super(get);
         }
 
-        RodapeRemessa quantidadeRegistros(Number valorQuantidade) {
+        public RodapeRemessa quantidadeRegistros(Number valorQuantidade) {
             return (RodapeRemessa) setValue(valorQuantidade);
         }
 
-        RodapeRemessa valorTotalRegistros(Number valorTotal) {
+        public RodapeRemessa valorTotalRegistros(Number valorTotal) {
             return (RodapeRemessa) setValue(valorTotal);
         }
     }
@@ -391,7 +391,7 @@ public class RemessaFacade {
      */
     List<RegistroRemessa> registros = new ArrayList<>();
 
-    RemessaFacade add(RegistroRemessa reg) {
+    public RemessaFacade add(RegistroRemessa reg) {
         registros.add(reg);
         return this;
     }
