@@ -31,10 +31,9 @@ import org.jrimum.texgit.Fillers;
  */
 public class LayoutsSuportados {
 
-    public static TagLayout LAYOUT_FEBRABAN_CNAB240 = flatfile(
-            layout(nome("Febraban-CNAB240"),
+    private static final TagLayout _LAYOUT_FEBRABAN_CNAB240 = flatfile(
+            layout(nome("Layout Padrão Febraban CNAB240"),
                     cnab(CNAB_240),
-                    servico(COBRANCA_REMESSA),
                     tag("url").value("https://portal.febraban.org.br/pagina/3053/33/pt-br/layout-240"),
                     versao("05")
             ),
@@ -46,11 +45,6 @@ public class LayoutsSuportados {
                     fcodigoRegistro().value("0"),
                     //Uso Exclusivo FEBRABAN / CNAB9179-AlfaBrancosG004
                     fbranco().length(9),
-                    //Tipo de Inscrição: '0'  =  Isento / Não Informado
-                    //                   '1'  =  CPF
-                    //                   '2'  =  CGC / CNPJ
-                    //                   '3'  =  PIS / PASEP
-                    //                   '9'  =   Outros
                     ftipoInscricao().value("2"),
                     fcedenteCnpj().length(14).padding(Fillers.ZERO_LEFT),
                     //ConvênioCódigo do Convênio no Banco335220-Alfa*G007
@@ -513,6 +507,35 @@ public class LayoutsSuportados {
                     fbranco().length(205)
             )
     );
+
+    public static final TagLayout LAYOUT_FEBRABAN_CNAB240
+            = _LAYOUT_FEBRABAN_CNAB240.cloneReadonly();
+
+    /*
+     Layout Padrão Febraban CNAB 240 para Remessa de Cobrança
+     */
+    private static final TagLayout _LAYOUT_FEBRABAN_CNAB240_COBRANCA_REMESSA
+            = _LAYOUT_FEBRABAN_CNAB240.clone();
+
+    static {
+        _LAYOUT_FEBRABAN_CNAB240_COBRANCA_REMESSA.get(cabecalho())
+                .get(fcodigoArquivo().value('1'));
+    }
+
+    public static final TagLayout LAYOUT_FEBRABAN_CNAB240_COBRANCA_REMESSA
+            = _LAYOUT_FEBRABAN_CNAB240_COBRANCA_REMESSA.cloneReadonly();
+
+    private static final TagLayout _LAYOUT_FEBRABAN_CNAB240_COBRANCA_RETORNO
+            = _LAYOUT_FEBRABAN_CNAB240.clone();
+
+    static {
+        _LAYOUT_FEBRABAN_CNAB240_COBRANCA_RETORNO.get(cabecalho())
+                .get(fcodigoArquivo().value('2'));
+
+    }
+
+    public static final TagLayout LAYOUT_FEBRABAN_CNAB240_COBRANCA_RETORNO
+            = _LAYOUT_FEBRABAN_CNAB240_COBRANCA_RETORNO.cloneReadonly();
 
     /*
      Baseado no arquivo: LayoutItauCNAB400Envio.txg

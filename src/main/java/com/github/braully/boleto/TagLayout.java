@@ -15,13 +15,16 @@
  */
 package com.github.braully.boleto;
 
+import java.io.Serializable;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import org.apache.commons.lang3.SerializationUtils;
 import org.jrimum.domkee.banco.IBanco;
 import org.jrimum.texgit.Fillers;
 import org.jrimum.texgit.IFiller;
@@ -30,7 +33,7 @@ import org.jrimum.texgit.IFiller;
  *
  * @author strike
  */
-public class TagLayout {
+public class TagLayout implements Serializable {
 
     public static class TagCreator {
 
@@ -47,10 +50,26 @@ public class TagLayout {
             return field("bancoNome").padding(Fillers.WHITE_SPACE_RIGHT);
         }
 
+        /**
+         * Agência Mantenedora da Conta 53 57 5-Num*G008. Dígito Verificador da
+         * Agência 58 58 1-Alfa*G009
+         *
+         * @return
+         */
         public static TagLayout fagencia() {
             return field("agencia").padding(Fillers.ZERO_LEFT);
         }
 
+        /**
+         * Dígito Verificador da Ag/Conta72721-Alfa*G012 Dígito Verificador da
+         * Agência / Conta Corrente Código adotado pelo Banco responsável pela
+         * conta corrente, para verificação da autenticidade do par Código da
+         * Agência / Número da Conta Corrente. Para os Bancos que se utilizam de
+         * duas posições para o Dígito Verificador do Número da Conta Corrente,
+         * preencher este campo com a 2ª posição deste dígito.
+         *
+         * @return
+         */
         public static TagLayout fdac() {
             return field("dac").length(1);
         }
@@ -67,14 +86,32 @@ public class TagLayout {
             return field("codigoBarras").padding(Fillers.ZERO_LEFT);
         }
 
+        /**
+         * Alias para facilitar o campo de acesso ao campo do nome do sacado
+         *
+         * @return
+         */
         public static TagLayout fsacadoNome() {
             return field("sacadoNome").padding(Fillers.WHITE_SPACE_RIGHT).length(30);
         }
 
+        /**
+         * Na maioria das vezes o sacado ou o pagador é uma pessoa fisica, por
+         * tanto esse metodo de alias.
+         *
+         * @return
+         */
         public static TagLayout fsacadoCpf() {
             return field("sacadoCpf").length(14).padding(Fillers.ZERO_LEFT);
         }
 
+        /**
+         * ConvênioCódigo do Convênio no Banco335220-Alfa*G007. Código adotado
+         * pelo Banco para identificar o Contrato entre este e a Empresa
+         * Cliente.
+         *
+         * @return
+         */
         public static TagLayout fconvenio() {
             return field("convenio").padding(Fillers.ZERO_LEFT);
         }
@@ -87,10 +124,20 @@ public class TagLayout {
             return field("tipoInscricaoCedente").length(1).padding(Fillers.ZERO_LEFT);
         }
 
+        /**
+         * Tipo de Inscrição: '0' = Isento / Não Informado '1' = CPF '2' = CGC /
+         * CNPJ '3' = PIS / PASEP '9' = Outros
+         *
+         * @return
+         */
         public static TagLayout ftipoInscricao() {
             return field("tipoInscricao").length(1).padding(Fillers.ZERO_LEFT);
         }
 
+        /**
+         * Alias para facilidade, quase sempre o Favorecido é uma Pessoa
+         * Juridica.
+         */
         public static TagLayout fcedenteCnpj() {
             return field("cedenteCnpj").padding(Fillers.ZERO_LEFT).length(14);
         }
@@ -259,6 +306,14 @@ public class TagLayout {
             return field("sequencialArquivo").padding(Fillers.ZERO_LEFT);
         }
 
+        /**
+         * Código Remessa / Retorno 1431431-NumG015 Código adotado pela FEBRABAN
+         * para qualificar o envio ou devolução de arquivo entre a Empresa
+         * Cliente e o Banco prestador dos Serviços. Domínio: '1' = Remessa
+         * (Cliente -> Banco) '2' = Retorno (Banco -> Cliente)
+         *
+         * @return
+         */
         public static TagLayout fcodigoArquivo() {
             return field("codigoArquivo").length(1);
         }
@@ -358,8 +413,12 @@ public class TagLayout {
 
     String nome;
     Object value;
-    final List<TagLayout> filhos;
-    final Map<String, Object> atributos;
+    List<TagLayout> filhos;
+    Map<String, Object> atributos;
+
+    TagLayout get(TagLayout tag) {
+        return get(tag.nome);
+    }
 
     TagLayout get(String strfilho) {
         TagLayout fi = null;
@@ -495,5 +554,24 @@ public class TagLayout {
         /* Propriedade a ser setada é o nome do metodo que chamou */
         this.atr(nomeMetodoAnterior, valor);
         return this;
+    }
+
+    public TagLayout clone() {
+        return SerializationUtils.clone(this);
+    }
+
+    //TODO: Melhorar isso, procurar alguma lib que faça o clone e já transforme o objeto em imutavel
+    public TagLayout cloneReadonly() {
+        TagLayout clone = this.clone();
+        colecoesImutaveis(clone);
+        return clone;
+    }
+
+    private void colecoesImutaveis(TagLayout clone) {
+        clone.atributos = Collections.unmodifiableMap(clone.atributos);
+        clone.filhos = Collections.unmodifiableList(clone.filhos);
+        for (TagLayout tf : clone.filhos) {
+            colecoesImutaveis(tf);
+        }
     }
 }
