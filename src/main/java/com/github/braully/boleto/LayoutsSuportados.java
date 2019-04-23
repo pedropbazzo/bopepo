@@ -16,13 +16,11 @@
 package com.github.braully.boleto;
 
 import static com.github.braully.boleto.CNAB.*;
-import static com.github.braully.boleto.CNABServico.*;
 import static com.github.braully.boleto.TagLayout.TagCreator.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Collections;
 import java.util.List;
-import static org.jrimum.bopepo.BancosSuportados.*;
 import org.jrimum.texgit.Fillers;
 
 /**
@@ -352,10 +350,27 @@ public class LayoutsSuportados {
     /*
     
      */
-    private static List<TagLayout> layoutsSuportados = new ArrayList<>();
+    private static final List<TagLayout> layoutsSuportados;
 
-    TagLayout getLayoutArquivoBancario(String banco, CNABServico servico,
-            String convenio, String carteira, CNAB cnab) {
+    static {
+        List<TagLayout> layoutsSuportadosTmp = new ArrayList<>();
+        /* */
+        //TODO: Adicionar teste e layouts homologados
+        layoutsSuportadosTmp.add(LAYOUT_FEBRABAN_CNAB240);
+        layoutsSuportadosTmp.add(LAYOUT_FEBRABAN_CNAB240_COBRANCA_REMESSA);
+        layoutsSuportadosTmp.add(LAYOUT_FEBRABAN_CNAB240_COBRANCA_RETORNO);
+        /* */
+        layoutsSuportados = Collections.unmodifiableList(layoutsSuportadosTmp);
+    }
+
+    public static TagLayout getLayoutArquivoBancarioRemessaCobranca(String codBanco, String numConvenio, String agencia, String conta, String carteira, Boolean registrado) {
+        return getLayoutArquivoBancario(CNABServico.COBRANCA_REMESSA, CNAB_240,
+                codBanco, numConvenio, agencia, conta, carteira, registrado);
+    }
+
+    //TODO: Implementar um metodo de busca por layouts, a partir de atributos relevantes
+    public static TagLayout getLayoutArquivoBancario(CNABServico servico, CNAB cnab, String banco,
+            String convenio, String agencia, String conta, String carteira, Boolean registrado) {
         TagLayout ret = null;
         for (TagLayout layout : layoutsSuportados) {
             TagLayout descritor = layout.get("layout");
@@ -372,7 +387,7 @@ public class LayoutsSuportados {
         return ret;
     }
 
-    private boolean eq(Object value1, Object value2) {
+    public static boolean eq(Object value1, Object value2) {
         return value1.equals(value2);
     }
 }
