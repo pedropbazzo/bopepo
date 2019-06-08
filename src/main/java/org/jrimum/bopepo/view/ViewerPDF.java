@@ -28,6 +28,13 @@
  */
 package org.jrimum.bopepo.view;
 
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.pdf.AcroFields;
+import com.itextpdf.text.pdf.BarcodeInter25;
+import com.itextpdf.text.pdf.PdfContentByte;
+import com.itextpdf.text.pdf.PdfReader;
+import com.itextpdf.text.pdf.PdfStamper;
 import org.jrimum.bopepo.Guia;
 
 import java.io.ByteArrayOutputStream;
@@ -49,13 +56,6 @@ import org.jrimum.domkee.banco.Convenio;
 import org.jrimum.domkee.banco.OrgaoRecebedor;
 import org.jrimum.domkee.banco.TipoValorReferencia;
 
-import com.lowagie.text.DocumentException;
-import com.lowagie.text.Image;
-import com.lowagie.text.pdf.AcroFields;
-import com.lowagie.text.pdf.BarcodeInter25;
-import com.lowagie.text.pdf.PdfContentByte;
-import com.lowagie.text.pdf.PdfReader;
-import com.lowagie.text.pdf.PdfStamper;
 import org.jrimum.bopepo.BancosSuportados;
 import org.jrimum.utilix.DateUtil;
 import org.jrimum.utilix.FileUtil;
@@ -517,16 +517,15 @@ class ViewerPDF {
         PdfContentByte cb = null;
 
         // Verifcando se existe o field(campo) da imagem no template do boleto.
-        float posCampoImgLogo[] = form.getFieldPositions("txtCodigoBarra");
+        List<AcroFields.FieldPosition> posCampoImgLogo = form.getFieldPositions("txtCodigoBarra");
 
         if (isNotNull(posCampoImgLogo)) {
-
-            RectanglePDF field = new RectanglePDF(posCampoImgLogo);
-
-            cb = stamper.getOverContent(field.getPage());
-            Image imgBarCode = barCode.createImageWithBarcode(cb, null, null);
-
-            PDFUtil.changeField2Image(stamper, field, imgBarCode);
+            for (AcroFields.FieldPosition pos : posCampoImgLogo) {
+                RectanglePDF field = new RectanglePDF(pos.position);
+                cb = stamper.getOverContent(field.getPage());
+                Image imgBarCode = barCode.createImageWithBarcode(cb, null, null);
+                PDFUtil.changeField2Image(stamper, field, imgBarCode);
+            }
         }
     }
 
@@ -702,14 +701,14 @@ class ViewerPDF {
     private void setImagemNoCampo(String nomeDoCampo, Image imagem)
             throws DocumentException {
 
-        float posCampoImgLogo[];
-
         if (StringUtils.isNotBlank(nomeDoCampo)) {
 
-            posCampoImgLogo = form.getFieldPositions(nomeDoCampo);
+            List<AcroFields.FieldPosition> posCampoImgLogo = form.getFieldPositions(nomeDoCampo);
 
             if (isNotNull(posCampoImgLogo)) {
-                PDFUtil.changeField2Image(stamper, posCampoImgLogo, imagem);
+                for (AcroFields.FieldPosition fpos : posCampoImgLogo) {
+                    PDFUtil.changeField2Image(stamper, new RectanglePDF(fpos.position), imagem);
+                }
             }
         }
     }

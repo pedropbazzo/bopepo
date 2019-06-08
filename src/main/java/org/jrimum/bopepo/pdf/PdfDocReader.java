@@ -26,9 +26,10 @@
  * Criado em: 19/09/2011 - 15:43:26
  * 
  */
-
 package org.jrimum.bopepo.pdf;
 
+import com.itextpdf.text.pdf.AcroFields;
+import com.itextpdf.text.pdf.PdfReader;
 import static org.jrimum.utilix.Collections.hasElement;
 
 import java.io.File;
@@ -42,260 +43,244 @@ import java.util.Map;
 
 import org.jrimum.utilix.Exceptions;
 
-import com.lowagie.text.pdf.AcroFields;
-import com.lowagie.text.pdf.PdfReader;
-
 /**
  * Leitor de documentos PDF.
- * 
+ *
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
- * 
+ *
  * @version 0.2.3
- * 
+ *
  * @since 0.2
  */
-public class PdfDocReader{
-	
-	private final PdfReader reader; 
-	private final AcroFields form;
-	private final PdfDocInfo docInfo;
+public class PdfDocReader {
 
-	/**
-	 * Modo de criação não utilizado e não permitido. 
-	 */
-	@SuppressWarnings("unused")
-	private PdfDocReader() {
-		Exceptions.throwIllegalStateException("Estado não permitido!");
-		reader = null;
-		this.form = null;
-		this.docInfo = null;
-	}
+    private final PdfReader reader;
+    private final AcroFields form;
+    private final PdfDocInfo docInfo;
 
-	/**
-	 * Ler e analisa o documento.
-	 * 
-	 * @param pdfIn
-	 *            Byte array contendo o documento
-	 */
-	@SuppressWarnings("unchecked")
-	public PdfDocReader(byte[] pdfIn){
-		PdfReader r = null;
-		try {
-			r = new PdfReader(pdfIn);
-		} catch (Exception e) {
-			Exceptions.throwIllegalStateException(e);
-		}
-		this.reader = r;
-		this.form = reader.getAcroFields();
-		this.docInfo = PdfDocInfo.create(this.reader.getInfo());
-	}
-	
-	/**
-	 * Ler e analisa o documento.
-	 * 
-	 * @param is
-	 *            Stream contendo o documento
-	 */
-	@SuppressWarnings("unchecked")
-	public PdfDocReader(InputStream is){
-		PdfReader r = null;
-		try {
-			r = new PdfReader(is);
-		} catch (Exception e) {
-			Exceptions.throwIllegalStateException(e);
-		}
-		this.reader = r;
-		this.form = reader.getAcroFields();
-		this.docInfo = PdfDocInfo.create(this.reader.getInfo());
-	}
-	
-	/**
-	 * Ler e analisa o documento.
-	 * 
-	 * @param url
-	 *            URL do documento
-	 */
-	@SuppressWarnings("unchecked")
-	public PdfDocReader(URL url){
-		PdfReader r = null;
-		try {
-			r = new PdfReader(url);
-		} catch (Exception e) {
-			Exceptions.throwIllegalStateException(e);
-		}
-		this.reader = r;
-		this.form = reader.getAcroFields();
-		this.docInfo = PdfDocInfo.create(this.reader.getInfo());
-	}
-	
-	/**
-	 * Ler e analisa o documento.
-	 * 
-	 * @param file
-	 *            Arquivo contendo o documento
-	 */
-	@SuppressWarnings("unchecked")
-	public PdfDocReader(File file){
-		PdfReader r = null;
-		try {
-			r = new PdfReader(new FileInputStream(file));
-		} catch (Exception e) {
-			Exceptions.throwIllegalStateException(e);
-		}
-		this.reader = r;
-		this.form = reader.getAcroFields();
-		this.docInfo = PdfDocInfo.create(this.reader.getInfo());
-	}
-	
-	/**
-	 * Ler e analisa o documento.
-	 * 
-	 * @param pdfIn
-	 *            Byte array contendo o documento
-	 * @param ownerPassword
-	 *            Senha para ler o documento.
-	 */
-	@SuppressWarnings("unchecked")
-	public PdfDocReader(byte[] pdfIn, byte[] ownerPassword){
-		PdfReader r = null;
-		try {
-			r = new PdfReader(pdfIn,ownerPassword);
-		} catch (Exception e) {
-			Exceptions.throwIllegalStateException(e);
-		}
-		this.reader = r;
-		this.form = reader.getAcroFields();
-		this.docInfo = PdfDocInfo.create(this.reader.getInfo());
-	}
-	
-	/**
-	 * Ler e analisa o documento.
-	 * 
-	 * @param is
-	 *            Stream contendo o documento
-	 * @param ownerPassword
-	 *            Senha para ler o documento.
-	 */
-	@SuppressWarnings("unchecked")
-	public PdfDocReader(InputStream is, byte[] ownerPassword){
-		PdfReader r = null;
-		try {
-			r = new PdfReader(is,ownerPassword);
-		} catch (Exception e) {
-			Exceptions.throwIllegalStateException(e);
-		}
-		this.reader = r;
-		this.form = reader.getAcroFields();
-		this.docInfo = PdfDocInfo.create(this.reader.getInfo());
-	}
-	
-	/**
-	 * Ler e analisa o documento.
-	 * 
-	 * @param url
-	 *            URL do documento
-	 * @param ownerPassword
-	 *            Senha para ler o documento.
-	 */
-	@SuppressWarnings("unchecked")
-	public PdfDocReader(URL url, byte[] ownerPassword){
-		PdfReader r = null;
-		try {
-			r = new PdfReader(url,ownerPassword);
-		} catch (Exception e) {
-			Exceptions.throwIllegalStateException(e);
-		}
-		this.reader = r;
-		this.form = reader.getAcroFields();
-		this.docInfo = PdfDocInfo.create(this.reader.getInfo());
-	}
-	
-	/**
-	 * Ler e analisa o documento.
-	 * 
-	 * @param file
-	 *            Arquivo contendo o documento
-	 * @param ownerPassword
-	 *            Senha para ler o documento.
-	 */
-	@SuppressWarnings("unchecked")
-	public PdfDocReader(File file, byte[] ownerPassword){
-		PdfReader r = null;
-		try {
-			r = new PdfReader(new FileInputStream(file),ownerPassword);
-		} catch (Exception e) {
-			Exceptions.throwIllegalStateException(e);
-		}
-		this.reader = r;
-		this.form = reader.getAcroFields();
-		this.docInfo = PdfDocInfo.create(this.reader.getInfo());
-	}
-	
-	/**
-	 * Retorna, ou não, o valor de um campo procurando pelo seu nome
-	 * ("fully qualified" ou não).
-	 * 
-	 * @param name
-	 *            Nome do campo
-	 * @return Valor do campo
-	 */
-	public String getField(String name){
-		
-		return this.form.getField(name);
-	}
+    /**
+     * Modo de criação não utilizado e não permitido.
+     */
+    @SuppressWarnings("unused")
+    private PdfDocReader() {
+        Exceptions.throwIllegalStateException("Estado não permitido!");
+        reader = null;
+        this.form = null;
+        this.docInfo = null;
+    }
 
-	/**
-	 * Retorna todos os nomes de campos contidos no documento. Os nomes são
-	 * dados na forma "fully qualified".
-	 * 
-	 * @return Coleção de nomes em um {@linkplain java.util.Set}
-	 */
-	@SuppressWarnings("unchecked")
-	public Collection<String> getFieldsNames() {
+    /**
+     * Ler e analisa o documento.
+     *
+     * @param pdfIn Byte array contendo o documento
+     */
+    @SuppressWarnings("unchecked")
+    public PdfDocReader(byte[] pdfIn) {
+        PdfReader r = null;
+        try {
+            r = new PdfReader(pdfIn);
+        } catch (Exception e) {
+            Exceptions.throwIllegalStateException(e);
+        }
+        this.reader = r;
+        this.form = reader.getAcroFields();
+        this.docInfo = PdfDocInfo.create(this.reader.getInfo());
+    }
 
-		return form.getFields().keySet();
-	}
-	
-	/**
-	 * Retorna todos os campos contidos no documento. Os nomes dos campos são
-	 * dados na forma "fully qualified".
-	 * 
-	 * @return Map(campo,valor)
-	 */
-	public Map<String,String> getFields(){
-		
-		Collection<String> names = getFieldsNames();
-		
-		if(hasElement(names)){
-			Map<String,String> fields = new HashMap<String, String>(names.size());
-			for(String name : names){
-				fields.put(name, getField(name));
-			}
-			return fields;
-		}
-		
-		return Collections.emptyMap();
-	}
-	
-	/**
-	 * Retorna as informações sobre o documento: Título, Autor, etc.
-	 * 
-	 * @return info
-	 */
-	public PdfDocInfo getInfo(){
-		
-		return this.docInfo;
-	}
-	
-	/**
-	 * Fecha o leitor. Necessário para liberar o recurso.
-	 */
-	public void close(){
-		try {
-			this.reader.close();
-		} catch (Exception e) {
-			Exceptions.throwIllegalStateException(e);
-		}
-	}
-	
+    /**
+     * Ler e analisa o documento.
+     *
+     * @param is Stream contendo o documento
+     */
+    @SuppressWarnings("unchecked")
+    public PdfDocReader(InputStream is) {
+        PdfReader r = null;
+        try {
+            r = new PdfReader(is);
+        } catch (Exception e) {
+            Exceptions.throwIllegalStateException(e);
+        }
+        this.reader = r;
+        this.form = reader.getAcroFields();
+        this.docInfo = PdfDocInfo.create(this.reader.getInfo());
+    }
+
+    /**
+     * Ler e analisa o documento.
+     *
+     * @param url URL do documento
+     */
+    @SuppressWarnings("unchecked")
+    public PdfDocReader(URL url) {
+        PdfReader r = null;
+        try {
+            r = new PdfReader(url);
+        } catch (Exception e) {
+            Exceptions.throwIllegalStateException(e);
+        }
+        this.reader = r;
+        this.form = reader.getAcroFields();
+        this.docInfo = PdfDocInfo.create(this.reader.getInfo());
+    }
+
+    /**
+     * Ler e analisa o documento.
+     *
+     * @param file Arquivo contendo o documento
+     */
+    @SuppressWarnings("unchecked")
+    public PdfDocReader(File file) {
+        PdfReader r = null;
+        try {
+            r = new PdfReader(new FileInputStream(file));
+        } catch (Exception e) {
+            Exceptions.throwIllegalStateException(e);
+        }
+        this.reader = r;
+        this.form = reader.getAcroFields();
+        this.docInfo = PdfDocInfo.create(this.reader.getInfo());
+    }
+
+    /**
+     * Ler e analisa o documento.
+     *
+     * @param pdfIn Byte array contendo o documento
+     * @param ownerPassword Senha para ler o documento.
+     */
+    @SuppressWarnings("unchecked")
+    public PdfDocReader(byte[] pdfIn, byte[] ownerPassword) {
+        PdfReader r = null;
+        try {
+            r = new PdfReader(pdfIn, ownerPassword);
+        } catch (Exception e) {
+            Exceptions.throwIllegalStateException(e);
+        }
+        this.reader = r;
+        this.form = reader.getAcroFields();
+        this.docInfo = PdfDocInfo.create(this.reader.getInfo());
+    }
+
+    /**
+     * Ler e analisa o documento.
+     *
+     * @param is Stream contendo o documento
+     * @param ownerPassword Senha para ler o documento.
+     */
+    @SuppressWarnings("unchecked")
+    public PdfDocReader(InputStream is, byte[] ownerPassword) {
+        PdfReader r = null;
+        try {
+            r = new PdfReader(is, ownerPassword);
+        } catch (Exception e) {
+            Exceptions.throwIllegalStateException(e);
+        }
+        this.reader = r;
+        this.form = reader.getAcroFields();
+        this.docInfo = PdfDocInfo.create(this.reader.getInfo());
+    }
+
+    /**
+     * Ler e analisa o documento.
+     *
+     * @param url URL do documento
+     * @param ownerPassword Senha para ler o documento.
+     */
+    @SuppressWarnings("unchecked")
+    public PdfDocReader(URL url, byte[] ownerPassword) {
+        PdfReader r = null;
+        try {
+            r = new PdfReader(url, ownerPassword);
+        } catch (Exception e) {
+            Exceptions.throwIllegalStateException(e);
+        }
+        this.reader = r;
+        this.form = reader.getAcroFields();
+        this.docInfo = PdfDocInfo.create(this.reader.getInfo());
+    }
+
+    /**
+     * Ler e analisa o documento.
+     *
+     * @param file Arquivo contendo o documento
+     * @param ownerPassword Senha para ler o documento.
+     */
+    @SuppressWarnings("unchecked")
+    public PdfDocReader(File file, byte[] ownerPassword) {
+        PdfReader r = null;
+        try {
+            r = new PdfReader(new FileInputStream(file), ownerPassword);
+        } catch (Exception e) {
+            Exceptions.throwIllegalStateException(e);
+        }
+        this.reader = r;
+        this.form = reader.getAcroFields();
+        this.docInfo = PdfDocInfo.create(this.reader.getInfo());
+    }
+
+    /**
+     * Retorna, ou não, o valor de um campo procurando pelo seu nome ("fully
+     * qualified" ou não).
+     *
+     * @param name Nome do campo
+     * @return Valor do campo
+     */
+    public String getField(String name) {
+
+        return this.form.getField(name);
+    }
+
+    /**
+     * Retorna todos os nomes de campos contidos no documento. Os nomes são
+     * dados na forma "fully qualified".
+     *
+     * @return Coleção de nomes em um {@linkplain java.util.Set}
+     */
+    @SuppressWarnings("unchecked")
+    public Collection<String> getFieldsNames() {
+
+        return form.getFields().keySet();
+    }
+
+    /**
+     * Retorna todos os campos contidos no documento. Os nomes dos campos são
+     * dados na forma "fully qualified".
+     *
+     * @return Map(campo,valor)
+     */
+    public Map<String, String> getFields() {
+
+        Collection<String> names = getFieldsNames();
+
+        if (hasElement(names)) {
+            Map<String, String> fields = new HashMap<String, String>(names.size());
+            for (String name : names) {
+                fields.put(name, getField(name));
+            }
+            return fields;
+        }
+
+        return Collections.emptyMap();
+    }
+
+    /**
+     * Retorna as informações sobre o documento: Título, Autor, etc.
+     *
+     * @return info
+     */
+    public PdfDocInfo getInfo() {
+
+        return this.docInfo;
+    }
+
+    /**
+     * Fecha o leitor. Necessário para liberar o recurso.
+     */
+    public void close() {
+        try {
+            this.reader.close();
+        } catch (Exception e) {
+            Exceptions.throwIllegalStateException(e);
+        }
+    }
+
 }

@@ -46,21 +46,6 @@ public class FixedField<G> extends Field<G> implements IFixedField<G> {
 
     /**
      * <p>
-     * Tamanho de especificação e parâmetro da string de leitura ou escrita do
-     * campo.
-     * </p>
-     */
-    private Integer length;
-
-    /**
-     * <p>
-     * Preenchedor do valor utilizado na hora da escrita.
-     * </p>
-     */
-    private IFiller filler;
-
-    /**
-     * <p>
      * Tamanho da string de escrita do campo.
      * </p>
      */

@@ -26,7 +26,6 @@
  * Criado em: 30/03/2008 - 18:15:56
  * 
  */
-
 package org.jrimum.texgit.type.component;
 
 import org.jrimum.texgit.Fillers;
@@ -53,178 +52,178 @@ import org.junit.Test;
  * <p>
  * Teste unitário para a classe utilitária de coleções.
  * </p>
- * 
+ *
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
  * @author <a href="mailto:romulomail@gmail.com">Rômulo Augusto</a>
- * 
+ *
  * @since 0.2
- * 
+ *
  * @version 0.2
  */
 public class TestFixedField {
 
-	private static final DateFormat FORMAT_DDMMYY = new SimpleDateFormat("ddMMyy");
-	
-	private FixedField<String> campoString;
+    private static final DateFormat FORMAT_DDMMYY = new SimpleDateFormat("ddMMyy");
 
-	private FixedField<Integer> campoInteger;
+    private FixedField<String> campoString;
 
-	private FixedField<Long> campoLong;
+    private FixedField<Integer> campoInteger;
 
-	private FixedField<Date> campoDate;
+    private FixedField<Long> campoLong;
 
-	private FixedField<BigDecimal> campoDecimal;
+    private FixedField<Date> campoDate;
 
-	private FixedField<BigDecimal> campoDecimal_v9;
+    private FixedField<BigDecimal> campoDecimal;
 
-	@Before
-	public void setUp() {
+    private FixedField<BigDecimal> campoDecimal_v9;
 
-		campoString = new FixedField<String>(StringUtils.EMPTY, 8, Fillers.WHITE_SPACE_RIGHT);
+    @Before
+    public void setUp() {
 
-		campoDate = new FixedField<Date>(DDMMYYYY_B.parse("22/07/2007"), 6, FORMAT_DDMMYY);
+        campoString = new FixedField<String>(StringUtils.EMPTY, 8, Fillers.WHITE_SPACE_RIGHT);
 
-		campoInteger = new FixedField<Integer>(0, 6, Fillers.ZERO_LEFT);
+        campoDate = new FixedField<Date>(DDMMYYYY_B.parse("22/07/2007"), 6, FORMAT_DDMMYY);
 
-		campoLong = new FixedField<Long>(0L, 6, Fillers.ZERO_LEFT);
+        campoInteger = new FixedField<Integer>(0, 6, Fillers.ZERO_LEFT);
 
-		campoDecimal = new FixedField<BigDecimal>(new BigDecimal("875.98"), 11, DecimalFormat.NUMBER_DD_BR.copy(), Fillers.ZERO_LEFT);
+        campoLong = new FixedField<Long>(0L, 6, Fillers.ZERO_LEFT);
 
-		campoDecimal_v9 = new FixedField<BigDecimal>(new BigDecimal("875.9"), 10, DecimalFormat.NUMBER_D_BR.copy(), Fillers.ZERO_LEFT);
-	}
+        campoDecimal = new FixedField<BigDecimal>(new BigDecimal("875.98"), 11, DecimalFormat.NUMBER_DD_BR.copy(), Fillers.ZERO_LEFT);
 
-	@After
-	public void tearDown() {
+        campoDecimal_v9 = new FixedField<BigDecimal>(new BigDecimal("875.9"), 10, DecimalFormat.NUMBER_D_BR.copy(), Fillers.ZERO_LEFT);
+    }
 
-		campoString = null;
-		campoDate = null;
-		campoInteger = null;
-		campoLong = null;
-		campoDecimal = null;
-		campoDecimal_v9 = null;
-	}
+    @After
+    public void tearDown() {
 
-	@Test(expected = IllegalArgumentException.class)
-	public void testCampo() {
+        campoString = null;
+        campoDate = null;
+        campoInteger = null;
+        campoLong = null;
+        campoDecimal = null;
+        campoDecimal_v9 = null;
+    }
 
-		Format format = null;
+    @Test(expected = IllegalArgumentException.class)
+    public void testCampo() {
 
-		campoDate = new FixedField<Date>(new Date(), 0, FORMAT_DDMMYY);
-		campoDate = new FixedField<Date>(null, 1, FORMAT_DDMMYY);
-		campoDate = new FixedField<Date>(new Date(), 0, format);
-	}
+        Format format = null;
 
-	@Test
-	public void testLer() {
+        campoDate = new FixedField<Date>(new Date(), 0, FORMAT_DDMMYY);
+        campoDate = new FixedField<Date>(null, 1, FORMAT_DDMMYY);
+        campoDate = new FixedField<Date>(new Date(), 0, format);
+    }
 
-		campoString.read("COBRANCA");
-		assertNotNull(campoString.getValue());
-		assertTrue(campoString.getValue() instanceof String);
-		assertEquals("COBRANCA", campoString.getValue().toString());
+    @Test
+    public void testLer() {
 
-		campoDate.read("011002");
-		assertNotNull(campoDate.getValue());
-		assertTrue(campoDate.getValue() instanceof Date);
-		assertEquals("011002", FORMAT_DDMMYY.format(campoDate
-				.getValue()));
+        campoString.read("COBRANCA");
+        assertNotNull(campoString.getValue());
+        assertTrue(campoString.getValue() instanceof String);
+        assertEquals("COBRANCA", campoString.getValue().toString());
 
-		campoInteger.read("000001");
-		assertNotNull(campoInteger.getValue());
-		assertTrue(campoInteger.getValue() instanceof Integer);
-		assertTrue(new Integer(1).compareTo(campoInteger.getValue()) == 0);
+        campoDate.read("011002");
+        assertNotNull(campoDate.getValue());
+        assertTrue(campoDate.getValue() instanceof Date);
+        assertEquals("011002", FORMAT_DDMMYY.format(campoDate
+                .getValue()));
 
-		campoLong.read("000001");
-		assertNotNull(campoLong.getValue());
-		assertTrue(campoLong.getValue() instanceof Long);
-		assertTrue(new Long(1L).compareTo(campoLong.getValue()) == 0);
+        campoInteger.read("000001");
+        assertNotNull(campoInteger.getValue());
+        assertTrue(campoInteger.getValue() instanceof Integer);
+        assertTrue(new Integer(1).compareTo(campoInteger.getValue()) == 0);
 
-		campoDecimal.read("00000087598");
-		assertNotNull(campoDecimal.getValue());
-		assertTrue(campoDecimal.getValue() instanceof BigDecimal);
-		assertTrue(new BigDecimal("875.98").compareTo(campoDecimal.getValue()) == 0);
+        campoLong.read("000001");
+        assertNotNull(campoLong.getValue());
+        assertTrue(campoLong.getValue() instanceof Long);
+        assertTrue(new Long(1L).compareTo(campoLong.getValue()) == 0);
 
-		campoDecimal_v9.read("0000008759");
-		assertNotNull(campoDecimal_v9.getValue());
-		assertTrue(campoDecimal_v9.getValue() instanceof BigDecimal);
-		assertTrue(new BigDecimal("875.9").compareTo(campoDecimal_v9
-				.getValue()) == 0);
-	}
+        campoDecimal.read("00000087598");
+        assertNotNull(campoDecimal.getValue());
+        assertTrue(campoDecimal.getValue() instanceof BigDecimal);
+        assertTrue(new BigDecimal("875.98").compareTo(campoDecimal.getValue()) == 0);
 
-	@Test(expected = IllegalArgumentException.class)
-	public void testLerException() {
+        campoDecimal_v9.read("0000008759");
+        assertNotNull(campoDecimal_v9.getValue());
+        assertTrue(campoDecimal_v9.getValue() instanceof BigDecimal);
+        assertTrue(new BigDecimal("875.9").compareTo(campoDecimal_v9
+                .getValue()) == 0);
+    }
 
-		campoString.read(null);
-		campoDate.read(null);
-		campoDate.read("");
-		campoDate.read("abcd");
-		campoDate.read("1a2MA1205");
-	}
+    @Test(expected = IllegalArgumentException.class)
+    public void testLerException() {
 
-	@Test
-	public void testEscrever() {
+        campoString.read(null);
+        campoDate.read(null);
+        campoDate.read("");
+        campoDate.read("abcd");
+        campoDate.read("1a2MA1205");
+    }
 
-		assertNotNull(campoString.write());
-		assertEquals("        ", campoString.write());
-		assertEquals(8, campoString.write().length());
+    @Test
+    public void testEscrever() {
 
-		assertNotNull(campoDate.write());
-		assertEquals("220707", campoDate.write());
-		assertEquals(6, campoDate.write().length());
+        assertNotNull(campoString.write());
+        assertEquals("        ", campoString.write());
+        assertEquals(8, campoString.write().length());
 
-		campoDate.setValue(Dates.invalidDate());
-		campoDate.setFiller(Fillers.ZERO_LEFT);
-		assertNotNull(campoDate.write());
-		assertEquals("000000", campoDate.write());
-		assertEquals(6, campoDate.write().length());
+        assertNotNull(campoDate.write());
+        assertEquals("220707", campoDate.write());
+        assertEquals(6, campoDate.write().length());
 
-		assertNotNull(campoInteger.write());
-		assertEquals("000000", campoInteger.write());
-		assertEquals(6, campoInteger.write().length());
+        campoDate.setValue(Dates.invalidDate());
+        campoDate.setFiller(Fillers.ZERO_LEFT);
+        assertNotNull(campoDate.write());
+        assertEquals("000000", campoDate.write());
+        assertEquals(6, campoDate.write().length());
 
-		assertNotNull(campoLong.write());
-		assertEquals("000000", campoLong.write());
-		assertEquals(6, campoLong.write().length());
+        assertNotNull(campoInteger.write());
+        assertEquals("000000", campoInteger.write());
+        assertEquals(6, campoInteger.write().length());
 
-		assertNotNull(campoDecimal.write());
-		assertEquals("00000087598", campoDecimal.write());
-		assertEquals(11, campoDecimal.write().length());
+        assertNotNull(campoLong.write());
+        assertEquals("000000", campoLong.write());
+        assertEquals(6, campoLong.write().length());
 
-		assertNotNull(campoDecimal_v9.write());
-		assertEquals("0000008759", campoDecimal_v9.write());
-		assertEquals(10, campoDecimal_v9.write().length());
-	}
+        assertNotNull(campoDecimal.write());
+        assertEquals("00000087598", campoDecimal.write());
+        assertEquals(11, campoDecimal.write().length());
 
-	@Test(expected = IllegalStateException.class)
-	public void testEscreverException() {
+        assertNotNull(campoDecimal_v9.write());
+        assertEquals("0000008759", campoDecimal_v9.write());
+        assertEquals(10, campoDecimal_v9.write().length());
+    }
 
-		FixedField<String> campo = new FixedField<String>("tamanho", 5);
-		assertEquals(5, campo.write().length());
+    @Test(expected = IllegalStateException.class)
+    public void testEscreverException() {
 
-		FixedField<Integer> campo1 = new FixedField<Integer>(1234, 3);
-		assertEquals(3, campo1.write().length());
+        FixedField<String> campo = new FixedField<String>("tamanho", 5);
+        assertEquals(5, campo.write().length());
 
-		FixedField<Integer> campo2 = new FixedField<Integer>(12, 3);
-		assertEquals(3, campo2.write().length());
-	}
+        FixedField<Integer> campo1 = new FixedField<Integer>(1234, 3);
+        assertEquals(3, campo1.write().length());
 
-	@Test(expected = IllegalArgumentException.class)
-	public void testSetCampo() {
-		campoInteger.setValue(null);
-	}
+        FixedField<Integer> campo2 = new FixedField<Integer>(12, 3);
+        assertEquals(3, campo2.write().length());
+    }
 
-	@Test(expected = IllegalArgumentException.class)
-	public void testSetTamanhoZero() {
-		campoString.setFixedLength(0);
-	}
+    @Test(expected = IllegalArgumentException.class)
+    public void testSetCampo() {
+        campoInteger.setValue(null);
+    }
 
-	@Test(expected = IllegalArgumentException.class)
-	public void testSetTamanhoNegativo() {
-		campoString.setFixedLength(-1);
-	}
+    @Test(expected = IllegalArgumentException.class)
+    public void testSetTamanhoZero() {
+        campoString.setFixedLength(0);
+    }
 
-	@Test(expected = IllegalArgumentException.class)
-	public void testSetFiller() {
-		campoString.setFiller(null);
-	}
+    @Test(expected = IllegalArgumentException.class)
+    public void testSetTamanhoNegativo() {
+        campoString.setFixedLength(-1);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testSetFiller() {
+        campoString.setFiller(null);
+    }
 
 }

@@ -26,9 +26,9 @@
  * Criado em: 14/04/2011 - 14:49:07
  * 
  */
-
 package org.jrimum.bopepo.pdf;
 
+import com.itextpdf.text.pdf.BarcodeInter25;
 import static java.lang.String.format;
 
 import java.awt.Color;
@@ -38,73 +38,70 @@ import org.jrimum.utilix.Exceptions;
 import org.jrimum.utilix.Objects;
 import org.jrimum.utilix.Strings;
 
-import com.lowagie.text.pdf.BarcodeInter25;
-
-
 /**
- * Classe geradora  de código de barras no padrão FEBRABAN.
- * 
+ * Classe geradora de código de barras no padrão FEBRABAN.
+ *
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
  * @author <a href="mailto:romulomail@gmail.com">Rômulo Augusto</a>
  *
  * @version 0.2.3
- * 
+ *
  * @since 0.2
  */
 public class CodigoDeBarras {
-	
-	private String codigo;
-	
-	/**
-	 * Classe não instanciável
-	 * 
-	 * @throws IllegalStateException
-	 *             Caso haja alguma tentativa de utilização deste construtor.
-	 *             
-	 * @since 0.2
-	 */
-	@SuppressWarnings("unused")
-	private CodigoDeBarras() {
 
-		Exceptions.throwIllegalStateException("Instanciação não permitida!");
-	}
-	
-	public CodigoDeBarras(String codigo){
-	
-		checkCodigo(codigo);
-		
-		this.codigo = codigo;
-	}
-	
-	public static CodigoDeBarras valueOf(String codigo){
-		checkCodigo(codigo);
-		return new CodigoDeBarras(codigo);
-	}
-	
-	public String write(){
-		
-		return codigo;
-	}
+    private String codigo;
 
-	public Image toImage(){
-		
-		// Montando o código de barras.
-		BarcodeInter25 barCode = new BarcodeInter25();
-		barCode.setCode(this.write());
+    /**
+     * Classe não instanciável
+     *
+     * @throws IllegalStateException Caso haja alguma tentativa de utilização
+     * deste construtor.
+     *
+     * @since 0.2
+     */
+    @SuppressWarnings("unused")
+    private CodigoDeBarras() {
 
-		barCode.setExtended(true);
-		barCode.setBarHeight(35);
-		barCode.setFont(null);
-		barCode.setN(3);
-		
-		return barCode.createAwtImage(Color.BLACK, Color.WHITE);
-	}
-	
-	private static void checkCodigo(String str) {
+        Exceptions.throwIllegalStateException("Instanciação não permitida!");
+    }
 
-		Objects.checkNotNull(str, "Código nulo!");
-		Strings.checkNotBlank(str, format("Código ausente! str = \"%s\"",str));
-		Strings.checkNotNumeric(str, format("Código não contém apenas números! str = \"%s\"",str));
-		Objects.checkArgument(str.length()==44, format("Código com tamanho diferente de 44 dígitos! str = \"%s\"",str));
-	}
+    public CodigoDeBarras(String codigo) {
+
+        checkCodigo(codigo);
+
+        this.codigo = codigo;
+    }
+
+    public static CodigoDeBarras valueOf(String codigo) {
+        checkCodigo(codigo);
+        return new CodigoDeBarras(codigo);
+    }
+
+    public String write() {
+
+        return codigo;
+    }
+
+    public Image toImage() {
+
+        // Montando o código de barras.
+        BarcodeInter25 barCode = new BarcodeInter25();
+        barCode.setCode(this.write());
+
+        barCode.setExtended(true);
+        barCode.setBarHeight(35);
+        barCode.setFont(null);
+        barCode.setN(3);
+
+        return barCode.createAwtImage(Color.BLACK, Color.WHITE);
+    }
+
+    private static void checkCodigo(String str) {
+
+        Objects.checkNotNull(str, "Código nulo!");
+        Strings.checkNotBlank(str, format("Código ausente! str = \"%s\"", str));
+        Strings.checkNotNumeric(str, format("Código não contém apenas números! str = \"%s\"", str));
+        Objects.checkArgument(str.length() == 44, format("Código com tamanho diferente de 44 dígitos! str = \"%s\"", str));
+    }
 }

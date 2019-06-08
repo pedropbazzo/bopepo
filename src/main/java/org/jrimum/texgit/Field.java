@@ -58,12 +58,12 @@ public class Field<G> implements org.jrimum.texgit.IField<G>, TextStream {
      * Nome do campo, também pode ser usado como id.
      * </p>
      */
-    private String name;
+    protected String name;
 
     /**
      *
      */
-    private Integer length;
+    protected Integer length;
 
     /**
      * <p>
@@ -82,7 +82,7 @@ public class Field<G> implements org.jrimum.texgit.IField<G>, TextStream {
     /**
      * Preenchedor do value utilizado na hora da escrita.
      */
-    private Filler<?> filler;
+    protected IFiller filler;
 
     /**
      * <p>
@@ -374,7 +374,7 @@ public class Field<G> implements org.jrimum.texgit.IField<G>, TextStream {
         }
     }
 
-    public Filler<?> getFiller() {
+    public IFiller getFiller() {
         return filler;
     }
 

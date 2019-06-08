@@ -27,162 +27,163 @@
  * Criado em: 30/03/2008 - 23:49:00
  * 
  */
-
 package org.jrimum.bopepo.pdf;
 
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.pdf.PdfContentByte;
+import com.itextpdf.text.pdf.PdfCopy;
+import com.itextpdf.text.pdf.PdfReader;
+import com.itextpdf.text.pdf.PdfStamper;
 import java.io.ByteArrayOutputStream;
 import java.util.Collection;
 
 import org.jrimum.utilix.Exceptions;
 
-import com.lowagie.text.Document;
-import com.lowagie.text.DocumentException;
-import com.lowagie.text.Image;
-import com.lowagie.text.pdf.PdfCopy;
-import com.lowagie.text.pdf.PdfReader;
-import com.lowagie.text.pdf.PdfStamper;
-
 /**
  * Serviços e atividades relacionadas a manipulação de PDF (provavelmente da lib
  * iText).
- * 
+ *
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
- * 
+ *
  * @since 0.2
- * 
+ *
  * @version 0.2
  */
-public class PDFs{
+public class PDFs {
 
-	/**
-	 * <p>
-	 * Muda um input field para uma imgem com as dimensões e possição do field.
-	 * </p>
-	 * 
-	 * @param stamper
-	 * @param positions
-	 * @param image
-	 * @return rectanglePDF
-	 * @throws DocumentException
-	 * 
-	 * @since 0.2
-	 */
-	public static PdfRectangle changeFieldToImage(PdfStamper stamper,
-			float[] positions, Image image) throws DocumentException {
+    /**
+     * <p>
+     * Muda um input field para uma imgem com as dimensões e possição do field.
+     * </p>
+     *
+     * @param stamper
+     * @param positions
+     * @param image
+     * @return rectanglePDF
+     * @throws DocumentException
+     *
+     * @since 0.2
+     */
+    public static PdfRectangle changeFieldToImage(PdfStamper stamper,
+            float[] positions, Image image) throws DocumentException {
 
-		PdfRectangle rect = new PdfRectangle(positions);
+        PdfRectangle rect = new PdfRectangle(positions);
 
-		return changeFieldToImage(stamper, rect, image);
-	}
+        return changeFieldToImage(stamper, rect, image);
+    }
 
-	/**
-	 * <p>
-	 * Muda um input field para uma imgem com as dimensões e possição do field.
-	 * </p>
-	 * 
-	 * @param stamper
-	 * @param rect
-	 * @param image
-	 * @return rectanglePDF
-	 * @throws DocumentException
-	 * 
-	 * @since 0.2
-	 */
-	public static PdfRectangle changeFieldToImage(PdfStamper stamper,
-			PdfRectangle rect, Image image) throws DocumentException {
+    /**
+     * <p>
+     * Muda um input field para uma imgem com as dimensões e possição do field.
+     * </p>
+     *
+     * @param stamper
+     * @param rect
+     * @param image
+     * @return rectanglePDF
+     * @throws DocumentException
+     *
+     * @since 0.2
+     */
+    public static PdfRectangle changeFieldToImage(PdfStamper stamper,
+            PdfRectangle rect, Image image) throws DocumentException {
 
-		// Ajustando o tamanho da imagem de acordo com o tamanho do campo.
-		// image.scaleToFit(rect.getWidth(), rect.getHeight());
-		image.scaleAbsolute(rect.getWidth(), rect.getHeight());
+        // Ajustando o tamanho da imagem de acordo com o tamanho do campo.
+        // image.scaleToFit(rect.getWidth(), rect.getHeight());
+        image.scaleAbsolute(rect.getWidth(), rect.getHeight());
 
-		// A rotina abaixo tem por objetivo deixar a imagem posicionada no
-		// centro
-		// do field, tanto na perspectiva horizontal como na vertical.
-		// Caso não se queira mais posicionar a imagem no centro do field, basta
-		// efetuar a chamada a seguir:
-		// "image.setAbsolutePosition
-		// (rect.getLowerLeftX(),rect.getLowerLeftY());"
-		image.setAbsolutePosition(rect.getLowerLeftX()
-				+ (rect.getWidth() - image.getScaledWidth()) / 2, rect
-				.getLowerLeftY()
-				+ (rect.getHeight() - image.getScaledHeight()) / 2);
+        // A rotina abaixo tem por objetivo deixar a imagem posicionada no
+        // centro
+        // do field, tanto na perspectiva horizontal como na vertical.
+        // Caso não se queira mais posicionar a imagem no centro do field, basta
+        // efetuar a chamada a seguir:
+        // "image.setAbsolutePosition
+        // (rect.getLowerLeftX(),rect.getLowerLeftY());"
+        image.setAbsolutePosition(rect.getLowerLeftX()
+                + (rect.getWidth() - image.getScaledWidth()) / 2, rect
+                .getLowerLeftY()
+                + (rect.getHeight() - image.getScaledHeight()) / 2);
 
-		stamper.getOverContent(rect.getPage()).addImage(image);
-		
-		return rect;
-	}
-	
-	/**
-	 * Junta varios arquivos pdf em um só.
-	 * 
-	 * @param pdfFiles
-	 *            Coleção de array de bytes
-	 * 
-	 * @return Arquivo PDF em forma de byte
-	 * @since 0.2
-	 */
-	public static byte[] mergeFiles(Collection<byte[]> pdfFiles) {
-		
-		return mergeFiles(pdfFiles, null);
-	}
-	
-	/**
-	 * Junta varios arquivos pdf em um só.
-	 * 
-	 * @param pdfFiles
-	 *            Coleção de array de bytes
-	 * @param info
-	 *            Usa somente as informações
-	 *            (title,subject,keywords,author,creator)
-	 * 
-	 * @return Arquivo PDF em forma de byte
-	 * 
-	 * @since 0.2
-	 */
-	public static byte[] mergeFiles(Collection<byte[]> pdfFiles, PdfDocInfo info) {
-		
-		try{
-			
-			ByteArrayOutputStream byteOS = new ByteArrayOutputStream();
-			
-			Document document = new Document();
-			
-			PdfCopy copy = new PdfCopy(document, byteOS);
-			
-			document.open();
-			
-			for (byte[] f : pdfFiles) {
+        int page = rect.getPage();
+        PdfContentByte overContent = stamper.getOverContent(page);
+        //Tentar a proxima pagina
+        if (overContent == null) {
+            overContent = stamper.getOverContent(page + 1);
+        }
+        overContent.addImage(image);
+        return rect;
+    }
 
-				PdfReader reader = new PdfReader(f);
+    /**
+     * Junta varios arquivos pdf em um só.
+     *
+     * @param pdfFiles Coleção de array de bytes
+     *
+     * @return Arquivo PDF em forma de byte
+     * @since 0.2
+     */
+    public static byte[] mergeFiles(Collection<byte[]> pdfFiles) {
 
-				for (int page = 1; page <= reader.getNumberOfPages(); page++) {
+        return mergeFiles(pdfFiles, null);
+    }
 
-					copy.addPage(copy.getImportedPage(reader, page));
-				}
+    /**
+     * Junta varios arquivos pdf em um só.
+     *
+     * @param pdfFiles Coleção de array de bytes
+     * @param info Usa somente as informações
+     * (title,subject,keywords,author,creator)
+     *
+     * @return Arquivo PDF em forma de byte
+     *
+     * @since 0.2
+     */
+    public static byte[] mergeFiles(Collection<byte[]> pdfFiles, PdfDocInfo info) {
 
-				reader.close();
-			}
-			
-			document.addCreationDate();
-			
-			if(info != null){
-				
-				 document.addAuthor(info.author());
-				 document.addCreator(info.creator());
-				 document.addTitle(info.title());
-				 document.addSubject(info.subject());
-				 document.addKeywords(info.keywords());
-			}
-			
-			copy.close();
-			document.close();
-			byteOS.close();
+        try {
 
-			return byteOS.toByteArray();
-			
-		}catch (Exception e) {
-			return Exceptions.throwIllegalStateException(e);
-		}
-	}
-	
+            ByteArrayOutputStream byteOS = new ByteArrayOutputStream();
+
+            Document document = new Document();
+
+            PdfCopy copy = new PdfCopy(document, byteOS);
+
+            document.open();
+
+            for (byte[] f : pdfFiles) {
+
+                PdfReader reader = new PdfReader(f);
+
+                for (int page = 1; page <= reader.getNumberOfPages(); page++) {
+
+                    copy.addPage(copy.getImportedPage(reader, page));
+                }
+
+                reader.close();
+            }
+
+            document.addCreationDate();
+
+            if (info != null) {
+
+                document.addAuthor(info.author());
+                document.addCreator(info.creator());
+                document.addTitle(info.title());
+                document.addSubject(info.subject());
+                document.addKeywords(info.keywords());
+            }
+
+            copy.close();
+            document.close();
+            byteOS.close();
+
+            return byteOS.toByteArray();
+
+        } catch (Exception e) {
+            return Exceptions.throwIllegalStateException(e);
+        }
+    }
+
 }

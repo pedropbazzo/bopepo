@@ -29,6 +29,7 @@
  */
 package org.jrimum.bopepo.view;
 
+import com.itextpdf.text.DocumentException;
 import org.jrimum.bopepo.Guia;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
@@ -41,7 +42,6 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 
-import com.lowagie.text.DocumentException;
 import static org.jrimum.utilix.Objects.isNotNull;
 
 /**

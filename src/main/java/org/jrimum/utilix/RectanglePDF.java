@@ -1,10 +1,11 @@
 package org.jrimum.utilix;
 
-import com.lowagie.text.Rectangle;
+import com.itextpdf.text.Rectangle;
 
 public class RectanglePDF extends Rectangle {
 
-    private int page;
+    //Padrão de pagina inicial no novo itext
+    private int page = 1;
 
     /**
      * For each of this groups the values are: [page, llx, lly, urx, ury].

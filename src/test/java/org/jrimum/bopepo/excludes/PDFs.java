@@ -27,7 +27,6 @@
  * Criado em: 12/01/2014 - 17:09:13 
  * 
  */
-
 package org.jrimum.bopepo.excludes;
 
 import java.awt.image.BufferedImage;
@@ -46,43 +45,52 @@ import com.itextpdf.text.pdf.parser.TextRenderInfo;
 
 /**
  * Utilitário para operações com PDFs.
- * 
+ *
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
  */
 public class PDFs {
-	
-	public static  Map<String,Collection<BufferedImage>> getImages(byte[] pdf) throws IOException{
-		PdfReader reader = new PdfReader(pdf);
+
+    public static Map<String, Collection<BufferedImage>> getImages(byte[] pdf) throws IOException {
+        PdfReader reader = new PdfReader(pdf);
         PdfReaderContentParser parser = new PdfReaderContentParser(reader);
         ImageRenderListener listener = new ImageRenderListener();
         for (int i = 1; i <= reader.getNumberOfPages(); i++) {
             parser.processContent(i, listener);
         }
         reader.close();
-		return listener.getImages();
-	}
+        return listener.getImages();
+    }
 
-	public static class ImageRenderListener implements RenderListener {
-		private Multimap<String, BufferedImage> images = ArrayListMultimap
-				.create();
-		public void renderImage(ImageRenderInfo renderInfo) {
-			try {
-				PdfImageObject image = renderInfo.getImage();
-				if (image == null) {
-					return;
-				}
-				final String ref = String.format("Ref-%s-%s", renderInfo.getRef()
-						.getNumber(), image.getFileType());
-				images.put(ref, image.getBufferedImage());
-			} catch (Exception e) {
-				throw new RuntimeException(e);
-			}
-		}
-		public  Map<String,Collection<BufferedImage>> getImages(){
-			return images.asMap();
-		}
-		public void beginTextBlock() {}
-		public void endTextBlock() {}
-		public void renderText(TextRenderInfo renderInfo) {}
-	}
+    public static class ImageRenderListener implements RenderListener {
+
+        private Multimap<String, BufferedImage> images = ArrayListMultimap
+                .create();
+
+        public void renderImage(ImageRenderInfo renderInfo) {
+            try {
+                PdfImageObject image = renderInfo.getImage();
+                if (image == null) {
+                    return;
+                }
+                final String ref = String.format("Ref-%s-%s", renderInfo.getRef()
+                        .getNumber(), image.getFileType());
+                images.put(ref, image.getBufferedImage());
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        public Map<String, Collection<BufferedImage>> getImages() {
+            return images.asMap();
+        }
+
+        public void beginTextBlock() {
+        }
+
+        public void endTextBlock() {
+        }
+
+        public void renderText(TextRenderInfo renderInfo) {
+        }
+    }
 }
