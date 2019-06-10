@@ -39,6 +39,6 @@ public class TestBoletoFacade {
         boletoFacade.gerarLinhaDigitavel();
         BoletoViewer create = BoletoViewer.create(boletoFacade);
 
-        create.getPdfAsFile("/home/strike/teste.pdf");
+//        create.getPdfAsFile("/home/strike/teste.pdf");
     }
 }

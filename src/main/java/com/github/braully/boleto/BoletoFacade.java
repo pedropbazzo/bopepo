@@ -157,7 +157,7 @@ public class BoletoFacade extends Boleto {
         return this;
     }
 
-    void carteira(String string) {
+    public void carteira(String string) {
         this.getCarteira().setCodigo(parseInt(string));
     }
 
