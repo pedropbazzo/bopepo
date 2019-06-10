@@ -199,14 +199,10 @@ public abstract class AbstractCPRFValidator {
      */
     public static AbstractCPRFValidator create(String codigoDoCadastro)
             throws IllegalArgumentException {
-
         AbstractCPRFValidator validatorCPRF = null;
-
         validatorCPRF = create(selectTipoDeCadastro(codigoDoCadastro));
-
         validatorCPRF.codigoDoCadastro = new StringBuilder(codigoDoCadastro);
         validatorCPRF.removeFormatacao();
-
         return validatorCPRF;
     }
 
@@ -221,15 +217,10 @@ public abstract class AbstractCPRFValidator {
      * @since 0.2
      */
     public static AbstractCPRFValidator create(TipoDeCPRF tipoDeCadastro) {
-
         AbstractCPRFValidator validatorCPRF = null;
-
         if (isNotNull(tipoDeCadastro)) {
-
             validatorCPRF = tipoDeCadastro.getAutenticador();
-
             validatorCPRF.tipoDeCadastro = tipoDeCadastro;
-
         } else {
             throw new IllegalArgumentException("Tipo de Cadastro [ "
                     + tipoDeCadastro + " ] nulo !");

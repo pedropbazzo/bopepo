@@ -26,10 +26,9 @@
  * Criado em: 30/03/2008 - 18:08:50
  * 
  */
-
-
 package org.jrimum.bopepo.campolivre;
 
+import org.jrimum.domkee.banco.Carteira;
 import org.jrimum.domkee.banco.ContaBancaria;
 import org.jrimum.domkee.banco.Titulo;
 import org.jrimum.texgit.Fillers;
@@ -37,10 +36,10 @@ import org.jrimum.texgit.FixedField;
 import org.jrimum.utilix.Exceptions;
 
 /**
- * 
+ *
  * O campo livre do Banco do Brasil com o nosso número de 11 dígitos deve seguir
  * esta forma:
- * 
+ *
  * <table border="1" cellpadding="0" cellspacing="0" style="border-collapse:
  * collapse" bordercolor="#111111" width="60%" id="campolivre">
  * <tr> <thead>
@@ -79,62 +78,62 @@ import org.jrimum.utilix.Exceptions;
  * <td >Carteira</td>
  * </tr>
  * </table>
- * 
- * 
- * 
+ *
+ *
+ *
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
  * @author <a href="mailto:misaelbarreto@gmail.com">Misael Barreto</a>
  * @author <a href="mailto:romulomail@gmail.com">Rômulo Augusto</a>
  * @author <a href="http://www.nordestefomento.com.br">Nordeste Fomento
- *         Mercantil</a>
- * 
+ * Mercantil</a>
+ *
  * @since 0.2
- * 
+ *
  * @version 0.2
  */
 class CLBancoDoBrasilNN11 extends AbstractCLBancoDoBrasil {
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -4859699102593834115L;
-	
-	/**
-	 * 
-	 */
-	private static final Integer FIELDS_LENGTH = 4;
-	
-	/**
-	 * <p>
-	 *   Dado um título, cria um campo livre para o padrão do Banco do Brasil
-	 *   que tenha o nosso número de tamanho 11.  
-	 * </p>
-	 * @param titulo título com as informações para geração do campo livre
-	 */
-	CLBancoDoBrasilNN11(Titulo titulo) {
-		
-		super(FIELDS_LENGTH);
-		
-		ContaBancaria conta = titulo.getContaBancaria();
-		String nossoNumero = titulo.getNossoNumero();
-		
-		this.add(new FixedField<String>(nossoNumero, 11, Fillers.ZERO_LEFT));
-		
-		this.add(new FixedField<Integer>(conta.getAgencia().getCodigo(), 4, Fillers.ZERO_LEFT));
-		this.add(new FixedField<Integer>(conta.getNumeroDaConta().getCodigoDaConta(), 8, Fillers.ZERO_LEFT));
-		
-		this.add(new FixedField<Integer>(conta.getCarteira().getCodigo(), 2, Fillers.ZERO_LEFT));
-	}
-	
-	@Override
-	protected void addFields(Titulo titulo) {
-		// TODO IMPLEMENTAR
-		Exceptions.throwUnsupportedOperationException("AINDA NÃO IMPLEMENTADO!");
-	}
 
-	@Override
-	protected void checkValues(Titulo titulo) {
-		// TODO IMPLEMENTAR
-		Exceptions.throwUnsupportedOperationException("AINDA NÃO IMPLEMENTADO!");
-	}
+    /**
+     *
+     */
+    private static final long serialVersionUID = -4859699102593834115L;
+
+    /**
+     *
+     */
+    private static final Integer FIELDS_LENGTH = 4;
+
+    /**
+     * <p>
+     * Dado um título, cria um campo livre para o padrão do Banco do Brasil que
+     * tenha o nosso número de tamanho 11.
+     * </p>
+     *
+     * @param titulo título com as informações para geração do campo livre
+     */
+    CLBancoDoBrasilNN11(Titulo titulo) {
+        super(FIELDS_LENGTH);
+        ContaBancaria conta = titulo.getContaBancaria();
+        Integer codigoAgencia = conta.getAgencia().getCodigo();
+        String nossoNumero = titulo.getNossoNumero();
+        Integer codigoConta = conta.getNumeroDaConta().getCodigoDaConta();
+        Carteira carteira = conta.getCarteira();
+        Integer codigoCarteira = carteira.getCodigo();
+        this.add(new FixedField<String>(nossoNumero, 11, Fillers.ZERO_LEFT));
+        this.add(new FixedField<Integer>(codigoAgencia, 4, Fillers.ZERO_LEFT));
+        this.add(new FixedField<Integer>(codigoConta, 8, Fillers.ZERO_LEFT));
+        this.add(new FixedField<Integer>(codigoCarteira, 2, Fillers.ZERO_LEFT));
+    }
+
+    @Override
+    protected void addFields(Titulo titulo) {
+        // TODO IMPLEMENTAR
+        Exceptions.throwUnsupportedOperationException("AINDA NÃO IMPLEMENTADO!");
+    }
+
+    @Override
+    protected void checkValues(Titulo titulo) {
+        // TODO IMPLEMENTAR
+        Exceptions.throwUnsupportedOperationException("AINDA NÃO IMPLEMENTADO!");
+    }
 }

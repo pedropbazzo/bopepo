@@ -22,10 +22,12 @@ import org.jrimum.bopepo.BancosSuportados;
 import org.jrimum.bopepo.Boleto;
 import org.jrimum.bopepo.LinhaDigitavel;
 import org.jrimum.domkee.banco.Agencia;
+import org.jrimum.domkee.banco.Carteira;
 import org.jrimum.domkee.banco.Cedente;
 import org.jrimum.domkee.banco.ContaBancaria;
 import org.jrimum.domkee.banco.NumeroDaConta;
 import org.jrimum.domkee.banco.Sacado;
+import org.jrimum.domkee.banco.TipoDeCobranca;
 import org.jrimum.domkee.banco.Titulo;
 import org.jrimum.domkee.pessoa.CNPJ;
 import org.jrimum.domkee.pessoa.CPF;
@@ -55,7 +57,8 @@ public class BoletoFacade extends Boleto {
 
     /* Metodos da API Publica */
     public BoletoFacade banco(String numeroBanco) {
-        this.getContaBancaria().setBanco(BancosSuportados.instancia(numeroBanco));
+        String numeroBancoCompleto = this.completaCodigoBanco(numeroBanco);
+        this.getContaBancaria().setBanco(BancosSuportados.instancia(numeroBancoCompleto));
         return this;
     }
 
@@ -107,12 +110,14 @@ public class BoletoFacade extends Boleto {
     }
 
     public BoletoFacade sacadoCpf(String cpf) {
-        this.getSacado().setCPRF(new CPF(cpf));
+        String completaCpf = this.completaCpf(cpf);
+        this.getSacado().setCPRF(new CPF(completaCpf));
         return this;
     }
 
     public BoletoFacade sacadoCnpj(String cnpj) {
-        this.getSacado().setCPRF(new CNPJ(cnpj));
+        String completaCnpj = this.completaCnpj(cnpj);
+        this.getSacado().setCPRF(new CNPJ(completaCnpj));
         return this;
     }
 
@@ -152,7 +157,19 @@ public class BoletoFacade extends Boleto {
         return this;
     }
 
+    void carteira(String string) {
+        this.getCarteira().setCodigo(parseInt(string));
+    }
+
+//    public BoletoFacade convenio(String string) {
+//        return this;
+//    }
     /* Metodos internos */
+    private String completaCodigoBanco(String banco) {
+        String fill = Filler.ZERO_LEFT.fill(banco, 3);
+        return fill;
+    }
+
     private String completaCnpj(String cnpj) {
         String fill = Filler.ZERO_LEFT.fill(cnpj, 14);
         return fill;
@@ -181,10 +198,25 @@ public class BoletoFacade extends Boleto {
         return sacado;
     }
 
-    private ContaBancaria getContaBancaria() {
-        if (this.getTitulo() == null) {
-            this.setTitulo(new Titulo());
+    private Carteira getCarteira() {
+        Carteira carteira = this.getContaBancaria().getCarteira();
+        if (carteira == null) {
+            carteira = new Carteira();
+            this.getContaBancaria().setCarteira(carteira);
         }
+        return carteira;
+    }
+
+    public Titulo getTitulo() {
+        Titulo titulo1 = super.getTitulo();
+        if (titulo1 == null) {
+            titulo1 = new Titulo();
+            this.setTitulo(titulo1);
+        }
+        return titulo1;
+    }
+
+    private ContaBancaria getContaBancaria() {
         if (this.getTitulo().getContaBancaria() == null) {
             this.getTitulo().setContaBancaria(new ContaBancaria());
         }

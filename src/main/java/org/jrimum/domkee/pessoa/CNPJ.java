@@ -80,7 +80,8 @@ public class CNPJ extends AbstractCPRF {
 
                 } else {
 
-                    Exceptions.throwIllegalArgumentException("O cadastro de pessoa [ \"" + numCNPJ + "\" ] não é válido.");
+                    Exceptions.throwIllegalArgumentException("O cadastro de pessoa [ \""
+                            + numCNPJ + "\" ] não é válido.");
                 }
             }
 

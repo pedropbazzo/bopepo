@@ -46,10 +46,12 @@ import static org.jrimum.utilix.DecimalFormat.MONEY_DD_BR;
 import java.awt.Image;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.Optional;
 
 import org.jrimum.bopepo.Boleto;
 import org.jrimum.bopepo.LinhaDigitavel;
 import org.jrimum.bopepo.pdf.CodigoDeBarras;
+import org.jrimum.domkee.banco.TipoDeTitulo;
 import org.jrimum.utilix.Exceptions;
 import org.jrimum.utilix.Objects;
 
@@ -128,7 +130,12 @@ public abstract class AbstractBoletoInfoCampoView implements BoletoInfoCampoView
     }
 
     public String getTextoFcEspecieDocumento() {
-        return whenNull(boleto.getTitulo().getTipoDeDocumento(), EMPTY, boleto.getTitulo().getTipoDeDocumento().getSigla());
+        String textoFcEspecieDocumento = EMPTY;
+        TipoDeTitulo tipoTitulo = boleto.getTitulo().getTipoDeDocumento();
+        if (tipoTitulo != null) {
+            textoFcEspecieDocumento = tipoTitulo.getSigla();
+        }
+        return textoFcEspecieDocumento;
     }
 
     public String getTextoFcDataDocumento() {

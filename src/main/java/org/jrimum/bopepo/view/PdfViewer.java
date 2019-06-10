@@ -133,7 +133,6 @@ class PdfViewer {
             processarPdf();
             return doc.toFile(destFile);
         } catch (Exception e) {
-            e.printStackTrace();
             log.error("Erro durante a criação do arquivo! " + e.getLocalizedMessage(), e);
             return Exceptions.throwIllegalStateException("Erro ao tentar criar arquivo! " + "Causado por " + e.getLocalizedMessage(), e);
         }

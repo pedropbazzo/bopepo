@@ -130,12 +130,9 @@ public class CPF extends AbstractCPRF {
     }
 
     private void initFromNotFormattedString(String strCPF) {
-
         try {
-
             this.setCodigoFormatado(format(strCPF));
             this.setCodigo(Long.parseLong(strCPF));
-
         } catch (Exception e) {
             throw new CPFException(e);
         }

@@ -27,15 +27,18 @@ public class TestBoletoFacade {
     @Test
     public void testBoletoSimples() {
         BoletoFacade boletoFacade = new BoletoFacade();
-        boletoFacade.banco("001").agencia("1234").conta("1234-1");
-        boletoFacade.sacado("Sacado da Silva Sauro").sacadoCpf("01234567891");
-        boletoFacade.cedente("Cedente da Silva Sauro").cedenteCnpj("9876543210");
-        boletoFacade.numeroDocumento("12345").nossoNumero("12345678901")
+        boletoFacade.sacado("Sacado da Silva Sauro").sacadoCpf("1");
+        boletoFacade.banco("1").agencia("1").conta("1");
+        boletoFacade.cedente("Cedente da Silva Sauro").cedenteCnpj("1");
+        //boletoFacade.covenio("1");
+        boletoFacade.carteira("1");
+        boletoFacade.numeroDocumento("1")
+                .nossoNumero("1234567890")
                 .valor(100.23).dataVencimento("01/01/2019");
 
         boletoFacade.gerarLinhaDigitavel();
         BoletoViewer create = BoletoViewer.create(boletoFacade);
 
-        create.getPdfAsFile("/home/braully/teste.pdf");
+        create.getPdfAsFile("/home/strike/teste.pdf");
     }
 }
