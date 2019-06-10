@@ -20,6 +20,7 @@ import java.math.BigDecimal;
 import org.apache.commons.lang3.tuple.Pair;
 import org.jrimum.bopepo.BancosSuportados;
 import org.jrimum.bopepo.Boleto;
+import org.jrimum.bopepo.LinhaDigitavel;
 import org.jrimum.domkee.banco.Agencia;
 import org.jrimum.domkee.banco.Cedente;
 import org.jrimum.domkee.banco.ContaBancaria;
@@ -41,6 +42,11 @@ public class BoletoFacade extends Boleto {
 
     public BoletoFacade() {
         super();
+    }
+
+    @Override
+    public LinhaDigitavel getLinhaDigitavel() {
+        return super.getLinhaDigitavel();
     }
 
     /* Metodos da API Publica */

@@ -72,63 +72,63 @@ import org.jrimum.utilix.Objects;
  */
 public class Boleto {
 
-    private static Logger log = Logger.getLogger(Boleto.class);
+    static Logger log = Logger.getLogger(Boleto.class);
 
     /**
      * @see Titulo
      */
-    private Titulo titulo;
+    protected Titulo titulo;
 
     /**
      * @see #setDataDeProcessamento(Date)
      */
-    private Date dataDeProcessamento;
+    protected Date dataDeProcessamento;
 
     /**
      * @see CodigoDeBarras
      */
-    private CodigoDeBarras codigoDeBarras;
+    protected CodigoDeBarras codigoDeBarras;
 
     /**
      * @see LinhaDigitavel
      */
-    private LinhaDigitavel linhaDigitavel;
+    protected LinhaDigitavel linhaDigitavel;
 
     /**
      * @see CampoLivre
      */
-    private CampoLivre campoLivre;
+    protected CampoLivre campoLivre;
 
     /**
      * @see #setLocalPagamento(String)
      */
-    private String localPagamento;
+    protected String localPagamento;
 
     /**
      * @see #setInstrucaoAoSacado(String)
      */
-    private String instrucaoAoSacado;
+    protected String instrucaoAoSacado;
 
-    private String instrucao1;
-    private String instrucao2;
-    private String instrucao3;
-    private String instrucao4;
-    private String instrucao5;
-    private String instrucao6;
-    private String instrucao7;
-    private String instrucao8;
+    protected String instrucao1;
+    protected String instrucao2;
+    protected String instrucao3;
+    protected String instrucao4;
+    protected String instrucao5;
+    protected String instrucao6;
+    protected String instrucao7;
+    protected String instrucao8;
 
     /**
      * @see #setTextosExtras(Map)
      */
-    private Map<String, String> textosExtras;
+    protected Map<String, String> textosExtras;
 
     /**
      * <p>
      * Map com nome do campo e imagem para este campo.
      * </p>
      */
-    private Map<String, Image> imagensExtras;
+    protected Map<String, Image> imagensExtras;
 
     /**
      * Apenas cria um instâcia do boleto com os dados nulos.
