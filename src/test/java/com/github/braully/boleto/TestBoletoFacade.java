@@ -34,7 +34,6 @@ public class TestBoletoFacade {
                 .valor(100.23).dataVencimento("01/01/2019");
 
         boletoFacade.gerarLinhaDigitavel();
-
         BoletoViewer create = BoletoViewer.create(boletoFacade);
 
         create.getPdfAsFile("/home/braully/teste.pdf");

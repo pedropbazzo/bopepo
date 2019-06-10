@@ -39,7 +39,7 @@ import org.jrimum.texgit.FixedField;
 import org.jrimum.utilix.Exceptions;
 
 /**
- * 
+ *
  * <p>
  * Campo Livre para o Banco Mercantil do Brasil. Segue o seguinte formato:
  * <br/>
@@ -77,56 +77,51 @@ import org.jrimum.utilix.Exceptions;
  * </tr>
  * </table>
  * </p>
- * 
+ *
  * @author <a href="mailto:romulomail@gmail.com">Rômulo Augusto</a>
- * 
+ *
  * @since 0.2
- * 
+ *
  * @version 0.2
  */
 class CLMercantilDoBrasil extends AbstractCLMercantilDoBrasil {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 2335934898236961987L;
-	
-	/**
-	 * 
-	 */
-	private static final Integer FIELDS_LENGTH = 4;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 2335934898236961987L;
 
-	/**
-	 * <p>
-	 * Dado um título, cria um campo livre para o padrão do Banco Mercantil do Brasil.
-	 * </p>
-	 * @param titulo título com as informações para geração do campo livre
-	 */
-	CLMercantilDoBrasil(Titulo titulo) {
-		super(FIELDS_LENGTH);
-		
-		ContaBancaria contaBancaria = titulo.getContaBancaria();
-		
+    /**
+     *
+     */
+    private static final Integer FIELDS_LENGTH = 4;
+
+    /**
+     * <p>
+     * Dado um título, cria um campo livre para o padrão do Banco Mercantil do
+     * Brasil.
+     * </p>
+     *
+     * @param titulo título com as informações para geração do campo livre
+     */
+    CLMercantilDoBrasil(Titulo titulo) {
+        super(FIELDS_LENGTH);
+        ContaBancaria contaBancaria = titulo.getContaBancaria();
 //		int digitoDoNossoNumero = calculeDigitoVerificadorDoNossoNumero(contaBancaria.getAgencia().getCodigoDaAgencia(), nossoNumero);
-		
-		//TODO Verificar de onde virá esta informação: apenas verificar se o título tem ou não valor de desconto.
-		int desconto;
-		if(titulo.getDesconto() == null || titulo.getDesconto().equals(BigDecimal.ZERO.setScale(2, RoundingMode.DOWN))) {
-			desconto = 2;
-			
-		} else {
-			desconto = 0;
-		}
-		
-		this.add(new FixedField<Integer>(contaBancaria.getAgencia().getCodigo(), 4, Fillers.ZERO_LEFT));
-		
-		this.add(new FixedField<String>(titulo.getNossoNumero() + titulo.getDigitoDoNossoNumero(), 11, Fillers.ZERO_LEFT));
-		
-		this.add(new FixedField<Integer>(contaBancaria.getNumeroDaConta().getCodigoDaConta(), 9, Fillers.ZERO_LEFT));
-		
-		this.add(new FixedField<Integer>(desconto, 1));
-	}
-	
+        //TODO Verificar de onde virá esta informação: apenas verificar se o título tem ou não valor de desconto.
+        int desconto;
+        if (titulo.getDesconto() == null || titulo.getDesconto().equals(BigDecimal.ZERO.setScale(2, RoundingMode.DOWN))) {
+            desconto = 2;
+        } else {
+            desconto = 0;
+        }
+
+        this.add(new FixedField<Integer>(contaBancaria.getAgencia().getCodigo(), 4, Fillers.ZERO_LEFT));
+        this.add(new FixedField<String>(titulo.getNossoNumero() + titulo.getDigitoDoNossoNumero(), 11, Fillers.ZERO_LEFT));
+        this.add(new FixedField<Integer>(contaBancaria.getNumeroDaConta().getCodigoDaConta(), 9, Fillers.ZERO_LEFT));
+        this.add(new FixedField<Integer>(desconto, 1));
+    }
+
 //	/**
 //	 * 
 //	 * <p>
@@ -151,17 +146,16 @@ class CLMercantilDoBrasil extends AbstractCLMercantilDoBrasil {
 //		
 //		return digito;
 //	}
-	
-	@Override
-	protected void addFields(Titulo titulo) {
-		// TODO IMPLEMENTAR
-		Exceptions.throwUnsupportedOperationException("AINDA NÃO IMPLEMENTADO!");
-	}
+    @Override
+    protected void addFields(Titulo titulo) {
+        // TODO IMPLEMENTAR
+        Exceptions.throwUnsupportedOperationException("AINDA NÃO IMPLEMENTADO!");
+    }
 
-	@Override
-	protected void checkValues(Titulo titulo) {
-		// TODO IMPLEMENTAR
-		Exceptions.throwUnsupportedOperationException("AINDA NÃO IMPLEMENTADO!");
-	}
+    @Override
+    protected void checkValues(Titulo titulo) {
+        // TODO IMPLEMENTAR
+        Exceptions.throwUnsupportedOperationException("AINDA NÃO IMPLEMENTADO!");
+    }
 
 }

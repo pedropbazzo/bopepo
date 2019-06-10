@@ -75,8 +75,8 @@ public final class CampoLivreFactory {
      * @throws NotSupportedBancoException
      * @throws NotSupportedCampoLivreException
      */
-    public static CampoLivre create(Titulo titulo) throws NotSupportedBancoException, NotSupportedCampoLivreException {
-
+    public static CampoLivre create(Titulo titulo)
+            throws NotSupportedBancoException, NotSupportedCampoLivreException {
         return AbstractCampoLivre.create(titulo);
     }
 
@@ -92,15 +92,11 @@ public final class CampoLivreFactory {
      */
     public static CampoLivre create(String strCampoLivre) {
         Objects.checkNotNull(strCampoLivre);
-
         strCampoLivre = strip(strCampoLivre);
-
         Strings.checkNotBlank(strCampoLivre, "O Campo Livre não deve ser vazio!");
-
         Objects.checkArgument(strCampoLivre.length() == CampoLivre.STRING_LENGTH, "O tamanho do Campo Livre [ " + strCampoLivre + " ] deve ser igual a 25 e não [" + strCampoLivre.length() + "]!");
         Objects.checkArgument(!containsAny(strCampoLivre, " "), "O Campo Livre [ " + strCampoLivre + " ] não deve conter espaços em branco!");
         Objects.checkArgument(isNumeric(strCampoLivre), "O Campo Livre [ " + strCampoLivre + " ] deve ser uma String numérica!");
-
         return valueOf(strCampoLivre);
     }
 
