@@ -145,38 +145,28 @@ public class Boleto {
      * @throws NotSupportedCampoLivreException
      */
     public Boleto(Titulo titulo) throws IllegalArgumentException, NotSupportedBancoException, NotSupportedCampoLivreException {
-
         if (log.isTraceEnabled()) {
             log.trace("Instanciando boleto");
         }
-
         if (log.isDebugEnabled()) {
             log.debug("titulo instance : " + titulo);
         }
-
         if (isNotNull(titulo)) {
-
             this.setTitulo(titulo);
             this.setCampoLivre(CampoLivreFactory.create(titulo));
             this.load();
-
             if (log.isDebugEnabled()) {
                 log.debug("boleto instance : " + this);
             }
-
         } else {
-
             if (log.isDebugEnabled()) {
                 log.debug("Título Nulo - Valor Não Permitido!");
             }
-
             Exceptions.throwIllegalArgumentException("Título nulo!");
         }
-
         if (log.isDebugEnabled() || log.isTraceEnabled()) {
             log.trace("Boleto Instanciado : " + this);
         }
-
     }
 
     /**
@@ -185,29 +175,22 @@ public class Boleto {
      */
     public Boleto(Titulo titulo, CampoLivre campoLivre) {
         super();
-
         if (log.isTraceEnabled()) {
             log.trace("Instanciando boleto");
         }
-
         if (log.isDebugEnabled()) {
             log.debug("titulo instance : " + titulo);
         }
-
         if (log.isDebugEnabled()) {
             log.debug("campoLivre instance : " + campoLivre);
         }
-
         if (isNotNull(titulo)) {
-
             this.setTitulo(titulo);
             this.setCampoLivre(campoLivre);
             this.load();
-
             if (log.isDebugEnabled()) {
                 log.debug("boleto instance : " + this);
             }
-
         } else {
             IllegalArgumentException e = new IllegalArgumentException("Título nulo!");
             log.error("Valor Não Permitido!", e);
@@ -215,20 +198,15 @@ public class Boleto {
         }
 
         if (log.isDebugEnabled() || log.isTraceEnabled()) {
-
             log.trace("Boleto Instanciado : " + this);
         }
-
     }
 
-    private void load() {
-
+    protected void load() {
         codigoDeBarras = new CodigoDeBarras(titulo, campoLivre);
         linhaDigitavel = new LinhaDigitavel(codigoDeBarras);
         dataDeProcessamento = new Date();
-
         if (log.isInfoEnabled()) {
-
             log.info("Data de Processamento do Boleto : " + DDMMYYYY_B.format(dataDeProcessamento));
         }
     }

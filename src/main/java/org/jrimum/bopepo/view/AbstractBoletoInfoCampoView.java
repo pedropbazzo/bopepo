@@ -48,8 +48,8 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 import org.jrimum.bopepo.Boleto;
+import org.jrimum.bopepo.LinhaDigitavel;
 import org.jrimum.bopepo.pdf.CodigoDeBarras;
-import org.jrimum.bopepo.view.ResourceBundle;
 import org.jrimum.utilix.Exceptions;
 import org.jrimum.utilix.Objects;
 
@@ -300,7 +300,8 @@ public abstract class AbstractBoletoInfoCampoView implements BoletoInfoCampoView
     }
 
     public String getTextoFcLinhaDigitavel() {
-        return boleto.getLinhaDigitavel().write();
+        LinhaDigitavel linhaDigitavel = boleto.getLinhaDigitavel();
+        return linhaDigitavel.write();
     }
 
     public Image getImagemFcCodigoBarra() {
