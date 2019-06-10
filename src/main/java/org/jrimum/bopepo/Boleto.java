@@ -72,7 +72,7 @@ import org.jrimum.utilix.Objects;
  */
 public class Boleto {
 
-    static Logger log = Logger.getLogger(Boleto.class);
+    protected static Logger log = Logger.getLogger(Boleto.class);
 
     /**
      * @see Titulo
@@ -145,15 +145,19 @@ public class Boleto {
      * @throws NotSupportedCampoLivreException
      */
     public Boleto(Titulo titulo) throws IllegalArgumentException, NotSupportedBancoException, NotSupportedCampoLivreException {
+        processFromTitulo(titulo);
+    }
+
+    protected void processFromTitulo(Titulo titulo1) throws NotSupportedCampoLivreException, NotSupportedBancoException {
         if (log.isTraceEnabled()) {
             log.trace("Instanciando boleto");
         }
         if (log.isDebugEnabled()) {
-            log.debug("titulo instance : " + titulo);
+            log.debug("titulo instance : " + titulo1);
         }
-        if (isNotNull(titulo)) {
-            this.setTitulo(titulo);
-            this.setCampoLivre(CampoLivreFactory.create(titulo));
+        if (isNotNull(titulo1)) {
+            this.setTitulo(titulo1);
+            this.setCampoLivre(CampoLivreFactory.create(titulo1));
             this.load();
             if (log.isDebugEnabled()) {
                 log.debug("boleto instance : " + this);

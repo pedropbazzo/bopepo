@@ -46,6 +46,10 @@ public class BoletoFacade extends Boleto {
 
     @Override
     public LinhaDigitavel getLinhaDigitavel() {
+        if (this.linhaDigitavel == null) {
+            log.debug("Boleto não gerado");
+            gerarLinhaDigitavel();
+        }
         return super.getLinhaDigitavel();
     }
 
@@ -214,4 +218,8 @@ public class BoletoFacade extends Boleto {
         return Pair.of(numero, dv);
     }
 
+    protected BoletoFacade gerarLinhaDigitavel() {
+        this.processFromTitulo(titulo);
+        return this;
+    }
 }

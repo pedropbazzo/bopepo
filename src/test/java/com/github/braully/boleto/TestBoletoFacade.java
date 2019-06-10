@@ -32,8 +32,11 @@ public class TestBoletoFacade {
         boletoFacade.cedente("Cedente da Silva Sauro").cedenteCnpj("9876543210");
         boletoFacade.numeroDocumento("12345").nossoNumero("12345678901")
                 .valor(100.23).dataVencimento("01/01/2019");
-        
+
+        boletoFacade.gerarLinhaDigitavel();
+
         BoletoViewer create = BoletoViewer.create(boletoFacade);
+
         create.getPdfAsFile("/home/braully/teste.pdf");
     }
 }
