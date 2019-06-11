@@ -964,7 +964,6 @@ public class PdfDocMix {
             stamper.addViewerPreference(PdfName.NEEDAPPEARANCES, PdfBoolean.PDFTRUE);
             form = stamper.getAcroFields();
             form.setGenerateAppearances(true);
-
         } catch (Exception e) {
             Exceptions.throwIllegalStateException(e);
         }
@@ -991,8 +990,8 @@ public class PdfDocMix {
         if (hasElement(txtMap)) {
             for (Entry<String, String> e : txtMap.entrySet()) {
                 try {
-                    boolean setField = form.setField(e.getKey(), e.getValue());
-//                    System.out.println("setField: " + e + " : " + setField);
+                    form.setField(e.getKey(), e.getValue());
+                    //System.out.println("form.setField(\"" + e.getKey() + "\", \"" + e.getValue() + "\");");
                 } catch (Exception ex) {
                     Exceptions.throwIllegalStateException(ex);
                 }
@@ -1083,15 +1082,14 @@ public class PdfDocMix {
 
         try {
             // Send immediately
-            outputStream.flush();
+            //outputStream.flush();
             // close All in this order
             https://stackoverflow.com/questions/23469286/merging-of-pdf-with-digital-signature-with-itext-5-4-0-or-greatest-gives-error
-            stamper.flush();
+            //stamper.flush();
             stamper.close();
-            reader.close();
-            outputStream.close();
+            //reader.close();
+            //outputStream.close();
         } catch (Exception e) {
-            e.printStackTrace();
             throw new IllegalStateException(e);
         }
     }

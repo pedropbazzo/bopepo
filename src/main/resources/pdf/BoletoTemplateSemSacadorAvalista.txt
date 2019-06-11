@@ -1,0 +1,83 @@
+RECIBO DO PAGADOR
+
+Beneficiário
+
+Agência / Código do Beneficiário
+
+Número do documento
+
+CPF / CNPJ
+
+(-) Descontos / Abatimentos
+
+(-) Outras deduções
+
+Espécie
+
+Data de Vencimento
+(+) Mora / Multa
+
+Quantidade
+
+Nosso número
+
+Valor Documento
+
+(+) Outros acréscimos
+
+(=) Valor Cobrado
+
+Pagador
+Instruções
+
+Autenticação Mecânica
+
+Corte na linha abaixo
+
+Local de pagamento
+
+Vencimento
+
+Beneficiário
+
+Agência / Código do Beneficiário
+
+Data do Documento
+
+Nº do Documento
+
+Uso do Banco
+
+Carteira
+
+Espécie Doc.
+Espécie
+
+Aceite
+Quantidade
+
+Data Processamento
+
+Nosso Número
+
+Valor
+
+Valor Documento
+
+Instruções (texto de responsabilidade do Beneficiário)
+
+(-) Descontos / Abatimentos
+(-) Outras deduções
+(+) Mora / Multa
+(+) Outros acréscimos
+(=) Valor Cobrado
+
+Pagador
+
+Autenticação Mecânica
+
+FICHA DE COMPENSAÇÃO
+
+Gerado por Bopepo – http://www.jrimum.org/bopepo
+
+

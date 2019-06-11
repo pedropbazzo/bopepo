@@ -225,7 +225,6 @@ public class PdfDocReader {
      * @return Valor do campo
      */
     public String getField(String name) {
-
         return this.form.getField(name);
     }
 
@@ -237,7 +236,6 @@ public class PdfDocReader {
      */
     @SuppressWarnings("unchecked")
     public Collection<String> getFieldsNames() {
-
         return form.getFields().keySet();
     }
 
@@ -248,9 +246,7 @@ public class PdfDocReader {
      * @return Map(campo,valor)
      */
     public Map<String, String> getFields() {
-
         Collection<String> names = getFieldsNames();
-
         if (hasElement(names)) {
             Map<String, String> fields = new HashMap<String, String>(names.size());
             for (String name : names) {
@@ -258,7 +254,6 @@ public class PdfDocReader {
             }
             return fields;
         }
-
         return Collections.emptyMap();
     }
 
@@ -268,7 +263,6 @@ public class PdfDocReader {
      * @return info
      */
     public PdfDocInfo getInfo() {
-
         return this.docInfo;
     }
 
@@ -282,5 +276,4 @@ public class PdfDocReader {
             Exceptions.throwIllegalStateException(e);
         }
     }
-
 }
