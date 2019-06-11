@@ -44,6 +44,8 @@ import static org.jrimum.utilix.Objects.isNull;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Calendar;
@@ -796,7 +798,6 @@ public class PdfDocMix {
      *
      */
     public byte[] getTemplate() {
-
         return template.clone();
     }
 
@@ -926,7 +927,6 @@ public class PdfDocMix {
      * @since 0.2
      */
     private void process() {
-
         init();
         fillFields();
         end();
@@ -939,7 +939,6 @@ public class PdfDocMix {
      * @since 0.2
      */
     private void init() {
-
         try {
             reader = new PdfReader(getTemplate());
             outputStream = new ByteArrayOutputStream();
@@ -1061,13 +1060,14 @@ public class PdfDocMix {
      * @since 0.2
      */
     private void end() {
+        /*
         if (isFullCompression()) {
             try {
                 stamper.setFullCompression();
             } catch (DocumentException ex) {
                 throw new RuntimeException(ex);
             }
-        }
+        }*/
 
         if (isRemoveFields()) {
             stamper.setFreeTextFlattening(true);
@@ -1089,6 +1089,7 @@ public class PdfDocMix {
             stamper.close();
             //reader.close();
             //outputStream.close();
+            //new FileOutputStream("/tmp/test.pdf").write(outputStream.toByteArray());
         } catch (Exception e) {
             throw new IllegalStateException(e);
         }

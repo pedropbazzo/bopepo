@@ -26,7 +26,6 @@
  * Criado em: 27/09/2011 - ‎16:11:14
  * 
  */
-
 package org.jrimum.bopepo.view;
 
 import static java.lang.String.format;
@@ -51,135 +50,120 @@ import org.jrimum.utilix.Strings;
 /**
  * Acessa os resources usados pelo Bopepo e os mantém nesta instância para as
  * próximas chamadas.
- * 
+ *
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
- * 
+ *
  * @since 0.2
- * 
+ *
  * @version 0.2
  */
 public class ResourceBundle {
-	
-	/**
-	 * Nome do arquivo pdf.
-	 */
-	public static final String BOLETO_TEMPLATE_COM_SACADOR_AVALISTA = "BoletoTemplateComSacadorAvalista.pdf";
-	
-	/**
-	 * Nome do arquivo pdf.
-	 */
-	public static final String BOLETO_TEMPLATE_SEM_SACADOR_AVALISTA = "BoletoTemplateSemSacadorAvalista.pdf";
 
-	/**
-	 * Imagens usadas na instancia. 
-	 */
-	private final Map<String,Image> imagensLogoBanco;
+    /**
+     * Nome do arquivo pdf.
+     */
+    public static final String BOLETO_TEMPLATE_COM_SACADOR_AVALISTA = "BoletoTemplateComSacadorAvalista.pdf";
 
-	/**
-	 * Template do projeto usando na isntancia.
-	 */
-	private byte[] defaultTemplateComSacadorAvalista;
-	
-	/**
-	 * Template do projeto usando na isntancia.
-	 */
-	private byte[] defaultTemplateSemSacadorAvalista;
-	
-	/**
-	 * Inicia a instancia com os valores padrões necessários.
-	 */
-	public ResourceBundle(){
-		imagensLogoBanco = new TreeMap<String, Image>();
-	}
+    /**
+     * Nome do arquivo pdf.
+     */
+    public static final String BOLETO_TEMPLATE_SEM_SACADOR_AVALISTA = "BoletoTemplateSemSacadorAvalista.pdf";
 
-	/**
-	 * 
-	 * 
-	 * @return template em bytes
-	 */
-	public byte[] getTemplateComSacadorAvalista() {
+    /**
+     * Imagens usadas na instancia.
+     */
+    private final Map<String, Image> imagensLogoBanco;
 
-		if (isNull(defaultTemplateComSacadorAvalista)) {
+    /**
+     * Template do projeto usando na isntancia.
+     */
+    private byte[] defaultTemplateComSacadorAvalista;
 
-			defaultTemplateComSacadorAvalista = loadPdf("BoletoTemplateComSacadorAvalista.pdf");
-		}
+    /**
+     * Template do projeto usando na isntancia.
+     */
+    private byte[] defaultTemplateSemSacadorAvalista;
 
-		return defaultTemplateComSacadorAvalista;
-	}
+    /**
+     * Inicia a instancia com os valores padrões necessários.
+     */
+    public ResourceBundle() {
+        imagensLogoBanco = new TreeMap<String, Image>();
+    }
 
-	public byte[] getTemplateSemSacadorAvalista() {
+    /**
+     *
+     *
+     * @return template em bytes
+     */
+    public byte[] getTemplateComSacadorAvalista() {
+        if (isNull(defaultTemplateComSacadorAvalista)) {
+            defaultTemplateComSacadorAvalista = loadPdf("BoletoTemplateComSacadorAvalista.pdf");
+        }
 
-		if (isNull(defaultTemplateSemSacadorAvalista)) {
+        return defaultTemplateComSacadorAvalista;
+    }
 
-			defaultTemplateSemSacadorAvalista = loadPdf("BoletoTemplateSemSacadorAvalista.pdf");
-		}
+    public byte[] getTemplateSemSacadorAvalista() {
+        if (isNull(defaultTemplateSemSacadorAvalista)) {
+            defaultTemplateSemSacadorAvalista = loadPdf("BoletoTemplateSemSacadorAvalista.pdf");
+        }
+        return defaultTemplateSemSacadorAvalista;
+    }
 
-		return defaultTemplateSemSacadorAvalista;
-	}
-	
-	public Image getLogotipoDoBanco(String codigo){
-		
-		Image logo = imagensLogoBanco.get(codigo);
-		
-		if(isNull(logo)){
-			logo = loadLogotipoDoBanco(codigo);
-			imagensLogoBanco.put(codigo, logo);
-		}
+    public Image getLogotipoDoBanco(String codigo) {
+        Image logo = imagensLogoBanco.get(codigo);
+        if (isNull(logo)) {
+            logo = loadLogotipoDoBanco(codigo);
+            imagensLogoBanco.put(codigo, logo);
+        }
+        return logo;
+    }
 
-		return logo;
-	}
-	
-	private BufferedImage loadLogotipoDoBanco(String codigo){	
-		
-		final String path = "/img/%s.png";
-		
-		Strings.checkNotBlank(codigo,"Codigo do banco não informado!");
-		
-		final String logo = format(path, codigo);
-		
-		URL url = ClassLoaders.getResource(logo, this.getClass());
-		
-		Objects.checkNotNull(url, format("Logo não \"%s\" não encontrada!",logo));		
+    private BufferedImage loadLogotipoDoBanco(String codigo) {
 
-		BufferedImage imageLogo = null;
-		
-		try {
-			imageLogo = ImageIO.read(url);
-			Objects.checkNotNull(imageLogo);	
-		} catch (IOException e) {
-			Exceptions.throwIllegalStateException("Erro ao tentar ler a imagem logotipo do banco "+codigo,e);
-		}
-		
-		return imageLogo;
-	}
-	
-	private byte[] loadPdf(String fileName){
-		
-		byte[] pdf = null;
-		InputStream is = null;
-		
-		try {
-			
-			is = ClassLoaders.getResource(
-						"/pdf/"+fileName,
-						this.getClass()).openStream();
-			
-			pdf = Files.toByteArray(is);
-			
-		} catch (Exception e) {
-			
-			Exceptions.throwIllegalStateException(e);
-			
-		}finally{
-			if(is != null){
-				try {
-					is.close();
-				} catch (Exception e) {
-					Exceptions.throwIllegalStateException(e);
-				}
-			}
-		}
-		
-		return pdf;
-	}
+        final String path = "/img/%s.png";
+
+        Strings.checkNotBlank(codigo, "Codigo do banco não informado!");
+
+        final String logo = format(path, codigo);
+
+        URL url = ClassLoaders.getResource(logo, this.getClass());
+
+        Objects.checkNotNull(url, format("Logo não \"%s\" não encontrada!", logo));
+
+        BufferedImage imageLogo = null;
+
+        try {
+            imageLogo = ImageIO.read(url);
+            Objects.checkNotNull(imageLogo);
+        } catch (IOException e) {
+            Exceptions.throwIllegalStateException("Erro ao tentar ler a imagem logotipo do banco " + codigo, e);
+        }
+
+        return imageLogo;
+    }
+
+    private byte[] loadPdf(String fileName) {
+        byte[] pdf = null;
+        InputStream is = null;
+        try {
+
+            is = ClassLoaders.getResource(
+                    "/pdf/" + fileName,
+                    this.getClass()).openStream();
+            pdf = Files.toByteArray(is);
+        } catch (Exception e) {
+            Exceptions.throwIllegalStateException(e);
+        } finally {
+            if (is != null) {
+                try {
+                    is.close();
+                } catch (Exception e) {
+                    Exceptions.throwIllegalStateException(e);
+                }
+            }
+        }
+        return pdf;
+    }
 }

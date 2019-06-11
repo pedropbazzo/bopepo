@@ -83,10 +83,8 @@ public class BoletoInfoViewBuilder {
     }
 
     public BoletoInfoViewBuilder(ResourceBundle resourceBundle, Boleto boleto) {
-
         Objects.checkNotNull(resourceBundle);
         Objects.checkNotNull(boleto);
-
         text = new WeakHashMap<String, String>();
         image = new WeakHashMap<String, Image>();
 
@@ -113,7 +111,6 @@ public class BoletoInfoViewBuilder {
      * @since 0.2
      */
     public BoletoInfoViewBuilder build() {
-
         setLogotipoDoBanco();
         setCodigoDoBanco();
         setLinhaDigitavel();
@@ -143,7 +140,6 @@ public class BoletoInfoViewBuilder {
         setCarteira();
         setTodosOsCamposTexto();
         setTodosOsCamposImagem();
-
         return this;
     }
 

@@ -30,8 +30,8 @@ import org.junit.Test;
  */
 public class TestItext {
 
-    public static final String SRC = "src/main/resources/pdf/BoletoTemplateComSacadorAvalista.pdf";
-    public static final String DEST = "target/BoletoTemplateComSacadorAvalista_format.pdf";
+    public static final String SRC = "src/main/resources/pdf/BoletoTemplateSemSacadorAvalista.pdf";
+    public static final String DEST = "target/BoletoTemplateSemSacadorAvalista_format.pdf";
 
     //https://itextpdf.com/en/resources/examples/itext-5-legacy/filling-out-forms
     @Test
