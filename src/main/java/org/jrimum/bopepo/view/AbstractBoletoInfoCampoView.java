@@ -90,7 +90,12 @@ public abstract class AbstractBoletoInfoCampoView implements BoletoInfoCampoView
     }
 
     public String getTextoRsCpfCnpj() {
-        return boleto.getTitulo().getCedente().getCPRF().getCodigoFormatado();
+        try {
+            return boleto.getTitulo().getCedente().getCPRF().getCodigoFormatado();
+        } catch (Exception e) {
+            log.debug("Fail on cprf sacado, default vaule 'Empty' in use");
+            return EMPTY;
+        }
     }
 
     public String getTextoRsSacado() {

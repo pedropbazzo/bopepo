@@ -34,6 +34,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.awt.Image;
+import java.io.File;
 import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -47,6 +48,7 @@ import org.jrimum.bopepo.campolivre.CampoLivre;
 import org.jrimum.bopepo.campolivre.NotSupportedBancoException;
 import org.jrimum.bopepo.campolivre.NotSupportedCampoLivreException;
 import org.jrimum.bopepo.view.BoletoCampo;
+import org.jrimum.bopepo.view.BoletoViewer;
 import org.jrimum.domkee.banco.Agencia;
 import org.jrimum.domkee.banco.Carteira;
 import org.jrimum.domkee.banco.Cedente;
@@ -174,9 +176,7 @@ public class TestBoleto {
 
     @Test(expected = IllegalArgumentException.class)
     public void testSetCampoLivreTamanhoMaior() {
-
         boleto = new Boleto(titulo, new CampoLivre() {
-
             private static final long serialVersionUID = 1L;
 
             public String write() {
@@ -210,9 +210,7 @@ public class TestBoleto {
         final String conteudoSobrescrito = "Banco JRimum";
         boleto.addTextosExtras(campoCendente, conteudoOriginal);
         assertEquals(boleto.getTextosExtras().get(campoCendente), conteudoOriginal);
-
         boleto.sobrescrevaCampo(BoletoCampo.txtFcCedente, conteudoSobrescrito);
-
         assertEquals(boleto.getTextosExtras().get(campoCendente), conteudoSobrescrito);
     }
 
@@ -220,9 +218,7 @@ public class TestBoleto {
     public void deve_adicionar_campos_texto_ao_boleto() throws Exception {
         final String campo = "meuCampo";
         final String conteudo = "Meu conteudo especial!";
-
         boleto.addTextosExtras(campo, conteudo);
-
         assertEquals(boleto.getTextosExtras().get(campo), conteudo);
     }
 
@@ -231,9 +227,13 @@ public class TestBoleto {
         final String campo = "meuCampo";
         final Image conteudo = ImageIO.read(ClassLoaders.getResource("img/001.png"));
         assertNotNull(conteudo);
-
         boleto.addImagensExtras(campo, conteudo);
-
         assertEquals(boleto.getImagensExtras().get(campo), conteudo);
+    }
+
+    @Test
+    public void salvarBoletoArquivo() {
+        BoletoViewer create = BoletoViewer.create(boleto);
+        create.getPdfAsFile(new File("./target/teste.pdf"));
     }
 }

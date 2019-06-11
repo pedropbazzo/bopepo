@@ -98,9 +98,7 @@ public class BoletoViewer {
      * @throws IllegalArgumentException Caso o {@code boleto} seja nulo
      */
     public BoletoViewer(Boleto boleto) {
-
         checkBoleto(boleto);
-
         this.pdfViewer = new PdfViewer(boleto);
     }
 
@@ -236,9 +234,7 @@ public class BoletoViewer {
      * @throws IllegalArgumentException Caso o {@code boleto} seja nulo
      */
     public static BoletoViewer create(Boleto boleto) {
-
         checkBoleto(boleto);
-
         return new BoletoViewer(boleto);
     }
 
@@ -257,9 +253,7 @@ public class BoletoViewer {
      * @since 0.2
      */
     public static byte[] groupInOnePDF(List<Boleto> boletos) {
-
         checkBoletosList(boletos);
-
         return PdfViewerMultiProcessor.groupInOnePDF(boletos, new BoletoViewer());
     }
 
@@ -279,10 +273,8 @@ public class BoletoViewer {
      * @since 0.2
      */
     public static File groupInOnePDF(List<Boleto> boletos, String destPath) {
-
         checkBoletosList(boletos);
         checkDestPath(destPath);
-
         return PdfViewerMultiProcessor.groupInOnePDF(boletos, new BoletoViewer(),
                 new File(destPath));
     }
@@ -303,10 +295,8 @@ public class BoletoViewer {
      * @since 0.2
      */
     public static File groupInOnePDF(List<Boleto> boletos, File destFile) {
-
         checkBoletosList(boletos);
         checkDestFile(destFile);
-
         return PdfViewerMultiProcessor.groupInOnePDF(boletos, new BoletoViewer(), destFile);
     }
 
@@ -325,10 +315,8 @@ public class BoletoViewer {
      * @since 0.2
      */
     public static byte[] groupInOnePdfWithTemplate(List<Boleto> boletos, String templatePath) {
-
         checkBoletosList(boletos);
         checkTemplatePath(templatePath);
-
         return PdfViewerMultiProcessor.groupInOnePDF(boletos, new BoletoViewer().setTemplate(templatePath));
     }
 
@@ -347,10 +335,8 @@ public class BoletoViewer {
      * @since 0.2
      */
     public static byte[] groupInOnePdfWithTemplate(List<Boleto> boletos, URL templateUrl) {
-
         checkBoletosList(boletos);
         checkTemplateFile(templateUrl);
-
         return PdfViewerMultiProcessor.groupInOnePDF(boletos, new BoletoViewer().setTemplate(templateUrl));
     }
 
@@ -369,10 +355,8 @@ public class BoletoViewer {
      * @since 0.2
      */
     public static byte[] groupInOnePdfWithTemplate(List<Boleto> boletos, File templateFile) {
-
         checkBoletosList(boletos);
         checkTemplateFile(templateFile);
-
         return PdfViewerMultiProcessor.groupInOnePDF(boletos, new BoletoViewer().setTemplate(templateFile));
     }
 
@@ -391,10 +375,8 @@ public class BoletoViewer {
      * @since 0.2
      */
     public static byte[] groupInOnePdfWithTemplate(List<Boleto> boletos, InputStream templateInput) {
-
         checkBoletosList(boletos);
         checkTemplateFile(templateInput);
-
         return PdfViewerMultiProcessor.groupInOnePDF(boletos, new BoletoViewer().setTemplate(templateInput));
     }
 

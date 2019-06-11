@@ -220,7 +220,6 @@ public class PdfDocMix {
      * @return Esta instância após a operação
      */
     public static PdfDocMix create() {
-
         return new PdfDocMix();
     }
 
@@ -237,9 +236,7 @@ public class PdfDocMix {
      * @throws IllegalArgumentException Caso o {@code template} seja nulo
      */
     public static PdfDocMix createWithTemplate(byte[] template) {
-
         checkTemplateFile(template);
-
         return new PdfDocMix(template);
     }
 
@@ -256,9 +253,7 @@ public class PdfDocMix {
      * @throws IllegalArgumentException Caso o {@code template} seja nulo
      */
     public static PdfDocMix createWithTemplate(URL templateUrl) {
-
         checkTemplateFile(templateUrl);
-
         return new PdfDocMix(templateUrl);
     }
 
@@ -275,9 +270,7 @@ public class PdfDocMix {
      * @throws IllegalArgumentException Caso o {@code template} seja nulo
      */
     public static PdfDocMix createWithTemplate(InputStream templateInput) {
-
         checkTemplateFile(templateInput);
-
         return new PdfDocMix(templateInput);
     }
 
@@ -294,9 +287,7 @@ public class PdfDocMix {
      * @throws IllegalArgumentException Caso o {@code template} seja nulo
      */
     public static PdfDocMix createWithTemplate(String templatePath) {
-
         checkTemplatePath(templatePath);
-
         return new PdfDocMix(templatePath);
     }
 
@@ -313,9 +304,7 @@ public class PdfDocMix {
      * @throws IllegalArgumentException Caso o {@code template} seja nulo
      */
     public static PdfDocMix createWithTemplate(File templateFile) {
-
         checkTemplateFile(templateFile);
-
         return new PdfDocMix(templateFile);
     }
 
@@ -331,9 +320,7 @@ public class PdfDocMix {
      * @throws IllegalArgumentException Caso o {@code template} seja nulo
      */
     public PdfDocMix withTemplate(byte[] template) {
-
         checkTemplateFile(template);
-
         return setTemplate(template);
     }
 
@@ -349,9 +336,7 @@ public class PdfDocMix {
      * @throws IllegalArgumentException Caso o {@code template} seja nulo
      */
     public PdfDocMix withTemplate(URL templateUrl) {
-
         checkTemplateFile(templateUrl);
-
         return setTemplate(templateUrl);
     }
 
@@ -367,9 +352,7 @@ public class PdfDocMix {
      * @throws IllegalArgumentException Caso o {@code template} seja nulo
      */
     public PdfDocMix withTemplate(InputStream templateInput) {
-
         checkTemplateFile(templateInput);
-
         return setTemplate(templateInput);
     }
 
@@ -385,9 +368,7 @@ public class PdfDocMix {
      * @throws IllegalArgumentException Caso o {@code template} seja nulo
      */
     public PdfDocMix withTemplate(String templatePath) {
-
         checkTemplatePath(templatePath);
-
         return setTemplate(templatePath);
     }
 
@@ -403,9 +384,7 @@ public class PdfDocMix {
      * @throws IllegalArgumentException Caso o {@code template} seja nulo
      */
     public PdfDocMix withTemplate(File templateFile) {
-
         checkTemplateFile(templateFile);
-
         return setTemplate(templateFile);
     }
 
@@ -433,15 +412,12 @@ public class PdfDocMix {
      * @since 0.2
      */
     public PdfDocMix putAllTexts(Map<String, String> txtMap) {
-
         Collections.checkNotEmpty(txtMap, "Campos ausentes!");
-
         if (isNull(this.txtMap)) {
             this.txtMap = txtMap;
         } else {
             this.txtMap.putAll(txtMap);
         }
-
         return this;
     }
 
@@ -457,15 +433,11 @@ public class PdfDocMix {
      * @since 0.2
      */
     public PdfDocMix put(String name, String value) {
-
         Strings.checkNotBlank(name, "Nome do campo ausente!");
-
         if (isNull(txtMap)) {
             this.txtMap = new WeakHashMap<String, String>();
         }
-
         this.txtMap.put(name, value);
-
         return this;
     }
 
@@ -493,15 +465,12 @@ public class PdfDocMix {
      * @since 0.2
      */
     public PdfDocMix putAllImages(Map<String, java.awt.Image> imgMap) {
-
         Collections.checkNotEmpty(imgMap, "Campos ausentes!");
-
         if (isNull(this.imgMap)) {
             this.imgMap = imgMap;
         } else {
             this.imgMap.putAll(imgMap);
         }
-
         return this;
     }
 
@@ -992,9 +961,11 @@ public class PdfDocMix {
             if (isNotNull(displayDocTitle)) {
                 stamper.addViewerPreference(PdfName.DISPLAYDOCTITLE, displayDocTitle ? PdfBoolean.PDFTRUE : PdfBoolean.PDFFALSE);
             }
+            stamper.addViewerPreference(PdfName.NEEDAPPEARANCES, PdfBoolean.PDFTRUE);
             form = stamper.getAcroFields();
-        } catch (Exception e) {
+            form.setGenerateAppearances(true);
 
+        } catch (Exception e) {
             Exceptions.throwIllegalStateException(e);
         }
     }
@@ -1006,7 +977,6 @@ public class PdfDocMix {
      * @since 0.2
      */
     private void fillFields() {
-
         setTextFields();
         setImageFields();
     }
@@ -1018,11 +988,11 @@ public class PdfDocMix {
      * @since 0.2
      */
     private void setTextFields() {
-
         if (hasElement(txtMap)) {
             for (Entry<String, String> e : txtMap.entrySet()) {
                 try {
-                    form.setField(e.getKey(), e.getValue());
+                    boolean setField = form.setField(e.getKey(), e.getValue());
+//                    System.out.println("setField: " + e + " : " + setField);
                 } catch (Exception ex) {
                     Exceptions.throwIllegalStateException(ex);
                 }
@@ -1037,7 +1007,6 @@ public class PdfDocMix {
      * @since 0.2
      */
     private void setImageFields() {
-
         if (hasElement(imgMap)) {
             for (Entry<String, java.awt.Image> e : imgMap.entrySet()) {
                 setImage(e.getKey(), e.getValue());
@@ -1054,11 +1023,8 @@ public class PdfDocMix {
      * @since 0.2
      */
     private void setImage(String fieldName, java.awt.Image image) {
-
         if (isNotBlank(fieldName)) {
-
             List<AcroFields.FieldPosition> posImgField = form.getFieldPositions(fieldName);
-
             if (isNotNull(posImgField)) {
                 try {
                     for (AcroFields.FieldPosition pos : posImgField) {
@@ -1096,7 +1062,6 @@ public class PdfDocMix {
      * @since 0.2
      */
     private void end() {
-
         if (isFullCompression()) {
             try {
                 stamper.setFullCompression();
@@ -1113,9 +1078,7 @@ public class PdfDocMix {
             stamper.setFreeTextFlattening(false);
             stamper.setFormFlattening(false);
         }
-
         reader.consolidateNamedDestinations();
-
         reader.eliminateSharedStreams();
 
         try {
@@ -1123,9 +1086,10 @@ public class PdfDocMix {
             outputStream.flush();
             // close All in this order
             https://stackoverflow.com/questions/23469286/merging-of-pdf-with-digital-signature-with-itext-5-4-0-or-greatest-gives-error
+            stamper.flush();
             stamper.close();
-            outputStream.close();
             reader.close();
+            outputStream.close();
         } catch (Exception e) {
             e.printStackTrace();
             throw new IllegalStateException(e);
@@ -1133,37 +1097,30 @@ public class PdfDocMix {
     }
 
     private static void checkDestPath(String path) {
-
         checkString(path,
                 "Caminho destinado a geração do(s) arquivo(s) não contém informação!");
     }
 
     private static void checkTemplatePath(String path) {
-
         checkString(path, "Caminho do template não contém informação!");
     }
 
     private static void checkTemplateFile(Object template) {
-
         Objects.checkNotNull(template, "Arquivo de template nulo!");
     }
 
     private static void checkString(String str, String msg) {
-
         Objects.checkNotNull(str);
         Strings.checkNotBlank(str, msg);
     }
 
     private static void checkDestURL(URL url) {
-
         Objects.checkNotNull(url,
                 "URL destinada a geração do(s) documentos(s) nula!");
     }
 
     private static void checkDestFile(File file) {
-
         Objects.checkNotNull(file,
                 "Arquivo destinado a geração do(s) documentos(s) nulo!");
     }
-
 }
