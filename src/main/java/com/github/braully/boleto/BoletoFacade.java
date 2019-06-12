@@ -17,6 +17,7 @@ package com.github.braully.boleto;
 
 import org.jrimum.ConfiguracaoJRimum;
 import java.math.BigDecimal;
+import java.util.Date;
 import org.apache.commons.lang3.tuple.Pair;
 import org.jrimum.bopepo.BancosSuportados;
 import org.jrimum.bopepo.Boleto;
@@ -27,7 +28,6 @@ import org.jrimum.domkee.banco.Cedente;
 import org.jrimum.domkee.banco.ContaBancaria;
 import org.jrimum.domkee.banco.NumeroDaConta;
 import org.jrimum.domkee.banco.Sacado;
-import org.jrimum.domkee.banco.TipoDeCobranca;
 import org.jrimum.domkee.banco.Titulo;
 import org.jrimum.domkee.pessoa.CNPJ;
 import org.jrimum.domkee.pessoa.CPF;
@@ -137,6 +137,11 @@ public class BoletoFacade extends Boleto {
         return this;
     }
 
+    public BoletoFacade valor(BigDecimal big) {
+        this.getTitulo().setValor(big);
+        return this;
+    }
+
     public BoletoFacade valor(Double valor) {
         this.getTitulo().setValor(BigDecimal.valueOf(valor));
         return this;
@@ -149,6 +154,11 @@ public class BoletoFacade extends Boleto {
 
     public BoletoFacade dataVencimento(String strDate) {
         this.getTitulo().setDataDoVencimento(DateUtil.parse(strDate, "dd/MM/yyyy"));
+        return this;
+    }
+
+    public BoletoFacade dataVencimento(Date datavencimento) {
+        this.getTitulo().setDataDoVencimento(datavencimento);
         return this;
     }
 
