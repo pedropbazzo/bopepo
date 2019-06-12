@@ -152,6 +152,11 @@ public class BoletoFacade extends Boleto {
         return this;
     }
 
+    public BoletoFacade numeroDocumento(Number num) {
+        this.getTitulo().setNumeroDoDocumento("" + num);
+        return this;
+    }
+
     public BoletoFacade numeroDocumento(String string) {
         this.getTitulo().setNumeroDoDocumento(string);
         return this;
