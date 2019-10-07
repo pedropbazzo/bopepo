@@ -91,7 +91,7 @@ abstract class AbstractCampoLivre extends BlockOfFields implements CampoLivre {
     /**
      * Looger.
      */
-    private static Logger log = Logger.getLogger(Objects.class);
+    protected static Logger log = Logger.getLogger(Objects.class);
 
     /**
      * Nosso número com 7 posições.

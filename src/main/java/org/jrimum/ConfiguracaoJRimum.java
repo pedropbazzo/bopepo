@@ -37,4 +37,9 @@ public class ConfiguracaoJRimum {
      */
     public static boolean falharEmRegistroVazio = false;
 
+    /*
+     Falhar em caso de registro vazio, na geração de arquivo texto
+     */
+    public static boolean preferirDefaultEmCampoLivre = true;
+
 }
