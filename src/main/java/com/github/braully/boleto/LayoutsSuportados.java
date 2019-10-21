@@ -198,6 +198,8 @@ public class LayoutsSuportados {
                     //Código adotado pela FEBRABAN, para identificar a ação a ser realizada com o
                     //lançamento enviado no arquivo. 
                     fmovimentoCodigo().value("00"),
+                    //Código adotado pela FEBRABAN para identificar o Título.
+                    //Especificações do Código de Barras do Boleto de Pagamentode Cobrança -Ficha de Compensação
                     fcodigoBarras().length(44),
                     fsacadoNome().length(30),
                     fdataVencimento(),

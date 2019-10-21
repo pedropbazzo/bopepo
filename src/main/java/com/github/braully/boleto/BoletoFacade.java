@@ -28,6 +28,7 @@ import org.jrimum.domkee.banco.Cedente;
 import org.jrimum.domkee.banco.ContaBancaria;
 import org.jrimum.domkee.banco.NumeroDaConta;
 import org.jrimum.domkee.banco.Sacado;
+import org.jrimum.domkee.banco.TipoDeCobranca;
 import org.jrimum.domkee.banco.Titulo;
 import org.jrimum.domkee.pessoa.CNPJ;
 import org.jrimum.domkee.pessoa.CPF;
@@ -133,7 +134,16 @@ public class BoletoFacade extends Boleto {
     }
 
     public BoletoFacade nossoNumero(String nossoNumero) {
-        this.getTitulo().setNossoNumero(nossoNumero);
+        Pair<String, String> numeroDV = quebraStringDV(nossoNumero);
+
+        String numero = numeroDV.getLeft();
+        String dv = numeroDV.getRight();
+
+        this.getTitulo().setNossoNumero(numero);
+
+        if (dv != null) {
+            this.getTitulo().setDigitoDoNossoNumero(dv);
+        }
         return this;
     }
 
@@ -172,8 +182,23 @@ public class BoletoFacade extends Boleto {
         return this;
     }
 
-    public void carteira(String string) {
+    public BoletoFacade carteira(String string) {
         this.getCarteira().setCodigo(parseInt(string));
+        return this;
+    }
+
+    //Alias
+    public BoletoFacade cobrancaRegistrada(Boolean registrado) {
+        return carteiraCobrancaRegistrada(registrado);
+    }
+
+    public BoletoFacade carteiraCobrancaRegistrada(Boolean registrado) {
+        if (registrado) {
+            this.getCarteira().setTipoCobranca(TipoDeCobranca.COM_REGISTRO);
+        } else {
+            this.getCarteira().setTipoCobranca(TipoDeCobranca.SEM_REGISTRO);
+        }
+        return this;
     }
 
 //    public BoletoFacade convenio(String string) {
@@ -218,6 +243,8 @@ public class BoletoFacade extends Boleto {
         if (carteira == null) {
             carteira = new Carteira();
             this.getContaBancaria().setCarteira(carteira);
+            //Tipo de cobrança padrão é registrado
+            carteira.setTipoCobranca(TipoDeCobranca.COM_REGISTRO);
         }
         return carteira;
     }
@@ -246,6 +273,23 @@ public class BoletoFacade extends Boleto {
             throw new IllegalArgumentException("Octal converter: " + string);
         }
         return Integer.parseInt(string);
+    }
+
+    private Pair<String, String> quebraStringDV(String strNumero) {
+        String numero = null;
+        String dv = null;
+        if (strNumero == null) {
+            throw new IllegalArgumentException("Numero esta null");
+        }
+        //TODO: Melhorar isso, ir pelo formato de agencia de cada banco.
+        if (strNumero.contains(SEPARADOR_DIGITO_VERIFICADOR)) {
+            String[] split = strNumero.split(SEPARADOR_DIGITO_VERIFICADOR);
+            numero = split[0];
+            dv = split[1];
+        } else {
+            numero = strNumero;
+        }
+        return Pair.of(numero, dv);
     }
 
     private Pair<Integer, String> quebraNumeroDV(String strNumero) {
