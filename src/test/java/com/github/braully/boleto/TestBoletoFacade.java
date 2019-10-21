@@ -58,9 +58,11 @@ public class TestBoletoFacade {
                 .nossoNumero("12345678-0")
                 .valor(100.23).dataVencimento("01/01/2019");
 
-        boletoFacade.getTitulo().
-                setParametrosBancarios(
-                        new ParametrosBancariosMap(ParametroBancoSicredi.POSTO_DA_AGENCIA, 2));
+        boletoFacade.parametroBancario(ParametroBancoSicredi.POSTO_DA_AGENCIA, 2);
+
+//        boletoFacade.getTitulo().
+//                setParametrosBancarios(
+//                        new ParametrosBancariosMap(ParametroBancoSicredi.POSTO_DA_AGENCIA, 2));
 
         boletoFacade.gerarLinhaDigitavel();
         BoletoViewer create = BoletoViewer.create(boletoFacade);

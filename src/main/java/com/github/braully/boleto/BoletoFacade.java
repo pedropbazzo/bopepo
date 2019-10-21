@@ -22,11 +22,14 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.jrimum.bopepo.BancosSuportados;
 import org.jrimum.bopepo.Boleto;
 import org.jrimum.bopepo.LinhaDigitavel;
+import org.jrimum.bopepo.parametro.ParametroBancoSicredi;
 import org.jrimum.domkee.banco.Agencia;
 import org.jrimum.domkee.banco.Carteira;
 import org.jrimum.domkee.banco.Cedente;
 import org.jrimum.domkee.banco.ContaBancaria;
 import org.jrimum.domkee.banco.NumeroDaConta;
+import org.jrimum.domkee.banco.ParametroBancario;
+import org.jrimum.domkee.banco.ParametrosBancariosMap;
 import org.jrimum.domkee.banco.Sacado;
 import org.jrimum.domkee.banco.TipoDeCobranca;
 import org.jrimum.domkee.banco.Titulo;
@@ -312,5 +315,29 @@ public class BoletoFacade extends Boleto {
     protected BoletoFacade gerarLinhaDigitavel() {
         this.processFromTitulo(titulo);
         return this;
+    }
+
+    public BoletoFacade parametroBancario(ParametroBancario parametroBancario, Object val) {
+        ParametrosBancariosMap parametrosBancarios = this.getParametrosBancarios();
+        Number valor = null;
+        if (val != null) {
+            if (val instanceof Number) {
+                valor = (Number) val;
+            } else {
+                parseInt(val.toString());
+            }
+        }
+        parametrosBancarios.adicione(parametroBancario, valor);
+        return this;
+    }
+
+    public ParametrosBancariosMap getParametrosBancarios() {
+        Titulo titulo1 = this.getTitulo();
+        ParametrosBancariosMap parametrosBancarios = titulo1.getParametrosBancarios();
+        if (parametrosBancarios == null) {
+            parametrosBancarios = new ParametrosBancariosMap();
+            titulo1.setParametrosBancarios(parametrosBancarios);
+        }
+        return parametrosBancarios;
     }
 }
