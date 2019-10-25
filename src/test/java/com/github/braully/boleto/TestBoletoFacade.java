@@ -68,4 +68,52 @@ public class TestBoletoFacade {
         BoletoViewer create = BoletoViewer.create(boletoFacade);
         create.getPdfAsFile("./target/teste-sicredi.pdf");
     }
+    @Test
+    public void testBoletoBancoBrasil(){
+        BoletoFacade boletoFacade = new BoletoFacade();
+        boletoFacade.sacado("Teste da silva Sauro")
+                .sacadoCpf("1");
+        boletoFacade.banco("001").agencia("4534-9").conta("188-999");
+        boletoFacade.cedente("Cedente da Silva Sauro").cedenteCnpj("1");
+        boletoFacade.carteira("1");
+        boletoFacade.numeroDocumento("1")
+                .nossoNumero("12345678901")
+                .valor(100.23).dataVencimento("01/01/2019");
+       
+        boletoFacade.gerarLinhaDigitavel();
+        BoletoViewer create = BoletoViewer.create(boletoFacade);
+        create.getPdfAsFile("./target/teste-bb.pdf");
+    }
+    @Test
+    public void testBoletoBancoBradesco(){
+        BoletoFacade boletoFacade = new BoletoFacade();
+        boletoFacade.sacado("Teste da silva Sauro")
+                .sacadoCpf("1");
+        boletoFacade.banco("237").agencia("4534-9").conta("188-999");
+        boletoFacade.cedente("Cedente da Silva Sauro").cedenteCnpj("1");
+        boletoFacade.carteira("1");
+        boletoFacade.numeroDocumento("1")
+                .nossoNumero("12345678901")
+                .valor(100.23).dataVencimento("01/01/2019");
+       
+        boletoFacade.gerarLinhaDigitavel();
+        BoletoViewer create = BoletoViewer.create(boletoFacade);
+        create.getPdfAsFile("./target/teste-bradesco.pdf");
+    }
+    @Test
+    public void testBoletoBancoSantander(){
+        BoletoFacade boletoFacade = new BoletoFacade();
+        boletoFacade.sacado("Teste da silva Sauro")
+                .sacadoCpf("1");
+        boletoFacade.banco("033").agencia("45349").conta("1");
+        boletoFacade.cedente("Cedente da Silva Sauro").cedenteCnpj("1");
+        boletoFacade.carteira("101");
+        boletoFacade.numeroDocumento("1")
+                .nossoNumero("12345678901")
+                .valor(100.23).dataVencimento("01/01/2019");
+       
+        boletoFacade.gerarLinhaDigitavel();
+        BoletoViewer create = BoletoViewer.create(boletoFacade);
+        create.getPdfAsFile("./target/teste-bradesco.pdf");
+    }
 }
