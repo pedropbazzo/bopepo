@@ -28,7 +28,7 @@ import org.jrimum.texgit.Fillers;
  * @author Braully Rocha da Silva
  */
 public class LayoutsSuportados {
-    
+
     private static final TagLayout _LAYOUT_FEBRABAN_CNAB240 = flatfile(
             layout(nome("Layout Padrão Febraban CNAB240"),
                     cnab(CNAB_240),
@@ -319,41 +319,129 @@ public class LayoutsSuportados {
                     fbranco().length(205)
             )
     );
-    
+    public static final TagLayout _LAYOUT_SICREDI_CNAB240 = flatfile(
+            layout(nome("Layout padrão SICREDI CNAB240"),
+                    cnab(CNAB_240),
+                    tag("url").value("https://www.sicredi.com.br/html/para-sua-empresa/recebimentos/cobranca/"),
+                    versao("05")
+            ),
+            cabecalho(
+                    fbancoCodigo().value("748"),
+                    flote().value("0001"),
+                    ftipoInscricao().value("2"),
+                    fcedenteCnpj().length(14).padding(Fillers.ZERO_LEFT),
+                    fconvenio().length(20),
+                    fagencia().length(6),
+                    fconta().length(13),
+                    fdac(), fcedenteNome().length(30), fbancoNome().length(30),
+                    fdataGeracao(),
+                    field("horaGeracao").length(6).format(new SimpleDateFormat("hhmmss")),
+                    fsequencialArquivo().length(6),
+                    field("versaoLayoutArquivo").valLen("103"),
+                    field("densidadeArquivo").value(0).length(5).padding(Fillers.ZERO_LEFT)
+            ),
+            cabecalhoLote(
+                    fbancoCodigo().value("748"),
+                    flote().value(1),
+                    ftipoInscricao().value("2"),
+                    fcedenteCnpj(),
+                    fconvenio().length(20),
+                    fagencia().length(6),
+                    fconta().length(13),
+                    fdac(),
+                    fcedenteNome().length(30),
+                    field("mensagem1").length(40).filler(Fillers.WHITE_SPACE_LEFT),
+                    field("cedenteEndereco").length(80).filler(Fillers.WHITE_SPACE_LEFT),
+                    focorrencias()
+            ),
+            tituloJ52(
+                    fbancoCodigo().value("748"),
+                    flote().value(1),
+                    fcodigoRegistro().value("3"),
+                    fsequencialRegistro().length(5),
+                    fmovimentoCodigo().value("00"),
+                    field("idRegOpcional").length(2).value("52"),
+                    field("tipoInscricaoSacado").valLen("1"),
+                    fsacadoCpf().length(15),
+                    fsacadoNome().length(40),
+                    //DADOS DO BENEFICIARIO
+                    field("tipoInscricaoCedente").valLen("2"),
+                    fcedenteCnpj().length(15),
+                    fcedenteNome().length(40),
+                    //DADOS DO PAGADORR
+                    //Pagadorr - Dados sobre o Beneficiário responsável pela emissão do título original
+                    field("tipoInscricaoPagadorr").valLen("2"),
+                    field("pagadorrInscricao").length(15).filler(Fillers.ZERO_LEFT),
+                    field("pagadorr").length(40).filler(Fillers.WHITE_SPACE_LEFT)
+            ),
+            rodapeLote(
+                    fbancoCodigo().value("748"),
+                    flote().value(1), // o mesmo do cabeçalho do lote
+                    fcodigoRegistro().value("5"),
+                    fquantidadeRegistros().length(9),
+                    fvalorTotalRegistros().length(18),
+                    field("qtedMoedas").length(18).padding(Fillers.ZERO_LEFT).value(1),
+                    field("numAvisoDebito").length(6).filler(Fillers.ZERO_LEFT),
+                    fbranco().length(165),
+                    focorrencias()
+            ),
+            rodape(
+                    fbancoCodigo(),
+                    flote().value("9999"),
+                    fcodigoRegistro().value("9"),
+                    fquantidadeRegistros().length(6),
+                    field("qtedContas").value(0).padding(Fillers.ZERO_LEFT).length(6)
+            )
+    );
     public static final TagLayout LAYOUT_FEBRABAN_CNAB240
             = _LAYOUT_FEBRABAN_CNAB240.cloneReadonly();
 
-    /*
-     Layout Padrão Febraban CNAB 240 para Remessa de Cobrança
-     */
+    public static final TagLayout LAYOUT_SICREDI_CNAB240 
+            = _LAYOUT_SICREDI_CNAB240.cloneReadonly();
+    
     private static final TagLayout _LAYOUT_FEBRABAN_CNAB240_COBRANCA_REMESSA
             = _LAYOUT_FEBRABAN_CNAB240.clone();
     
+    private static final TagLayout _LAYOUT_SICREDI_CNAB240_COBRANCA_REMESSA
+            = _LAYOUT_SICREDI_CNAB240.clone();
+
     static {
         _LAYOUT_FEBRABAN_CNAB240_COBRANCA_REMESSA.get(cabecalho())
                 .get(fcodigoArquivo().value('1'));
     }
-    
+    static {
+        _LAYOUT_SICREDI_CNAB240_COBRANCA_REMESSA.get(cabecalho())
+                .get(fcodigoArquivo().value('1'));
+    }
+
     public static final TagLayout LAYOUT_FEBRABAN_CNAB240_COBRANCA_REMESSA
             = _LAYOUT_FEBRABAN_CNAB240_COBRANCA_REMESSA.cloneReadonly();
     
+    public static final TagLayout LAYOUT_SICREDI_CNAB240_COBRANCA_REMESSA
+            = _LAYOUT_SICREDI_CNAB240_COBRANCA_REMESSA.cloneReadonly();
+
     private static final TagLayout _LAYOUT_FEBRABAN_CNAB240_COBRANCA_RETORNO
             = _LAYOUT_FEBRABAN_CNAB240.clone();
     
+    private static final TagLayout _LAYOUT_SICREDI_CNAB240_COBRANCA_RETORNO
+            = _LAYOUT_SICREDI_CNAB240.clone();
+
     static {
         _LAYOUT_FEBRABAN_CNAB240_COBRANCA_RETORNO.get(cabecalho())
                 .get(fcodigoArquivo().value('2'));
         
+        _LAYOUT_SICREDI_CNAB240_COBRANCA_RETORNO.get(cabecalho())
+                .get(fcodigoArquivo().value('2'));          
     }
-    
+
     public static final TagLayout LAYOUT_FEBRABAN_CNAB240_COBRANCA_RETORNO
             = _LAYOUT_FEBRABAN_CNAB240_COBRANCA_RETORNO.cloneReadonly();
 
-    /*
+    public static final TagLayout LAYOUT_SICREDI_CNAB240_COBRANCA_RETORNO
+            = _LAYOUT_SICREDI_CNAB240_COBRANCA_RETORNO.cloneReadonly();
     
-     */
     private static final List<TagLayout> layoutsSuportados;
-    
+
     static {
         List<TagLayout> layoutsSuportadosTmp = new ArrayList<>();
         /* */
@@ -361,10 +449,13 @@ public class LayoutsSuportados {
         layoutsSuportadosTmp.add(LAYOUT_FEBRABAN_CNAB240);
         layoutsSuportadosTmp.add(LAYOUT_FEBRABAN_CNAB240_COBRANCA_REMESSA);
         layoutsSuportadosTmp.add(LAYOUT_FEBRABAN_CNAB240_COBRANCA_RETORNO);
-        /* */
+        layoutsSuportadosTmp.add(LAYOUT_SICREDI_CNAB240);
+        layoutsSuportadosTmp.add(LAYOUT_SICREDI_CNAB240_COBRANCA_REMESSA);
+        layoutsSuportadosTmp.add(LAYOUT_SICREDI_CNAB240_COBRANCA_RETORNO);
+        
         layoutsSuportados = Collections.unmodifiableList(layoutsSuportadosTmp);
     }
-    
+
     public static TagLayout getLayoutArquivoBancarioRemessaCobranca(String codBanco, String numConvenio, String agencia, String conta, String carteira, Boolean registrado) {
         return getLayoutArquivoBancario(CNABServico.COBRANCA_REMESSA, CNAB_240,
                 codBanco, numConvenio, agencia, conta, carteira, registrado);
@@ -388,7 +479,7 @@ public class LayoutsSuportados {
         }
         return ret;
     }
-    
+
     public static boolean eq(Object value1, Object value2) {
         return value1 == value2
                 || value1 != null && value1.equals(value2)
