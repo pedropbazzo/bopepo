@@ -334,6 +334,10 @@ public class TagLayout implements Serializable {
             return field("valorPagamento").type(Number.class).filler(Fillers.ZERO_LEFT);
         }
 
+        public static TagLayout fvalorOcorrencia() {
+            return field("valorOcorrencia").type(Number.class).filler(Fillers.ZERO_LEFT);
+        }
+
         public static TagLayout fvalorDesconto() {
             return field("valorDesconto").type(Number.class).padding(Fillers.ZERO_LEFT);
         }
@@ -508,6 +512,10 @@ public class TagLayout implements Serializable {
 
         public static TagLayout fdataGeracao() {
             return field("dataGeracao").type(Date.class).format(new SimpleDateFormat("ddMMyyyy")).length(8);
+        }
+
+        public static TagLayout fdataOcorrencia() {
+            return field("dataOcorrencia").length(8).format(new SimpleDateFormat("ddMMyyyy"));
         }
 
         public static TagLayout fdataVencimento() {

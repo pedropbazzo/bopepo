@@ -15,14 +15,28 @@
  */
 package com.github.braully.boleto;
 
+import org.junit.Test;
+
 /**
  *
  * @author braully
  */
-public class RetornoFacade extends ArquivoFacade {
+public class TestRetornoFacade {
 
-    public RetornoFacade(TagLayout template) {
-        this.template = template;
+    @Test
+    public void testRetornoCobancaGenericaFebraban240V5() {
+        RetornoFacade retorno = new RetornoFacade(LayoutsSuportados.LAYOUT_FEBRABAN_CNAB240);
+        retorno.cabecalho();
+
+        retorno.cabecalhoLote();
+
+        retorno.titulos();
+        
+        retorno.rodapeLote();
+
+        retorno.rodape();
+
+        //System.err.println(remessaStr);
+//        assertEquals(remessaStr, "");
     }
-
 }
