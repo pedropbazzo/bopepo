@@ -15,6 +15,8 @@
  */
 package com.github.braully.boleto;
 
+import java.util.List;
+
 /**
  *
  * @author braully
@@ -25,4 +27,23 @@ public class RetornoFacade extends ArquivoFacade {
         this.template = template;
     }
 
+    CabecalhoArquivo cabecalho() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    CabecalhoArquivo cabecalhoLote() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    List<TituloArquivo> titulos() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    RodapeArquivo rodapeLote() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    RodapeArquivo rodape() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
