@@ -28,22 +28,22 @@ public class RetornoFacade extends ArquivoFacade {
     }
 
     CabecalhoArquivo cabecalho() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return (CabecalhoArquivo) this.get("cabecalho");
     }
 
     CabecalhoArquivo cabecalhoLote() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return (CabecalhoArquivo) this.get("cabecalhoLote");
     }
 
     List<TituloArquivo> titulos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return null;//(TituloArquivo) this.get("titulo");
     }
 
     RodapeArquivo rodapeLote() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return (RodapeArquivo) this.get("rodapeLote");
     }
 
     RodapeArquivo rodape() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return (RodapeArquivo) this.get("rodape");
     }
 }
