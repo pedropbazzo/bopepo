@@ -504,4 +504,15 @@ public class ArquivoFacade {
         }
         return null;
     }
+
+    public List<RegistroArquivo> gets(TagLayout tiporegistro) {
+        List<RegistroArquivo> regs = new ArrayList<>();
+        //Melhorar isso, indexar via Map
+        for (RegistroArquivo reg : registros) {
+            if (reg.getName().equalsIgnoreCase(tiporegistro.nome)) {
+                regs.add(reg);
+            }
+        }
+        return regs;
+    }
 }
