@@ -225,12 +225,12 @@ public class Field<G> implements org.jrimum.texgit.IField<G>, TextStream {
     @SuppressWarnings("unchecked")
     private void readStringOrNumericField(String str) {
         str = parseNumber(str);
-        Class<?> clazz = value.getClass();
-        if (clazz.equals(String.class)) {
-            value = (G) str;
-        } else {
-            readNumeric(clazz, str);
-        }
+        
+//        if (value != null && value.getClass().equals(String.class)) {
+        value = (G) str;
+//        } else {
+//            readNumeric(clazz, str);
+//        }
     }
 
     @SuppressWarnings("unchecked")
