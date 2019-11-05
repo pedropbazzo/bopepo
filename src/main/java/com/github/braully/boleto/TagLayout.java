@@ -36,6 +36,26 @@ import org.jrimum.texgit.IFiller;
  */
 public class TagLayout implements Serializable {
 
+    boolean isAttr(String id) {
+        return is(this.atributos.get(id));
+    }
+
+    private boolean is(Object get) {
+        boolean ret = false;
+        if (get != null) {
+            try {
+                if (get instanceof Boolean) {
+                    ret = (Boolean) get;
+                } else {
+                    ret = Boolean.parseBoolean(get.toString());
+                }
+            } catch (Exception e) {
+
+            }
+        }
+        return ret;
+    }
+
     public static class TagCreator {
 
         public static TagLayout field(String texto) {
@@ -451,7 +471,7 @@ public class TagLayout implements Serializable {
          * @return
          */
         public static TagLayout fcodigoRegistro() {
-            return field("codigoRegistro").length(1);
+            return field("codigoRegistro").length(1).id(true);
         }
 
         /**
@@ -709,6 +729,10 @@ public class TagLayout implements Serializable {
         this.value(val);
         this.length(val.length());
         return this;
+    }
+
+    public TagLayout id(boolean bol) {
+        return setAttr(bol);
     }
 
     public TagLayout length(int len) {

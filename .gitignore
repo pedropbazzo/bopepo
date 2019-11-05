@@ -5,3 +5,4 @@
 .project
 .settings
 /nb-configuration.xml
+/src/test/java/com/github/braully/boleto/TestRetornoExemplos.java
