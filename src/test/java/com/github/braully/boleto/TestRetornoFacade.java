@@ -42,7 +42,7 @@ public class TestRetornoFacade {
         ArquivoFacade.RegistroArquivo cabecalhoLote = retorno.cabecalhoLote();
         assertNotNull(cabecalhoLote);
 
-        List<ArquivoFacade.RegistroArquivo> titulos = retorno.titulos();
+        List<ArquivoFacade.RegistroArquivo> titulos = retorno.detalhes();
         assertNotNull(titulos);
 
         ArquivoFacade.RegistroArquivo rodapeLote = retorno.rodapeLote();

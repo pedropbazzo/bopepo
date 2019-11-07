@@ -72,16 +72,8 @@ public class ArquivoFacade {
         for (String linha : linhas) {
             RegistroArquivo regLido = null;
             for (RegistroArquivo reg : registrosLayout) {
-                FixedField<String> id = null;
                 RegistroArquivo clone = reg.clone();
-                FixedField<String> idType = reg.getIdType();
-                try {
-                    id = clone.getId(linha);
-                } catch (Exception e) {
-
-                }
-                if (idType != null && id != null && id.getValue() != null
-                        && !id.getValue().isBlank() && id.getValue().equals(idType.getValue())) {
+                if (clone.checkIds(linha)) {
                     regLido = clone;
                     regLido.read(linha);
                 }
@@ -110,6 +102,7 @@ public class ArquivoFacade {
     public static class RegistroArquivo extends Record {
 
         protected TagLayout layoutRegistro;
+        protected List<FixedField> extraIds;
 
         public RegistroArquivo() {
         }
@@ -118,6 +111,13 @@ public class ArquivoFacade {
             this.setName(layoutRegistro.nome);
             this.layoutRegistro = layoutRegistro;
             layoutRegistro.filhos.stream().forEach(l -> add(l));
+        }
+
+        public void addExtraId(FixedField fixedField) {
+            if (extraIds == null) {
+                extraIds = new ArrayList<>();
+            }
+            extraIds.add(fixedField);
         }
 
         public String render() {
@@ -293,7 +293,11 @@ public class ArquivoFacade {
                 fixedField.setFiller(filler);
             }
             if (l.isAttr("id")) {
-                setIdType(fixedField);
+                if (this.getIdType() == null) {
+                    setIdType(fixedField);
+                } else {
+                    addExtraId(fixedField);
+                }
             }
             super.add(fixedField);
             super.incLength(len);
@@ -313,6 +317,27 @@ public class ArquivoFacade {
 
         private boolean isValid(String nome) {
             return nome != null;
+        }
+
+        private boolean checkIds(String linha) {
+            FixedField<String> id = null;
+            FixedField<String> idType = this.getIdType();
+            try {
+                id = this.getId(linha);
+            } catch (Exception e) {
+
+            }
+            boolean ret = idType != null && idType.equalsValue(id);
+            if (ret) {
+                if (extraIds != null) {
+                    for (FixedField ff : extraIds) {
+                        FixedField<String> lval = this.get(ff, linha);
+                        ret = ret && ff.equalsValue(lval);
+                        //Break para melhorar a performance
+                    }
+                }
+            }
+            return ret;
         }
     }
 

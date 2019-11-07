@@ -177,7 +177,7 @@ public class LayoutsSuportados {
                     focorrencias()
             ),
             //Registro Detalhe - Segmento J (Obrigatório - Remessa / Retorno)
-            tituloJ(
+            detalheSegmentoJ(
                     //Controle: Banco, lote e registro
                     //Banco: Código do Banco na Compensação133-NumG001
                     fbancoCodigo(),
@@ -191,7 +191,7 @@ public class LayoutsSuportados {
                     fcodigoRegistro().value("3"),
                     fsequencialRegistro().length(5),
                     //Código adotado pela FEBRABAN para identificar o segmento do registro.
-                    field("segmento").value("J").length(1),
+                    fsegmento().value("J"),
                     //Código adotado pela FEBRABAN, para identificar o tipo de movimentação enviada no arquivo.
                     fmovimentoTipo().value(0),
                     //Código da Instrução para Movimento
@@ -233,7 +233,7 @@ public class LayoutsSuportados {
                     focorrencias()
             ),
             //Registro Detalhe - Segmento J-52 (Obrigatório – Remessa / Retorno)
-            tituloJ52(
+            detalheSegmentoJ52(
                     //Controle: Banco, lote e registro
                     //Banco: Código do Banco na Compensação133-NumG001
                     //Número seqüencial para identificar univocamente um lote de serviço. Criado e
@@ -242,9 +242,11 @@ public class LayoutsSuportados {
                     //anterior acrescido de 1. O número não poderá ser repetido dentro do arquivo.
                     //Se registro for Header do Arquivo preencher com '0000'
                     //Se registro for Trailer do Arquivo preencher com '9999'
-                    fbancoCodigo(), flote().value(1), fcodigoRegistro().value("3"), fsequencialRegistro().length(5),
+                    fbancoCodigo(), flote().value(1),
+                    fcodigoRegistro().value("3"),
+                    fsequencialRegistro().length(5),
                     //Código adotado pela FEBRABAN para identificar o segmento do registro.
-                    field("segmento").value("J").length(1),
+                    fsegmento().id(true).value("J"),
                     //06.4.J52 CNAB Uso Exclusivo FEBRABAN/CNAB 15 15 1 - Alfa Brancos G004
                     fbranco().length(1),
                     //C004: Código de Movimento Remessa 
@@ -253,7 +255,7 @@ public class LayoutsSuportados {
                     //Cada Banco definirá os campos a serem alterados para o código de movimento '31'
                     fmovimentoCodigo().value("00"),
                     //08.4.J52 Código Reg. Opcional Identificação Registro Opcional 18 19 2 - Num “52” G067
-                    field("idRegOpcional").length(2).value("52"),
+                    fidOpcional().id(true).value("52"),
                     //DADOS DO PAGADOR
                     //Tipo de Inscrição: '0'  =  Isento / Não Informado
                     //                   '1'  =  CPF

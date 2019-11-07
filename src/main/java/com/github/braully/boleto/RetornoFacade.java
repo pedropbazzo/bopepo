@@ -15,6 +15,7 @@
  */
 package com.github.braully.boleto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,8 +36,15 @@ public class RetornoFacade extends ArquivoFacade {
         return this.get("cabecalhoLote");
     }
 
-    List<RegistroArquivo> titulos() {
-        return this.gets("titulo");
+    List<RegistroArquivo> detalhes() {
+        List<RegistroArquivo> regs = new ArrayList<>();
+        //Melhorar isso, indexar via Map
+        for (RegistroArquivo reg : registros) {
+            if (reg.getName().toLowerCase().startsWith("detalhe")) {
+                regs.add(reg);
+            }
+        }
+        return regs;
     }
 
     RegistroArquivo rodapeLote() {

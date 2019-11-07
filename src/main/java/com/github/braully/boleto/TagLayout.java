@@ -435,6 +435,20 @@ public class TagLayout implements Serializable {
             return field("").filler(Fillers.ZERO_LEFT);
         }
 
+        public static TagLayout fsegmento() {
+            return field("segmento").length(1);
+        }
+
+        /**
+         * 08.4.J52 Código Reg. Opcional Identificação Registro Opcional 18 19 2
+         * - Num “52” G067
+         *
+         * @return
+         */
+        public static TagLayout fidOpcional() {
+            return field("idOpcional").length(2);
+        }
+
         /**
          * Esse field ira gerar espaços em branco.
          *
@@ -566,11 +580,11 @@ public class TagLayout implements Serializable {
             return tagin().with(filhos);
         }
 
-        public static TagLayout tituloJ(TagLayout... filhos) {
+        public static TagLayout detalheSegmentoJ(TagLayout... filhos) {
             return tagin().with(filhos);
         }
 
-        public static TagLayout tituloJ52(TagLayout... filhos) {
+        public static TagLayout detalheSegmentoJ52(TagLayout... filhos) {
             return tagin().with(filhos);
         }
 

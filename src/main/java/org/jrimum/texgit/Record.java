@@ -107,6 +107,21 @@ public class Record extends BlockOfFields implements IRecord {
         return ffID;
     }
 
+    @SuppressWarnings("null")
+    public FixedField<String> get(FixedField ff, String lineRecord) {
+        if (ff == null) {
+            return null;
+        }
+        try {
+            ff = ff.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new UnsupportedOperationException(format("Quebra de contrato [%s] não suporta clonagem!", Objects.whenNull(ff, "FixedField", ff.getClass())), e);
+        }
+        int position = this.getPosition(ff);
+        ff.read(lineRecord.substring(position, position + ff.getFixedLength()));
+        return ff;
+    }
+
     public IFixedField<?> getField(String fieldName) {
         IFixedField<?> field = null;
         if (isNotBlank(fieldName)) {
@@ -135,6 +150,21 @@ public class Record extends BlockOfFields implements IRecord {
             }
         }
         return is;
+    }
+
+    public int getPosition(FixedField f) {
+        int pos = -1;
+        if (f != null) {
+            pos = 0;
+            for (FixedField<?> ff : this.getFields()) {
+                if (!ff.getName().equals(f.getName())) {
+                    pos += ff.getFixedLength();
+                } else {
+                    break;
+                }
+            }
+        }
+        return pos;
     }
 
     private int getIdPosition() {

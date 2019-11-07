@@ -211,4 +211,9 @@ public class FixedField<G> extends Field<G> implements IFixedField<G> {
                 Objects.whenNull(this.truncate, EMPTY));
     }
 
+    //Melhorar isso
+    public boolean equalsValue(FixedField ff) {
+        return ff != null && ff.getValue() != null
+                && ff.getValue().equals(this.getValue());
+    }
 }
