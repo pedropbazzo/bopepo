@@ -985,7 +985,211 @@ public class LayoutsSuportados {
                     fquantidadeRegistros().length(6),
                     fbranco().length(9)
             )
-       );
+    );
+    public static final TagLayout _LAYOUT_CAIXA_CNAB240 = flatfile(
+            layout(nome("Layout padrão Banco Itau CNAB240"),
+                    cnab(CNAB_240),
+                    tag("url").value("https://www.bb.com.br/docs/pub/emp/empl/dwn/CbrVer04BB.pdf"),
+                    versao("05")
+            ),
+            cabecalho(
+                    fbancoCodigo().value("104"),
+                    flote().value("0000"),
+                    fcodigoRegistro().value("0"),
+                    fbranco().length(9),
+                    ftipoInscricao().value("2"),
+                    fcedenteCnpj().length(14).padding(Fillers.ZERO_LEFT),
+                    fbranco().length(9),
+                    fconvenio().length(20),
+                    fagencia().length(6),
+                    fconta().length(13),
+                    fbranco().length(9),
+                    fdac(),
+                    fcedenteNome().length(30),
+                    fbancoNome().length(30),
+                    fcodigoArquivo().value(1),
+                    fdataGeracao(),
+                    field("horaGeracao").length(6).format(new SimpleDateFormat("hhmmss")),
+                    fsequencialArquivo().length(6),
+                    field("versaoLayoutArquivo").valLen("103"),
+                    field("densidadeArquivo").value(0).length(5).padding(Fillers.ZERO_LEFT),
+                    focorrencias()
+            ),
+            cabecalhoLote(
+                    fbancoCodigo().value("104"),
+                    flote(),
+                    fcodigoRegistro().value("1"),
+                    foperacao().value("R"),
+                    fservico().value("01"),
+                    fforma(),
+                    field("versaoLayoutLote").value("060").length(3),
+                    ftipoInscricao().value("2"),
+                    fcedenteCnpj(),
+                    fbranco().length(9),
+                    fconvenio().length(20),
+                    fagencia().length(6),
+                    fconta().length(13),
+                    fdac(),
+                    fcedenteNome().length(30),
+                    field("mensagem1").length(40).filler(Fillers.WHITE_SPACE_LEFT),
+                    field("cedenteEndereco").length(80).filler(Fillers.WHITE_SPACE_LEFT),
+                    focorrencias()
+            ),
+            tituloJ(
+                    fbancoCodigo().value("104"),
+                    flote(),
+                    fcodigoRegistro().value("3"),
+                    fsequencialRegistro(),
+                    field("segmento").value("P").length(1),
+                    fcodigoBarras().length(44),
+                    fcedenteNome().length(30),
+                    fdataVencimento(),
+                    fvalor().length(15),
+                    fvalorDesconto().value(0).length(15),
+                    fvalorAcrescimo().value(0).length(15),
+                    fdataPagamento(), fvalorPagamento().length(15),
+                    field("qtdeMoeda").filler(Fillers.ZERO_LEFT).value(1).length(15),
+                    fnumeroDocumento().length(20),
+                    focorrencias()
+            ),
+            tituloJ(
+                    fbancoCodigo().value("104"),
+                    flote(),
+                    fcodigoRegistro().value("3"),
+                    fsequencialRegistro(),
+                    field("segmento").value("Q").length(1),
+                    ftipoInscricao().value("2"),
+                    fcedenteCnpj().length(14).padding(Fillers.ZERO_LEFT),
+                    fcedenteNome().length(30),
+                    fbranco().length(9),
+                    fdataVencimento(),
+                    fvalor().length(15),
+                    fvalorDesconto().value(0).length(15),
+                    fvalorAcrescimo().value(0).length(15),
+                    fdataPagamento(), fvalorPagamento().length(15),
+                    field("qtdeMoeda").filler(Fillers.ZERO_LEFT).value(1).length(15),
+                    field("cedenteEndereco").length(80).filler(Fillers.WHITE_SPACE_LEFT),
+                    fbranco().length(9),
+                    focorrencias()
+            ),
+            rodapeLote(
+                    fbancoCodigo().value("104"),
+                    flote(),
+                    fcodigoRegistro().value("5"),
+                    fbranco().length(9),
+                    fquantidadeRegistros().length(9),
+                    fvalorTotalRegistros().length(18),
+                    field("qtedMoedas").length(18).padding(Fillers.ZERO_LEFT).value(1),
+                    field("numAvisoDebito").length(6).filler(Fillers.ZERO_LEFT),
+                    fvalor().length(15),
+                    fbranco().length(9)
+            ),
+            //COMPOSIÇÃO ARQUIVO RETORNO
+
+            cabecalho(
+                    fbancoCodigo().value("104"),
+                    flote().value("0000"),
+                    fcodigoRegistro().value("0"),
+                    fbranco().length(9),
+                    ftipoInscricao().value("2"),
+                    fcedenteCnpj().length(14).padding(Fillers.ZERO_LEFT),
+                    fbranco().length(9),
+                    fconvenio().length(20),
+                    fagencia().length(6),
+                    fconta().length(13),
+                    fbranco().length(9),
+                    fdac(),
+                    fcedenteNome().length(30),
+                    fbancoNome().length(30),
+                    fcodigoArquivo().value(1),
+                    fdataGeracao(),
+                    field("horaGeracao").length(6).format(new SimpleDateFormat("hhmmss")),
+                    fsequencialArquivo().length(6),
+                    field("versaoLayoutArquivo").valLen("040"),
+                    field("densidadeArquivo").value(0).length(5).padding(Fillers.ZERO_LEFT),
+                    focorrencias()
+            ),
+            cabecalhoLote(
+                    fbancoCodigo().value("104"),
+                    flote(),
+                    fcodigoRegistro().value("1"),
+                    foperacao().value("T"),
+                    fservico().value("01"),
+                    fforma(),
+                    field("versaoLayoutLote").value("030").length(3),
+                    ftipoInscricao().value("2"),
+                    fcedenteCnpj(),
+                    fbranco().length(9),
+                    fconvenio().length(20),
+                    fagencia().length(6),
+                    fconta().length(13),
+                    fdac(),
+                    fcedenteNome().length(30),
+                    field("mensagem1").length(40).filler(Fillers.WHITE_SPACE_LEFT),
+                    field("mensagem2").length(40).filler(Fillers.WHITE_SPACE_LEFT),
+                    field("cedenteEndereco").length(80).filler(Fillers.WHITE_SPACE_LEFT),
+                    focorrencias()
+            ),
+            tituloJ(
+                    fbancoCodigo().value("104"),
+                    flote(),
+                    fcodigoRegistro().value("3"),
+                    fsequencialRegistro(),
+                    field("segmento").value("T").length(1),
+                    fcedenteNome().length(30),
+                    fbranco().length(9),
+                    fdataVencimento(),
+                    fvalor().length(15),
+                    fvalorDesconto().value(0).length(15),
+                    fvalorAcrescimo().value(0).length(15),
+                    fdataPagamento(), fvalorPagamento().length(15),
+                    field("qtdeMoeda").filler(Fillers.ZERO_LEFT).value(1).length(15),
+                    fnossoNumero().length(20),
+                    fnumeroDocumento().length(20),
+                    fbranco().length(9),
+                    focorrencias()
+            ),
+            tituloJ(
+                    fbancoCodigo().value("104"),
+                    flote(),
+                    fcodigoRegistro().value("3"),
+                    fsequencialRegistro(),
+                    field("segmento").value("U").length(1),
+                    fcedenteNome().length(30),
+                    fbranco().length(9),
+                    fdataVencimento(),
+                    fvalor().length(15),
+                    fvalorDesconto().value(0).length(15),
+                    fvalorAcrescimo().value(0).length(15),
+                    fdataPagamento(), fvalorPagamento().length(15),
+                    field("qtdeMoeda").filler(Fillers.ZERO_LEFT).value(1).length(15),
+                    fnumeroDocumento().length(20),
+                    fbranco().length(9),
+                    focorrencias(),
+                    fbranco().length(9)
+            ),
+            rodapeLote(
+                    
+                    fbancoCodigo().value("104"),
+                    flote(),
+                    fcodigoRegistro().value("5"),
+                    fbranco().length(9),
+                    fquantidadeRegistros().length(9),
+                    fvalorTotalRegistros().length(18),
+                    field("qtedMoedas").length(18).padding(Fillers.ZERO_LEFT).value(1),
+                    field("numAvisoDebito").length(6).filler(Fillers.ZERO_LEFT),
+                    fvalor().length(15),
+                    fbranco().length(9)
+            ),
+
+    rodape(
+                     fbancoCodigo().value("341"),
+                    flote().value("9999"),
+                    fcodigoRegistro().value("9"),
+                    fquantidadeRegistros().length(6),
+                    fbranco().length(9)
+            )
+    );
     public static final TagLayout LAYOUT_FEBRABAN_CNAB240
             = _LAYOUT_FEBRABAN_CNAB240.cloneReadonly();
 
@@ -997,9 +1201,12 @@ public class LayoutsSuportados {
 
     public static final TagLayout LAYOUT_SANTANDER_CNAB240
             = _LAYOUT_SANTANDER_CNAB240.cloneReadonly();
-    
+
     public static final TagLayout LAYOUT_ITAU_CNAB240
             = _LAYOUT_ITAU_CNAB240.cloneReadonly();
+    
+    public static final TagLayout LAYOUT_CAIXA_CNAB240
+            =   _LAYOUT_CAIXA_CNAB240.cloneReadonly();
 
     private static final TagLayout _LAYOUT_FEBRABAN_CNAB240_COBRANCA_REMESSA
             = _LAYOUT_FEBRABAN_CNAB240.clone();
@@ -1012,8 +1219,11 @@ public class LayoutsSuportados {
 
     private static final TagLayout _LAYOUT_SANTANDER_CNAB240_COBRANCA_REMESSA
             = _LAYOUT_SANTANDER_CNAB240.clone();
-    
+
     private static final TagLayout _LAYOUT_ITAU_CNAB240_COBRANCA_REMESSA
+            = _LAYOUT_ITAU_CNAB240.clone();
+    
+    private static final TagLayout _LAYOUT_CAIXA_CNAB240_COBRANCA_REMESSA
             = _LAYOUT_ITAU_CNAB240.clone();
 
     static {
@@ -1036,11 +1246,17 @@ public class LayoutsSuportados {
         _LAYOUT_SANTANDER_CNAB240_COBRANCA_REMESSA.get(cabecalho())
                 .get(fcodigoArquivo().value('1'));
     }
+
     static {
         _LAYOUT_ITAU_CNAB240_COBRANCA_REMESSA.get(cabecalho())
                 .get(fcodigoArquivo().value('1'));
     }
-
+    
+    static{
+        _LAYOUT_ITAU_CNAB240_COBRANCA_REMESSA.get(cabecalho())
+                .get(fcodigoArquivo().value('1'));
+        
+                }
     public static final TagLayout LAYOUT_FEBRABAN_CNAB240_COBRANCA_REMESSA
             = _LAYOUT_FEBRABAN_CNAB240_COBRANCA_REMESSA.cloneReadonly();
 
@@ -1052,9 +1268,13 @@ public class LayoutsSuportados {
 
     public static final TagLayout LAYOUT_SANTANDER_CNAB240_COBRANCA_REMESSA
             = _LAYOUT_SANTANDER_CNAB240_COBRANCA_REMESSA.cloneReadonly();
-    
+
     public static final TagLayout LAYOUT_ITAU_CNAB240_COBRANCA_REMESSA
             = _LAYOUT_ITAU_CNAB240_COBRANCA_REMESSA.cloneReadonly();
+    
+    public static final TagLayout LAYOUT_CAIXA_CNAB240_COBRANCA_REMESSA
+            = _LAYOUT_CAIXA_CNAB240_COBRANCA_REMESSA.cloneReadonly();
+
 
     private static final TagLayout _LAYOUT_FEBRABAN_CNAB240_COBRANCA_RETORNO
             = _LAYOUT_FEBRABAN_CNAB240.clone();
@@ -1067,12 +1287,15 @@ public class LayoutsSuportados {
 
     private static final TagLayout _LAYOUT_SANTANDER_CNAB240_COBRANCA_RETORNO
             = _LAYOUT_SANTANDER_CNAB240.clone();
-    
+
     private static final TagLayout _LAYOUT_ITAU_CNAB240_COBRANCA_RETORNO
             = _LAYOUT_ITAU_CNAB240.clone();
+    
+    private static final TagLayout _LAYOUT_CAIXA_CNAB240_COBRANCA_RETORNO
+            = _LAYOUT_CAIXA_CNAB240.clone();
 
     static {
-        
+
         _LAYOUT_FEBRABAN_CNAB240_COBRANCA_RETORNO.get(cabecalho())
                 .get(fcodigoArquivo().value('2'));
 
@@ -1084,8 +1307,11 @@ public class LayoutsSuportados {
 
         _LAYOUT_SANTANDER_CNAB240_COBRANCA_RETORNO.get(cabecalho())
                 .get(fcodigoArquivo().value('2'));
-        
+
         _LAYOUT_ITAU_CNAB240_COBRANCA_RETORNO.get(cabecalho())
+                .get(fcodigoArquivo().value('2'));
+        
+        _LAYOUT_CAIXA_CNAB240_COBRANCA_RETORNO.get(cabecalho())
                 .get(fcodigoArquivo().value('2'));
     }
 
@@ -1100,9 +1326,12 @@ public class LayoutsSuportados {
 
     public static final TagLayout LAYOUT_SANTANDER_CNAB240_COBRANCA_RETORNO
             = _LAYOUT_SANTANDER_CNAB240_COBRANCA_RETORNO.cloneReadonly();
-    
+
     public static final TagLayout LAYOUT_ITAU_CNAB240_COBRANCA_RETORNO
             = _LAYOUT_ITAU_CNAB240_COBRANCA_RETORNO.cloneReadonly();
+    
+    public static final TagLayout LAYOUT_CAIXA_CNAB240_COBRANCA_RETORNO
+            = _LAYOUT_CAIXA_CNAB240_COBRANCA_RETORNO.cloneReadonly();
 
     private static final List<TagLayout> layoutsSuportados;
 
@@ -1125,6 +1354,10 @@ public class LayoutsSuportados {
         layoutsSuportadosTmp.add(LAYOUT_BB_CNAB240);
         layoutsSuportadosTmp.add(LAYOUT_ITAU_CNAB240_COBRANCA_REMESSA);
         layoutsSuportadosTmp.add(LAYOUT_ITAU_CNAB240_COBRANCA_RETORNO);
+        layoutsSuportadosTmp.add(LAYOUT_CAIXA_CNAB240);
+        layoutsSuportadosTmp.add(LAYOUT_CAIXA_CNAB240_COBRANCA_REMESSA);
+        layoutsSuportadosTmp.add(LAYOUT_BB_CNAB240_COBRANCA_RETORNO);
+        
 
         layoutsSuportados = Collections.unmodifiableList(layoutsSuportadosTmp);
     }
