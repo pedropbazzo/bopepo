@@ -48,10 +48,10 @@ public class RetornoFacade extends ArquivoFacade {
     }
 
     RegistroArquivo rodapeLote() {
-        return (RodapeArquivo) this.get("rodapeLote");
+        return this.get("rodapeLote");
     }
 
     RegistroArquivo rodape() {
-        return (RodapeArquivo) this.get("rodape");
+        return this.get("rodape");
     }
 }
