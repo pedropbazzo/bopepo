@@ -27,23 +27,23 @@ public class RetornoFacade extends ArquivoFacade {
         this.template = template;
     }
 
-    CabecalhoArquivo cabecalho() {
-        return (CabecalhoArquivo) this.get("cabecalho");
+    RegistroArquivo cabecalho() {
+        return this.get("cabecalho");
     }
 
-    CabecalhoArquivo cabecalhoLote() {
-        return (CabecalhoArquivo) this.get("cabecalhoLote");
+    RegistroArquivo cabecalhoLote() {
+        return this.get("cabecalhoLote");
     }
 
-    List<TituloArquivo> titulos() {
-        return null;//(TituloArquivo) this.get("titulo");
+    List<RegistroArquivo> titulos() {
+        return this.gets("titulo");
     }
 
-    RodapeArquivo rodapeLote() {
+    RegistroArquivo rodapeLote() {
         return (RodapeArquivo) this.get("rodapeLote");
     }
 
-    RodapeArquivo rodape() {
+    RegistroArquivo rodape() {
         return (RodapeArquivo) this.get("rodape");
     }
 }

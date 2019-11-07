@@ -33,20 +33,20 @@ import org.jrimum.utilix.Objects;
  * @author braully
  */
 public class ArquivoFacade {
-    
+
     public static Logger logger = Logger.getLogger(ArquivoFacade.class);
     /*
     
      */
     TagLayout template;
-    
+
     public ArquivoFacade() {
     }
-    
+
     public ArquivoFacade(TagLayout template) {
         this.template = template;
     }
-    
+
     public List<String> renderLinhas() {
         List<String> linhas = new ArrayList<>();
         for (RegistroArquivo r : this.registros) {
@@ -55,7 +55,7 @@ public class ArquivoFacade {
         }
         return linhas;
     }
-    
+
     public void parse(List<String> linhas) {
         this.registros.clear();
         this.linhas.clear();
@@ -68,20 +68,21 @@ public class ArquivoFacade {
                 registrosLayout.add(new RegistroArquivo(tag));
             }
         }
-        
+
         for (String linha : linhas) {
             RegistroArquivo regLido = null;
             for (RegistroArquivo reg : registrosLayout) {
                 FixedField<String> id = null;
+                RegistroArquivo clone = reg.clone();
                 FixedField<String> idType = reg.getIdType();
                 try {
-                    id = reg.readID(linha);
+                    id = clone.getId(linha);
                 } catch (Exception e) {
-                    
+
                 }
-                if (idType != null && id != null && id.getValue() != null && !id.getValue().isBlank() && id.getValue().equals(idType.getValue())) {
-                    regLido = reg.clone();
-                    Integer fixedLength = reg.getFixedLength();
+                if (idType != null && id != null && id.getValue() != null
+                        && !id.getValue().isBlank() && id.getValue().equals(idType.getValue())) {
+                    regLido = clone;
                     regLido.read(linha);
                 }
             }
@@ -103,22 +104,22 @@ public class ArquivoFacade {
             sb.append(FileUtil.NEW_LINE);
         }
         return sb.toString();
-        
+
     }
-    
+
     public static class RegistroArquivo extends Record {
-        
+
         protected TagLayout layoutRegistro;
-        
+
         public RegistroArquivo() {
         }
-        
+
         public RegistroArquivo(TagLayout layoutRegistro) {
             this.setName(layoutRegistro.nome);
             this.layoutRegistro = layoutRegistro;
             layoutRegistro.filhos.stream().forEach(l -> add(l));
         }
-        
+
         public String render() {
 //            StringBuilder sb = new StringBuilder();
 //            return sb.toString(); 
@@ -130,67 +131,67 @@ public class ArquivoFacade {
             setValue(fsequencialRegistro().nome, seq);
             return this;
         }
-        
+
         public Integer sequencialRegistro() {
             return this.getValueAsInteger();
         }
-        
+
         public RegistroArquivo banco(String codigo, String nome) {
             setValue(fbancoCodigo().nome, codigo).setValue(fbancoNome().nome, nome);
             return this;
         }
-        
+
         public String bancoCodigo() {
             return getValue(fbancoCodigo().nome);
         }
-        
+
         public RegistroArquivo cedente(String nome, String cnpj) {
             setValue(fcedenteNome().nome, nome).setValue(fcedenteCnpj().nome, cnpj);
             return this;
         }
-        
+
         public String cedenteCnpj() {
             return getValue(fcedenteCnpj().nome);
         }
-        
+
         public RegistroArquivo convenio(String convenio, String agencia, String conta, String dac) {
             this.convenio(convenio).agencia(agencia).conta(conta).dac(dac);
             return this;
         }
-        
+
         public RegistroArquivo convenio(String convenio) {
             return setValue(convenio);
         }
-        
+
         public String convenio() {
             return getValue(fconvenio().nome);
         }
-        
+
         public RegistroArquivo agencia(String agencia) {
             return setValue(agencia);
         }
-        
+
         public String agencia() {
             return getValue(fagencia().nome);
         }
-        
+
         public RegistroArquivo conta(String conta) {
             return setValue(conta);
         }
-        
+
         public String conta() {
             return getValue(fconta().nome);
         }
-        
+
         public RegistroArquivo dac(String dac) {
             return setValue(dac);
         }
-        
+
         public RegistroArquivo setVal(String nomeAtributo, Object valor) {
             this.setValue(nomeAtributo, valor);
             return this;
         }
-        
+
         protected String getValue() {
             //TODO: Melhorar isso; perda de performance
             String nomeMetodoAnterior = Thread.currentThread().getStackTrace()[2].getMethodName();
@@ -202,14 +203,14 @@ public class ArquivoFacade {
             }
             return ret;
         }
-        
+
         protected String removeLeftZeros(String number) {
             if (number == null) {
                 return null;
             }
             return number.replaceFirst("^0+(?!$)", "");
         }
-        
+
         protected String trimNumberValue(String str) {
             if (str != null) {
                 str = str.replaceAll("\\D", "");
@@ -217,13 +218,13 @@ public class ArquivoFacade {
             }
             return str;
         }
-        
+
         public Integer getValueAsInteger() {
             //TODO: Melhorar isso; perda de performance
             String nomeMetodoAnterior = Thread.currentThread().getStackTrace()[2].getMethodName();
             return getValueAsInteger(nomeMetodoAnterior);
         }
-        
+
         public Integer getValueAsInteger(String nomefield) {
             /* Propriedade a ser setada é o nome do metodo que chamou */
             Object value = this.getValue(nomefield);
@@ -237,7 +238,7 @@ public class ArquivoFacade {
             }
             return ret;
         }
-        
+
         public Number getValueAsNumber() {
             //TODO: Melhorar isso; perda de performance
             String nomeMetodoAnterior = Thread.currentThread().getStackTrace()[2].getMethodName();
@@ -253,7 +254,7 @@ public class ArquivoFacade {
             }
             return ret;
         }
-        
+
         protected RegistroArquivo setValue(Object valor) {
             //TODO: Melhorar isso; perda de performance
             String nomeMetodoAnterior = Thread.currentThread().getStackTrace()[2].getMethodName();
@@ -261,7 +262,7 @@ public class ArquivoFacade {
             this.setValue(nomeMetodoAnterior, valor);
             return this;
         }
-        
+
         private void add(TagLayout l) {
             FixedField fixedField = new FixedField();
             if (isValid(l.nome)) {
@@ -292,24 +293,24 @@ public class ArquivoFacade {
                 fixedField.setFiller(filler);
             }
             if (l.isAttr("id")) {
-                super.setIdType(fixedField);
+                setIdType(fixedField);
             }
             super.add(fixedField);
             super.incLength(len);
             super.incSize();
         }
-        
+
         @Override
         public String toString() {
             return "RegistroArquivo{" + "layoutRegistro=" + layoutRegistro + "}+" + super.toString();
         }
-        
+
         @Override
         public RegistroArquivo clone() {
             RegistroArquivo clone = new RegistroArquivo(this.layoutRegistro);
             return clone;
         }
-        
+
         private boolean isValid(String nome) {
             return nome != null;
         }
@@ -317,78 +318,78 @@ public class ArquivoFacade {
 
     /* Reune atributos recorrentes nos registros do tipo cabecalho */
     public static class CabecalhoArquivo extends RegistroArquivo {
-        
+
         public CabecalhoArquivo(TagLayout get) {
             super(get);
         }
-        
+
         public CabecalhoArquivo agencia(String string) {
             return (CabecalhoArquivo) setValue(string);
         }
-        
+
         public CabecalhoArquivo conta(String string) {
             return (CabecalhoArquivo) setValue(string);
         }
-        
+
         public CabecalhoArquivo numeroConvenio(String string) {
             return (CabecalhoArquivo) setValue(string);
         }
-        
+
         public CabecalhoArquivo cedente(String string) {
             return (CabecalhoArquivo) setValue(string);
         }
-        
+
         public CabecalhoArquivo dataGeracao(String string) {
             return (CabecalhoArquivo) setValue(string);
         }
-        
+
         public CabecalhoArquivo dataGeracao(Date data) {
             return (CabecalhoArquivo) setValue(data);
         }
-        
+
         public CabecalhoArquivo cedenteCnpj(String string) {
             return (CabecalhoArquivo) setValue(string);
         }
-        
+
         public CabecalhoArquivo sequencialArquivo(Integer i) {
             setValue(fsequencialArquivo().nome, i);
             return this;
         }
-        
+
         public Integer sequencialArquivo() {
             return getValueAsInteger(fsequencialArquivo().nome);
         }
-        
+
         public CabecalhoArquivo operacao(Object op) {
             setValue(foperacao().nome, op);
             return this;
         }
-        
+
         public String operacao() {
             return getValue(foperacao().nome);
         }
-        
+
         public CabecalhoArquivo servico(Object op) {
             setValue(fservico().nome, op);
             return this;
         }
-        
+
         public String servico() {
             return getValue(fservico().nome);
         }
-        
+
         public CabecalhoArquivo forma(Object op) {
             setValue(fforma().nome, op);
             return this;
         }
-        
+
         public Object forma() {
             return getValue(fforma().nome);
         }
     }
-    
+
     public static class TituloArquivo extends RegistroArquivo {
-        
+
         public TituloArquivo(TagLayout get) {
             super(get);
         }
@@ -405,118 +406,118 @@ public class ArquivoFacade {
             setValue(fsacadoNome().nome, nome).setValue(fsacadoCpf().nome, cpf);
             return this;
         }
-        
+
         public String sacadoCpf() {
             return getValue(fsacadoCpf().nome);
         }
-        
+
         public TituloArquivo valor(Object string) {
             return (TituloArquivo) setValue(fvalor().nome, string);
         }
-        
+
         public String valor() {
             return getValue(fvalor().nome);
         }
-        
+
         public TituloArquivo valorDesconto(Object string) {
             return (TituloArquivo) setValue(fvalorDesconto().nome, string);
         }
-        
+
         public String valorDesconto() {
             return getValue(fvalorDesconto().nome);
         }
-        
+
         public TituloArquivo valorAcrescimo(Object string) {
             return (TituloArquivo) setValue(fvalorAcrescimo().nome, string);
         }
-        
+
         public String valorAcrescimo() {
             return getValue(fvalorAcrescimo().nome);
         }
-        
+
         public TituloArquivo vencimento(String string) {
             return (TituloArquivo) setValue(string);
         }
-        
+
         public String vencimento() {
             return getValue("vencimento");
         }
-        
+
         public TituloArquivo numeroDocumento(Object string) {
             return (TituloArquivo) setValue(string);
         }
-        
+
         public String numeroDocumento() {
             return getValue(fnumeroDocumento().nome);
         }
-        
+
         public TituloArquivo codigoBarras(String codigoBarras) {
             return (TituloArquivo) setVal(fcodigoBarras().nome, codigoBarras);
         }
-        
+
         public TituloArquivo nossoNumero(Object string) {
             return (TituloArquivo) setValue(string);
         }
-        
+
         public String nossoNumero() {
             return getValue("nossoNumero");
         }
-        
+
         public TituloArquivo dataVencimento(Object vencimento) {
             return (TituloArquivo) setValue(vencimento);
         }
-        
+
         public TituloArquivo dataEmissao(Object emissao) {
             return (TituloArquivo) setValue(emissao);
         }
-        
+
         public String dataOcorrencia(Object emissao) {
             return getValue(fdataOcorrencia().nome);
         }
-        
+
         public Number valorOcorrencia(Object string) {
             return getValue(fvalorOcorrencia().nome);
         }
-        
+
         public String ocorrencias(Object string) {
             return getValue(focorrencias().nome);
         }
-        
+
         public TituloArquivo carteira(String string) {
             return (TituloArquivo) setValue(string);
         }
-        
+
         public TituloArquivo sacado(String string) {
             return (TituloArquivo) setValue(string);
         }
-        
+
         public TituloArquivo sacadoCpf(String string) {
             return (TituloArquivo) setValue(string);
         }
-        
+
         public TituloArquivo sacadoEndereco(String string) {
             return (TituloArquivo) setValue(string);
         }
-        
+
         public TituloArquivo instrucao(String string) {
             return (TituloArquivo) setValue(string);
         }
     }
-    
+
     public static class RodapeArquivo extends RegistroArquivo {
-        
+
         public RodapeArquivo(TagLayout get) {
             super(get);
         }
-        
+
         public RodapeArquivo quantidadeRegistros(Number valorQuantidade) {
             return (RodapeArquivo) setValue(valorQuantidade);
         }
-        
+
         public Number quantidadeRegistros() {
             return getValueAsNumber();
         }
-        
+
         public RodapeArquivo valorTotalRegistros(Number valorTotal) {
             return (RodapeArquivo) setValue(valorTotal);
         }
@@ -527,26 +528,30 @@ public class ArquivoFacade {
      */
     List<RegistroArquivo> registros = new ArrayList<>();
     List<String> linhas = new ArrayList<>();
-    
+
     public ArquivoFacade add(RegistroArquivo reg) {
         registros.add(reg);
         return this;
     }
-    
+
     public RegistroArquivo get(String str) {
         return this.get(template.get(str));
     }
-    
+
     public RegistroArquivo get(TagLayout tiporegistro) {
         //Melhorar isso, indexar via Map
         for (RegistroArquivo reg : registros) {
-            if (reg.getName().equalsIgnoreCase(tiporegistro.nome)) {
+            if (reg.layoutRegistro == tiporegistro) {
                 return reg;
             }
         }
         return null;
     }
-    
+
+    public List<RegistroArquivo> gets(String str) {
+        return this.gets(template.get(str));
+    }
+
     public List<RegistroArquivo> gets(TagLayout tiporegistro) {
         List<RegistroArquivo> regs = new ArrayList<>();
         //Melhorar isso, indexar via Map

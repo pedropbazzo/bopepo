@@ -94,6 +94,19 @@ public class Record extends BlockOfFields implements IRecord {
         return ffID;
     }
 
+    @SuppressWarnings("null")
+    public FixedField<String> getId(String lineRecord) {
+        FixedField<String> ffID = null;
+        try {
+            ffID = getIdType().clone();
+            ffID.setName("");
+        } catch (CloneNotSupportedException e) {
+            throw new UnsupportedOperationException(format("Quebra de contrato [%s] não suporta clonagem!", Objects.whenNull(ffID, "FixedField", ffID.getClass())), e);
+        }
+        ffID.read(lineRecord.substring(getIdPosition(), getIdPosition() + getIdType().getFixedLength()));
+        return ffID;
+    }
+
     public IFixedField<?> getField(String fieldName) {
         IFixedField<?> field = null;
         if (isNotBlank(fieldName)) {

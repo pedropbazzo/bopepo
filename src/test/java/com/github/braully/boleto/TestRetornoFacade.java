@@ -18,7 +18,9 @@ package com.github.braully.boleto;
 import com.github.braully.boleto.ArquivoFacade.CabecalhoArquivo;
 import com.github.braully.boleto.ArquivoFacade.RodapeArquivo;
 import com.github.braully.boleto.ArquivoFacade.TituloArquivo;
+import java.util.Arrays;
 import java.util.List;
+import static org.junit.Assert.assertNotNull;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -32,15 +34,22 @@ public class TestRetornoFacade {
     @Test
     public void testRetornoCobancaGenericaFebraban240V5() {
         RetornoFacade retorno = new RetornoFacade(LayoutsSuportados.LAYOUT_FEBRABAN_CNAB240);
-        CabecalhoArquivo cabecalho = retorno.cabecalho();
 
-        CabecalhoArquivo cabecalhoLote = retorno.cabecalhoLote();
 
-        List<TituloArquivo> titulos = retorno.titulos();
+        ArquivoFacade.RegistroArquivo cabecalho = retorno.cabecalho();
+        assertNotNull(cabecalho);
 
-        RodapeArquivo rodapeLote = retorno.rodapeLote();
+        ArquivoFacade.RegistroArquivo cabecalhoLote = retorno.cabecalhoLote();
+        assertNotNull(cabecalhoLote);
 
-        RodapeArquivo rodapeArquivo = retorno.rodape();
+        List<ArquivoFacade.RegistroArquivo> titulos = retorno.titulos();
+        assertNotNull(titulos);
+
+        ArquivoFacade.RegistroArquivo rodapeLote = retorno.rodapeLote();
+        assertNotNull(rodapeLote);
+
+        ArquivoFacade.RegistroArquivo rodape = retorno.rodape();
+        assertNotNull(rodape);
 
         //System.err.println(remessaStr);
 //        assertEquals(remessaStr, "");
