@@ -306,7 +306,30 @@ public class ArquivoFacade {
 
         @Override
         public String toString() {
-            return "RegistroArquivo{" + "layoutRegistro=" + layoutRegistro + "}+" + super.toString();
+            StringBuilder sb = new StringBuilder("Registro{layout=");
+            if (layoutRegistro != null) {
+                sb.append(layoutRegistro.nome);
+            }
+            sb.append(",\n fields=[");
+            if (this.fields != null) {
+                sb.append("\n");
+                for (FixedField ff : this.fields) {
+                    Object value = ff.getValue();
+                    String name = ff.getName();
+                    if (name != null && !name.isBlank()
+                            && value != null && !value.toString().isBlank()) {
+                        sb.append("\t");
+                        sb.append(name);
+                        sb.append("=");
+                        sb.append(value);
+                        sb.append("\n");
+                    }
+                }
+
+            }
+            sb.append("]");
+            sb.append("}");
+            return sb.toString();
         }
 
         @Override
