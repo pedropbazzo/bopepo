@@ -191,7 +191,7 @@ public class LayoutsSuportados {
                     fcodigoRegistro().value("3"),
                     fsequencialRegistro().length(5),
                     //Código adotado pela FEBRABAN para identificar o segmento do registro.
-                    fsegmento().value("J"),
+                    fsegmento().id(true).value("J"),
                     //Código adotado pela FEBRABAN, para identificar o tipo de movimentação enviada no arquivo.
                     fmovimentoTipo().value(0),
                     //Código da Instrução para Movimento
@@ -276,6 +276,85 @@ public class LayoutsSuportados {
                     field("pagadorr").length(40).filler(Fillers.WHITE_SPACE_LEFT),
                     //Uso Exclusivo FEBRABAN/CNAB
                     field("CNAB").length(53)
+            ),
+            //Layout Padrão Febraban 240 posições V10.5
+            //http://www.febraban.org.br
+            //Registro Detalhe -Segmento U (Obrigatório -Retorno)
+            detalheSegmentoU(
+                    fbancoCodigo(), flote(),
+                    fcodigoRegistro().value("3"),
+                    fsequencialRegistro().length(5),
+                    //Código adotado pela FEBRABAN para identificar o segmento do registro.
+                    fsegmento().id(true).value("U"),
+                    //06.4.J52 CNAB Uso Exclusivo FEBRABAN/CNAB 15 15 1 - Alfa Brancos G004
+                    fbranco().length(1),
+                    //C004: Código de Movimento Remessa 
+                    //Código adotado pela FEBRABAN, para identificar o tipo de movimentação enviado nos
+                    //registros do arquivo de remessa.
+                    //Cada Banco definirá os campos a serem alterados para o código de movimento '31'
+                    fmovimentoCodigo(),
+                    //Dadosdo Título
+                    //Valor da Mora + Multa
+                    //Valor do juros de mora somado ao Valor da multa, expresso em moeda corrente
+                    fvalorAcrescimo().length(15),
+                    fvalorDesconto().length(15),
+                    fvalorAbatimento().length(15),
+                    fvalorIOF().length(15),
+                    fvalorPagamento().length(15),
+                    fvalorLiquido().length(15),
+                    fvalorOutrasDespesas(),
+                    fvalorOutrasReceitas(),
+                    fdataOcorrencia(),
+                    fdata().nome("dataOutrasReceitas"),
+                    //Ocorr. do Pagador
+                    fcodigoOcorrencia().length(4),
+                    fdata().nome("dataOcorrenciaPagador"),
+                    fvalor().nome("valorOcorrenciaPagador"),
+                    field("complementoOcorrencia").length(30),
+                    field("codBancoCorrespondenteCompens").length(3),
+                    field("nossoNumeroBancoCorrespondenteCompens").length(20),
+                    field("CNAB").length(7)
+            ),
+            //Registro Detalhe -Segmento T (Obrigatório -Retorno)
+            detalheSegmentoT(
+                    fbancoCodigo(), flote(),
+                    fcodigoRegistro().value("3"),
+                    fsequencialRegistro().length(5),
+                    //Código adotado pela FEBRABAN para identificar o segmento do registro.
+                    fsegmento().id(true).value("T"),
+                    //06.4.J52 CNAB Uso Exclusivo FEBRABAN/CNAB 15 15 1 - Alfa Brancos G004
+                    fbranco().length(1),
+                    fmovimentoCodigo(),
+                    //C/C
+                    fagencia().length(6),
+                    //Número da Conta Corrente5970 12-Num*G010
+                    //Dígito Verificador da Conta7171 1-Alfa*G011
+                    fconta().length(13), //Conta com DV
+                    //Dígito Verificador da Ag/Conta72721-Alfa*G012
+                    //Dígito Verificador da Agência / Conta CorrenteCódigo  
+                    //adotado  pelo  Banco  responsável  pela  conta  corrente,
+                    //para  verificação  da autenticidade do par Código da Agência / Número da Conta Corrente.
+                    //Para os Bancos que se utilizam de duas posições para o Dígito Verificador 
+                    //do Número da Conta Corrente, preencher este campo com a 2ª posição deste dígito. 
+                    fdac(),
+                    fnossoNumero().length(20),
+                    fcodigoCarteira(),
+                    fnumeroDocumento().length(15),
+                    fdataVencimento(),
+                    fvalor().length(15),
+                    //*C045
+                    fbancoCodigo().nome("bancoCodigoRecebedor"),
+                    //Agencia (5) + DV (1)
+                    fagencia().length(6).nome("agenciaBancoRecebedor"),
+                    field("usoEmpresa").length(25),
+                    fcodigoMoeda(),
+                    ftipoInscricao(),
+                    fsacadoCpf().length(15),
+                    fsacadoNome().length(40),
+                    field("numeroContrato").length(10),
+                    field("valorTarifaCustas").length(15),
+                    frejeicoes().length(10),
+                    field("CNAB").length(17)
             ),
             rodapeLote(
                     //Controle: Banco, lote e registro
