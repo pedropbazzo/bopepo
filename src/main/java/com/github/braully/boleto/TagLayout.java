@@ -487,40 +487,40 @@ public class TagLayout implements Serializable {
         }
 
         public static TagLayout fvalorPagamento() {
-            return field("valorPagamento").type(Number.class).filler(Fillers.ZERO_LEFT);
+            return field("valorPagamento").length(15).type(Number.class).filler(Fillers.ZERO_LEFT);
         }
 
         public static TagLayout fvalorOcorrencia() {
-            return field("valorOcorrencia").type(Number.class).filler(Fillers.ZERO_LEFT);
+            return field("valorOcorrencia").length(15).type(Number.class).filler(Fillers.ZERO_LEFT);
         }
 
         public static TagLayout fvalorDesconto() {
-            return field("valorDesconto").type(Number.class).padding(Fillers.ZERO_LEFT);
+            return field("valorDesconto").length(15).type(Number.class).padding(Fillers.ZERO_LEFT);
         }
 
         public static TagLayout fvalorAbatimento() {
-            return field("valorAbatimento").type(Number.class).padding(Fillers.ZERO_LEFT);
+            return field("valorAbatimento").length(15).type(Number.class).padding(Fillers.ZERO_LEFT);
         }
 
         public static TagLayout fvalorIOF() {
-            return field("valorIOF").type(Number.class).padding(Fillers.ZERO_LEFT);
+            return field("valorIOF").length(15).type(Number.class).padding(Fillers.ZERO_LEFT);
         }
 
         public static TagLayout fvalorLiquido() {
-            return field("valorLiquido").type(Number.class).padding(Fillers.ZERO_LEFT);
+            return field("valorLiquido").length(15).type(Number.class).padding(Fillers.ZERO_LEFT);
         }
 
         public static TagLayout fvalorOutrasDespesas() {
-            return field("valorOutrasDespesas").type(Number.class).padding(Fillers.ZERO_LEFT);
+            return field("valorOutrasDespesas").length(15).type(Number.class).padding(Fillers.ZERO_LEFT);
 
         }
 
         public static TagLayout fvalorOutrasReceitas() {
-            return field("valorOutrasReceitas").type(Number.class).padding(Fillers.ZERO_LEFT);
+            return field("valorOutrasReceitas").length(15).type(Number.class).padding(Fillers.ZERO_LEFT);
         }
 
         public static TagLayout fvalorAcrescimo() {
-            return field("valorAcresciomo").type(Number.class).padding(Fillers.ZERO_LEFT);
+            return field("valorAcresciomo").length(15).type(Number.class).padding(Fillers.ZERO_LEFT);
         }
 
         public static TagLayout fnumeroDocumento() {
