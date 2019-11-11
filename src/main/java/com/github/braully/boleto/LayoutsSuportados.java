@@ -361,6 +361,8 @@ public class LayoutsSuportados {
                     fbancoCodigo(),
                     flote().value(1), // o mesmo do cabeçalho do lote
                     fcodigoRegistro().value("3"),
+                    fsequencialRegistro().length(5),
+                    fsegmento().id(true).value("P"),
                     fbranco().length(1),
                     //C004
                     fmovimentoCodigo(),
@@ -368,12 +370,13 @@ public class LayoutsSuportados {
                     fconta().length(13), //Conta com DV
                     fdac(),
                     fnossoNumero().length(20),
-                    fcodigoCarteira(),
+                    fcodigoCarteira().value(1),
                     //1'  =  Com Cadastramento (Cobrança Registrada)
                     //'2'  =  Sem Cadastramento (Cobrança sem Registro) 
                     //Obs.: Destina-se somente para emissão de Boleto de Pagamentopelo banco
                     //'3'  =  Com Cadastramento / Recusa do Débito Autom
                     field("formaCadastroTitulo").length(1).value(1),
+                    ftipoDocumento(),
                     ftipoEmissaoBoleto(),
                     fnumeroDocumento(),
                     fdataVencimento(),
