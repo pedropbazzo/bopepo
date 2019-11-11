@@ -126,6 +126,26 @@ public class TagLayout implements Serializable {
             return field("sacadoNome").padding(Fillers.WHITE_SPACE_RIGHT).length(30);
         }
 
+        public static TagLayout fendereco() {
+            return field("endereco").padding(Fillers.WHITE_SPACE_RIGHT).length(40);
+        }
+
+        public static TagLayout fbairro() {
+            return field("bairro").padding(Fillers.WHITE_SPACE_RIGHT).length(40);
+        }
+
+        public static TagLayout fcep() {
+            return field("cep").padding(Fillers.ZERO_RIGHT).length(8);
+        }
+
+        public static TagLayout fcidade() {
+            return field("cidade").padding(Fillers.WHITE_SPACE_RIGHT).length(15);
+        }
+
+        public static TagLayout fuf() {
+            return field("uf").length(2);
+        }
+
         /**
          * C004: Código de Movimento Remessa Código adotado pela FEBRABAN, para
          * identificar o tipo de movimentação enviado nos //registros do arquivo
@@ -571,10 +591,10 @@ public class TagLayout implements Serializable {
         /**
          * Código para Baixa / Devolução C028 Código adotado pela FEBRABAN para
          * identificar qual o procedimento a ser adotado com o Título. Domínio:
-         * '1' = Baixar / Devolver 
-         * '2' = Não Baixar / Não Devolver 
-         * '3' = Cancelar Prazo para Baixa / Devolução 
-         * (somente válido p/CódigoMovimento Remessa = '31' - Descrição C004)
+         * '1' = Baixar / Devolver '2' = Não Baixar / Não Devolver '3' =
+         * Cancelar Prazo para Baixa / Devolução (somente válido
+         * p/CódigoMovimento Remessa = '31' - Descrição C004)
+         *
          * @return
          */
         public static TagLayout fcodigoBaixa() {

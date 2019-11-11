@@ -28,7 +28,7 @@ import org.jrimum.texgit.Fillers;
  * @author Braully Rocha da Silva
  */
 public class LayoutsSuportados {
-
+    
     private static final TagLayout _LAYOUT_FEBRABAN_CNAB240 = flatfile(
             layout(nome("Layout Padrão Febraban CNAB240"),
                     cnab(CNAB_240),
@@ -405,9 +405,33 @@ public class LayoutsSuportados {
                     field("numeroContrato").length(10).type(Number.class),
                     field("usoLivre").length(1)
             ),
-            detalheSegmentoU(
-            
+            //Registro Detalhe -Segmento Q (Obrigatório -Remessa)
+            detalheSegmentoQ(
+                    fbancoCodigo(),
+                    flote().value(1), // o mesmo do cabeçalho do lote
+                    fcodigoRegistro().value("3"),
+                    fsequencialRegistro().length(5),
+                    fsegmento().id(true).value("Q"),
+                    fbranco().length(1),
+                    //*C004
+                    fmovimentoCodigo(),
+                    //Tipo de Inscrição 
+                    ftipoInscricao().value(1),
+                    fsacadoCpf().length(15),
+                    fsacadoNome().length(40),
+                    fendereco().length(40),
+                    fbairro().length(40),
+                    fcep().length(8),
+                    fcidade().length(15),
+                    fuf().length(2),
+                    field("tipoInscricaoAvalista").value(0),
+                    field("numeroInscricaoAvalista").length(15).padding(Fillers.WHITE_SPACE_LEFT),
+                    field("nomeAvalista").length(40),
+                    fbancoCodigo().nome("bancoCodigoCorrespondente"),
+                    field("nossoNumeroBancoCorrespondente").length(20),
+                    fbranco().length(8)
             ),
+            detalheSegmentoR(),
             rodapeLote(
                     //Controle: Banco, lote e registro
                     //Banco: Código do Banco na Compensação133-NumG001
@@ -454,7 +478,7 @@ public class LayoutsSuportados {
                     fbranco().length(205)
             )
     );
-
+    
     public static final TagLayout LAYOUT_FEBRABAN_CNAB240
             = _LAYOUT_FEBRABAN_CNAB240.cloneReadonly();
 
@@ -463,24 +487,24 @@ public class LayoutsSuportados {
      */
     private static final TagLayout _LAYOUT_FEBRABAN_CNAB240_COBRANCA_REMESSA
             = _LAYOUT_FEBRABAN_CNAB240.clone();
-
+    
     static {
         _LAYOUT_FEBRABAN_CNAB240_COBRANCA_REMESSA.get(cabecalho())
                 .get(fcodigoArquivo().value('1'));
     }
-
+    
     public static final TagLayout LAYOUT_FEBRABAN_CNAB240_COBRANCA_REMESSA
             = _LAYOUT_FEBRABAN_CNAB240_COBRANCA_REMESSA.cloneReadonly();
-
+    
     private static final TagLayout _LAYOUT_FEBRABAN_CNAB240_COBRANCA_RETORNO
             = _LAYOUT_FEBRABAN_CNAB240.clone();
-
+    
     static {
         _LAYOUT_FEBRABAN_CNAB240_COBRANCA_RETORNO.get(cabecalho())
                 .get(fcodigoArquivo().value('2'));
-
+        
     }
-
+    
     public static final TagLayout LAYOUT_FEBRABAN_CNAB240_COBRANCA_RETORNO
             = _LAYOUT_FEBRABAN_CNAB240_COBRANCA_RETORNO.cloneReadonly();
 
@@ -488,7 +512,7 @@ public class LayoutsSuportados {
     
      */
     private static final List<TagLayout> layoutsSuportados;
-
+    
     static {
         List<TagLayout> layoutsSuportadosTmp = new ArrayList<>();
         /* */
@@ -499,7 +523,7 @@ public class LayoutsSuportados {
         /* */
         layoutsSuportados = Collections.unmodifiableList(layoutsSuportadosTmp);
     }
-
+    
     public static TagLayout getLayoutArquivoBancarioRemessaCobranca(String codBanco, String numConvenio, String agencia, String conta, String carteira, Boolean registrado) {
         return getLayoutArquivoBancario(CNABServico.COBRANCA_REMESSA, CNAB_240,
                 codBanco, numConvenio, agencia, conta, carteira, registrado);
@@ -523,7 +547,7 @@ public class LayoutsSuportados {
         }
         return ret;
     }
-
+    
     public static boolean eq(Object value1, Object value2) {
         return value1 == value2
                 || value1 != null && value1.equals(value2)
