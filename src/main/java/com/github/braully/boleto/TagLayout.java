@@ -523,8 +523,140 @@ public class TagLayout implements Serializable {
             return field("valorAcresciomo").length(15).type(Number.class).padding(Fillers.ZERO_LEFT);
         }
 
+        /**
+         * Código do Juros de Mora C018 Código adotado pela FEBRABAN para
+         * identificação do tipo de pagamento de juros de mora. Domínio: '1' =
+         * Valor por Dia '2' = Taxa Mensal '3' = Isento
+         *
+         * @return
+         */
+        public static TagLayout fcodigoAcrescimo() {
+            return field("codigoAcrescimo").length(1).value(2);
+        }
+
+        /**
+         * Código adotado pela FEBRABAN para identificação do tipo de desconto
+         * que deverá ser concedido. Ao se optar por valor, os três descontos
+         * devem ser expresso em valores. Idem ao se optar por percentual, os
+         * três descontos devem ser expressos em percentual. Domínio: '1' =
+         * Valor Fixo Até a Data Informada '2' = Percentual Até a Data Informada
+         * '3' = Valor por Antecipação Dia Corrido '4' = Valor por Antecipação
+         * Dia Útil '5' = Percentual Sobre o Valor Nominal Dia Corrido '6' =
+         * Percentual Sobre o Valor Nominal Dia Útil '7' = Cancelamento de
+         * Desconto Para os códigos '1' e '2' será obrigatório a informação da
+         * Data. Para o código '7', somente será válido para o código de
+         * movimento '31' - Alteração de Dados
+         *
+         * @return
+         */
+        public static TagLayout fcodigoDesconto() {
+            return field("codigoDesconto").length(1).value(2);
+        }
+
+        /**
+         * Código para Protesto C026 Código adotado pela FEBRABAN para
+         * identificar o tipo de prazo a ser considerado para o protesto.
+         * Domínio: '1' = Protestar Dias Corridos '2' = Protestar Dias Úteis '3'
+         * = Não Protestar ‘4’ = Protestar Fim Falimentar - Dias Úteis ‘5’ =
+         * Protestar Fim Falimentar - Dias Corridos ‘8’ = Negativação sem
+         * Protesto '9' = Cancelamento Protesto Automático (somente válido p/
+         * CódigoMovimento Remessa = '31' - Descrição C004)
+         *
+         * @return
+         */
+        public static TagLayout fcodigoProtesto() {
+            return field("codigoProtesto").length(1).value(3);
+        }
+
+        /**
+         * Código para Baixa / Devolução C028 Código adotado pela FEBRABAN para
+         * identificar qual o procedimento a ser adotado com o Título. Domínio:
+         * '1' = Baixar / Devolver 
+         * '2' = Não Baixar / Não Devolver 
+         * '3' = Cancelar Prazo para Baixa / Devolução 
+         * (somente válido p/CódigoMovimento Remessa = '31' - Descrição C004)
+         * @return
+         */
+        public static TagLayout fcodigoBaixa() {
+            return field("codigoBaixa").length(1).value(2);
+        }
+
         public static TagLayout fnumeroDocumento() {
             return field("numeroDocumento").type(Number.class).padding(Fillers.ZERO_LEFT);
+        }
+
+        /**
+         * Tipo de Documento C008 Código adotado pela FEBRABAN para identificar
+         * a existência material do documento no processo. Domínio: '1' =
+         * Tradicional '2' = Escritural
+         *
+         * @return
+         */
+        public static TagLayout ftipoDocumento() {
+            return field("tipoDocumento").length(1).value(1);
+        }
+
+        /**
+         * Identificação da Emissão do Boleto de Pagamento C009 Código adotado
+         * pela FEBRABAN para identificar o responsável e a forma de emissão do
+         * Boleto de Pagamento. Domínio: '1' = Banco Emite '2' = Cliente Emite
+         * '3' = Banco Pré-emite e Cliente Complementa '4' = Banco Reemite '5' =
+         * Banco Não Reemite '7' = Banco Emitente - Aberta '8' = Banco Emitente
+         * - Auto-envelopável Os códigos '4' e '5' só serão aceitos para código
+         * de movimento para remessa '31'
+         *
+         * @return
+         */
+        public static TagLayout ftipoEmissaoBoleto() {
+            return field("tipoEmissaoBoleto").length(1).value(2);
+        }
+
+        /**
+         * Identificação da Distribuição C010 Código adotado pela FEBRABAN para
+         * identificar o responsável pela distribuição do Boleto de Pagamento.
+         * Domínio: '1' = Banco Distribui '2' = Cliente Distribui ‘3’ = Banco
+         * envia e-mail ‘4’ = Banco envia SMS
+         *
+         * @return
+         */
+        public static TagLayout ftipoDistribuicaoBoleto() {
+            return field("tipoDistribuicaoBoleto").length(1).value(2);
+        }
+
+        /**
+         * Código adotado pela FEBRABAN para identificar o tipo de título de
+         * cobrança. Domínio: '01' = CH Cheque '02' = DM Duplicata Mercantil
+         * '03' = DMI Duplicata Mercantil p/ Indicação '04' = DS Duplicata de
+         * Serviço '05' = DSI Duplicata de Serviço p/ Indicação '06' = DR
+         * Duplicata Rural '07' = LC Letra de Câmbio '08' = NCC Nota de Crédito
+         * Comercial '09' = NCE Nota de Crédito a Exportação '10' = NCI Nota de
+         * Crédito Industrial '11' = NCR Nota de Crédito Rural '12' = NP Nota
+         * Promissória '13' = NPR Nota Promissória Rural '14' = TM Triplicata
+         * Mercantil '15' = TS Triplicata de Serviço '16' = NS Nota de Seguro
+         * '17' = RC Recibo '18' = FAT Fatura '19' = ND Nota de Débito '20' = AP
+         * Apólice de Seguro '21' = ME Mensalidade Escolar '22' = PC Parcela de
+         * Consórcio '23' = NF Nota Fiscal '24' = DD Documento de Dívida ‘25’ =
+         * Cédula de Produto Rural ‘26’ = Warrant ‘27’ = Dívida Ativa de Estado
+         * ‘28’ = Dívida Ativa de Município ‘29’ = Dívida Ativa da União ‘30’ =
+         * Encargos condominiais ‘31’ = CC Cartão de Crédito ‘32’ = BDP – Boleto
+         * de Proposta '99' = Outros
+         *
+         * @return
+         */
+        public static TagLayout fespecieTitulo() {
+            return field("especieTitulo").length(2).value("02");
+        }
+
+        /**
+         * Identificação de Título Aceito / Não Aceito C016 Código adotado pela
+         * FEBRABAN para identificar se o título de cobrança foi aceito
+         * (reconhecimento da dívida pelo Pagador). Domínio: 'A' = Aceite 'N' =
+         * Não Aceite
+         *
+         * @return
+         */
+        public static TagLayout faceite() {
+            return field("aceite").length(1).value("A");
         }
 
         public static TagLayout fnossoNumero() {
@@ -766,6 +898,18 @@ public class TagLayout implements Serializable {
         }
 
         public static TagLayout detalheSegmentoT(TagLayout... filhos) {
+            return tagin().with(filhos);
+        }
+
+        public static TagLayout detalheSegmentoP(TagLayout... filhos) {
+            return tagin().with(filhos);
+        }
+
+        public static TagLayout detalheSegmentoQ(TagLayout... filhos) {
+            return tagin().with(filhos);
+        }
+
+        public static TagLayout detalheSegmentoR(TagLayout... filhos) {
             return tagin().with(filhos);
         }
 

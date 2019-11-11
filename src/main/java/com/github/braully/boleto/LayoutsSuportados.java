@@ -356,6 +356,58 @@ public class LayoutsSuportados {
                     frejeicoes().length(10),
                     field("CNAB").length(17)
             ),
+            //Registro Detalhe -Segmento P (Obrigatório -Remessa)
+            detalheSegmentoP(
+                    fbancoCodigo(),
+                    flote().value(1), // o mesmo do cabeçalho do lote
+                    fcodigoRegistro().value("3"),
+                    fbranco().length(1),
+                    //C004
+                    fmovimentoCodigo(),
+                    fagencia().length(6),
+                    fconta().length(13), //Conta com DV
+                    fdac(),
+                    fnossoNumero().length(20),
+                    fcodigoCarteira(),
+                    //1'  =  Com Cadastramento (Cobrança Registrada)
+                    //'2'  =  Sem Cadastramento (Cobrança sem Registro) 
+                    //Obs.: Destina-se somente para emissão de Boleto de Pagamentopelo banco
+                    //'3'  =  Com Cadastramento / Recusa do Débito Autom
+                    field("formaCadastroTitulo").length(1).value(1),
+                    ftipoEmissaoBoleto(),
+                    fnumeroDocumento(),
+                    fdataVencimento(),
+                    fvalor(),
+                    fagencia().nome("agenciaCobradora"),
+                    fespecieTitulo(),
+                    faceite(),
+                    fdataGeracao(),
+                    fcodigoAcrescimo(),
+                    //Data indicativa do início da cobrança do Juros de Mora de um título de cobrança.
+                    //A data informada deverá ser maior que a Data de Vencimento do título de cobrança
+                    //Caso seja inválida ou não informada será assumida a data do vencimento.
+                    fdata().nome("dataAcrescimo"),
+                    //Valor ou porcentagem sobre o valor do título a ser cobrada de juros de mora.
+                    fvalorAcrescimo(),
+                    fcodigoDesconto(),
+                    fdata().nome("dataDesconto"),
+                    //Valor ou percentual de desconto a ser concedido sobre o título de cobrança.
+                    fvalorDesconto(),
+                    fvalorIOF(),
+                    fvalorAbatimento(),
+                    //Identificação do Título na Empresa
+                    fnumeroDocumento().length(25),
+                    fcodigoProtesto(),
+                    field("numeroDiasProtesto").length(2),
+                    fcodigoBaixa(),
+                    field("numeroDiasBaixa").length(3),
+                    fcodigoMoeda(),
+                    field("numeroContrato").length(10).type(Number.class),
+                    field("usoLivre").length(1)
+            ),
+            detalheSegmentoU(
+            
+            ),
             rodapeLote(
                     //Controle: Banco, lote e registro
                     //Banco: Código do Banco na Compensação133-NumG001
