@@ -389,7 +389,9 @@ public class LayoutsSuportados {
                     fnumeroDocumento().length(15),
                     fdataVencimento(),
                     fvalor(),
-                    field("agenciaCobradora").length(6).padding(Fillers.ZERO_LEFT),
+                    field("agenciaCobradora")
+                            .length(6).padding(Fillers.ZERO_LEFT)
+                            .value(0),
                     fespecieTitulo(),
                     faceite(),
                     fdataGeracao(),
