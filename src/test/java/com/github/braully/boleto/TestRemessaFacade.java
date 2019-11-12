@@ -28,8 +28,58 @@ import org.junit.Test;
 public class TestRemessaFacade {
 
     @Test
+    public void testRemessaCobancaGenericaFebraban240V5SegmentoPQ() {
+        RemessaFacade remessa = new RemessaFacade(LayoutsSuportados.LAYOUT_FEBRABAN_CNAB240_COBRANCA_REMESSA);
+        remessa.addNovoCabecalho()
+                .sequencialArquivo(1)
+                .dataGeracao(new Date()).setVal("horaGeracao", new Date())
+                .banco("0", "Banco").cedente("ACME S.A LTDA.", "1").convenio("1", "1", "1", "1");
+
+        remessa.addNovoCabecalhoLote()
+                .operacao("R")//Operação de remessa
+                .servico(1)//Cobrança
+                .forma(1)//Crédito em Conta Corrente
+                .banco("0", "Banco")
+                .cedente("ACME S.A LTDA.", "1")
+                .convenio("1", "1", "1", "1");
+
+        remessa.addNovoDetalheSegmentoP()
+                .valor(1)
+                .valorDesconto(0).valorAcrescimo(0)//opcionais
+                .dataVencimento(new Date())
+                .numeroDocumento(1)
+                .nossoNumero(1)
+                .banco("0", "Banco")
+                .cedente("ACME S.A LTDA.", "1")
+                .convenio("1", "1", "1", "1")
+                .sequencialRegistro(1);
+
+        remessa.addNovoDetalheSegmentoQ()
+                .sacado("Fulano de Tal", "0")
+                .banco("0", "Banco")
+                .cedente("ACME S.A LTDA.", "1")
+                .convenio("1", "1", "1", "1")
+                .sequencialRegistro(2);
+
+        remessa.addNovoRodapeLote()
+                .quantidadeRegistros(2)
+                .valorTotalRegistros(1)
+                .banco("0", "Banco")
+                .cedente("ACME S.A LTDA.", "1").convenio("1", "1", "1", "1");
+
+        remessa.addNovoRodape()
+                .quantidadeRegistros(1)
+                .valorTotalRegistros(1)
+                .setVal("codigoRetorno", "1")
+                .banco("0", "Banco").cedente("ACME S.A LTDA.", "1").convenio("1", "1", "1", "1");
+
+        String remessaStr = remessa.render();
+        System.err.println(remessaStr);
+    }
+
+    @Test
     public void testRemessaCobancaGenericaFebraban240V5() {
-        RemessaFacade remessa = new RemessaFacade(LayoutsSuportados.LAYOUT_FEBRABAN_CNAB240);
+        RemessaFacade remessa = new RemessaFacade(LayoutsSuportados.LAYOUT_FEBRABAN_CNAB240_COBRANCA_REMESSA);
         remessa.addNovoCabecalho()
                 .sequencialArquivo(1)
                 .dataGeracao(new Date()).setVal("horaGeracao", new Date())

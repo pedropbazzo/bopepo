@@ -676,7 +676,7 @@ public class TagLayout implements Serializable {
          * @return
          */
         public static TagLayout faceite() {
-            return field("aceite").length(1).value("A");
+            return field("aceite").length(1).value("N");
         }
 
         public static TagLayout fnossoNumero() {
@@ -864,6 +864,14 @@ public class TagLayout implements Serializable {
          */
         public static TagLayout fdata() {
             return field("data").length(8).format(new SimpleDateFormat("ddMMyyyy"));
+        }
+
+        public static TagLayout fdataAcrescimo() {
+            return fdata().nome("dataAcrescimo");
+        }
+
+        public static TagLayout fdataDesconto() {
+            return fdata().nome("dataDesconto");
         }
 
         public static TagLayout fdataGeracao() {

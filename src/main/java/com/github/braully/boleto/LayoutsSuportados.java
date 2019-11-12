@@ -348,7 +348,7 @@ public class LayoutsSuportados {
                     fagencia().nome("agenciaBancoRecebedor"),
                     field("usoEmpresa").length(25),
                     fcodigoMoeda(),
-                    ftipoInscricao(),
+                    ftipoInscricao().value(1),//Default 1 CPF
                     fsacadoCpf().length(15),
                     fsacadoNome().length(40),
                     field("numeroContrato").length(10),
@@ -365,12 +365,12 @@ public class LayoutsSuportados {
                     fsegmento().id(true).value("P"),
                     fbranco().length(1),
                     //C004
-                    fmovimentoCodigo(),
+                    fmovimentoCodigo().value("01"),//Default '01' = Entrada de Títulos
                     fagencia(),
                     fconta(), //Conta com DV
                     fdac(),
                     fnossoNumero().length(20),
-                    fcodigoCarteira().value(1),
+                    fcodigoCarteira().value(1),//Default '1' = Cobrança Simples
                     //1'  =  Com Cadastramento (Cobrança Registrada)
                     //'2'  =  Sem Cadastramento (Cobrança sem Registro) 
                     //Obs.: Destina-se somente para emissão de Boleto de Pagamentopelo banco
@@ -389,7 +389,7 @@ public class LayoutsSuportados {
                     fnumeroDocumento().length(15),
                     fdataVencimento(),
                     fvalor(),
-                    field("agenciaCobradora").length(6),
+                    field("agenciaCobradora").length(6).padding(Fillers.ZERO_LEFT),
                     fespecieTitulo(),
                     faceite(),
                     fdataGeracao(),
@@ -397,11 +397,11 @@ public class LayoutsSuportados {
                     //Data indicativa do início da cobrança do Juros de Mora de um título de cobrança.
                     //A data informada deverá ser maior que a Data de Vencimento do título de cobrança
                     //Caso seja inválida ou não informada será assumida a data do vencimento.
-                    fdata().nome("dataAcrescimo"),
+                    fdataAcrescimo(),
                     //Valor ou porcentagem sobre o valor do título a ser cobrada de juros de mora.
                     fvalorAcrescimo(),
                     fcodigoDesconto(),
-                    fdata().nome("dataDesconto"),
+                    fdataDesconto(),
                     //Valor ou percentual de desconto a ser concedido sobre o título de cobrança.
                     fvalorDesconto(),
                     fvalorIOF(),
@@ -409,11 +409,13 @@ public class LayoutsSuportados {
                     //Identificação do Título na Empresa
                     fnumeroDocumento().nome("numeroDocumentoEmpresa").length(25),
                     fcodigoProtesto(),
-                    field("numeroDiasProtesto").length(2),
-                    fcodigoBaixa(),
-                    field("numeroDiasBaixa").length(3),
+                    field("numeroDiasProtesto").length(2).value("00"),
+                    fcodigoBaixa().value("0"),
+                    field("numeroDiasBaixa").length(3).value("000"),
                     fcodigoMoeda(),
-                    field("numeroContrato").length(10).type(Number.class),
+                    field("numeroContrato").length(10)
+                            .filler(Fillers.WHITE_SPACE_LEFT)
+                            .type(Number.class).value(0),
                     field("usoLivre").length(1)
             ),
             //Registro Detalhe -Segmento Q (Obrigatório -Remessa)
@@ -425,7 +427,7 @@ public class LayoutsSuportados {
                     fsegmento().id(true).value("Q"),
                     fbranco().length(1),
                     //*C004
-                    fmovimentoCodigo(),
+                    fmovimentoCodigo().value(1),//Default 1
                     //Tipo de Inscrição 
                     ftipoInscricao().value(1),
                     fsacadoCpf().length(15),
@@ -436,9 +438,11 @@ public class LayoutsSuportados {
                     fcidade().length(15),
                     fuf().length(2),
                     field("tipoInscricaoAvalista").length(1).value(0),
-                    field("numeroInscricaoAvalista").length(15).padding(Fillers.WHITE_SPACE_LEFT),
+                    field("numeroInscricaoAvalista")
+                            .length(15).padding(Fillers.WHITE_SPACE_LEFT),
                     field("nomeAvalista").length(40),
-                    fbancoCodigo().nome("bancoCodigoCorrespondente"),
+                    fbancoCodigo()
+                            .nome("bancoCodigoCorrespondente").value(0),
                     field("nossoNumeroBancoCorrespondente").length(20),
                     fbranco().length(8)
             ),
@@ -454,7 +458,7 @@ public class LayoutsSuportados {
                     fmovimentoCodigo(),
                     //Desconto 2
                     fcodigoDesconto(),
-                    fdata().nome("dataDesconto"),
+                    fdataDesconto(),
                     //Valor ou percentual de desconto a ser concedido sobre o título de cobrança.
                     fvalorDesconto(),
                     //Desconto 3
@@ -464,7 +468,7 @@ public class LayoutsSuportados {
                     fvalorDesconto().nome("valorDescontoExtra"),
                     //Multa/Juros
                     fcodigoAcrescimo(),
-                    fdata().nome("dataAcrescimo"),
+                    fdataAcrescimo(),
                     fvalorAcrescimo(),
                     field("infoPagador").length(10),
                     field("mensagem3").length(40),
