@@ -50,10 +50,10 @@ public class LayoutsSuportados {
                     fconvenio().length(20),
                     //Agência Mantenedora da Conta 53 57 5-Num*G008
                     //Dígito Verificador da Agência 58 58 1-Alfa*G009
-                    fagencia().length(6),
+                    fagencia(),
                     //Número da Conta Corrente5970 12-Num*G010
                     //Dígito Verificador da Conta7171 1-Alfa*G011
-                    fconta().length(13), //Conta com DV
+                    fconta(), //Conta com DV
                     //Dígito Verificador da Ag/Conta72721-Alfa*G012
                     //Dígito Verificador da Agência / Conta CorrenteCódigo  
                     //adotado  pelo  Banco  responsável  pela  conta  corrente,
@@ -154,10 +154,10 @@ public class LayoutsSuportados {
                     fconvenio().length(20),
                     //Agência Mantenedora da Conta 53 57 5-Num*G008
                     //Dígito Verificador da Agência 58 58 1-Alfa*G009
-                    fagencia().length(6),
+                    fagencia(),
                     //Número da Conta Corrente5970 12-Num*G010
                     //Dígito Verificador da Conta7171 1-Alfa*G011
-                    fconta().length(13), //Conta com DV
+                    fconta(), //Conta com DV
                     //Dígito Verificador da Ag/Conta72721-Alfa*G012
                     //Dígito Verificador da Agência / Conta CorrenteCódigo  
                     //adotado  pelo  Banco  responsável  pela  conta  corrente,
@@ -189,7 +189,7 @@ public class LayoutsSuportados {
                     //Se registro for Trailer do Arquivo preencher com '9999'
                     flote().value(1),
                     fcodigoRegistro().value("3"),
-                    fsequencialRegistro().length(5),
+                    fsequencialRegistro(),
                     //Código adotado pela FEBRABAN para identificar o segmento do registro.
                     fsegmento().id(true).value("J"),
                     //Código adotado pela FEBRABAN, para identificar o tipo de movimentação enviada no arquivo.
@@ -244,7 +244,7 @@ public class LayoutsSuportados {
                     //Se registro for Trailer do Arquivo preencher com '9999'
                     fbancoCodigo(), flote().value(1),
                     fcodigoRegistro().value("3"),
-                    fsequencialRegistro().length(5),
+                    fsequencialRegistro(),
                     //Código adotado pela FEBRABAN para identificar o segmento do registro.
                     fsegmento().id(true).value("J"),
                     //06.4.J52 CNAB Uso Exclusivo FEBRABAN/CNAB 15 15 1 - Alfa Brancos G004
@@ -283,7 +283,7 @@ public class LayoutsSuportados {
             detalheSegmentoU(
                     fbancoCodigo(), flote(),
                     fcodigoRegistro().value("3"),
-                    fsequencialRegistro().length(5),
+                    fsequencialRegistro(),
                     //Código adotado pela FEBRABAN para identificar o segmento do registro.
                     fsegmento().id(true).value("U"),
                     //06.4.J52 CNAB Uso Exclusivo FEBRABAN/CNAB 15 15 1 - Alfa Brancos G004
@@ -319,17 +319,17 @@ public class LayoutsSuportados {
             detalheSegmentoT(
                     fbancoCodigo(), flote(),
                     fcodigoRegistro().value("3"),
-                    fsequencialRegistro().length(5),
+                    fsequencialRegistro(),
                     //Código adotado pela FEBRABAN para identificar o segmento do registro.
                     fsegmento().id(true).value("T"),
                     //06.4.J52 CNAB Uso Exclusivo FEBRABAN/CNAB 15 15 1 - Alfa Brancos G004
                     fbranco().length(1),
                     fmovimentoCodigo(),
                     //C/C
-                    fagencia().length(6),
+                    fagencia(),
                     //Número da Conta Corrente5970 12-Num*G010
                     //Dígito Verificador da Conta7171 1-Alfa*G011
-                    fconta().length(13), //Conta com DV
+                    fconta(), //Conta com DV
                     //Dígito Verificador da Ag/Conta72721-Alfa*G012
                     //Dígito Verificador da Agência / Conta CorrenteCódigo  
                     //adotado  pelo  Banco  responsável  pela  conta  corrente,
@@ -345,7 +345,7 @@ public class LayoutsSuportados {
                     //*C045
                     fbancoCodigo().nome("bancoCodigoRecebedor"),
                     //Agencia (5) + DV (1)
-                    fagencia().length(6).nome("agenciaBancoRecebedor"),
+                    fagencia().nome("agenciaBancoRecebedor"),
                     field("usoEmpresa").length(25),
                     fcodigoMoeda(),
                     ftipoInscricao(),
@@ -361,13 +361,13 @@ public class LayoutsSuportados {
                     fbancoCodigo(),
                     flote().value(1), // o mesmo do cabeçalho do lote
                     fcodigoRegistro().value("3"),
-                    fsequencialRegistro().length(5),
+                    fsequencialRegistro(),
                     fsegmento().id(true).value("P"),
                     fbranco().length(1),
                     //C004
                     fmovimentoCodigo(),
-                    fagencia().length(6),
-                    fconta().length(13), //Conta com DV
+                    fagencia(),
+                    fconta(), //Conta com DV
                     fdac(),
                     fnossoNumero().length(20),
                     fcodigoCarteira().value(1),
@@ -378,10 +378,18 @@ public class LayoutsSuportados {
                     field("formaCadastroTitulo").length(1).value(1),
                     ftipoDocumento(),
                     ftipoEmissaoBoleto(),
-                    fnumeroDocumento(),
+                    //C010 Identificação da Distribuição
+                    //Código adotado pela FEBRABAN para identificar o responsável pela distribuição do Boleto de Pagamento.
+                    // Domínio:
+                    //        '1' = Banco Distribui
+                    //        '2' = Cliente Distribui
+                    //        ‘3’ = Banco envia e-mail
+                    //        ‘4’ = Banco envia SMS
+                    field("formaDistribuicaoTitulo").length(1).value(2),
+                    fnumeroDocumento().length(15),
                     fdataVencimento(),
                     fvalor(),
-                    fagencia().nome("agenciaCobradora"),
+                    field("agenciaCobradora").length(6),
                     fespecieTitulo(),
                     faceite(),
                     fdataGeracao(),
@@ -399,7 +407,7 @@ public class LayoutsSuportados {
                     fvalorIOF(),
                     fvalorAbatimento(),
                     //Identificação do Título na Empresa
-                    fnumeroDocumento().length(25),
+                    fnumeroDocumento().nome("numeroDocumentoEmpresa").length(25),
                     fcodigoProtesto(),
                     field("numeroDiasProtesto").length(2),
                     fcodigoBaixa(),
@@ -413,7 +421,7 @@ public class LayoutsSuportados {
                     fbancoCodigo(),
                     flote().value(1), // o mesmo do cabeçalho do lote
                     fcodigoRegistro().value("3"),
-                    fsequencialRegistro().length(5),
+                    fsequencialRegistro(),
                     fsegmento().id(true).value("Q"),
                     fbranco().length(1),
                     //*C004
@@ -423,18 +431,64 @@ public class LayoutsSuportados {
                     fsacadoCpf().length(15),
                     fsacadoNome().length(40),
                     fendereco().length(40),
-                    fbairro().length(40),
+                    fbairro().length(15),
                     fcep().length(8),
                     fcidade().length(15),
                     fuf().length(2),
-                    field("tipoInscricaoAvalista").value(0),
+                    field("tipoInscricaoAvalista").length(1).value(0),
                     field("numeroInscricaoAvalista").length(15).padding(Fillers.WHITE_SPACE_LEFT),
                     field("nomeAvalista").length(40),
                     fbancoCodigo().nome("bancoCodigoCorrespondente"),
                     field("nossoNumeroBancoCorrespondente").length(20),
                     fbranco().length(8)
             ),
-            detalheSegmentoR(),
+            //Registro Detalhe - Segmento R (Opcional - Remessa)
+            detalheSegmentoR(
+                    fbancoCodigo(),
+                    flote().value(1), // o mesmo do cabeçalho do lote
+                    fcodigoRegistro().value("3"),
+                    fsequencialRegistro(),
+                    fsegmento().id(true).value("R"),
+                    fbranco().length(1),
+                    //*C004
+                    fmovimentoCodigo(),
+                    //Desconto 2
+                    fcodigoDesconto(),
+                    fdata().nome("dataDesconto"),
+                    //Valor ou percentual de desconto a ser concedido sobre o título de cobrança.
+                    fvalorDesconto(),
+                    //Desconto 3
+                    fcodigoDesconto().nome("codigoDescontoExtra"),
+                    fdata().nome("dataDescontoExtra"),
+                    //Valor ou percentual de desconto a ser concedido sobre o título de cobrança.
+                    fvalorDesconto().nome("valorDescontoExtra"),
+                    //Multa/Juros
+                    fcodigoAcrescimo(),
+                    fdata().nome("dataAcrescimo"),
+                    fvalorAcrescimo(),
+                    field("infoPagador").length(10),
+                    field("mensagem3").length(40),
+                    field("mensagem4").length(40),
+                    fbranco().length(20),
+                    //C038: Código da Ocorrência do Pagador
+                    //Código adotado pela FEBRABAN para identificar a ocorrência do Pagador (Descrição A001) 
+                    // a(s) qual(is) o Beneficiário não concorda.
+                    //Somente será utilizado para o Código de Movimento '30' (Descrição C004).
+                    fcodigoOcorrencia().nome("codigoOcorrenciaPagador").length(8),
+                    //Dados para debito
+                    fbancoCodigo().nome("bancoCodigoDebito"),
+                    fagencia().nome("agenciaDebito"),
+                    fconta().nome("contaDebito"),
+                    fdac().nome("dacDebito"),
+                    //C0039: Aviso para Débito Automático Código adotado pela FEBRABAN para 
+                    //identificação da emissão do aviso de débito automático em conta corrente.
+                    //Domínio: '01' = Emite o Aviso com o Endereço Informado no Arquivo Remessa
+                    //'02' = Não Emite Aviso ao Pagador
+                    //'03' = Emite Aviso com o Endereço Constante do Cadastro do Banco
+                    //Para códigos diferentes de '01', '02' e '03' seguir a regra do '03'.
+                    field("avisoDebitoAutomatico").length(1).value("0"),
+                    fbranco().length(9)
+            ),
             rodapeLote(
                     //Controle: Banco, lote e registro
                     //Banco: Código do Banco na Compensação133-NumG001

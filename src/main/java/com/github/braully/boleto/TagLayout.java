@@ -83,12 +83,12 @@ public class TagLayout implements Serializable {
 
         /**
          * Agência Mantenedora da Conta 53 57 5-Num*G008. Com Dígito Verificador
-         * da Agência 58 58 1-Alfa*G009
+         * da Agência 58 58 1-Alfa*G009 Agencia (5) + DV (1)
          *
          * @return
          */
         public static TagLayout fagencia() {
-            return field("agencia").padding(Fillers.ZERO_LEFT);
+            return field("agencia").length(6).padding(Fillers.ZERO_LEFT);
         }
 
         /**
@@ -684,7 +684,7 @@ public class TagLayout implements Serializable {
         }
 
         public static TagLayout fsequencialRegistro() {
-            return field("sequencialRegistro").type(Number.class).padding(Fillers.ZERO_LEFT);
+            return field("sequencialRegistro").length(5).type(Number.class).padding(Fillers.ZERO_LEFT);
         }
 
         /**
@@ -767,7 +767,7 @@ public class TagLayout implements Serializable {
         }
 
         /**
-         * G010 Número da Conta Corrente G010
+         * G010 Número da Conta Corrente Conta com DV
          *
          * Número adotado pelo Banco, para identificar univocamente a conta
          * corrente utilizada pelo Cliente. G011 Dígito Verificador da Conta
@@ -781,7 +781,7 @@ public class TagLayout implements Serializable {
          * @return
          */
         public static TagLayout fconta() {
-            return field("conta").padding(Fillers.ZERO_LEFT);
+            return field("conta").length(13).padding(Fillers.ZERO_LEFT);
         }
 
         /**

@@ -75,6 +75,7 @@ public class ArquivoFacade {
                 RegistroArquivo clone = reg.clone();
                 if (clone.checkIds(linha)) {
                     regLido = clone;
+                    //System.out.println(reg.getDescricaoLayout());
                     regLido.read(linha);
                 }
             }
@@ -306,7 +307,7 @@ public class ArquivoFacade {
 
         @Override
         public String toString() {
-            StringBuilder sb = new StringBuilder("Registro{layout=");
+            StringBuilder sb = new StringBuilder("Registro{value=");
             if (layoutRegistro != null) {
                 sb.append(layoutRegistro.nome);
             }
@@ -326,6 +327,27 @@ public class ArquivoFacade {
                     }
                 }
 
+            }
+            sb.append("]");
+            sb.append("}");
+            return sb.toString();
+        }
+
+        public String getDescricaoLayout() {
+            StringBuilder sb = new StringBuilder("Registro{layout=");
+            if (layoutRegistro != null) {
+                sb.append(layoutRegistro.nome);
+            }
+            sb.append(",\n fields=[");
+            if (this.fields != null) {
+                sb.append("\n");
+                for (FixedField ff : this.fields) {
+                    sb.append("\t");
+                    sb.append(ff.getName());
+                    sb.append("=");
+                    sb.append(ff.getLength());
+                    sb.append("\n");
+                }
             }
             sb.append("]");
             sb.append("}");
