@@ -399,17 +399,19 @@ public class LayoutsSuportados {
                     //Data indicativa do início da cobrança do Juros de Mora de um título de cobrança.
                     //A data informada deverá ser maior que a Data de Vencimento do título de cobrança
                     //Caso seja inválida ou não informada será assumida a data do vencimento.
-                    fdataAcrescimo(),
+                    fdataAcrescimo().value(0),
                     //Valor ou porcentagem sobre o valor do título a ser cobrada de juros de mora.
                     fvalorAcrescimo(),
                     fcodigoDesconto(),
-                    fdataDesconto(),
+                    fdataDesconto().value(0),
                     //Valor ou percentual de desconto a ser concedido sobre o título de cobrança.
                     fvalorDesconto(),
                     fvalorIOF(),
                     fvalorAbatimento(),
                     //Identificação do Título na Empresa
-                    fnumeroDocumento().nome("numeroDocumentoEmpresa").length(25),
+                    fnumeroDocumento().nome("numeroDocumentoEmpresa")
+                            .length(25).filler(Fillers.ZERO_LEFT)
+                            .value(0),
                     fcodigoProtesto(),
                     field("numeroDiasProtesto").length(2).value("00"),
                     fcodigoBaixa().value("0"),
@@ -418,7 +420,7 @@ public class LayoutsSuportados {
                     field("numeroContrato").length(10)
                             .filler(Fillers.WHITE_SPACE_LEFT)
                             .type(Number.class).value(0),
-                    field("usoLivre").length(1)
+                    fbranco().length(1)
             ),
             //Registro Detalhe -Segmento Q (Obrigatório -Remessa)
             detalheSegmentoQ(
@@ -434,18 +436,22 @@ public class LayoutsSuportados {
                     ftipoInscricao().value(1),
                     fsacadoCpf().length(15),
                     fsacadoNome().length(40),
-                    fendereco().length(40),
-                    fbairro().length(15),
-                    fcep().length(8),
-                    fcidade().length(15),
-                    fuf().length(2),
+                    fendereco().length(40).value(""),
+                    fbairro().length(15).value(""),
+                    fcep().length(8).value(0),
+                    fcidade().length(15).value(""),
+                    fuf().length(2).value(""),
                     field("tipoInscricaoAvalista").length(1).value(0),
                     field("numeroInscricaoAvalista")
-                            .length(15).padding(Fillers.WHITE_SPACE_LEFT),
-                    field("nomeAvalista").length(40),
+                            .length(15).filler(Fillers.ZERO_LEFT)
+                            .value(0),
+                    field("nomeAvalista").padding(Fillers.WHITE_SPACE_RIGHT)
+                            .length(40).value(""),
                     fbancoCodigo()
-                            .nome("bancoCodigoCorrespondente").value(0),
-                    field("nossoNumeroBancoCorrespondente").length(20),
+                            .nome("bancoCodigoCorrespondente")
+                            .value(0),
+                    field("nossoNumeroBancoCorrespondente").filler(Fillers.ZERO_LEFT)
+                            .length(20).value(0),
                     fbranco().length(8)
             ),
             //Registro Detalhe - Segmento R (Opcional - Remessa)
@@ -457,7 +463,7 @@ public class LayoutsSuportados {
                     fsegmento().id(true).value("R"),
                     fbranco().length(1),
                     //*C004
-                    fmovimentoCodigo(),
+                    fmovimentoCodigo().value(1),
                     //Desconto 2
                     fcodigoDesconto(),
                     fdataDesconto(),

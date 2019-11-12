@@ -143,7 +143,7 @@ public class TagLayout implements Serializable {
         }
 
         public static TagLayout fuf() {
-            return field("uf").length(2);
+            return field("uf").length(2).padding(Fillers.WHITE_SPACE_RIGHT);
         }
 
         /**
@@ -178,7 +178,7 @@ public class TagLayout implements Serializable {
          * Alteração do Valor Máximo/Percentual
          */
         public static TagLayout fmovimentoCodigo() {
-            return field("movimentoCodigo").length(2);
+            return field("movimentoCodigo").filler(Fillers.ZERO_LEFT).length(2);
         }
 
         /**
@@ -515,32 +515,31 @@ public class TagLayout implements Serializable {
         }
 
         public static TagLayout fvalorDesconto() {
-            return field("valorDesconto").length(15).type(Number.class).padding(Fillers.ZERO_LEFT);
+            return fvalor().nome("valorDesconto").value(0);
         }
 
         public static TagLayout fvalorAbatimento() {
-            return field("valorAbatimento").length(15).type(Number.class).padding(Fillers.ZERO_LEFT);
+            return fvalor().nome("valorAbatimento").value(0);
         }
 
         public static TagLayout fvalorIOF() {
-            return field("valorIOF").length(15).type(Number.class).padding(Fillers.ZERO_LEFT);
+            return fvalor().nome("valorIOF").value(0);
         }
 
         public static TagLayout fvalorLiquido() {
-            return field("valorLiquido").length(15).type(Number.class).padding(Fillers.ZERO_LEFT);
+            return fvalor().nome("valorLiquido").value(0);
         }
 
         public static TagLayout fvalorOutrasDespesas() {
-            return field("valorOutrasDespesas").length(15).type(Number.class).padding(Fillers.ZERO_LEFT);
-
+            return fvalor().nome("valorOutrasDespesas").value(0);
         }
 
         public static TagLayout fvalorOutrasReceitas() {
-            return field("valorOutrasReceitas").length(15).type(Number.class).padding(Fillers.ZERO_LEFT);
+            return fvalor().nome("valorOutrasReceitas").value(0);
         }
 
         public static TagLayout fvalorAcrescimo() {
-            return field("valorAcresciomo").length(15).type(Number.class).padding(Fillers.ZERO_LEFT);
+            return fvalor().nome("valorAcresciomo").value(0);
         }
 
         /**
@@ -867,11 +866,11 @@ public class TagLayout implements Serializable {
         }
 
         public static TagLayout fdataAcrescimo() {
-            return fdata().nome("dataAcrescimo");
+            return fdata().nome("dataAcrescimo").filler(Fillers.ZERO_LEFT);
         }
 
         public static TagLayout fdataDesconto() {
-            return fdata().nome("dataDesconto");
+            return fdata().nome("dataDesconto").filler(Fillers.ZERO_LEFT);
         }
 
         public static TagLayout fdataGeracao() {

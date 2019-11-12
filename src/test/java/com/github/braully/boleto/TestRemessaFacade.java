@@ -46,6 +46,7 @@ public class TestRemessaFacade {
         remessa.addNovoDetalheSegmentoP()
                 .valor(1)
                 .valorDesconto(0).valorAcrescimo(0)//opcionais
+                .dataGeracao(new Date())
                 .dataVencimento(new Date())
                 .numeroDocumento(1)
                 .nossoNumero(1)
