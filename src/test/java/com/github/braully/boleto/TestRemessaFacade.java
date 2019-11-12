@@ -43,7 +43,7 @@ public class TestRemessaFacade {
                 .cedente("ACME S.A LTDA.", "1")
                 .convenio("1", "1", "1", "1");
 
-        remessa.addNovoTituloJ()
+        remessa.addNovoDetalheSegmentoJ()
                 .sacado("Fulano de Tal", "0")
                 .codigoBarras("0")
                 .valor(1)
@@ -54,7 +54,7 @@ public class TestRemessaFacade {
                 .banco("0", "Banco").cedente("ACME S.A LTDA.", "1").convenio("1", "1", "1", "1")
                 .sequencialRegistro(1);
 
-        remessa.addNovoTituloJ52()
+        remessa.addNovoDetalheSegmentoJ52()
                 .sacado("Fulano de Tal", "0")
                 .banco("0", "Banco").cedente("ACME S.A LTDA.", "1").convenio("1", "1", "1", "1")
                 .sequencialRegistro(2);
@@ -85,7 +85,7 @@ public class TestRemessaFacade {
                 .cedente("ACME S.A LTDA.").cedenteCnpj("1")
                 .dataGeracao(new Date()).setValue("codigoRetorno", "1");
 
-        remessa.addNovoTitulo().valor("1").vencimento("1")
+        remessa.addNovoDetalhe().valor("1").vencimento("1")
                 .numeroDocumento("1").nossoNumero("1")
                 .dataEmissao("1").carteira("1")
                 .sacado("Fulano de Tal").sacadoCpf("1")

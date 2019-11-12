@@ -46,22 +46,36 @@ public class RemessaFacade extends ArquivoFacade {
         return cabecalho;
     }
 
-    public TituloArquivo addNovoTitulo() {
-        TituloArquivo titulo = this.novoTitulo("titulo");
+    public TituloArquivo addNovoDetalhe() {
+        TituloArquivo titulo = this.novoTitulo("detalhe");
         this.add(titulo);
         return titulo;
     }
 
-    public TituloArquivo addNovoTituloJ() {
-        TituloArquivo titulo = this.novoTitulo("tituloJ");
+    public TituloArquivo addNovoDetalhe(String segmento) {
+        TituloArquivo titulo = this.novoTitulo("detalheSegmento" + segmento);
         this.add(titulo);
         return titulo;
     }
 
-    public TituloArquivo addNovoTituloJ52() {
-        TituloArquivo titulo = this.novoTitulo("tituloJ52");
-        this.add(titulo);
-        return titulo;
+    public TituloArquivo addNovoDetalheSegmentoJ() {
+        return addNovoDetalhe("J");
+    }
+
+    public TituloArquivo addNovoDetalheSegmentoJ52() {
+        return addNovoDetalhe("J52");
+    }
+
+    public TituloArquivo addNovoDetalheSegmentoP() {
+        return addNovoDetalhe("P");
+    }
+
+    public TituloArquivo addNovoDetalheSegmentoQ() {
+        return addNovoDetalhe("Q");
+    }
+
+    public TituloArquivo addNovoDetalheSegmentoR() {
+        return addNovoDetalhe("R");
     }
 
     public TituloArquivo novoTitulo(String tipoTitulo) {
