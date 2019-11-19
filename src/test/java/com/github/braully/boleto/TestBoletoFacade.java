@@ -1,6 +1,8 @@
 package com.github.braully.boleto;
 
+import java.math.BigDecimal;
 import org.jrimum.bopepo.parametro.ParametroBancoSicredi;
+import org.jrimum.bopepo.parametro.ParametroCaixaEconomicaFederal;
 import org.jrimum.bopepo.view.BoletoViewer;
 import org.jrimum.domkee.banco.ParametrosBancariosMap;
 import org.junit.Test;
@@ -63,9 +65,77 @@ public class TestBoletoFacade {
 //        boletoFacade.getTitulo().
 //                setParametrosBancarios(
 //                        new ParametrosBancariosMap(ParametroBancoSicredi.POSTO_DA_AGENCIA, 2));
-
         boletoFacade.gerarLinhaDigitavel();
         BoletoViewer create = BoletoViewer.create(boletoFacade);
         create.getPdfAsFile("./target/teste-sicredi.pdf");
+    }
+
+    @Test
+    public void testBoletoBancoBradesco() {
+        BoletoFacade boletoFacade = new BoletoFacade();
+        boletoFacade.sacado("Teste da silva Sauro")
+                .sacadoCpf("1");
+        boletoFacade.banco("237").agencia("4534-9").conta("188-999");
+        boletoFacade.cedente("Cedente da Silva Sauro").cedenteCnpj("1");
+        boletoFacade.carteira("1");
+        boletoFacade.numeroDocumento("1")
+                .nossoNumero("12345678901")
+                .valor(100.23).dataVencimento("01/01/2019");
+
+        boletoFacade.gerarLinhaDigitavel();
+        BoletoViewer create = BoletoViewer.create(boletoFacade);
+        create.getPdfAsFile("./target/teste-bradesco.pdf");
+    }
+
+    @Test
+    public void testBoletoBancoSantander() {
+        BoletoFacade boletoFacade = new BoletoFacade();
+        boletoFacade.sacado("Teste do banco santander")
+                .sacadoCpf("04895540162");
+        boletoFacade.banco("033").agencia("4536").conta("10008-6");
+        boletoFacade.cedente("Cedente da Silva Sauro").cedenteCnpj("22.413.806/0001-44");
+        boletoFacade.carteira("101").carteiraCobrancaRegistrada(Boolean.TRUE);
+        boletoFacade.getTitulo();
+        boletoFacade.numeroDocumento("36744")
+                .nossoNumero("56612457800-2")
+                .valor(100.23).dataVencimento("10/08/2012");
+        BoletoViewer create = BoletoViewer.create(boletoFacade);
+        create.getPdfAsFile("./target/teste-santander.pdf");
+    }
+
+    @Test
+    public void testBoletoBancoCaixa() {
+        BoletoFacade boletoFacade = new BoletoFacade();
+        boletoFacade.sacado("Sacado da Silva Sauro").sacadoCpf("1");
+        boletoFacade.banco("104").agencia("1").conta("1");
+        boletoFacade.cedente("Cedente da Silva Sauro").cedenteCnpj("1");
+        //boletoFacade.covenio("1");
+        boletoFacade.carteira("1");
+        boletoFacade.numeroDocumento("1")
+                .nossoNumero("3234567890")
+                .valor(100.23).dataVencimento("01/01/2019");
+
+        boletoFacade.parametroBancario(ParametroCaixaEconomicaFederal.CODIGO_OPERACAO, 2);
+
+        boletoFacade.gerarLinhaDigitavel();
+        BoletoViewer create = BoletoViewer.create(boletoFacade);
+        create.getPdfAsFile("./target/teste-bancocaixa.pdf");
+    }
+
+    @Test
+    public void testBoletoBancoItau() {
+        BoletoFacade boletoFacade = new BoletoFacade();
+        boletoFacade.sacado("Sacado da Silva Sauro").sacadoCpf("1");
+        boletoFacade.banco("341").agencia("1").conta("1");
+        boletoFacade.cedente("Cedente da Silva Sauro").cedenteCnpj("1");
+        //boletoFacade.covenio("1");
+        boletoFacade.carteira("1");
+        boletoFacade.numeroDocumento("1")
+                .nossoNumero("323456-7")
+                .valor(100.23).dataVencimento("01/01/2019");
+
+        boletoFacade.gerarLinhaDigitavel();
+        BoletoViewer create = BoletoViewer.create(boletoFacade);
+        create.getPdfAsFile("./target/teste-bancoitau.pdf");
     }
 }
