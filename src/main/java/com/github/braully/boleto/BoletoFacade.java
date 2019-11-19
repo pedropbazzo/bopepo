@@ -272,7 +272,7 @@ public class BoletoFacade extends Boleto {
         if (string == null) {
             throw new IllegalArgumentException("null string");
         }
-        if (!ConfiguracaoJRimum.ignorarZeroEsquerdaConversao && string.charAt(0) == '0') {
+        if (!ConfiguracaoJRimum.ignorarZeroEsquerdaConversao && !string.isEmpty() && string.charAt(0) == '0') {
             throw new IllegalArgumentException("Octal converter: " + string);
         }
         return Integer.parseInt(string);
@@ -312,7 +312,7 @@ public class BoletoFacade extends Boleto {
         return Pair.of(numero, dv);
     }
 
-    protected BoletoFacade gerarLinhaDigitavel() {
+    public BoletoFacade gerarLinhaDigitavel() {
         this.processFromTitulo(titulo);
         return this;
     }

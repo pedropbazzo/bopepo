@@ -15,10 +15,43 @@
  */
 package com.github.braully.boleto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author braully
  */
-public class RetornoFacade {
+public class RetornoFacade extends ArquivoFacade {
 
+    public RetornoFacade(TagLayout template) {
+        this.template = template;
+    }
+
+    RegistroArquivo cabecalho() {
+        return this.get("cabecalho");
+    }
+
+    RegistroArquivo cabecalhoLote() {
+        return this.get("cabecalhoLote");
+    }
+
+    List<RegistroArquivo> detalhes() {
+        List<RegistroArquivo> regs = new ArrayList<>();
+        //Melhorar isso, indexar via Map
+        for (RegistroArquivo reg : registros) {
+            if (reg.getName().toLowerCase().startsWith("detalhe")) {
+                regs.add(reg);
+            }
+        }
+        return regs;
+    }
+
+    RegistroArquivo rodapeLote() {
+        return this.get("rodapeLote");
+    }
+
+    RegistroArquivo rodape() {
+        return this.get("rodape");
+    }
 }

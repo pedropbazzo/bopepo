@@ -28,8 +28,8 @@ import org.junit.Test;
 public class TestRemessaFacade {
 
     @Test
-    public void testRemessaCobancaGenericaFebraban240V5() {
-        RemessaFacade remessa = new RemessaFacade(LayoutsSuportados.LAYOUT_FEBRABAN_CNAB240);
+    public void testRemessaCobancaGenericaFebraban240V5SegmentoPQ() {
+        RemessaFacade remessa = new RemessaFacade(LayoutsSuportados.LAYOUT_FEBRABAN_CNAB240_COBRANCA_REMESSA);
         remessa.addNovoCabecalho()
                 .sequencialArquivo(1)
                 .dataGeracao(new Date()).setVal("horaGeracao", new Date())
@@ -43,7 +43,58 @@ public class TestRemessaFacade {
                 .cedente("ACME S.A LTDA.", "1")
                 .convenio("1", "1", "1", "1");
 
-        remessa.addNovoTituloJ()
+        remessa.addNovoDetalheSegmentoP()
+                .valor(1)
+                .valorDesconto(0).valorAcrescimo(0)//opcionais
+                .dataGeracao(new Date())
+                .dataVencimento(new Date())
+                .numeroDocumento(1)
+                .nossoNumero(1)
+                .banco("0", "Banco")
+                .cedente("ACME S.A LTDA.", "1")
+                .convenio("1", "1", "1", "1")
+                .sequencialRegistro(1);
+
+        remessa.addNovoDetalheSegmentoQ()
+                .sacado("Fulano de Tal", "0")
+                .banco("0", "Banco")
+                .cedente("ACME S.A LTDA.", "1")
+                .convenio("1", "1", "1", "1")
+                .sequencialRegistro(2);
+
+        remessa.addNovoRodapeLote()
+                .quantidadeRegistros(2)
+                .valorTotalRegistros(1)
+                .banco("0", "Banco")
+                .cedente("ACME S.A LTDA.", "1").convenio("1", "1", "1", "1");
+
+        remessa.addNovoRodape()
+                .quantidadeRegistros(1)
+                .valorTotalRegistros(1)
+                .setVal("codigoRetorno", "1")
+                .banco("0", "Banco").cedente("ACME S.A LTDA.", "1").convenio("1", "1", "1", "1");
+
+        String remessaStr = remessa.render();
+        System.err.println(remessaStr);
+    }
+
+    @Test
+    public void testRemessaCobancaGenericaFebraban240V5() {
+        RemessaFacade remessa = new RemessaFacade(LayoutsSuportados.LAYOUT_FEBRABAN_CNAB240_COBRANCA_REMESSA);
+        remessa.addNovoCabecalho()
+                .sequencialArquivo(1)
+                .dataGeracao(new Date()).setVal("horaGeracao", new Date())
+                .banco("0", "Banco").cedente("ACME S.A LTDA.", "1").convenio("1", "1", "1", "1");
+
+        remessa.addNovoCabecalhoLote()
+                .operacao("R")//Operação de remessa
+                .servico(1)//Cobrança
+                .forma(1)//Crédito em Conta Corrente
+                .banco("0", "Banco")
+                .cedente("ACME S.A LTDA.", "1")
+                .convenio("1", "1", "1", "1");
+
+        remessa.addNovoDetalheSegmentoJ()
                 .sacado("Fulano de Tal", "0")
                 .codigoBarras("0")
                 .valor(1)
@@ -54,7 +105,7 @@ public class TestRemessaFacade {
                 .banco("0", "Banco").cedente("ACME S.A LTDA.", "1").convenio("1", "1", "1", "1")
                 .sequencialRegistro(1);
 
-        remessa.addNovoTituloJ52()
+        remessa.addNovoDetalheSegmentoJ52()
                 .sacado("Fulano de Tal", "0")
                 .banco("0", "Banco").cedente("ACME S.A LTDA.", "1").convenio("1", "1", "1", "1")
                 .sequencialRegistro(2);
@@ -132,7 +183,7 @@ public class TestRemessaFacade {
                 .cedente("ACME S.A LTDA.").cedenteCnpj("1")
                 .dataGeracao(new Date()).setValue("codigoRetorno", "1");
 
-        remessa.addNovoTitulo().valor("1").vencimento("1")
+        remessa.addNovoDetalhe().valor("1").vencimento("1")
                 .numeroDocumento("1").nossoNumero("1")
                 .dataEmissao("1").carteira("1")
                 .sacado("Fulano de Tal").sacadoCpf("1")

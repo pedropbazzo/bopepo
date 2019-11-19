@@ -51,7 +51,7 @@ public abstract class AbstractStringOfFields<G extends IField<?>> implements Tex
     /**
      *
      */
-    private ArrayList<G> fields;
+    protected ArrayList<G> fields;
 
     /**
      *

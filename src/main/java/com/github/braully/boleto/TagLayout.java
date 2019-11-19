@@ -23,6 +23,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.TreeMap;
 import org.apache.commons.lang3.SerializationUtils;
 import org.jrimum.domkee.banco.IBanco;
@@ -34,6 +35,26 @@ import org.jrimum.texgit.IFiller;
  * @author strike
  */
 public class TagLayout implements Serializable {
+
+    boolean isAttr(String id) {
+        return is(this.atributos.get(id));
+    }
+
+    private boolean is(Object get) {
+        boolean ret = false;
+        if (get != null) {
+            try {
+                if (get instanceof Boolean) {
+                    ret = (Boolean) get;
+                } else {
+                    ret = Boolean.parseBoolean(get.toString());
+                }
+            } catch (Exception e) {
+
+            }
+        }
+        return ret;
+    }
 
     public static class TagCreator {
 
@@ -62,12 +83,12 @@ public class TagLayout implements Serializable {
 
         /**
          * Agência Mantenedora da Conta 53 57 5-Num*G008. Com Dígito Verificador
-         * da Agência 58 58 1-Alfa*G009
+         * da Agência 58 58 1-Alfa*G009 Agencia (5) + DV (1)
          *
          * @return
          */
         public static TagLayout fagencia() {
-            return field("agencia").padding(Fillers.ZERO_LEFT);
+            return field("agencia").length(6).padding(Fillers.ZERO_LEFT);
         }
 
         /**
@@ -105,6 +126,26 @@ public class TagLayout implements Serializable {
             return field("sacadoNome").padding(Fillers.WHITE_SPACE_RIGHT).length(30);
         }
 
+        public static TagLayout fendereco() {
+            return field("endereco").padding(Fillers.WHITE_SPACE_RIGHT).length(40);
+        }
+
+        public static TagLayout fbairro() {
+            return field("bairro").padding(Fillers.WHITE_SPACE_RIGHT).length(40);
+        }
+
+        public static TagLayout fcep() {
+            return field("cep").padding(Fillers.ZERO_RIGHT).length(8);
+        }
+
+        public static TagLayout fcidade() {
+            return field("cidade").padding(Fillers.WHITE_SPACE_RIGHT).length(15);
+        }
+
+        public static TagLayout fuf() {
+            return field("uf").length(2).padding(Fillers.WHITE_SPACE_RIGHT);
+        }
+
         /**
          * C004: Código de Movimento Remessa Código adotado pela FEBRABAN, para
          * identificar o tipo de movimentação enviado nos //registros do arquivo
@@ -137,7 +178,7 @@ public class TagLayout implements Serializable {
          * Alteração do Valor Máximo/Percentual
          */
         public static TagLayout fmovimentoCodigo() {
-            return field("movimentoCodigo").length(2);
+            return field("movimentoCodigo").filler(Fillers.ZERO_LEFT).length(2);
         }
 
         /**
@@ -312,6 +353,128 @@ public class TagLayout implements Serializable {
         }
 
         /**
+         * C047: Motivo da OcorrênciaCódigo adotado pela FEBRABAN para
+         * identificar as ocorrências (rejeições, tarifas, custas, liquidação e
+         * baixas) em registros detalhe de títulos de cobrança. Poderão ser
+         * informados até cinco ocorrências distintas, incidente sobre o
+         * título.Domínio:A -Códigos de rejeições de '01' a '95'associados aos
+         * códigos de movimento '02', '03', '26' e '30' (Descrição C044)'01' =
+         * Código do Banco Inválido'02' = Código do Registro Detalhe
+         * Inválido'03' = Código do Segmento Inválido'04' = Código de Movimento
+         * Não Permitido para Carteira'05' = Código de Movimento Inválido'06' =
+         * Tipo/Número de Inscrição do BeneficiárioInválidos'07' =
+         * Agência/Conta/DV Inválido'08' = Nosso Número Inválido'09' = Nosso
+         * Número Duplicado'10' = Carteira Inválida'11' = Forma de Cadastramento
+         * do Título Inválido'12' = Tipo de Documento Inválido'13' =
+         * Identificação da Emissão do Boleto de PagamentoInválida'14' =
+         * Identificação da Distribuição do Boleto de PagamentoInválida'15' =
+         * Características da Cobrança Incompatíveis'16' = Data de Vencimento
+         * Inválida '17' = Data de Vencimento Anterior a Data de Emissão'18' =
+         * Vencimento Fora do Prazo de Operação'19' = Título a Cargo de Bancos
+         * Correspondentes com Vencimento Inferior a XX Dias'20' = Valor do
+         * Título Inválido'21' = Espécie do Título Inválida'22' = Espécie do
+         * Título Não Permitida para a Carteira'23' = Aceite Inválido'24' = Data
+         * da Emissão Inválida'25' = Data da Emissão Posterior a Data de
+         * Entrada'26' = Código de Juros de Mora Inválido'27' = Valor/Taxa de
+         * Juros de Mora Inválido'28' = Código do Desconto Inválido'29' = Valor
+         * do Desconto Maior ou Igual ao Valor do Título'30' = Desconto a
+         * Conceder Não Confere'31' = Concessão de Desconto -Já Existe Desconto
+         * Anterior'32' = Valor do IOF Inválido'33' = Valor do Abatimento
+         * Inválido'34' = Valor do Abatimento Maior ou Igual ao Valor do
+         * Título'35' = Valor a Conceder Não Confere'36' = Concessão de
+         * Abatimento -Já ExisteAbatimento Anterior'37' = Código para Protesto
+         * Inválido'38' = Prazo para Protesto Inválido'39' = Pedido de Protesto
+         * Não Permitido para o Título'40' = Título com Ordem de Protesto
+         * Emitida'41' = Pedido de Cancelamento/Sustação para Títulos sem
+         * Instrução de Protesto'42' = Código para Baixa/Devolução Inválido'43'
+         * = Prazo para Baixa/Devolução Inválido'44' = Código da Moeda
+         * Inválido'45' = Nome do PagadorNão Informado'46' = Tipo/Número de
+         * Inscrição do PagadorInválidos'47' = Endereço do PagadorNão
+         * Informado'48' = CEP Inválido'49' = CEP Sem Praça de Cobrança (Não
+         * Localizado)'50' = CEP Referente a um Banco Correspondente'51' = CEP
+         * incompatível com a Unidade da Federação'52' = Unidade da Federação
+         * Inválida'53' = Tipo/Número de Inscrição do Sacador/Avalista
+         * Inválidos'54' = Sacador/Avalista Não Informado'55' = Nosso número no
+         * Banco Correspondente Não Informado'56' = Código do Banco
+         * Correspondente Não Informado'57' = Código da Multa Inválido'58' =
+         * Data da Multa Inválida'59' = Valor/Percentual da Multa Inválido'60' =
+         * Movimento para Título Não Cadastrado'61' = Alteração da Agência
+         * Cobradora/DV Inválida'62' = Tipo de Impressão Inválido'63' = Entrada
+         * para Título já Cadastrado'64' = Número da Linha Inválido'65' = Código
+         * do Banco para Débito Inválido'66' = Agência/Conta/DV para Débito
+         * Inválido'67' = Dados para Débito incompatível com a Identificação da
+         * Emissão do Boleto de Pagamento'68' = Débito Automático Agendado'69' =
+         * Débito Não Agendado -Erro nos Dados da Remessa'70' = Débito Não
+         * Agendado -PagadorNão Consta do Cadastro de Autorizante'71' = Débito
+         * Não Agendado -BeneficiárioNão Autorizado pelo Pagador'72' = Débito
+         * Não Agendado -BeneficiárioNão Participa da Modalidade Débito
+         * Automático'73' = Débito Não Agendado -Código de Moeda Diferente de
+         * Real (R$)'74' = Débito Não Agendado -Data Vencimento Inválida'75' =
+         * Débito Não Agendado, Conforme seu Pedido, Título Não Registrado '76'
+         * = Débito Não Agendado, Tipo/Num. Inscrição do Debitado, Inválido'77'
+         * = Transferência para Desconto Não Permitida para a Carteira do
+         * Título'78' = Data Inferior ou Igual ao Vencimento para Débito
+         * Automático'79' = Data Juros de Mora Inválido'80' = Data do Desconto
+         * Inválida'81' = Tentativas de Débito Esgotadas -Baixado'82' =
+         * Tentativas de Débito Esgotadas -Pendente'83' = Limite Excedido'84' =
+         * Número Autorização Inexistente'85' = Título com Pagamento Vinculado
+         * '86' = Seu Número Inválido‘87’= e-mail/SMS enviado‘88’= e-mail
+         * Lido‘89’= e-mail/SMS devolvido -endereço de e-mail ou número do
+         * celular incorreto ‘90’= e-mail devolvido -caixa postal cheia‘91’=
+         * e-mail/número do celular do Pagadornão informado‘92’= Pagadoroptante
+         * por Boleto de PagamentoEletrônico -e-mail não enviado‘93’= Código
+         * para emissão de Boleto de Pagamentonão permite envio de e-mail‘94’=
+         * Código da Carteira inválido para envio e-mail.‘95’=Contrato não
+         * permite o envio de e-mail‘96’= Número de contrato inválido‘97’ =
+         * Rejeição da alteração do prazo limite de recebimento (a data deve ser
+         * informada no campo 28.3.p)‘98’ = Rejeição de dispensa de prazo limite
+         * de recebimento‘99’ = Rejeição da alteração do número do título dado
+         * pelo Beneficiário‘A1’ = Rejeição da alteração do número controle do
+         * participante‘A2’ = Rejeição da alteração dos dados do Pagador‘A3’ =
+         * Rejeição da alteração dos dados do Sacador/avalista‘A4’ =
+         * PagadorDDA‘A5’ = Registro Rejeitado –Título já Liquidado‘A6’ = Código
+         * do Convenente Inválido ou Encerrado‘A7’ = Título já se encontra na
+         * situação Pretendida‘A8’ = Valor do Abatimento inválido para
+         * cancelamento‘A9’ = Não autoriza pagamento parcial‘B1’ = Autoriza
+         * recebimento parcial‘B2’ = Valor Nominal do Título Conflitante‘B3’ =
+         * Tipo de Pagamento Inválido‘B4’ = Valor Máximo/Percentual Inválido‘B5’
+         * = Valor Mínimo/Percentual InválidoB -Códigos de tarifas / custas de
+         * '01' a '20' associados ao código de movimento '28' (Descrição
+         * C044)'01' = Tarifa de Extrato de Posição'02' = Tarifa de Manutenção
+         * de Título Vencido'03' = Tarifa de Sustação'04' = Tarifa de
+         * Protesto'05' = Tarifa de Outras Instruções'06' = Tarifa de Outras
+         * Ocorrências'07' = Tarifa de Envio de Duplicata ao Pagador'08' =
+         * Custas de Protesto'09' = Custas de Sustação de Protesto'10' = Custas
+         * de Cartório Distribuidor'11' = Custas de Edital'12' = Tarifa Sobre
+         * Devolução de Título Vencido'13' = Tarifa Sobre Registro Cobrada na
+         * Baixa/Liquidação'14' = Tarifa Sobre Reapresentação Automática'15' =
+         * Tarifa Sobre Rateio de Crédito'16' = Tarifa Sobre Informações Via
+         * Fax'17' = Tarifa Sobre Prorrogação de Vencimento '18' = Tarifa Sobre
+         * Alteração de Abatimento/Desconto'19' = Tarifa Sobre Arquivo mensal
+         * (Em Ser)'20' = Tarifa Sobre Emissão de Boleto de PagamentoPré-Emitido
+         * pelo BancoC -Códigos de liquidação / baixa de '01' a '15' associados
+         * aos códigos de movimento '06', '09' e '17' (Descrição
+         * C044)Liquidação:'01' = Por Saldo'02' = Por Conta'03' = Liquidação no
+         * Guichê de Caixa em Dinheiro'04' = Compensação Eletrônica'05' =
+         * Compensação Convencional'06' = Por Meio Eletrônico'07' = Após Feriado
+         * Local'08' = Em Cartório‘30’ = Liquidação no Guichê de Caixa em
+         * Cheque‘31’ = Liquidação em banco correspondente‘32’ = Liquidação
+         * Terminal de Auto-Atendimento‘33’ = Liquidação na Internet (Home
+         * banking)‘34’ = Liquidado Office Banking‘35’ = Liquidado
+         * Correspondente em Dinheiro‘36’ = Liquidado Correspondente em
+         * Cheque‘37’ = Liquidado por meio de Central de Atendimento
+         * (Telefone)Baixa:'09' = Comandada Banco'10' = Comandada Cliente
+         * Arquivo'11' = Comandada Cliente On-line'12' = Decurso Prazo
+         * -Cliente'13' = Decurso Prazo -Banco'14' = Protestado'15' = Título
+         * Excluído
+         *
+         * @return
+         */
+        public static TagLayout frejeicoes() {
+            return field("rejeicoes").length(10);
+        }
+
+        /**
          * Lote de Serviço Número seqüencial para identificar univocamente um
          * lote de serviço. Criado e controlado pelo responsável pela geração
          * magnética dos dados contidos no arquivo. Preencher com '0001' para o
@@ -326,24 +489,193 @@ public class TagLayout implements Serializable {
             return field("lote").length(4).type(Number.class).padding(Fillers.ZERO_LEFT);
         }
 
+        /**
+         * Código da Carteira: Código adotado pela FEBRABAN, para identificar a
+         * característica dos títulos dentro das modalidadesde cobrança
+         * existentes no banco Domínio: '1' = Cobrança Simples '2' = Cobrança
+         * Vinculada '3' = Cobrança Caucionada '4' = Cobrança Descontada ‘5’ =
+         * Cobrança Vendor
+         *
+         * @return
+         */
+        public static TagLayout fcodigoCarteira() {
+            return field("codigoCarteira").length(1).type(Number.class);
+        }
+
         public static TagLayout fvalor() {
-            return field("valor").type(Number.class).padding(Fillers.ZERO_LEFT);
+            return field("valor").length(15).type(Number.class).padding(Fillers.ZERO_LEFT);
         }
 
         public static TagLayout fvalorPagamento() {
-            return field("valorPagamento").type(Number.class).filler(Fillers.ZERO_LEFT);
+            return field("valorPagamento").length(15).type(Number.class).filler(Fillers.ZERO_LEFT);
+        }
+
+        public static TagLayout fvalorOcorrencia() {
+            return field("valorOcorrencia").length(15).type(Number.class).filler(Fillers.ZERO_LEFT);
         }
 
         public static TagLayout fvalorDesconto() {
-            return field("valorDesconto").type(Number.class).padding(Fillers.ZERO_LEFT);
+            return fvalor().nome("valorDesconto").value(0);
+        }
+
+        public static TagLayout fvalorAbatimento() {
+            return fvalor().nome("valorAbatimento").value(0);
+        }
+
+        public static TagLayout fvalorIOF() {
+            return fvalor().nome("valorIOF").value(0);
+        }
+
+        public static TagLayout fvalorLiquido() {
+            return fvalor().nome("valorLiquido").value(0);
+        }
+
+        public static TagLayout fvalorOutrasDespesas() {
+            return fvalor().nome("valorOutrasDespesas").value(0);
+        }
+
+        public static TagLayout fvalorOutrasReceitas() {
+            return fvalor().nome("valorOutrasReceitas").value(0);
         }
 
         public static TagLayout fvalorAcrescimo() {
-            return field("valorAcresciomo").type(Number.class).padding(Fillers.ZERO_LEFT);
+            return fvalor().nome("valorAcresciomo").value(0);
+        }
+
+        /**
+         * Código do Juros de Mora C018 Código adotado pela FEBRABAN para
+         * identificação do tipo de pagamento de juros de mora. Domínio: '1' =
+         * Valor por Dia '2' = Taxa Mensal '3' = Isento
+         *
+         * @return
+         */
+        public static TagLayout fcodigoAcrescimo() {
+            return field("codigoAcrescimo").length(1).value(2);
+        }
+
+        /**
+         * Código adotado pela FEBRABAN para identificação do tipo de desconto
+         * que deverá ser concedido. Ao se optar por valor, os três descontos
+         * devem ser expresso em valores. Idem ao se optar por percentual, os
+         * três descontos devem ser expressos em percentual. Domínio: '1' =
+         * Valor Fixo Até a Data Informada '2' = Percentual Até a Data Informada
+         * '3' = Valor por Antecipação Dia Corrido '4' = Valor por Antecipação
+         * Dia Útil '5' = Percentual Sobre o Valor Nominal Dia Corrido '6' =
+         * Percentual Sobre o Valor Nominal Dia Útil '7' = Cancelamento de
+         * Desconto Para os códigos '1' e '2' será obrigatório a informação da
+         * Data. Para o código '7', somente será válido para o código de
+         * movimento '31' - Alteração de Dados
+         *
+         * @return
+         */
+        public static TagLayout fcodigoDesconto() {
+            return field("codigoDesconto").length(1).value(2);
+        }
+
+        /**
+         * Código para Protesto C026 Código adotado pela FEBRABAN para
+         * identificar o tipo de prazo a ser considerado para o protesto.
+         * Domínio: '1' = Protestar Dias Corridos '2' = Protestar Dias Úteis '3'
+         * = Não Protestar ‘4’ = Protestar Fim Falimentar - Dias Úteis ‘5’ =
+         * Protestar Fim Falimentar - Dias Corridos ‘8’ = Negativação sem
+         * Protesto '9' = Cancelamento Protesto Automático (somente válido p/
+         * CódigoMovimento Remessa = '31' - Descrição C004)
+         *
+         * @return
+         */
+        public static TagLayout fcodigoProtesto() {
+            return field("codigoProtesto").length(1).value(3);
+        }
+
+        /**
+         * Código para Baixa / Devolução C028 Código adotado pela FEBRABAN para
+         * identificar qual o procedimento a ser adotado com o Título. Domínio:
+         * '1' = Baixar / Devolver '2' = Não Baixar / Não Devolver '3' =
+         * Cancelar Prazo para Baixa / Devolução (somente válido
+         * p/CódigoMovimento Remessa = '31' - Descrição C004)
+         *
+         * @return
+         */
+        public static TagLayout fcodigoBaixa() {
+            return field("codigoBaixa").length(1).value(2);
         }
 
         public static TagLayout fnumeroDocumento() {
             return field("numeroDocumento").type(Number.class).padding(Fillers.ZERO_LEFT);
+        }
+
+        /**
+         * Tipo de Documento C008 Código adotado pela FEBRABAN para identificar
+         * a existência material do documento no processo. Domínio: '1' =
+         * Tradicional '2' = Escritural
+         *
+         * @return
+         */
+        public static TagLayout ftipoDocumento() {
+            return field("tipoDocumento").length(1).value(1);
+        }
+
+        /**
+         * Identificação da Emissão do Boleto de Pagamento C009 Código adotado
+         * pela FEBRABAN para identificar o responsável e a forma de emissão do
+         * Boleto de Pagamento. Domínio: '1' = Banco Emite '2' = Cliente Emite
+         * '3' = Banco Pré-emite e Cliente Complementa '4' = Banco Reemite '5' =
+         * Banco Não Reemite '7' = Banco Emitente - Aberta '8' = Banco Emitente
+         * - Auto-envelopável Os códigos '4' e '5' só serão aceitos para código
+         * de movimento para remessa '31'
+         *
+         * @return
+         */
+        public static TagLayout ftipoEmissaoBoleto() {
+            return field("tipoEmissaoBoleto").length(1).value(2);
+        }
+
+        /**
+         * Identificação da Distribuição C010 Código adotado pela FEBRABAN para
+         * identificar o responsável pela distribuição do Boleto de Pagamento.
+         * Domínio: '1' = Banco Distribui '2' = Cliente Distribui ‘3’ = Banco
+         * envia e-mail ‘4’ = Banco envia SMS
+         *
+         * @return
+         */
+        public static TagLayout ftipoDistribuicaoBoleto() {
+            return field("tipoDistribuicaoBoleto").length(1).value(2);
+        }
+
+        /**
+         * Código adotado pela FEBRABAN para identificar o tipo de título de
+         * cobrança. Domínio: '01' = CH Cheque '02' = DM Duplicata Mercantil
+         * '03' = DMI Duplicata Mercantil p/ Indicação '04' = DS Duplicata de
+         * Serviço '05' = DSI Duplicata de Serviço p/ Indicação '06' = DR
+         * Duplicata Rural '07' = LC Letra de Câmbio '08' = NCC Nota de Crédito
+         * Comercial '09' = NCE Nota de Crédito a Exportação '10' = NCI Nota de
+         * Crédito Industrial '11' = NCR Nota de Crédito Rural '12' = NP Nota
+         * Promissória '13' = NPR Nota Promissória Rural '14' = TM Triplicata
+         * Mercantil '15' = TS Triplicata de Serviço '16' = NS Nota de Seguro
+         * '17' = RC Recibo '18' = FAT Fatura '19' = ND Nota de Débito '20' = AP
+         * Apólice de Seguro '21' = ME Mensalidade Escolar '22' = PC Parcela de
+         * Consórcio '23' = NF Nota Fiscal '24' = DD Documento de Dívida ‘25’ =
+         * Cédula de Produto Rural ‘26’ = Warrant ‘27’ = Dívida Ativa de Estado
+         * ‘28’ = Dívida Ativa de Município ‘29’ = Dívida Ativa da União ‘30’ =
+         * Encargos condominiais ‘31’ = CC Cartão de Crédito ‘32’ = BDP – Boleto
+         * de Proposta '99' = Outros
+         *
+         * @return
+         */
+        public static TagLayout fespecieTitulo() {
+            return field("especieTitulo").length(2).value("02");
+        }
+
+        /**
+         * Identificação de Título Aceito / Não Aceito C016 Código adotado pela
+         * FEBRABAN para identificar se o título de cobrança foi aceito
+         * (reconhecimento da dívida pelo Pagador). Domínio: 'A' = Aceite 'N' =
+         * Não Aceite
+         *
+         * @return
+         */
+        public static TagLayout faceite() {
+            return field("aceite").length(1).value("N");
         }
 
         public static TagLayout fnossoNumero() {
@@ -351,7 +683,7 @@ public class TagLayout implements Serializable {
         }
 
         public static TagLayout fsequencialRegistro() {
-            return field("sequencialRegistro").type(Number.class).padding(Fillers.ZERO_LEFT);
+            return field("sequencialRegistro").length(5).type(Number.class).padding(Fillers.ZERO_LEFT);
         }
 
         /**
@@ -410,6 +742,20 @@ public class TagLayout implements Serializable {
             return field("").filler(Fillers.ZERO_LEFT);
         }
 
+        public static TagLayout fsegmento() {
+            return field("segmento").length(1);
+        }
+
+        /**
+         * 08.4.J52 Código Reg. Opcional Identificação Registro Opcional 18 19 2
+         * - Num “52” G067
+         *
+         * @return
+         */
+        public static TagLayout fidOpcional() {
+            return field("idOpcional").length(2);
+        }
+
         /**
          * Esse field ira gerar espaços em branco.
          *
@@ -420,7 +766,7 @@ public class TagLayout implements Serializable {
         }
 
         /**
-         * G010 Número da Conta Corrente G010
+         * G010 Número da Conta Corrente Conta com DV
          *
          * Número adotado pelo Banco, para identificar univocamente a conta
          * corrente utilizada pelo Cliente. G011 Dígito Verificador da Conta
@@ -434,7 +780,7 @@ public class TagLayout implements Serializable {
          * @return
          */
         public static TagLayout fconta() {
-            return field("conta").padding(Fillers.ZERO_LEFT);
+            return field("conta").length(13).padding(Fillers.ZERO_LEFT);
         }
 
         /**
@@ -446,7 +792,7 @@ public class TagLayout implements Serializable {
          * @return
          */
         public static TagLayout fcodigoRegistro() {
-            return field("codigoRegistro").length(1);
+            return field("codigoRegistro").length(1).id(true);
         }
 
         /**
@@ -506,8 +852,37 @@ public class TagLayout implements Serializable {
             return field("codigoArquivo").length(1);
         }
 
+        public static TagLayout fcodigoOcorrencia() {
+            return field("codigoOcorrencia").length(1);
+        }
+
+        /**
+         * Campo de data generico
+         *
+         * @return
+         */
+        public static TagLayout fdata() {
+            return field("data").length(8).format(new SimpleDateFormat("ddMMyyyy"));
+        }
+
+        public static TagLayout fdataAcrescimo() {
+            return fdata().nome("dataAcrescimo").filler(Fillers.ZERO_LEFT);
+        }
+
+        public static TagLayout fdataDesconto() {
+            return fdata().nome("dataDesconto").filler(Fillers.ZERO_LEFT);
+        }
+
         public static TagLayout fdataGeracao() {
             return field("dataGeracao").type(Date.class).format(new SimpleDateFormat("ddMMyyyy")).length(8);
+        }
+
+        public static TagLayout fdataOcorrencia() {
+            return field("dataOcorrencia").length(8).format(new SimpleDateFormat("ddMMyyyy"));
+        }
+
+        public static TagLayout fdataCredito() {
+            return field("dataCredito").length(8).format(new SimpleDateFormat("ddMMyyyy"));
         }
 
         public static TagLayout fdataVencimento() {
@@ -537,11 +912,31 @@ public class TagLayout implements Serializable {
             return tagin().with(filhos);
         }
 
-        public static TagLayout tituloJ(TagLayout... filhos) {
+        public static TagLayout detalheSegmentoJ(TagLayout... filhos) {
             return tagin().with(filhos);
         }
 
-        public static TagLayout tituloJ52(TagLayout... filhos) {
+        public static TagLayout detalheSegmentoJ52(TagLayout... filhos) {
+            return tagin().with(filhos);
+        }
+
+        public static TagLayout detalheSegmentoU(TagLayout... filhos) {
+            return tagin().with(filhos);
+        }
+
+        public static TagLayout detalheSegmentoT(TagLayout... filhos) {
+            return tagin().with(filhos);
+        }
+
+        public static TagLayout detalheSegmentoP(TagLayout... filhos) {
+            return tagin().with(filhos);
+        }
+
+        public static TagLayout detalheSegmentoQ(TagLayout... filhos) {
+            return tagin().with(filhos);
+        }
+
+        public static TagLayout detalheSegmentoR(TagLayout... filhos) {
             return tagin().with(filhos);
         }
 
@@ -603,6 +998,11 @@ public class TagLayout implements Serializable {
     Object value;
     List<TagLayout> filhos;
     Map<String, Object> atributos;
+
+    public TagLayout nome(String texto) {
+        this.nome = texto;
+        return this;
+    }
 
     TagLayout get(TagLayout tag) {
         return get(tag.nome);
@@ -702,6 +1102,10 @@ public class TagLayout implements Serializable {
         return this;
     }
 
+    public TagLayout id(boolean bol) {
+        return setAttr(bol);
+    }
+
     public TagLayout length(int len) {
         return setAttr(len);
     }
@@ -762,4 +1166,30 @@ public class TagLayout implements Serializable {
             colecoesImutaveis(tf);
         }
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 61 * hash + Objects.hashCode(this.nome);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final TagLayout other = (TagLayout) obj;
+        if (!Objects.equals(this.nome, other.nome)) {
+            return false;
+        }
+        return true;
+    }
+
 }
