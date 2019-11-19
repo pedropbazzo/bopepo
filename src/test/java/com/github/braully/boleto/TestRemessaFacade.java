@@ -126,6 +126,7 @@ public class TestRemessaFacade {
         System.err.println(remessaStr);
 //        assertEquals(remessaStr, "");
     }
+
     @Test
     public void testRemessaCobancaGenericaSicredi240V5() {
         RemessaFacade remessa = new RemessaFacade(LayoutsSuportados.LAYOUT_SICREDI_CNAB240);
@@ -142,7 +143,7 @@ public class TestRemessaFacade {
                 .cedente("ACME S.A LTDA.", "1")
                 .convenio("1", "1", "1", "1");
 
-        remessa.addNovoTituloJ()
+        remessa.addNovoDetalheSegmentoJ()
                 .sacado("Fulano de Tal", "0")
                 .codigoBarras("0")
                 .valor(1)
@@ -153,7 +154,7 @@ public class TestRemessaFacade {
                 .banco("0", "Banco").cedente("ACME S.A LTDA.", "1").convenio("1", "1", "1", "1")
                 .sequencialRegistro(1);
 
-        remessa.addNovoTituloJ52()
+        remessa.addNovoDetalheSegmentoJ52()
                 .sacado("Fulano de Tal", "0")
                 .banco("0", "Banco").cedente("ACME S.A LTDA.", "1").convenio("1", "1", "1", "1")
                 .sequencialRegistro(2);
@@ -174,6 +175,7 @@ public class TestRemessaFacade {
         System.err.println(remessaStr);
 //        assertEquals(remessaStr, "");
     }
+
     @Ignore
     @Test
     public void testRemessaVazia() {
@@ -265,7 +267,8 @@ public class TestRemessaFacade {
         );
         return flatfileLayout;
     }
-    public TagLayout layoutBancoBradescoTest(){
+
+    public TagLayout layoutBancoBradescoTest() {
         TagLayout flatfileLayout = flatfile(
                 /*
                 <layout>
@@ -294,7 +297,6 @@ public class TestRemessaFacade {
                         <Field name="DATA_ARQUIVO" length="6" type="DATE" format="DATE_DDMMYY" />
                  */
                 cabecalho(
- 
                         fcodigoRegistro().value(0),
                         fcodigoRetorno(),
                         fagencia().length(4),
@@ -331,7 +333,8 @@ public class TestRemessaFacade {
         );
         return flatfileLayout;
     }
-        public TagLayout layoutBancoSantander(){
+
+    public TagLayout layoutBancoSantander() {
         TagLayout flatfileLayout = flatfile(
                 /*
                 <layout>
@@ -360,7 +363,6 @@ public class TestRemessaFacade {
                         <Field name="DATA_ARQUIVO" length="6" type="DATE" format="DATE_DDMMYY" />
                  */
                 cabecalho(
- 
                         fcodigoRegistro().value(0),
                         fcodigoRetorno(),
                         fagencia().length(4),
