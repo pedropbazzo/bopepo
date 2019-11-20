@@ -583,7 +583,7 @@ public class LayoutsSuportados {
                     field("cedenteEndereco").length(80).filler(Fillers.WHITE_SPACE_LEFT),
                     focorrencias()
             ),
-            tituloJ52(
+            detalheSegmentoJ52(
                     fbancoCodigo().value("748"),
                     flote().value(1),
                     fcodigoRegistro().value("3"),
@@ -622,6 +622,7 @@ public class LayoutsSuportados {
                     field("qtedContas").value(0).padding(Fillers.ZERO_LEFT).length(6)
             )
     );
+
     public static final TagLayout _LAYOUT_BB_CNAB240 = flatfile(
             layout(nome("Layout padrão Banco do Brasil CNAB240"),
                     cnab(CNAB_240),
@@ -664,7 +665,7 @@ public class LayoutsSuportados {
                     field("mensagem1").length(40).filler(Fillers.WHITE_SPACE_LEFT),
                     field("cedenteEndereco").length(80).filler(Fillers.WHITE_SPACE_LEFT)
             ),
-            tituloJ(
+            detalheSegmentoJ(
                     fbancoCodigo().value("001"),
                     flote().value("0001"),
                     fcodigoRegistro().value("3"),
@@ -683,7 +684,7 @@ public class LayoutsSuportados {
                     fnossoNumero().length(9999),
                     fcodigoMoeda()
             ),
-            tituloJ(
+            detalheSegmentoJ(
                     fbancoCodigo().value("001"),
                     flote().value("0001"),
                     fcodigoRegistro().value("3"),
@@ -695,7 +696,7 @@ public class LayoutsSuportados {
                     fcodigoBarras().length(44),
                     fsacadoNome().length(30)
             ),
-            tituloJ(
+            detalheSegmentoJ(
                     fbancoCodigo().value("001"),
                     flote().value("0001"),
                     fcodigoRegistro().value("3"),
@@ -706,7 +707,7 @@ public class LayoutsSuportados {
                     fagencia().length(6),
                     fconta().length(13)
             ),
-            tituloJ(
+            detalheSegmentoJ(
                     fbancoCodigo().value("001"),
                     flote().value("0001"),
                     fcodigoRegistro().value("3"),
@@ -773,7 +774,7 @@ public class LayoutsSuportados {
                     field("cedenteEndereco").length(80).filler(Fillers.WHITE_SPACE_LEFT),
                     focorrencias()
             ),
-            tituloJ(
+            detalheSegmentoJ(
                     fbancoCodigo().value("033"),
                     flote().value("0001"),
                     fcodigoRegistro().value("3"),
@@ -795,7 +796,7 @@ public class LayoutsSuportados {
                     fnumeroDocumento().length(20),
                     focorrencias()
             ),
-            tituloJ(
+            detalheSegmentoJ(
                     fbancoCodigo().value("033"),
                     flote().value("0001"),
                     fcodigoRegistro().value("3"),
@@ -824,7 +825,7 @@ public class LayoutsSuportados {
                     field("cedenteEndereco").length(80).filler(Fillers.WHITE_SPACE_LEFT),
                     focorrencias()
             ),
-            tituloJ(
+            detalheSegmentoJ(
                     fbancoCodigo().value("033"),
                     flote().value("0001"),
                     fcodigoRegistro().value("3"),
@@ -861,7 +862,7 @@ public class LayoutsSuportados {
                     field("cedenteEndereco").length(80).filler(Fillers.WHITE_SPACE_LEFT),
                     focorrencias()
             ),
-            tituloJ(
+            detalheSegmentoJ(
                     fbancoCodigo().value("033"),
                     flote().value("0001"),
                     fcodigoRegistro().value("3"),
@@ -900,7 +901,7 @@ public class LayoutsSuportados {
                     field("cedenteEndereco").length(80).filler(Fillers.WHITE_SPACE_LEFT),
                     focorrencias()
             ),
-            tituloJ(
+            detalheSegmentoJ(
                     fbancoCodigo().value("033"),
                     flote().value("0001"),
                     fcodigoRegistro().value("3"),
@@ -918,7 +919,7 @@ public class LayoutsSuportados {
                     fnumeroDocumento().length(20),
                     focorrencias()
             ),
-            tituloJ52(
+            detalheSegmentoJ52(
                     fbancoCodigo().value("033"),
                     flote(),
                     fcodigoRegistro().value("3"),
@@ -960,7 +961,7 @@ public class LayoutsSuportados {
                     field("cedenteEndereco").length(80).filler(Fillers.WHITE_SPACE_LEFT),
                     focorrencias()
             ),
-            tituloJ(
+            detalheSegmentoJ(
                     fbancoCodigo().value("033"),
                     flote().value("0001"),
                     fcodigoRegistro().value("3"),
@@ -999,7 +1000,7 @@ public class LayoutsSuportados {
                     field("cedenteEndereco").length(80).filler(Fillers.WHITE_SPACE_LEFT),
                     focorrencias()
             ),
-            tituloJ(
+            detalheSegmentoJ(
                     fbancoCodigo().value("033"),
                     flote().value("0001"),
                     fcodigoRegistro().value("3"),
@@ -1034,7 +1035,7 @@ public class LayoutsSuportados {
                     fdac(),
                     fcedenteNome().length(30)
             ),
-            tituloJ(
+            detalheSegmentoJ(
                     fbancoCodigo(),
                     flote().value(1),
                     fcodigoRegistro().value("3"),
@@ -1121,7 +1122,7 @@ public class LayoutsSuportados {
                     field("cedenteEndereco").length(80).filler(Fillers.WHITE_SPACE_LEFT),
                     focorrencias()
             ),
-            tituloJ(
+            detalheSegmentoJ(
                     fbancoCodigo().value("341"),
                     flote().value("0001"),
                     fcodigoRegistro().value("3"),
@@ -1138,7 +1139,7 @@ public class LayoutsSuportados {
                     fnumeroDocumento().length(20),
                     focorrencias()
             ),
-            tituloJ(
+            detalheSegmentoJ(
                     fbancoCodigo().value("341"),
                     flote().value("0001"),
                     fcodigoRegistro().value("3"),
@@ -1158,7 +1159,7 @@ public class LayoutsSuportados {
                     fbranco().length(9),
                     focorrencias()
             ),
-            tituloJ(
+            detalheSegmentoJ(
                     fbancoCodigo().value("341"),
                     flote().value("0001"),
                     fcodigoRegistro().value("3"),
@@ -1176,7 +1177,7 @@ public class LayoutsSuportados {
                     fbranco().length(9),
                     focorrencias()
             ),
-            tituloJ(
+            detalheSegmentoJ(
                     fbancoCodigo().value("341"),
                     flote().value("0001"),
                     fcodigoRegistro().value("3"),
@@ -1264,7 +1265,7 @@ public class LayoutsSuportados {
                     field("cedenteEndereco").length(80).filler(Fillers.WHITE_SPACE_LEFT),
                     focorrencias()
             ),
-            tituloJ(
+            detalheSegmentoJ(
                     fbancoCodigo().value("104"),
                     flote(),
                     fcodigoRegistro().value("3"),
@@ -1281,7 +1282,7 @@ public class LayoutsSuportados {
                     fnumeroDocumento().length(20),
                     focorrencias()
             ),
-            tituloJ(
+            detalheSegmentoJ(
                     fbancoCodigo().value("104"),
                     flote(),
                     fcodigoRegistro().value("3"),
@@ -1359,7 +1360,7 @@ public class LayoutsSuportados {
                     field("cedenteEndereco").length(80).filler(Fillers.WHITE_SPACE_LEFT),
                     focorrencias()
             ),
-            tituloJ(
+            detalheSegmentoJ(
                     fbancoCodigo().value("104"),
                     flote(),
                     fcodigoRegistro().value("3"),
@@ -1378,7 +1379,7 @@ public class LayoutsSuportados {
                     fbranco().length(9),
                     focorrencias()
             ),
-            tituloJ(
+            detalheSegmentoJ(
                     fbancoCodigo().value("104"),
                     flote(),
                     fcodigoRegistro().value("3"),
@@ -1469,7 +1470,7 @@ public class LayoutsSuportados {
                     field("cedenteEndereco").length(80).filler(Fillers.WHITE_SPACE_LEFT),
                     focorrencias()
             ),
-            tituloJ(
+            detalheSegmentoJ(
                     fbancoCodigo().value("237"),
                     flote().value("0001"),
                     fcodigoRegistro().value("3"),
@@ -1491,7 +1492,7 @@ public class LayoutsSuportados {
                     fnumeroDocumento().length(20),
                     focorrencias()
             ),
-            tituloJ(
+            detalheSegmentoJ(
                     fbancoCodigo().value("237"),
                     flote().value("0001"),
                     fcodigoRegistro().value("3"),
@@ -1536,7 +1537,7 @@ public class LayoutsSuportados {
                     field("cedenteEndereco").length(80).filler(Fillers.WHITE_SPACE_LEFT),
                     focorrencias()
             ),
-            tituloJ(
+            detalheSegmentoJ(
                     fbancoCodigo().value("237"),
                     flote(),
                     fcodigoRegistro().value("3"),
@@ -1579,7 +1580,7 @@ public class LayoutsSuportados {
                     field("cedenteEndereco").length(80).filler(Fillers.WHITE_SPACE_LEFT),
                     focorrencias()
             ),
-            tituloJ(
+            detalheSegmentoJ(
                     fbancoCodigo().value("237"),
                     flote().value("0001"),
                     fcodigoRegistro().value("3"),
@@ -1596,7 +1597,7 @@ public class LayoutsSuportados {
                     fnumeroDocumento().length(20),
                     focorrencias()
             ),
-            tituloJ(
+            detalheSegmentoJ(
                     fbancoCodigo().value("237"),
                     flote().value("0001"),
                     fcodigoRegistro().value("3"),
@@ -1634,7 +1635,7 @@ public class LayoutsSuportados {
                     fdac(),
                     fcedenteNome().length(30)
             ),
-            tituloJ(
+            detalheSegmentoJ(
                     fbancoCodigo().value("237"),
                     flote().value("0001"),
                     fcodigoRegistro().value("3"),
@@ -1678,7 +1679,7 @@ public class LayoutsSuportados {
                     fdac(),
                     fcedenteNome().length(30)
             ),
-            tituloJ(
+            detalheSegmentoJ(
                     fbancoCodigo().value("237"),
                     flote(),
                     fcodigoRegistro().value("3"),
@@ -1749,7 +1750,7 @@ public class LayoutsSuportados {
 
     public static final TagLayout LAYOUT_CAIXA_CNAB240
             = _LAYOUT_CAIXA_CNAB240.cloneReadonly();
-    
+
     public static final TagLayout LAYOUT_BRADESCO_CNAB240
             = _LAYOUT_BRADESCO_CNAB240.cloneReadonly();
 
@@ -1770,7 +1771,7 @@ public class LayoutsSuportados {
 
     private static final TagLayout _LAYOUT_CAIXA_CNAB240_COBRANCA_REMESSA
             = _LAYOUT_ITAU_CNAB240.clone();
-    
+
     private static final TagLayout _LAYOUT_BRADESCO_CNAB240_COBRANCA_REMESSA
             = _LAYOUT_BRADESCO_CNAB240.clone();
 
@@ -1805,9 +1806,10 @@ public class LayoutsSuportados {
                 .get(fcodigoArquivo().value('1'));
 
     }
+
     static {
-       _LAYOUT_BRADESCO_CNAB240_COBRANCA_REMESSA.get(cabecalho())
-               .get(fcodigoArquivo().value('1'));
+        _LAYOUT_BRADESCO_CNAB240_COBRANCA_REMESSA.get(cabecalho())
+                .get(fcodigoArquivo().value('1'));
     }
     public static final TagLayout LAYOUT_FEBRABAN_CNAB240_COBRANCA_REMESSA
             = _LAYOUT_FEBRABAN_CNAB240_COBRANCA_REMESSA.cloneReadonly();
@@ -1826,7 +1828,7 @@ public class LayoutsSuportados {
 
     public static final TagLayout LAYOUT_CAIXA_CNAB240_COBRANCA_REMESSA
             = _LAYOUT_CAIXA_CNAB240_COBRANCA_REMESSA.cloneReadonly();
-    
+
     public static final TagLayout LAYOUT_BRADESCO_CNAB240_COBRANCA_REMESSA
             = _LAYOUT_BRADESCO_CNAB240_COBRANCA_REMESSA.cloneReadonly();
 
@@ -1847,7 +1849,7 @@ public class LayoutsSuportados {
 
     private static final TagLayout _LAYOUT_CAIXA_CNAB240_COBRANCA_RETORNO
             = _LAYOUT_CAIXA_CNAB240.clone();
-    
+
     private static final TagLayout _LAYOUT_BRADESCO_CNAB240_COBRANCA_RETORNO
             = _LAYOUT_BRADESCO_CNAB240.clone();
 
@@ -1870,7 +1872,7 @@ public class LayoutsSuportados {
 
         _LAYOUT_CAIXA_CNAB240_COBRANCA_RETORNO.get(cabecalho())
                 .get(fcodigoArquivo().value('2'));
-        
+
         _LAYOUT_BRADESCO_CNAB240_COBRANCA_RETORNO.get(cabecalho())
                 .get(fcodigoArquivo().value('2'));
     }
@@ -1892,38 +1894,9 @@ public class LayoutsSuportados {
 
     public static final TagLayout LAYOUT_CAIXA_CNAB240_COBRANCA_RETORNO
             = _LAYOUT_CAIXA_CNAB240_COBRANCA_RETORNO.cloneReadonly();
-    
+
     public static final TagLayout LAYOUT_BRADESCO_CNAB240_COBRANCA_RETORNO
             = _LAYOUT_BRADESCO_CNAB240_COBRANCA_RETORNO.cloneReadonly();
-
-    public static final TagLayout LAYOUT_FEBRABAN_CNAB240
-            = _LAYOUT_FEBRABAN_CNAB240.cloneReadonly();
-
-    /*
-     Layout Padrão Febraban CNAB 240 para Remessa de Cobrança
-     */
-    private static final TagLayout _LAYOUT_FEBRABAN_CNAB240_COBRANCA_REMESSA
-            = _LAYOUT_FEBRABAN_CNAB240.clone();
-
-    static {
-        _LAYOUT_FEBRABAN_CNAB240_COBRANCA_REMESSA.get(cabecalho())
-                .get(fcodigoArquivo().value('1'));
-    }
-
-    public static final TagLayout LAYOUT_FEBRABAN_CNAB240_COBRANCA_REMESSA
-            = _LAYOUT_FEBRABAN_CNAB240_COBRANCA_REMESSA.cloneReadonly();
-
-    private static final TagLayout _LAYOUT_FEBRABAN_CNAB240_COBRANCA_RETORNO
-            = _LAYOUT_FEBRABAN_CNAB240.clone();
-
-    static {
-        _LAYOUT_FEBRABAN_CNAB240_COBRANCA_RETORNO.get(cabecalho())
-                .get(fcodigoArquivo().value('2'));
-
-    }
-
-    public static final TagLayout LAYOUT_FEBRABAN_CNAB240_COBRANCA_RETORNO
-            = _LAYOUT_FEBRABAN_CNAB240_COBRANCA_RETORNO.cloneReadonly();
 
     /*
     
@@ -1956,7 +1929,7 @@ public class LayoutsSuportados {
         layoutsSuportadosTmp.add(LAYOUT_BRADESCO_CNAB240_COBRANCA_REMESSA);
         layoutsSuportadosTmp.add(LAYOUT_BRADESCO_CNAB240_COBRANCA_RETORNO);
 
-       /* */
+        /* */
         layoutsSuportados = Collections.unmodifiableList(layoutsSuportadosTmp);
     }
 
@@ -1984,29 +1957,9 @@ public class LayoutsSuportados {
         return ret;
     }
 
-    //TODO: Implementar um metodo de busca por layouts, a partir de atributos relevantes
-    public static TagLayout getLayoutArquivoBancario(CNABServico servico, CNAB cnab, String banco,
-            String convenio, String agencia, String conta, String carteira, Boolean registrado) {
-        TagLayout ret = null;
-        for (TagLayout layout : layoutsSuportados) {
-            TagLayout descritor = layout.get("layout");
-            if (descritor != null
-                    && eq(descritor.getValue("banco"), banco)
-                    && eq(descritor.getValue("convenio"), convenio)
-                    && eq(descritor.getValue("carteira"), carteira)
-                    && eq(descritor.getValue("cnab"), cnab)
-                    && eq(descritor.getValue("servico"), servico)) {
-                ret = layout;
-                break;
-            }
-        }
-        return ret;
-    }
-
     public static boolean eq(Object value1, Object value2) {
         return value1 == value2
                 || value1 != null && value1.equals(value2)
                 || value2 != null && value2.equals(value1);
     }
 }
- 
