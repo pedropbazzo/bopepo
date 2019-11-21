@@ -27,6 +27,7 @@ import org.jrimum.texgit.Fillers;
  *
  * @author Braully Rocha da Silva
  */
+//TODO: Revisar layout de terceiros que vieram via pull request
 public class LayoutsSuportados {
 
     private static final TagLayout _LAYOUT_FEBRABAN_CNAB240 = flatfile(

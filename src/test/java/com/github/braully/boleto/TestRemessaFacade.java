@@ -129,7 +129,7 @@ public class TestRemessaFacade {
 
     @Test
     public void testRemessaCobancaGenericaSicredi240V5() {
-        RemessaFacade remessa = new RemessaFacade(LayoutsSuportados.LAYOUT_SICREDI_CNAB240);
+        RemessaFacade remessa = new RemessaFacade(LayoutsSuportados.LAYOUT_FEBRABAN_CNAB240_COBRANCA_REMESSA);
         remessa.addNovoCabecalho()
                 .sequencialArquivo(1)
                 .dataGeracao(new Date()).setVal("horaGeracao", new Date())
