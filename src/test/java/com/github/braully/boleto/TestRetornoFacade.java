@@ -15,10 +15,6 @@
  */
 package com.github.braully.boleto;
 
-import com.github.braully.boleto.ArquivoFacade.CabecalhoArquivo;
-import com.github.braully.boleto.ArquivoFacade.RodapeArquivo;
-import com.github.braully.boleto.ArquivoFacade.TituloArquivo;
-import java.util.Arrays;
 import java.util.List;
 import static org.junit.Assert.assertNotNull;
 import org.junit.Ignore;
@@ -36,19 +32,19 @@ public class TestRetornoFacade {
         RetornoFacade retorno = new RetornoFacade(LayoutsSuportados.LAYOUT_FEBRABAN_CNAB240);
 
 
-        ArquivoFacade.RegistroArquivo cabecalho = retorno.cabecalho();
+        RegistroArquivo cabecalho = retorno.cabecalho();
         assertNotNull(cabecalho);
 
-        ArquivoFacade.RegistroArquivo cabecalhoLote = retorno.cabecalhoLote();
+        RegistroArquivo cabecalhoLote = retorno.cabecalhoLote();
         assertNotNull(cabecalhoLote);
 
-        List<ArquivoFacade.RegistroArquivo> titulos = retorno.detalhes();
+        List<RegistroArquivo> titulos = retorno.detalhes();
         assertNotNull(titulos);
 
-        ArquivoFacade.RegistroArquivo rodapeLote = retorno.rodapeLote();
+        RegistroArquivo rodapeLote = retorno.rodapeLote();
         assertNotNull(rodapeLote);
 
-        ArquivoFacade.RegistroArquivo rodape = retorno.rodape();
+        RegistroArquivo rodape = retorno.rodape();
         assertNotNull(rodape);
 
         //System.err.println(remessaStr);
