@@ -128,8 +128,9 @@ public class TestFixedField {
                 .getValue()));
 
         campoInteger.read("000001");
-        assertNotNull(campoInteger.getValue());
-        assertTrue(campoInteger.getValue() instanceof Integer);
+        Object value = campoInteger.getValue();
+        assertNotNull(value);
+        assertTrue(value instanceof Integer);
         assertTrue(new Integer(1).compareTo(campoInteger.getValue()) == 0);
 
         campoLong.read("000001");

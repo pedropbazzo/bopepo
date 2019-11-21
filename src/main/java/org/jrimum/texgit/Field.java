@@ -31,6 +31,8 @@ package org.jrimum.texgit;
 import static java.lang.String.format;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.Format;
@@ -157,6 +159,8 @@ public class Field<G> implements org.jrimum.texgit.IField<G>, TextStream {
         return (Field<G>) super.clone();
     }
 
+    //Problema: https://stackoverflow.com/questions/3403909/get-generic-type-of-class-at-runtime
+    //
     public void read(String str) {
         Objects.checkNotNull(str, "String inválida [null]!");
         if (str.length() != length) {
@@ -164,16 +168,41 @@ public class Field<G> implements org.jrimum.texgit.IField<G>, TextStream {
                     + str + " ] é incompatível com o especificado [ " + length + " ]!");
         }
 
+        //Tentar inferir o tipo generico do Field<T>
+        //Melhorar isso, pois todas as formas são problematicas
+        //https://stackoverflow.com/questions/3403909/get-generic-type-of-class-at-runtime
+        //O ideal seria fixar uma campo com o valor da Class generica.
+        Class<?> valueType = String.class;//Tipo padrão
         try {
-            if (this.value instanceof TextStream) {
+            if (value != null) {
+                valueType = value.getClass();
+            } else {
+                Class<?> tmpValueType = getGenericTypeArgument(this.getClass(), 0);
+                if (tmpValueType != null) {
+                    valueType = tmpValueType;
+                }
+            }
+        } catch (Exception e) {
+
+        }
+
+        try {
+            if (this.value instanceof TextStream
+                    || TextStream.class.isAssignableFrom(valueType)) {
                 TextStream reader = (TextStream) this.value;
                 reader.read(str);
-            } else if (this.value instanceof BigDecimal) {
+            } else if (this.value instanceof BigDecimal
+                    || BigDecimal.class.isAssignableFrom(valueType)) {
                 readDecimalField(str);
-            } else if (this.value instanceof Date) {
+            } else if (this.value instanceof Date
+                    || Date.class.isAssignableFrom(valueType)) {
                 readDateField(str);
-            } else if (this.value instanceof Character) {
+            } else if (this.value instanceof Character
+                    || Character.class.isAssignableFrom(valueType)) {
                 readCharacter(str);
+            } else if (this.value instanceof Number
+                    || Number.class.isAssignableFrom(valueType)) {
+                readNumeric(valueType, str);
             } else {
                 readStringOrNumericField(str);
             }
@@ -225,12 +254,25 @@ public class Field<G> implements org.jrimum.texgit.IField<G>, TextStream {
     @SuppressWarnings("unchecked")
     private void readStringOrNumericField(String str) {
         str = parseNumber(str);
-        
+
 //        if (value != null && value.getClass().equals(String.class)) {
         value = (G) str;
 //        } else {
 //            readNumeric(clazz, str);
 //        }
+    }
+
+    public static <T> Class<T> getGenericTypeArgument(final Class<?> clazz, final int idx) {
+        final Type type = clazz.getGenericSuperclass();
+
+        ParameterizedType paramType;
+        try {
+            paramType = (ParameterizedType) type;
+        } catch (ClassCastException cause) {
+            paramType = (ParameterizedType) ((Class<T>) type).getGenericSuperclass();
+        }
+
+        return (Class<T>) paramType.getActualTypeArguments()[idx];
     }
 
     @SuppressWarnings("unchecked")
