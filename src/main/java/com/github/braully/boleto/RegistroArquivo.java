@@ -257,8 +257,8 @@ public class RegistroArquivo extends Record {
             for (FixedField ff : this.fields) {
                 Object value = ff.getValue();
                 String name = ff.getName();
-                if (name != null && !name.trim().isBlank()
-                        && value != null && !value.toString().trim().isBlank()) {
+                if (name != null && !name.trim().isEmpty()
+                        && value != null && !value.toString().trim().isEmpty()) {
                     sb.append("\t");
                     sb.append(name);
                     sb.append("=");
