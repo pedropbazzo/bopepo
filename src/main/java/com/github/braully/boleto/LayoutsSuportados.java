@@ -548,34 +548,1355 @@ public class LayoutsSuportados {
             )
     );
 
+    public static final TagLayout _LAYOUT_SICREDI_CNAB240 = flatfile(
+            layout(nome("Layout padrão SICREDI CNAB240"),
+                    cnab(CNAB_240),
+                    tag("url").value("https://www.sicredi.com.br/html/para-sua-empresa/recebimentos/cobranca/"),
+                    versao("05")
+            ),
+            cabecalho(
+                    fbancoCodigo().value("748"),
+                    flote().value("0001"),
+                    ftipoInscricao().value("2"),
+                    fcedenteCnpj().length(14).padding(Fillers.ZERO_LEFT),
+                    fconvenio().length(20),
+                    fagencia().length(6),
+                    fconta().length(13),
+                    fdac(), fcedenteNome().length(30), fbancoNome().length(30),
+                    fdataGeracao(),
+                    field("horaGeracao").length(6).format(new SimpleDateFormat("hhmmss")),
+                    fsequencialArquivo().length(6),
+                    field("versaoLayoutArquivo").valLen("103"),
+                    field("densidadeArquivo").value(0).length(5).padding(Fillers.ZERO_LEFT)
+            ),
+            cabecalhoLote(
+                    fbancoCodigo().value("748"),
+                    flote().value(1),
+                    ftipoInscricao().value("2"),
+                    fcedenteCnpj(),
+                    fconvenio().length(20),
+                    fagencia().length(6),
+                    fconta().length(13),
+                    fdac(),
+                    fcedenteNome().length(30),
+                    field("mensagem1").length(40).filler(Fillers.WHITE_SPACE_LEFT),
+                    field("cedenteEndereco").length(80).filler(Fillers.WHITE_SPACE_LEFT),
+                    focorrencias()
+            ),
+            detalheSegmentoJ52(
+                    fbancoCodigo().value("748"),
+                    flote().value(1),
+                    fcodigoRegistro().value("3"),
+                    fsequencialRegistro().length(5),
+                    fmovimentoCodigo().value("00"),
+                    field("idRegOpcional").length(2).value("52"),
+                    field("tipoInscricaoSacado").valLen("1"),
+                    fsacadoCpf().length(15),
+                    fsacadoNome().length(40),
+                    //DADOS DO BENEFICIARIO
+                    field("tipoInscricaoCedente").valLen("2"),
+                    fcedenteCnpj().length(15),
+                    fcedenteNome().length(40),
+                    //DADOS DO PAGADORR
+                    //Pagadorr - Dados sobre o Beneficiário responsável pela emissão do título original
+                    field("tipoInscricaoPagadorr").valLen("2"),
+                    field("pagadorrInscricao").length(15).filler(Fillers.ZERO_LEFT),
+                    field("pagadorr").length(40).filler(Fillers.WHITE_SPACE_LEFT)
+            ),
+            rodapeLote(
+                    fbancoCodigo().value("748"),
+                    flote().value(1), // o mesmo do cabeçalho do lote
+                    fcodigoRegistro().value("5"),
+                    fquantidadeRegistros().length(9),
+                    fvalorTotalRegistros().length(18),
+                    field("qtedMoedas").length(18).padding(Fillers.ZERO_LEFT).value(1),
+                    field("numAvisoDebito").length(6).filler(Fillers.ZERO_LEFT),
+                    fbranco().length(165),
+                    focorrencias()
+            ),
+            rodape(
+                    fbancoCodigo(),
+                    flote().value("9999"),
+                    fcodigoRegistro().value("9"),
+                    fquantidadeRegistros().length(6),
+                    field("qtedContas").value(0).padding(Fillers.ZERO_LEFT).length(6)
+            )
+    );
+
+    public static final TagLayout _LAYOUT_BB_CNAB240 = flatfile(
+            layout(nome("Layout padrão Banco do Brasil CNAB240"),
+                    cnab(CNAB_240),
+                    tag("url").value("https://www.bb.com.br/docs/pub/emp/empl/dwn/CbrVer04BB.pdf"),
+                    versao("05")
+            ),
+            cabecalho(
+                    fbancoCodigo().value("001"),
+                    flote().value("0000"),
+                    fcodigoRegistro().value("0"),
+                    ftipoInscricao().value("2"),
+                    fcedenteCnpj().length(14).padding(Fillers.ZERO_LEFT),
+                    fconvenio().length(20),
+                    fagencia().length(6),
+                    fconta().length(13),
+                    fdac(),
+                    fcedenteNome().length(30),
+                    fbancoNome().length(30),
+                    fcodigoArquivo().value(1),
+                    fdataGeracao(),
+                    field("horaGeracao").length(6).format(new SimpleDateFormat("hhmmss")),
+                    fsequencialArquivo().length(6),
+                    field("versaoLayoutArquivo").valLen("103"),
+                    field("densidadeArquivo").value(0).length(5).padding(Fillers.ZERO_LEFT)
+            ),
+            cabecalhoLote(
+                    fbancoCodigo().value("001"),
+                    flote().value("0001"),
+                    fcodigoRegistro().value("1"),
+                    foperacao().value("R"),
+                    fservico().value("01"),
+                    field("versaoLayoutLote").value("042").length(3),
+                    ftipoInscricao().value("2"),
+                    fcedenteCnpj(),
+                    fconvenio().length(20),
+                    fagencia().length(6),
+                    fconta().length(13),
+                    fdac(),
+                    fcedenteNome().length(30),
+                    field("mensagem1").length(40).filler(Fillers.WHITE_SPACE_LEFT),
+                    field("cedenteEndereco").length(80).filler(Fillers.WHITE_SPACE_LEFT)
+            ),
+            detalheSegmentoJ(
+                    fbancoCodigo().value("001"),
+                    flote().value("0001"),
+                    fcodigoRegistro().value("3"),
+                    fsequencialRegistro().length(5),
+                    field("segmento").value("P").length(1),
+                    fmovimentoCodigo().value("01"),
+                    fcodigoBarras().length(44),
+                    fsacadoNome().length(30),
+                    fdataVencimento(),
+                    fvalor().length(15),
+                    fvalorDesconto().value(0).length(15),
+                    fvalorAcrescimo().value(0).length(15),
+                    fdataPagamento(), fvalorPagamento().length(15),
+                    field("qtdeMoeda").filler(Fillers.ZERO_LEFT).value(1).length(15),
+                    fnumeroDocumento().length(20),
+                    fnossoNumero().length(9999),
+                    fcodigoMoeda()
+            ),
+            detalheSegmentoJ(
+                    fbancoCodigo().value("001"),
+                    flote().value("0001"),
+                    fcodigoRegistro().value("3"),
+                    fsequencialRegistro().length(5),
+                    field("segmento").value("Q").length(1),
+                    fmovimentoCodigo().value("01"),
+                    ftipoInscricao().value("2"),
+                    fcedenteCnpj().length(14).padding(Fillers.ZERO_LEFT),
+                    fcodigoBarras().length(44),
+                    fsacadoNome().length(30)
+            ),
+            detalheSegmentoJ(
+                    fbancoCodigo().value("001"),
+                    flote().value("0001"),
+                    fcodigoRegistro().value("3"),
+                    fsequencialRegistro().length(5),
+                    field("segmento").value("R").length(1),
+                    fmovimentoCodigo().value("01"),
+                    fconvenio().length(20),
+                    fagencia().length(6),
+                    fconta().length(13)
+            ),
+            detalheSegmentoJ(
+                    fbancoCodigo().value("001"),
+                    flote().value("0001"),
+                    fcodigoRegistro().value("3"),
+                    fsequencialRegistro().length(5),
+                    field("segmento").value("S").length(1),
+                    fmovimentoCodigo().value("01")
+            ),
+            rodapeLote(
+                    fbancoCodigo().value("001"),
+                    flote().value(1), // o mesmo do cabeçalho do lote
+                    fcodigoRegistro().value("5"),
+                    fquantidadeRegistros().length(6)
+            ),
+            rodape(
+                    fbancoCodigo().value("001"),
+                    flote().value(9999), // o mesmo do cabeçalho do lote
+                    fcodigoRegistro().value("9"),
+                    fquantidadeRegistros().length(6)
+            )
+    );
+    public static final TagLayout _LAYOUT_SANTANDER_CNAB240 = flatfile(
+            layout(nome("Layout padrão Banco Santander CNAB240"),
+                    cnab(CNAB_240),
+                    tag("url").value("https://www.bb.com.br/docs/pub/emp/empl/dwn/CbrVer04BB.pdf"),
+                    versao("05")
+            ),
+            //REGISTRO HEADER DE ARQUIVO - TIPO DE REGISTRO = 0
+
+            cabecalho(
+                    fbancoCodigo().value("033"),
+                    flote().value("0000"),
+                    fcodigoRegistro().value("0"),
+                    ftipoInscricao().value("2"),
+                    fcedenteCnpj().length(14).padding(Fillers.ZERO_LEFT),
+                    fconvenio().length(20),
+                    fagencia().length(6),
+                    fconta().length(13),
+                    fdac(),
+                    fcedenteNome().length(30),
+                    fbancoNome().length(30),
+                    fcodigoArquivo().value(1),
+                    fdataGeracao(),
+                    field("horaGeracao").length(6).format(new SimpleDateFormat("hhmmss")),
+                    fsequencialArquivo().length(6),
+                    field("versaoLayoutArquivo").valLen("103"),
+                    field("densidadeArquivo").value(0).length(5).padding(Fillers.ZERO_LEFT),
+                    focorrencias()
+            ),
+            cabecalhoLote(
+                    fbancoCodigo().value("033"),
+                    flote().value("0001"),
+                    fcodigoRegistro().value("1"),
+                    foperacao().value("C"),
+                    fservico().value("01"),
+                    field("versaoLayoutLote").value("031").length(3),
+                    ftipoInscricao().value("2"),
+                    fcedenteCnpj(),
+                    fconvenio().length(20),
+                    fagencia().length(6),
+                    fconta().length(13),
+                    fdac(),
+                    fcedenteNome().length(30),
+                    field("mensagem1").length(40).filler(Fillers.WHITE_SPACE_LEFT),
+                    field("cedenteEndereco").length(80).filler(Fillers.WHITE_SPACE_LEFT),
+                    focorrencias()
+            ),
+            detalheSegmentoJ(
+                    fbancoCodigo().value("033"),
+                    flote().value("0001"),
+                    fcodigoRegistro().value("3"),
+                    fsequencialRegistro(),
+                    field("segmento").value("A").length(1),
+                    fmovimentoCodigo().value("01"),
+                    fconvenio().length(20),
+                    fagencia().length(6),
+                    fconta().length(13),
+                    fdac(),
+                    fcodigoBarras().length(44),
+                    fsacadoNome().length(30),
+                    fdataVencimento(),
+                    fvalor().length(15),
+                    fvalorDesconto().value(0).length(15),
+                    fvalorAcrescimo().value(0).length(15),
+                    fdataPagamento(), fvalorPagamento().length(15),
+                    field("qtdeMoeda").filler(Fillers.ZERO_LEFT).value(1).length(15),
+                    fnumeroDocumento().length(20),
+                    focorrencias()
+            ),
+            detalheSegmentoJ(
+                    fbancoCodigo().value("033"),
+                    flote().value("0001"),
+                    fcodigoRegistro().value("3"),
+                    fsequencialRegistro(),
+                    field("segmento").value("B").length(1),
+                    ftipoInscricao().value("2"),
+                    fcedenteCnpj().length(14).padding(Fillers.ZERO_LEFT)
+            ),
+            //PAGAMENTO ATRAVÉS DE ORDEM DE CRÉDITO POR TELEPROCESSAMENTO
+            cabecalhoLote(
+                    fbancoCodigo().value("033"),
+                    flote().value("0001"),
+                    fcodigoRegistro().value("1"),
+                    foperacao().value("C"),
+                    fservico().value("01"),
+                    fforma().value("35"),
+                    field("versaoLayoutLote").value("035").length(3),
+                    ftipoInscricao().value("2"),
+                    fcedenteCnpj(),
+                    fconvenio().length(20),
+                    fagencia().length(6),
+                    fconta().length(13),
+                    fdac(),
+                    fcedenteNome().length(30),
+                    field("mensagem1").length(40).filler(Fillers.WHITE_SPACE_LEFT),
+                    field("cedenteEndereco").length(80).filler(Fillers.WHITE_SPACE_LEFT),
+                    focorrencias()
+            ),
+            detalheSegmentoJ(
+                    fbancoCodigo().value("033"),
+                    flote().value("0001"),
+                    fcodigoRegistro().value("3"),
+                    fsequencialRegistro(),
+                    field("segmento").value("I").length(1),
+                    fmovimentoCodigo().value("01"),
+                    fdataVencimento(),
+                    fvalor().length(15),
+                    fvalorDesconto().value(0).length(15),
+                    fvalorAcrescimo().value(0).length(15),
+                    fdataPagamento(), fvalorPagamento().length(15),
+                    field("qtdeMoeda").filler(Fillers.ZERO_LEFT).value(1).length(15),
+                    fnumeroDocumento().length(20),
+                    focorrencias()
+            ),
+            //PAGAMENTO ATRAVÉS DE TITULOS BANCÁRIOS
+
+            cabecalhoLote(
+                    fbancoCodigo().value("033"),
+                    flote().value("0001"),
+                    fcodigoRegistro().value("1"),
+                    foperacao().value("C"),
+                    fservico().value("01"),
+                    fforma().value("35"),
+                    field("versaoLayoutLote").value("030").length(3),
+                    ftipoInscricao().value("2"),
+                    fcedenteCnpj(),
+                    fconvenio().length(20),
+                    fagencia().length(6),
+                    fconta().length(13),
+                    fdac(),
+                    fcedenteNome().length(30),
+                    field("mensagem1").length(40).filler(Fillers.WHITE_SPACE_LEFT),
+                    field("cedenteEndereco").length(80).filler(Fillers.WHITE_SPACE_LEFT),
+                    focorrencias()
+            ),
+            detalheSegmentoJ(
+                    fbancoCodigo().value("033"),
+                    flote().value("0001"),
+                    fcodigoRegistro().value("3"),
+                    fsequencialRegistro(),
+                    field("segmento").value("I").length(1),
+                    fmovimentoCodigo().value("01"),
+                    fcodigoBarras().length(44),
+                    fcedenteNome().length(30),
+                    fdataVencimento(),
+                    fvalor().length(15),
+                    fvalorDesconto().value(0).length(15),
+                    fvalorAcrescimo().value(0).length(15),
+                    fdataPagamento(), fvalorPagamento().length(15),
+                    field("qtdeMoeda").filler(Fillers.ZERO_LEFT).value(1).length(15),
+                    fnumeroDocumento().length(20),
+                    focorrencias()
+            ),
+            //PAGAMENTO ATRAVÉS DE TITULOS BANCÁRIOS
+
+            cabecalhoLote(
+                    fbancoCodigo().value("033"),
+                    flote().value("0001"),
+                    fcodigoRegistro().value("1"),
+                    foperacao().value("C"),
+                    fservico().value("01"),
+                    fforma().value("35"),
+                    field("versaoLayoutLote").value("030").length(3),
+                    ftipoInscricao().value("2"),
+                    fcedenteCnpj(),
+                    fconvenio().length(20),
+                    fagencia().length(6),
+                    fconta().length(13),
+                    fdac(),
+                    fcedenteNome().length(30),
+                    field("mensagem1").length(40).filler(Fillers.WHITE_SPACE_LEFT),
+                    field("cedenteEndereco").length(80).filler(Fillers.WHITE_SPACE_LEFT),
+                    focorrencias()
+            ),
+            detalheSegmentoJ(
+                    fbancoCodigo().value("033"),
+                    flote().value("0001"),
+                    fcodigoRegistro().value("3"),
+                    fsequencialRegistro(),
+                    field("segmento").value("I").length(1),
+                    fmovimentoCodigo().value("01"),
+                    fcodigoBarras().length(44),
+                    fcedenteNome().length(30),
+                    fdataVencimento(),
+                    fvalor().length(15),
+                    fvalorDesconto().value(0).length(15),
+                    fvalorAcrescimo().value(0).length(15),
+                    fdataPagamento(), fvalorPagamento().length(15),
+                    field("qtdeMoeda").filler(Fillers.ZERO_LEFT).value(1).length(15),
+                    fnumeroDocumento().length(20),
+                    focorrencias()
+            ),
+            detalheSegmentoJ52(
+                    fbancoCodigo().value("033"),
+                    flote(),
+                    fcodigoRegistro().value("3"),
+                    fsequencialRegistro(),
+                    field("segmento").value("J").length(1),
+                    fmovimentoCodigo().value("00"),
+                    field("idRegOpcional").length(2).value("52"),
+                    field("tipoInscricaoSacado").valLen("1"),
+                    fsacadoCpf().length(15),
+                    fsacadoNome().length(40),
+                    //DADOS DO BENEFICIARIO
+                    field("tipoInscricaoCedente").valLen("2"),
+                    fcedenteCnpj().length(15),
+                    fcedenteNome().length(40),
+                    //DADOS DO PAGADORR
+                    //Pagadorr - Dados sobre o Beneficiário responsável pela emissão do título original
+                    field("tipoInscricaoPagadorr").valLen("2"),
+                    field("pagadorrInscricao").length(15).filler(Fillers.ZERO_LEFT),
+                    field("pagadorr").length(40).filler(Fillers.WHITE_SPACE_LEFT)
+            ),
+            //PAGAMENTO DE TRIBUTOS E IMPOSTOS SEM CÓDIGO DE BARRAS
+
+            cabecalhoLote(
+                    fbancoCodigo().value("033"),
+                    flote().value("0001"),
+                    fcodigoRegistro().value("1"),
+                    foperacao().value("C"),
+                    fservico().value("01"),
+                    fforma(),
+                    field("versaoLayoutLote").value("010").length(3),
+                    ftipoInscricao().value("2"),
+                    fcedenteCnpj(),
+                    fconvenio().length(20),
+                    fagencia().length(6),
+                    fconta().length(13),
+                    fdac(),
+                    fcedenteNome().length(30),
+                    field("mensagem1").length(40).filler(Fillers.WHITE_SPACE_LEFT),
+                    field("cedenteEndereco").length(80).filler(Fillers.WHITE_SPACE_LEFT),
+                    focorrencias()
+            ),
+            detalheSegmentoJ(
+                    fbancoCodigo().value("033"),
+                    flote().value("0001"),
+                    fcodigoRegistro().value("3"),
+                    fsequencialRegistro(),
+                    field("segmento").value("N").length(1),
+                    fmovimentoCodigo().value("01"),
+                    fcodigoBarras().length(44),
+                    fcedenteNome().length(30),
+                    fdataVencimento(),
+                    fvalor().length(15),
+                    fvalorDesconto().value(0).length(15),
+                    fvalorAcrescimo().value(0).length(15),
+                    fdataPagamento(), fvalorPagamento().length(15),
+                    field("qtdeMoeda").filler(Fillers.ZERO_LEFT).value(1).length(15),
+                    fnumeroDocumento().length(20),
+                    focorrencias()
+            ),
+            //PAGAMENTO DE TRIBUTOS E CONCESSIONÁRIAS COM CÓDIGO DE BARRAS
+
+            cabecalhoLote(
+                    fbancoCodigo().value("033"),
+                    flote().value("0001"),
+                    fcodigoRegistro().value("1"),
+                    foperacao().value("C"),
+                    fservico().value("01"),
+                    fforma(),
+                    field("versaoLayoutLote").value("010").length(3),
+                    ftipoInscricao().value("2"),
+                    fcedenteCnpj(),
+                    fconvenio().length(20),
+                    fagencia().length(6),
+                    fconta().length(13),
+                    fdac(),
+                    fcedenteNome().length(30),
+                    field("mensagem1").length(40).filler(Fillers.WHITE_SPACE_LEFT),
+                    field("cedenteEndereco").length(80).filler(Fillers.WHITE_SPACE_LEFT),
+                    focorrencias()
+            ),
+            detalheSegmentoJ(
+                    fbancoCodigo().value("033"),
+                    flote().value("0001"),
+                    fcodigoRegistro().value("3"),
+                    fsequencialRegistro(),
+                    field("segmento").value("O").length(1),
+                    fmovimentoCodigo().value("01"),
+                    fcodigoBarras().length(44),
+                    fcedenteNome().length(30),
+                    fdataVencimento(),
+                    fvalor().length(15),
+                    fvalorDesconto().value(0).length(15),
+                    fvalorAcrescimo().value(0).length(15),
+                    fdataPagamento(), fvalorPagamento().length(15),
+                    fnumeroDocumento().length(20),
+                    focorrencias()
+            ),
+            //CAPTURA DE TITULOS DE COBRANÇA - ARQUIVO RETORNO
+
+            cabecalhoLote(
+                    fbancoCodigo().value("033"),
+                    flote().value("0001"),
+                    fcodigoRegistro().value("1"),
+                    foperacao().value("I"),
+                    fservico().value("03"),
+                    fforma(),
+                    field("versaoLayoutLote").value("020").length(3),
+                    ftipoInscricao().value("2"),
+                    fcedenteCnpj(),
+                    fconvenio().length(20),
+                    fagencia().length(6),
+                    fconta().length(13),
+                    fdac(),
+                    fcedenteNome().length(30)
+            ),
+            detalheSegmentoJ(
+                    fbancoCodigo(),
+                    flote().value(1),
+                    fcodigoRegistro().value("3"),
+                    fsequencialRegistro().length(5),
+                    field("segmento").value("J").length(1),
+                    fmovimentoTipo().value(0),
+                    fmovimentoCodigo().value("00"),
+                    fcodigoBarras().length(44),
+                    fsacadoNome().length(30),
+                    fdataVencimento(),
+                    fvalor().length(15),
+                    fvalorDesconto().value(0).length(15),
+                    fvalorAcrescimo().value(0).length(15),
+                    fdataPagamento(), fvalorPagamento().length(15),
+                    field("qtdeMoeda").filler(Fillers.ZERO_LEFT).value(1).length(15),
+                    fnumeroDocumento().length(20),
+                    fnossoNumero().length(20),
+                    fcodigoMoeda()
+            ),
+            rodapeLote(
+                    fbancoCodigo().value("033"),
+                    flote(),
+                    fcodigoRegistro().value("5"),
+                    fquantidadeRegistros().length(5),
+                    fvalorTotalRegistros().length(18),
+                    field("qtedMoedas").length(18).padding(Fillers.ZERO_LEFT).value(1),
+                    field("numAvisoDebito").length(6).filler(Fillers.ZERO_LEFT),
+                    focorrencias()
+            ),
+            rodape(
+                    fbancoCodigo().value("001"),
+                    flote().value(9999), // o mesmo do cabeçalho do lote
+                    fcodigoRegistro().value("9"),
+                    fquantidadeRegistros().length(6),
+                    field("qtedContas").value(0).padding(Fillers.ZERO_LEFT).length(6)
+            )
+    );
+    public static final TagLayout _LAYOUT_ITAU_CNAB240 = flatfile(
+            layout(nome("Layout padrão Banco Itau CNAB240"),
+                    cnab(CNAB_240),
+                    tag("url").value("https://www.bb.com.br/docs/pub/emp/empl/dwn/CbrVer04BB.pdf"),
+                    versao("05")
+            ),
+            cabecalho(
+                    fbancoCodigo().value("341"),
+                    flote().value("0000"),
+                    fcodigoRegistro().value("0"),
+                    fbranco().length(9),
+                    ftipoInscricao().value("2"),
+                    fcedenteCnpj().length(14).padding(Fillers.ZERO_LEFT),
+                    fbranco().length(9),
+                    fconvenio().length(20),
+                    fagencia().length(6),
+                    fconta().length(13),
+                    fbranco().length(9),
+                    fdac(),
+                    fcedenteNome().length(30),
+                    fbancoNome().length(30),
+                    fcodigoArquivo().value(1),
+                    fdataGeracao(),
+                    field("horaGeracao").length(6).format(new SimpleDateFormat("hhmmss")),
+                    fsequencialArquivo().length(6),
+                    field("versaoLayoutArquivo").valLen("103"),
+                    field("densidadeArquivo").value(0).length(5).padding(Fillers.ZERO_LEFT),
+                    focorrencias()
+            ),
+            cabecalhoLote(
+                    fbancoCodigo().value("341"),
+                    flote().value("0001"),
+                    fcodigoRegistro().value("1"),
+                    foperacao().value("R"),
+                    fservico().value("01"),
+                    fforma(),
+                    field("versaoLayoutLote").value("030").length(3),
+                    ftipoInscricao().value("2"),
+                    fcedenteCnpj(),
+                    fbranco().length(9),
+                    fconvenio().length(20),
+                    fagencia().length(6),
+                    fconta().length(13),
+                    fdac(),
+                    fcedenteNome().length(30),
+                    field("mensagem1").length(40).filler(Fillers.WHITE_SPACE_LEFT),
+                    field("cedenteEndereco").length(80).filler(Fillers.WHITE_SPACE_LEFT),
+                    focorrencias()
+            ),
+            detalheSegmentoJ(
+                    fbancoCodigo().value("341"),
+                    flote().value("0001"),
+                    fcodigoRegistro().value("3"),
+                    fsequencialRegistro(),
+                    field("segmento").value("P").length(1),
+                    fcodigoBarras().length(44),
+                    fcedenteNome().length(30),
+                    fdataVencimento(),
+                    fvalor().length(15),
+                    fvalorDesconto().value(0).length(15),
+                    fvalorAcrescimo().value(0).length(15),
+                    fdataPagamento(), fvalorPagamento().length(15),
+                    field("qtdeMoeda").filler(Fillers.ZERO_LEFT).value(1).length(15),
+                    fnumeroDocumento().length(20),
+                    focorrencias()
+            ),
+            detalheSegmentoJ(
+                    fbancoCodigo().value("341"),
+                    flote().value("0001"),
+                    fcodigoRegistro().value("3"),
+                    fsequencialRegistro(),
+                    field("segmento").value("Q").length(1),
+                    ftipoInscricao().value("2"),
+                    fcedenteCnpj().length(14).padding(Fillers.ZERO_LEFT),
+                    fcedenteNome().length(30),
+                    fbranco().length(9),
+                    fdataVencimento(),
+                    fvalor().length(15),
+                    fvalorDesconto().value(0).length(15),
+                    fvalorAcrescimo().value(0).length(15),
+                    fdataPagamento(), fvalorPagamento().length(15),
+                    field("qtdeMoeda").filler(Fillers.ZERO_LEFT).value(1).length(15),
+                    fnumeroDocumento().length(20),
+                    fbranco().length(9),
+                    focorrencias()
+            ),
+            detalheSegmentoJ(
+                    fbancoCodigo().value("341"),
+                    flote().value("0001"),
+                    fcodigoRegistro().value("3"),
+                    fsequencialRegistro(),
+                    field("segmento").value("T").length(1),
+                    fcedenteNome().length(30),
+                    fbranco().length(9),
+                    fdataVencimento(),
+                    fvalor().length(15),
+                    fvalorDesconto().value(0).length(15),
+                    fvalorAcrescimo().value(0).length(15),
+                    fdataPagamento(), fvalorPagamento().length(15),
+                    field("qtdeMoeda").filler(Fillers.ZERO_LEFT).value(1).length(15),
+                    fnumeroDocumento().length(20),
+                    fbranco().length(9),
+                    focorrencias()
+            ),
+            detalheSegmentoJ(
+                    fbancoCodigo().value("341"),
+                    flote().value("0001"),
+                    fcodigoRegistro().value("3"),
+                    fsequencialRegistro(),
+                    field("segmento").value("U").length(1),
+                    fcedenteNome().length(30),
+                    fbranco().length(9),
+                    fdataVencimento(),
+                    fvalor().length(15),
+                    fvalorDesconto().value(0).length(15),
+                    fvalorAcrescimo().value(0).length(15),
+                    fdataPagamento(), fvalorPagamento().length(15),
+                    field("qtdeMoeda").filler(Fillers.ZERO_LEFT).value(1).length(15),
+                    fnumeroDocumento().length(20),
+                    fbranco().length(9),
+                    focorrencias(),
+                    fbranco().length(9)
+            ),
+            rodapeLote(
+                    fbancoCodigo().value("341"),
+                    flote().value("0001"),
+                    fcodigoRegistro().value("5"),
+                    fbranco().length(9),
+                    fquantidadeRegistros().length(9),
+                    fvalorTotalRegistros().length(18),
+                    field("qtedMoedas").length(18).padding(Fillers.ZERO_LEFT).value(1),
+                    field("numAvisoDebito").length(6).filler(Fillers.ZERO_LEFT),
+                    fvalor().length(15),
+                    fbranco().length(9)
+            ),
+            rodape(
+                    fbancoCodigo().value("341"),
+                    flote().value("9999"),
+                    fcodigoRegistro().value("9"),
+                    fquantidadeRegistros().length(6),
+                    fbranco().length(9)
+            )
+    );
+    public static final TagLayout _LAYOUT_CAIXA_CNAB240 = flatfile(
+            layout(nome("Layout padrão Banco Itau CNAB240"),
+                    cnab(CNAB_240),
+                    tag("url").value("https://www.bb.com.br/docs/pub/emp/empl/dwn/CbrVer04BB.pdf"),
+                    versao("05")
+            ),
+            cabecalho(
+                    fbancoCodigo().value("104"),
+                    flote().value("0000"),
+                    fcodigoRegistro().value("0"),
+                    fbranco().length(9),
+                    ftipoInscricao().value("2"),
+                    fcedenteCnpj().length(14).padding(Fillers.ZERO_LEFT),
+                    fbranco().length(9),
+                    fconvenio().length(20),
+                    fagencia().length(6),
+                    fconta().length(13),
+                    fbranco().length(9),
+                    fdac(),
+                    fcedenteNome().length(30),
+                    fbancoNome().length(30),
+                    fcodigoArquivo().value(1),
+                    fdataGeracao(),
+                    field("horaGeracao").length(6).format(new SimpleDateFormat("hhmmss")),
+                    fsequencialArquivo().length(6),
+                    field("versaoLayoutArquivo").valLen("103"),
+                    field("densidadeArquivo").value(0).length(5).padding(Fillers.ZERO_LEFT),
+                    focorrencias()
+            ),
+            cabecalhoLote(
+                    fbancoCodigo().value("104"),
+                    flote(),
+                    fcodigoRegistro().value("1"),
+                    foperacao().value("R"),
+                    fservico().value("01"),
+                    fforma(),
+                    field("versaoLayoutLote").value("060").length(3),
+                    ftipoInscricao().value("2"),
+                    fcedenteCnpj(),
+                    fbranco().length(9),
+                    fconvenio().length(20),
+                    fagencia().length(6),
+                    fconta().length(13),
+                    fdac(),
+                    fcedenteNome().length(30),
+                    field("mensagem1").length(40).filler(Fillers.WHITE_SPACE_LEFT),
+                    field("cedenteEndereco").length(80).filler(Fillers.WHITE_SPACE_LEFT),
+                    focorrencias()
+            ),
+            detalheSegmentoJ(
+                    fbancoCodigo().value("104"),
+                    flote(),
+                    fcodigoRegistro().value("3"),
+                    fsequencialRegistro(),
+                    field("segmento").value("P").length(1),
+                    fcodigoBarras().length(44),
+                    fcedenteNome().length(30),
+                    fdataVencimento(),
+                    fvalor().length(15),
+                    fvalorDesconto().value(0).length(15),
+                    fvalorAcrescimo().value(0).length(15),
+                    fdataPagamento(), fvalorPagamento().length(15),
+                    field("qtdeMoeda").filler(Fillers.ZERO_LEFT).value(1).length(15),
+                    fnumeroDocumento().length(20),
+                    focorrencias()
+            ),
+            detalheSegmentoJ(
+                    fbancoCodigo().value("104"),
+                    flote(),
+                    fcodigoRegistro().value("3"),
+                    fsequencialRegistro(),
+                    field("segmento").value("Q").length(1),
+                    ftipoInscricao().value("2"),
+                    fcedenteCnpj().length(14).padding(Fillers.ZERO_LEFT),
+                    fcedenteNome().length(30),
+                    fbranco().length(9),
+                    fdataVencimento(),
+                    fvalor().length(15),
+                    fvalorDesconto().value(0).length(15),
+                    fvalorAcrescimo().value(0).length(15),
+                    fdataPagamento(), fvalorPagamento().length(15),
+                    field("qtdeMoeda").filler(Fillers.ZERO_LEFT).value(1).length(15),
+                    field("cedenteEndereco").length(80).filler(Fillers.WHITE_SPACE_LEFT),
+                    fbranco().length(9),
+                    focorrencias()
+            ),
+            rodapeLote(
+                    fbancoCodigo().value("104"),
+                    flote(),
+                    fcodigoRegistro().value("5"),
+                    fbranco().length(9),
+                    fquantidadeRegistros().length(9),
+                    fvalorTotalRegistros().length(18),
+                    field("qtedMoedas").length(18).padding(Fillers.ZERO_LEFT).value(1),
+                    field("numAvisoDebito").length(6).filler(Fillers.ZERO_LEFT),
+                    fvalor().length(15),
+                    fbranco().length(9)
+            ),
+            //COMPOSIÇÃO ARQUIVO RETORNO
+
+            cabecalho(
+                    fbancoCodigo().value("104"),
+                    flote().value("0000"),
+                    fcodigoRegistro().value("0"),
+                    fbranco().length(9),
+                    ftipoInscricao().value("2"),
+                    fcedenteCnpj().length(14).padding(Fillers.ZERO_LEFT),
+                    fbranco().length(9),
+                    fconvenio().length(20),
+                    fagencia().length(6),
+                    fconta().length(13),
+                    fbranco().length(9),
+                    fdac(),
+                    fcedenteNome().length(30),
+                    fbancoNome().length(30),
+                    fcodigoArquivo().value(1),
+                    fdataGeracao(),
+                    field("horaGeracao").length(6).format(new SimpleDateFormat("hhmmss")),
+                    fsequencialArquivo().length(6),
+                    field("versaoLayoutArquivo").valLen("040"),
+                    field("densidadeArquivo").value(0).length(5).padding(Fillers.ZERO_LEFT),
+                    focorrencias()
+            ),
+            cabecalhoLote(
+                    fbancoCodigo().value("104"),
+                    flote(),
+                    fcodigoRegistro().value("1"),
+                    foperacao().value("T"),
+                    fservico().value("01"),
+                    fforma(),
+                    field("versaoLayoutLote").value("030").length(3),
+                    ftipoInscricao().value("2"),
+                    fcedenteCnpj(),
+                    fbranco().length(9),
+                    fconvenio().length(20),
+                    fagencia().length(6),
+                    fconta().length(13),
+                    fdac(),
+                    fcedenteNome().length(30),
+                    field("mensagem1").length(40).filler(Fillers.WHITE_SPACE_LEFT),
+                    field("mensagem2").length(40).filler(Fillers.WHITE_SPACE_LEFT),
+                    field("cedenteEndereco").length(80).filler(Fillers.WHITE_SPACE_LEFT),
+                    focorrencias()
+            ),
+            detalheSegmentoJ(
+                    fbancoCodigo().value("104"),
+                    flote(),
+                    fcodigoRegistro().value("3"),
+                    fsequencialRegistro(),
+                    field("segmento").value("T").length(1),
+                    fcedenteNome().length(30),
+                    fbranco().length(9),
+                    fdataVencimento(),
+                    fvalor().length(15),
+                    fvalorDesconto().value(0).length(15),
+                    fvalorAcrescimo().value(0).length(15),
+                    fdataPagamento(), fvalorPagamento().length(15),
+                    field("qtdeMoeda").filler(Fillers.ZERO_LEFT).value(1).length(15),
+                    fnossoNumero().length(20),
+                    fnumeroDocumento().length(20),
+                    fbranco().length(9),
+                    focorrencias()
+            ),
+            detalheSegmentoJ(
+                    fbancoCodigo().value("104"),
+                    flote(),
+                    fcodigoRegistro().value("3"),
+                    fsequencialRegistro(),
+                    field("segmento").value("U").length(1),
+                    fcedenteNome().length(30),
+                    fbranco().length(9),
+                    fdataVencimento(),
+                    fvalor().length(15),
+                    fvalorDesconto().value(0).length(15),
+                    fvalorAcrescimo().value(0).length(15),
+                    fdataPagamento(), fvalorPagamento().length(15),
+                    field("qtdeMoeda").filler(Fillers.ZERO_LEFT).value(1).length(15),
+                    fnumeroDocumento().length(20),
+                    fbranco().length(9),
+                    focorrencias(),
+                    fbranco().length(9)
+            ),
+            rodapeLote(
+                    fbancoCodigo().value("104"),
+                    flote(),
+                    fcodigoRegistro().value("5"),
+                    fbranco().length(9),
+                    fquantidadeRegistros().length(9),
+                    fvalorTotalRegistros().length(18),
+                    field("qtedMoedas").length(18).padding(Fillers.ZERO_LEFT).value(1),
+                    field("numAvisoDebito").length(6).filler(Fillers.ZERO_LEFT),
+                    fvalor().length(15),
+                    fbranco().length(9)
+            ),
+            rodape(
+                    fbancoCodigo().value("341"),
+                    flote().value("9999"),
+                    fcodigoRegistro().value("9"),
+                    fquantidadeRegistros().length(6),
+                    fbranco().length(9)
+            )
+    );
+    public static final TagLayout _LAYOUT_BRADESCO_CNAB240 = flatfile(
+            layout(nome("Layout padrão Banco Itau CNAB240"),
+                    cnab(CNAB_240),
+                    tag("url").value("https://www.bb.com.br/docs/pub/emp/empl/dwn/CbrVer04BB.pdf"),
+                    versao("05")
+            ),
+            cabecalho(
+                    fbancoCodigo().value("237"),
+                    flote().value("0000"),
+                    fcodigoRegistro().value("0"),
+                    fbranco().length(9),
+                    ftipoInscricao().value("2"),
+                    fcedenteCnpj().length(14).padding(Fillers.ZERO_LEFT),
+                    fbranco().length(9),
+                    fconvenio().length(20),
+                    fagencia().length(6),
+                    fconta().length(13),
+                    fbranco().length(9),
+                    fdac(),
+                    fcedenteNome().length(30),
+                    fbancoNome().length(30),
+                    fcodigoArquivo().value(1),
+                    fdataGeracao(),
+                    field("horaGeracao").length(6).format(new SimpleDateFormat("hhmmss")),
+                    fsequencialArquivo().length(6),
+                    field("versaoLayoutArquivo").valLen("089"),
+                    field("densidadeArquivo").value(0).length(5).padding(Fillers.ZERO_LEFT),
+                    focorrencias()
+            ),
+            //PAGAMENTO ATRAVÉS DE CREDITO EM CONTA, CHEQUE, OP, DOC, TED OU PAGAMENTO COM AUTENTICAÇÃO
+
+            cabecalhoLote(
+                    fbancoCodigo().value("237"),
+                    flote(),
+                    fcodigoRegistro().value("1"),
+                    foperacao().value("C"),
+                    fservico().value("01"),
+                    fforma(),
+                    field("versaoLayoutLote").value("045").length(3),
+                    ftipoInscricao().value("2"),
+                    fcedenteCnpj(),
+                    fbranco().length(9),
+                    fconvenio().length(20),
+                    fagencia().length(6),
+                    fconta().length(13),
+                    fdac(),
+                    fcedenteNome().length(30),
+                    field("mensagem1").length(40).filler(Fillers.WHITE_SPACE_LEFT),
+                    field("mensagem2").length(40).filler(Fillers.WHITE_SPACE_LEFT),
+                    field("cedenteEndereco").length(80).filler(Fillers.WHITE_SPACE_LEFT),
+                    focorrencias()
+            ),
+            detalheSegmentoJ(
+                    fbancoCodigo().value("237"),
+                    flote().value("0001"),
+                    fcodigoRegistro().value("3"),
+                    fsequencialRegistro(),
+                    field("segmento").value("A").length(1),
+                    fmovimentoCodigo().value("01"),
+                    fconvenio().length(20),
+                    fagencia().length(6),
+                    fconta().length(13),
+                    fdac(),
+                    fcodigoBarras().length(44),
+                    fsacadoNome().length(30),
+                    fdataVencimento(),
+                    fvalor().length(15),
+                    fvalorDesconto().value(0).length(15),
+                    fvalorAcrescimo().value(0).length(15),
+                    fdataPagamento(), fvalorPagamento().length(15),
+                    field("qtdeMoeda").filler(Fillers.ZERO_LEFT).value(1).length(15),
+                    fnumeroDocumento().length(20),
+                    focorrencias()
+            ),
+            detalheSegmentoJ(
+                    fbancoCodigo().value("237"),
+                    flote().value("0001"),
+                    fcodigoRegistro().value("3"),
+                    fsequencialRegistro(),
+                    field("segmento").value("B").length(1),
+                    fmovimentoCodigo().value("01"),
+                    fconvenio().length(20),
+                    fagencia().length(6),
+                    fconta().length(13),
+                    fdac(),
+                    fcodigoBarras().length(44),
+                    fsacadoNome().length(30),
+                    fdataVencimento(),
+                    fvalor().length(15),
+                    fvalorDesconto().value(0).length(15),
+                    fvalorAcrescimo().value(0).length(15),
+                    fdataPagamento(), fvalorPagamento().length(15),
+                    field("qtdeMoeda").filler(Fillers.ZERO_LEFT).value(1).length(15),
+                    fnumeroDocumento().length(20),
+                    focorrencias()
+            ),
+            //PAGAMENTO DE TÍTULO E COBRANCA
+
+            cabecalhoLote(
+                    fbancoCodigo().value("237"),
+                    flote(),
+                    fcodigoRegistro().value("1"),
+                    foperacao().value("C"),
+                    fservico().value("01"),
+                    fforma(),
+                    field("versaoLayoutLote").value("040").length(3),
+                    ftipoInscricao().value("2"),
+                    fcedenteCnpj(),
+                    fbranco().length(9),
+                    fconvenio().length(20),
+                    fagencia().length(6),
+                    fconta().length(13),
+                    fdac(),
+                    fcedenteNome().length(30),
+                    field("mensagem1").length(40).filler(Fillers.WHITE_SPACE_LEFT),
+                    field("mensagem2").length(40).filler(Fillers.WHITE_SPACE_LEFT),
+                    field("cedenteEndereco").length(80).filler(Fillers.WHITE_SPACE_LEFT),
+                    focorrencias()
+            ),
+            detalheSegmentoJ(
+                    fbancoCodigo().value("237"),
+                    flote(),
+                    fcodigoRegistro().value("3"),
+                    fsequencialRegistro().length(5),
+                    field("segmento").value("J").length(1),
+                    fmovimentoTipo().value(0),
+                    fmovimentoCodigo().value("00"),
+                    fcodigoBarras().length(44),
+                    fsacadoNome().length(30),
+                    fdataVencimento(),
+                    fvalor().length(15),
+                    fvalorDesconto().value(0).length(15),
+                    fvalorAcrescimo().value(0).length(15),
+                    fdataPagamento(), fvalorPagamento().length(15),
+                    field("qtdeMoeda").filler(Fillers.ZERO_LEFT).value(1).length(15),
+                    fnumeroDocumento().length(20),
+                    fnossoNumero().length(20),
+                    fcodigoMoeda()
+            ),
+            //PAGAMENTO TRIBUTOS
+
+            cabecalhoLote(
+                    fbancoCodigo().value("237"),
+                    flote(),
+                    fcodigoRegistro().value("1"),
+                    foperacao().value("C"),
+                    fservico().value("01"),
+                    fforma(),
+                    field("versaoLayoutLote").value("012").length(3),
+                    ftipoInscricao().value("2"),
+                    fcedenteCnpj(),
+                    fbranco().length(9),
+                    fconvenio().length(20),
+                    fagencia().length(6),
+                    fconta().length(13),
+                    fdac(),
+                    fcedenteNome().length(30),
+                    field("mensagem1").length(40).filler(Fillers.WHITE_SPACE_LEFT),
+                    field("mensagem2").length(40).filler(Fillers.WHITE_SPACE_LEFT),
+                    field("cedenteEndereco").length(80).filler(Fillers.WHITE_SPACE_LEFT),
+                    focorrencias()
+            ),
+            detalheSegmentoJ(
+                    fbancoCodigo().value("237"),
+                    flote().value("0001"),
+                    fcodigoRegistro().value("3"),
+                    fsequencialRegistro(),
+                    field("segmento").value("O").length(1),
+                    fmovimentoCodigo().value("01"),
+                    fcodigoBarras().length(44),
+                    fcedenteNome().length(30),
+                    fdataVencimento(),
+                    fvalor().length(15),
+                    fvalorDesconto().value(0).length(15),
+                    fvalorAcrescimo().value(0).length(15),
+                    fdataPagamento(), fvalorPagamento().length(15),
+                    fnumeroDocumento().length(20),
+                    focorrencias()
+            ),
+            detalheSegmentoJ(
+                    fbancoCodigo().value("237"),
+                    flote().value("0001"),
+                    fcodigoRegistro().value("3"),
+                    fsequencialRegistro(),
+                    field("segmento").value("N").length(1),
+                    fmovimentoCodigo().value("01"),
+                    fcodigoBarras().length(44),
+                    fcedenteNome().length(30),
+                    fdataVencimento(),
+                    fvalor().length(15),
+                    fvalorDesconto().value(0).length(15),
+                    fvalorAcrescimo().value(0).length(15),
+                    fdataPagamento(), fvalorPagamento().length(15),
+                    field("qtdeMoeda").filler(Fillers.ZERO_LEFT).value(1).length(15),
+                    fnumeroDocumento().length(20),
+                    focorrencias()
+            ),
+            //BLOQUETO ELETRONICO - (CAPTURA DE TÍTULOS EM COBRANÇA)
+
+            cabecalhoLote(
+                    fbancoCodigo().value("237"),
+                    flote().value("0001"),
+                    fcodigoRegistro().value("1"),
+                    foperacao().value("I"),
+                    fservico().value("03"),
+                    fforma(),
+                    fbranco().length(9),
+                    field("versaoLayoutLote").value("022").length(3),
+                    fbranco().length(9),
+                    ftipoInscricao().value("2"),
+                    fcedenteCnpj(),
+                    fconvenio().length(20),
+                    fagencia().length(6),
+                    fconta().length(13),
+                    fdac(),
+                    fcedenteNome().length(30)
+            ),
+            detalheSegmentoJ(
+                    fbancoCodigo().value("237"),
+                    flote().value("0001"),
+                    fcodigoRegistro().value("3"),
+                    fsequencialRegistro(),
+                    field("segmento").value("G").length(1),
+                    fbranco().length(9),
+                    fmovimentoCodigo().value("01"),
+                    fconvenio().length(20),
+                    fagencia().length(6),
+                    fconta().length(13),
+                    fdac(),
+                    fcodigoBarras().length(44),
+                    fsacadoNome().length(30),
+                    fdataVencimento(),
+                    fvalor().length(15),
+                    fvalorDesconto().value(0).length(15),
+                    fvalorAcrescimo().value(0).length(15),
+                    fdataPagamento(), fvalorPagamento().length(15),
+                    field("qtdeMoeda").filler(Fillers.ZERO_LEFT).value(1).length(15),
+                    fnumeroDocumento().length(20),
+                    focorrencias()
+            ),
+            //ALEGAÇÃO DO SACADO
+
+            cabecalhoLote(
+                    fbancoCodigo().value("237"),
+                    flote(),
+                    fcodigoRegistro().value("1"),
+                    foperacao().value("C"),
+                    fservico().value("29"),
+                    fforma(),
+                    fbranco().length(9),
+                    field("versaoLayoutLote").value("010").length(3),
+                    fbranco().length(9),
+                    ftipoInscricao().value("2"),
+                    fcedenteCnpj(),
+                    fbranco().length(9),
+                    fconvenio().length(20),
+                    fagencia().length(6),
+                    fconta().length(13),
+                    fdac(),
+                    fcedenteNome().length(30)
+            ),
+            detalheSegmentoJ(
+                    fbancoCodigo().value("237"),
+                    flote(),
+                    fcodigoRegistro().value("3"),
+                    fsequencialRegistro(),
+                    field("segmento").value("Y").length(1),
+                    fbranco().length(9),
+                    fmovimentoCodigo().value("40"),
+                    fcodigoBarras().length(44),
+                    focorrencias()
+            ),
+            //BASES DO SISTEMA
+
+            cabecalhoLote(
+                    fbancoCodigo().value("237"),
+                    flote(),
+                    fcodigoRegistro().value("1"),
+                    foperacao().value("C"),
+                    fservico().value("01"),
+                    fforma(),
+                    field("versaoLayoutLote").value("010").length(3),
+                    fbranco().length(9),
+                    ftipoInscricao().value("2"),
+                    fcedenteCnpj(),
+                    fconvenio().length(20),
+                    fagencia().length(6),
+                    fconta().length(13),
+                    fdac(),
+                    fcedenteNome().length(30),
+                    field("mensagem1").length(40).filler(Fillers.WHITE_SPACE_LEFT),
+                    field("mensagem2").length(40).filler(Fillers.WHITE_SPACE_LEFT),
+                    field("cedenteEndereco").length(80).filler(Fillers.WHITE_SPACE_LEFT),
+                    focorrencias()
+            ),
+            rodapeLote(
+                    fbancoCodigo().value("237"),
+                    flote(),
+                    fcodigoRegistro().value("5"),
+                    fbranco().length(9),
+                    fquantidadeRegistros().length(9),
+                    fvalorTotalRegistros().length(18),
+                    field("qtedMoedas").length(18).padding(Fillers.ZERO_LEFT).value(1),
+                    field("numAvisoDebito").length(6).filler(Fillers.ZERO_LEFT),
+                    fvalor().length(15),
+                    fbranco().length(9)
+            ),
+            rodape(
+                    fbancoCodigo().value("341"),
+                    flote().value("9999"),
+                    fcodigoRegistro().value("9"),
+                    fquantidadeRegistros().length(6),
+                    fbranco().length(9)
+            )
+    );
     public static final TagLayout LAYOUT_FEBRABAN_CNAB240
             = _LAYOUT_FEBRABAN_CNAB240.cloneReadonly();
 
-    /*
-     Layout Padrão Febraban CNAB 240 para Remessa de Cobrança
-     */
+    public static final TagLayout LAYOUT_SICREDI_CNAB240
+            = _LAYOUT_SICREDI_CNAB240.cloneReadonly();
+
+    public static final TagLayout LAYOUT_BB_CNAB240
+            = _LAYOUT_BB_CNAB240.cloneReadonly();
+
+    public static final TagLayout LAYOUT_SANTANDER_CNAB240
+            = _LAYOUT_SANTANDER_CNAB240.cloneReadonly();
+
+    public static final TagLayout LAYOUT_ITAU_CNAB240
+            = _LAYOUT_ITAU_CNAB240.cloneReadonly();
+
+    public static final TagLayout LAYOUT_CAIXA_CNAB240
+            = _LAYOUT_CAIXA_CNAB240.cloneReadonly();
+
+    public static final TagLayout LAYOUT_BRADESCO_CNAB240
+            = _LAYOUT_BRADESCO_CNAB240.cloneReadonly();
+
     private static final TagLayout _LAYOUT_FEBRABAN_CNAB240_COBRANCA_REMESSA
             = _LAYOUT_FEBRABAN_CNAB240.clone();
+
+    private static final TagLayout _LAYOUT_SICREDI_CNAB240_COBRANCA_REMESSA
+            = _LAYOUT_SICREDI_CNAB240.clone();
+
+    private static final TagLayout _LAYOUT_BB_CNAB240_COBRANCA_REMESSA
+            = _LAYOUT_BB_CNAB240.clone();
+
+    private static final TagLayout _LAYOUT_SANTANDER_CNAB240_COBRANCA_REMESSA
+            = _LAYOUT_SANTANDER_CNAB240.clone();
+
+    private static final TagLayout _LAYOUT_ITAU_CNAB240_COBRANCA_REMESSA
+            = _LAYOUT_ITAU_CNAB240.clone();
+
+    private static final TagLayout _LAYOUT_CAIXA_CNAB240_COBRANCA_REMESSA
+            = _LAYOUT_ITAU_CNAB240.clone();
+
+    private static final TagLayout _LAYOUT_BRADESCO_CNAB240_COBRANCA_REMESSA
+            = _LAYOUT_BRADESCO_CNAB240.clone();
 
     static {
         _LAYOUT_FEBRABAN_CNAB240_COBRANCA_REMESSA.get(cabecalho())
                 .get(fcodigoArquivo().value('1'));
     }
 
+    static {
+        _LAYOUT_SICREDI_CNAB240_COBRANCA_REMESSA.get(cabecalho())
+                .get(fcodigoArquivo().value('1'));
+    }
+
+    static {
+        _LAYOUT_BB_CNAB240_COBRANCA_REMESSA.get(cabecalho())
+                .get(fcodigoArquivo().value('1'));
+
+    }
+
+    static {
+        _LAYOUT_SANTANDER_CNAB240_COBRANCA_REMESSA.get(cabecalho())
+                .get(fcodigoArquivo().value('1'));
+    }
+
+    static {
+        _LAYOUT_ITAU_CNAB240_COBRANCA_REMESSA.get(cabecalho())
+                .get(fcodigoArquivo().value('1'));
+    }
+
+    static {
+        _LAYOUT_ITAU_CNAB240_COBRANCA_REMESSA.get(cabecalho())
+                .get(fcodigoArquivo().value('1'));
+
+    }
+
+    static {
+        _LAYOUT_BRADESCO_CNAB240_COBRANCA_REMESSA.get(cabecalho())
+                .get(fcodigoArquivo().value('1'));
+    }
     public static final TagLayout LAYOUT_FEBRABAN_CNAB240_COBRANCA_REMESSA
             = _LAYOUT_FEBRABAN_CNAB240_COBRANCA_REMESSA.cloneReadonly();
+
+    public static final TagLayout LAYOUT_SICREDI_CNAB240_COBRANCA_REMESSA
+            = _LAYOUT_SICREDI_CNAB240_COBRANCA_REMESSA.cloneReadonly();
+
+    public static final TagLayout LAYOUT_BB_CNAB240_COBRANCA_REMESSA
+            = _LAYOUT_BB_CNAB240_COBRANCA_REMESSA.cloneReadonly();
+
+    public static final TagLayout LAYOUT_SANTANDER_CNAB240_COBRANCA_REMESSA
+            = _LAYOUT_SANTANDER_CNAB240_COBRANCA_REMESSA.cloneReadonly();
+
+    public static final TagLayout LAYOUT_ITAU_CNAB240_COBRANCA_REMESSA
+            = _LAYOUT_ITAU_CNAB240_COBRANCA_REMESSA.cloneReadonly();
+
+    public static final TagLayout LAYOUT_CAIXA_CNAB240_COBRANCA_REMESSA
+            = _LAYOUT_CAIXA_CNAB240_COBRANCA_REMESSA.cloneReadonly();
+
+    public static final TagLayout LAYOUT_BRADESCO_CNAB240_COBRANCA_REMESSA
+            = _LAYOUT_BRADESCO_CNAB240_COBRANCA_REMESSA.cloneReadonly();
 
     private static final TagLayout _LAYOUT_FEBRABAN_CNAB240_COBRANCA_RETORNO
             = _LAYOUT_FEBRABAN_CNAB240.clone();
 
+    private static final TagLayout _LAYOUT_SICREDI_CNAB240_COBRANCA_RETORNO
+            = _LAYOUT_SICREDI_CNAB240.clone();
+
+    private static final TagLayout _LAYOUT_BB_CNAB240_COBRANCA_RETORNO
+            = _LAYOUT_BB_CNAB240.clone();
+
+    private static final TagLayout _LAYOUT_SANTANDER_CNAB240_COBRANCA_RETORNO
+            = _LAYOUT_SANTANDER_CNAB240.clone();
+
+    private static final TagLayout _LAYOUT_ITAU_CNAB240_COBRANCA_RETORNO
+            = _LAYOUT_ITAU_CNAB240.clone();
+
+    private static final TagLayout _LAYOUT_CAIXA_CNAB240_COBRANCA_RETORNO
+            = _LAYOUT_CAIXA_CNAB240.clone();
+
+    private static final TagLayout _LAYOUT_BRADESCO_CNAB240_COBRANCA_RETORNO
+            = _LAYOUT_BRADESCO_CNAB240.clone();
+
     static {
+
         _LAYOUT_FEBRABAN_CNAB240_COBRANCA_RETORNO.get(cabecalho())
                 .get(fcodigoArquivo().value('2'));
 
+        _LAYOUT_SICREDI_CNAB240_COBRANCA_RETORNO.get(cabecalho())
+                .get(fcodigoArquivo().value('2'));
+
+        _LAYOUT_BB_CNAB240_COBRANCA_RETORNO.get(cabecalho())
+                .get(fcodigoArquivo().value('2'));
+
+        _LAYOUT_SANTANDER_CNAB240_COBRANCA_RETORNO.get(cabecalho())
+                .get(fcodigoArquivo().value('2'));
+
+        _LAYOUT_ITAU_CNAB240_COBRANCA_RETORNO.get(cabecalho())
+                .get(fcodigoArquivo().value('2'));
+
+        _LAYOUT_CAIXA_CNAB240_COBRANCA_RETORNO.get(cabecalho())
+                .get(fcodigoArquivo().value('2'));
+
+        _LAYOUT_BRADESCO_CNAB240_COBRANCA_RETORNO.get(cabecalho())
+                .get(fcodigoArquivo().value('2'));
     }
 
     public static final TagLayout LAYOUT_FEBRABAN_CNAB240_COBRANCA_RETORNO
             = _LAYOUT_FEBRABAN_CNAB240_COBRANCA_RETORNO.cloneReadonly();
+
+    public static final TagLayout LAYOUT_SICREDI_CNAB240_COBRANCA_RETORNO
+            = _LAYOUT_SICREDI_CNAB240_COBRANCA_RETORNO.cloneReadonly();
+
+    public static final TagLayout LAYOUT_BB_CNAB240_COBRANCA_RETORNO
+            = _LAYOUT_BB_CNAB240_COBRANCA_RETORNO.cloneReadonly();
+
+    public static final TagLayout LAYOUT_SANTANDER_CNAB240_COBRANCA_RETORNO
+            = _LAYOUT_SANTANDER_CNAB240_COBRANCA_RETORNO.cloneReadonly();
+
+    public static final TagLayout LAYOUT_ITAU_CNAB240_COBRANCA_RETORNO
+            = _LAYOUT_ITAU_CNAB240_COBRANCA_RETORNO.cloneReadonly();
+
+    public static final TagLayout LAYOUT_CAIXA_CNAB240_COBRANCA_RETORNO
+            = _LAYOUT_CAIXA_CNAB240_COBRANCA_RETORNO.cloneReadonly();
+
+    public static final TagLayout LAYOUT_BRADESCO_CNAB240_COBRANCA_RETORNO
+            = _LAYOUT_BRADESCO_CNAB240_COBRANCA_RETORNO.cloneReadonly();
 
     /*
     
@@ -589,6 +1910,25 @@ public class LayoutsSuportados {
         layoutsSuportadosTmp.add(LAYOUT_FEBRABAN_CNAB240);
         layoutsSuportadosTmp.add(LAYOUT_FEBRABAN_CNAB240_COBRANCA_REMESSA);
         layoutsSuportadosTmp.add(LAYOUT_FEBRABAN_CNAB240_COBRANCA_RETORNO);
+        layoutsSuportadosTmp.add(LAYOUT_SICREDI_CNAB240);
+        layoutsSuportadosTmp.add(LAYOUT_SICREDI_CNAB240_COBRANCA_REMESSA);
+        layoutsSuportadosTmp.add(LAYOUT_SICREDI_CNAB240_COBRANCA_RETORNO);
+        layoutsSuportadosTmp.add(LAYOUT_BB_CNAB240);
+        layoutsSuportadosTmp.add(LAYOUT_BB_CNAB240_COBRANCA_REMESSA);
+        layoutsSuportadosTmp.add(LAYOUT_BB_CNAB240_COBRANCA_RETORNO);
+        layoutsSuportadosTmp.add(LAYOUT_SANTANDER_CNAB240);
+        layoutsSuportadosTmp.add(LAYOUT_SANTANDER_CNAB240_COBRANCA_REMESSA);
+        layoutsSuportadosTmp.add(LAYOUT_SANTANDER_CNAB240_COBRANCA_RETORNO);
+        layoutsSuportadosTmp.add(LAYOUT_ITAU_CNAB240);
+        layoutsSuportadosTmp.add(LAYOUT_ITAU_CNAB240_COBRANCA_REMESSA);
+        layoutsSuportadosTmp.add(LAYOUT_ITAU_CNAB240_COBRANCA_RETORNO);
+        layoutsSuportadosTmp.add(LAYOUT_CAIXA_CNAB240);
+        layoutsSuportadosTmp.add(LAYOUT_CAIXA_CNAB240_COBRANCA_REMESSA);
+        layoutsSuportadosTmp.add(LAYOUT_CAIXA_CNAB240_COBRANCA_RETORNO);
+        layoutsSuportadosTmp.add(LAYOUT_BRADESCO_CNAB240);
+        layoutsSuportadosTmp.add(LAYOUT_BRADESCO_CNAB240_COBRANCA_REMESSA);
+        layoutsSuportadosTmp.add(LAYOUT_BRADESCO_CNAB240_COBRANCA_RETORNO);
+
         /* */
         layoutsSuportados = Collections.unmodifiableList(layoutsSuportadosTmp);
     }

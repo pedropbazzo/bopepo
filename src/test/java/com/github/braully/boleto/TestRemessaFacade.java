@@ -127,6 +127,55 @@ public class TestRemessaFacade {
 //        assertEquals(remessaStr, "");
     }
 
+    @Test
+    public void testRemessaCobancaGenericaSicredi240V5() {
+        RemessaFacade remessa = new RemessaFacade(LayoutsSuportados.LAYOUT_SICREDI_CNAB240);
+        remessa.addNovoCabecalho()
+                .sequencialArquivo(1)
+                .dataGeracao(new Date()).setVal("horaGeracao", new Date())
+                .banco("0", "Banco").cedente("ACME S.A LTDA.", "1").convenio("1", "1", "1", "1");
+
+        remessa.addNovoCabecalhoLote()
+                .operacao("R")//Operação de remessa
+                .servico(1)//Cobrança
+                .forma(1)//Crédito em Conta Corrente
+                .banco("0", "Banco")
+                .cedente("ACME S.A LTDA.", "1")
+                .convenio("1", "1", "1", "1");
+
+        remessa.addNovoDetalheSegmentoJ()
+                .sacado("Fulano de Tal", "0")
+                .codigoBarras("0")
+                .valor(1)
+                .valorDesconto(0).valorAcrescimo(0)//opcionais
+                .dataVencimento(new Date())
+                .numeroDocumento(1)
+                .nossoNumero(1)
+                .banco("0", "Banco").cedente("ACME S.A LTDA.", "1").convenio("1", "1", "1", "1")
+                .sequencialRegistro(1);
+
+        remessa.addNovoDetalheSegmentoJ52()
+                .sacado("Fulano de Tal", "0")
+                .banco("0", "Banco").cedente("ACME S.A LTDA.", "1").convenio("1", "1", "1", "1")
+                .sequencialRegistro(2);
+
+        remessa.addNovoRodapeLote()
+                .quantidadeRegistros(2)
+                .valorTotalRegistros(1)
+                .banco("0", "Banco")
+                .cedente("ACME S.A LTDA.", "1").convenio("1", "1", "1", "1");
+
+        remessa.addNovoRodape()
+                .quantidadeRegistros(1)
+                .valorTotalRegistros(1)
+                .setVal("codigoRetorno", "1")
+                .banco("0", "Banco").cedente("ACME S.A LTDA.", "1").convenio("1", "1", "1", "1");
+
+        String remessaStr = remessa.render();
+        System.err.println(remessaStr);
+//        assertEquals(remessaStr, "");
+    }
+
     @Ignore
     @Test
     public void testRemessaVazia() {
@@ -169,6 +218,138 @@ public class TestRemessaFacade {
                         descricao("Layout padrão do Febraban"),
                         versao("01"),
                         banco(BancosSuportados.BANCO_DO_BRASIL.create()),
+                        cnab(CNAB.CNAB_400),
+                        servico(CNABServico.COBRANCA_REMESSA)
+                ),
+                /*
+                        <GroupOfRecords>
+                        <Record name="cabecalho" description="Protocolo de comunicação">
+                        <GroupOfFields>
+                        <IdType name="CODIGO_REGISTRO" length="1" position="1" value="0" />
+                        <Field name="CODIGO_RETORNO" length="1" />
+                        <Field name="AGENCIA" length="4" type="INTEGER" padding="ZERO_LEFT" />
+                        <Field name="DATA_ARQUIVO" length="6" type="DATE" format="DATE_DDMMYY" />
+                 */
+                cabecalho(
+                        fcodigoRegistro().value(0),
+                        fcodigoRetorno(),
+                        fagencia().length(4),
+                        fconta().length(7),
+                        fdataGeracao()
+                ),
+                titulo(
+                        fcodigoRegistro().value(7)
+                ),
+                /*
+                        <Record name="TRAILLER">
+                        <GroupOfFields>
+                        <IdType name="CODIGO_REGISTRO" length="1" position="1"  value="9"/>
+                        <Field name="CODIGO_RETORNO" length="1" />
+                        <Field name="Filler" length="2" />
+                        <Field name="CODIGO_BANCO" length="3" />
+                        <Field name="Filler" length="10" />
+                        <Field name="QUANTIDADE_TITULOS" length="8" type="BIGDECIMAL" format="DECIMAL_DD" />
+                        <Field name="VALOR_TOTAL_TITULOS" length="15" type="BIGDECIMAL" format="DECIMAL_DD" />
+                        <Field name="Filler" length="8" />
+                        </GroupOfFields>
+                        </Record>
+                 */
+                rodape(
+                        fcodigoRegistro().value(9),
+                        fcodigoRetorno(),
+                        fzero().length(2),
+                        fbranco().length(3),
+                        fzero().length(10),
+                        fquantidadeRegistros().length(8),
+                        fvalorTotalRegistros().length(8),
+                        fzero().length(8)
+                )
+        );
+        return flatfileLayout;
+    }
+
+    public TagLayout layoutBancoBradescoTest() {
+        TagLayout flatfileLayout = flatfile(
+                /*
+                <layout>
+                <name>Arquivo-Febraban_CNAB400</name>
+                <version>Version 00</version>
+                <description>
+                Layout padrão do Febraban
+                </description>
+                </layout>
+                 */
+                layout(
+                        nome("Arquivo-Febraban_CNAB400"),
+                        descricao("Layout padrão do Febraban"),
+                        versao("01"),
+                        banco(BancosSuportados.BANCO_BRADESCO.create()),
+                        cnab(CNAB.CNAB_400),
+                        servico(CNABServico.COBRANCA_REMESSA)
+                ),
+                /*
+                        <GroupOfRecords>
+                        <Record name="cabecalho" description="Protocolo de comunicação">
+                        <GroupOfFields>
+                        <IdType name="CODIGO_REGISTRO" length="1" position="1" value="0" />
+                        <Field name="CODIGO_RETORNO" length="1" />
+                        <Field name="AGENCIA" length="4" type="INTEGER" padding="ZERO_LEFT" />
+                        <Field name="DATA_ARQUIVO" length="6" type="DATE" format="DATE_DDMMYY" />
+                 */
+                cabecalho(
+                        fcodigoRegistro().value(0),
+                        fcodigoRetorno(),
+                        fagencia().length(4),
+                        fconta().length(7),
+                        fdataGeracao()
+                ),
+                titulo(
+                        fcodigoRegistro().value(7)
+                ),
+                /*
+                        <Record name="TRAILLER">
+                        <GroupOfFields>
+                        <IdType name="CODIGO_REGISTRO" length="1" position="1"  value="9"/>
+                        <Field name="CODIGO_RETORNO" length="1" />
+                        <Field name="Filler" length="2" />
+                        <Field name="CODIGO_BANCO" length="3" />
+                        <Field name="Filler" length="10" />
+                        <Field name="QUANTIDADE_TITULOS" length="8" type="BIGDECIMAL" format="DECIMAL_DD" />
+                        <Field name="VALOR_TOTAL_TITULOS" length="15" type="BIGDECIMAL" format="DECIMAL_DD" />
+                        <Field name="Filler" length="8" />
+                        </GroupOfFields>
+                        </Record>
+                 */
+                rodape(
+                        fcodigoRegistro().value(9),
+                        fcodigoRetorno(),
+                        fzero().length(2),
+                        fbranco().length(3),
+                        fzero().length(10),
+                        fquantidadeRegistros().length(8),
+                        fvalorTotalRegistros().length(8),
+                        fzero().length(8)
+                )
+        );
+        return flatfileLayout;
+    }
+
+    public TagLayout layoutBancoSantander() {
+        TagLayout flatfileLayout = flatfile(
+                /*
+                <layout>
+                <name>Arquivo-Febraban_CNAB400</name>
+                <version>Version 00</version>
+                <description>
+                Layout padrão do Febraban
+                </description>
+                </layout>
+                 */
+                layout(
+                        nome("Arquivo-Febraban_CNAB400"),
+                        descricao("Layout padrão do Febraban"),
+                        versao("01"),
+                        banco(BancosSuportados.BANCO_SANTANDER.create()),
                         cnab(CNAB.CNAB_400),
                         servico(CNABServico.COBRANCA_REMESSA)
                 ),
