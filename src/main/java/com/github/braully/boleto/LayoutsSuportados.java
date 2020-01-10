@@ -86,6 +86,7 @@ public class LayoutsSuportados {
                     //Uso Exclusivo FEBRABAN / CNAB21224029-AlfaBrancosG004
                     fbranco().length(29)
             ),
+            //Registro Header de Lote: 3.2.2 -Títulos em Cobrança
             cabecalhoLote(
                     //Controle: Banco, lote e registro
                     //Banco: Código do Banco na Compensação133-NumG001
@@ -150,7 +151,7 @@ public class LayoutsSuportados {
                     //Uso Exclusivo da FEBRABAN/CNAB 17 17 1 - Alfa Brancos G004
                     fbranco().length(1),
                     ftipoInscricao().value("2"),
-                    fcedenteCnpj(),
+                    fcedenteCnpj().length(15),
                     //ConvênioCódigo do Convênio no Banco335220-Alfa*G007
                     //Código adotado pelo Banco para identificar o Contrato entre este e a Empresa Cliente.
                     fconvenio().length(20),
@@ -172,11 +173,14 @@ public class LayoutsSuportados {
                     //Informação 1: Genérica. Quando informada constará em todos os avisos e/ou
                     //documentos originados dos detalhes desse lote. Informada no Header do Lote.
                     field("mensagem1").length(40).filler(Fillers.WHITE_SPACE_LEFT),
-                    field("cedenteEndereco").length(80).filler(Fillers.WHITE_SPACE_LEFT),
+                    field("mensagem2").length(40).filler(Fillers.WHITE_SPACE_LEFT),
+                    fnumeroRemessa().length(8).value(0),
+                    fdataGeracao().length(8),
+                    field("dataCredito").length(8).value("").filler(Fillers.WHITE_SPACE_LEFT),
                     //Uso Exclusivo da FEBRABAN/CNAB
-                    fbranco().length(8),
-                    //Código das Ocorrências p/ Retorno
-                    focorrencias()
+                    fbranco().length(33)
+            //Código das Ocorrências p/ Retorno 
+            //focorrencias()
             ),
             //Registro Detalhe - Segmento J (Obrigatório - Remessa / Retorno)
             detalheSegmentoJ(
@@ -560,9 +564,14 @@ public class LayoutsSuportados {
         layout.get("url").value("https://www.sicredi.com.br/html/para-sua-empresa/recebimentos/cobranca/");
     }
 
+    /**
+     * Particularidades BB CNAB 240 2019
+     * https://www.bb.com.br/docs/pub/emp/empl/dwn/CNAB240SegPQRSTY.pdf
+     */
     static final TagLayout _LAYOUT_BB_CNAB240 = _LAYOUT_FEBRABAN_CNAB240.clone();
 
     static {
+
         //Layout
         TagLayout layout = _LAYOUT_BB_CNAB240.get(layout());
         TagLayout tnome = layout.get("nome");
@@ -610,7 +619,6 @@ public class LayoutsSuportados {
                     substituir os espaços em branco (posições 52 e 53) por "TS".
                     Caso não queira realizar os testes, informe brancos*/
                 fbranco().length(2));
-
     }
 
     static final TagLayout _LAYOUT_SANTANDER_CNAB240 = _LAYOUT_FEBRABAN_CNAB240.clone();

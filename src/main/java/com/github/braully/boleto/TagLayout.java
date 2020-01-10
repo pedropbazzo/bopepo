@@ -604,6 +604,14 @@ public class TagLayout implements Serializable {
         public static TagLayout fnumeroDocumento() {
             return field("numeroDocumento").type(Number.class).padding(Fillers.ZERO_LEFT);
         }
+        
+        /**
+         * Número Remessa/Retorno: G079
+         * @return 
+         */
+        public static TagLayout fnumeroRemessa() {
+            return field("numeroRemessa").type(Number.class).padding(Fillers.ZERO_LEFT);
+        }
 
         /**
          * Tipo de Documento C008 Código adotado pela FEBRABAN para identificar

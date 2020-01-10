@@ -16,6 +16,7 @@
 package com.github.braully.boleto;
 
 import static com.github.braully.boleto.TagLayout.TagCreator.fforma;
+import static com.github.braully.boleto.TagLayout.TagCreator.fnumeroRemessa;
 import static com.github.braully.boleto.TagLayout.TagCreator.foperacao;
 import static com.github.braully.boleto.TagLayout.TagCreator.fsequencialArquivo;
 import static com.github.braully.boleto.TagLayout.TagCreator.fservico;
@@ -62,6 +63,11 @@ public class CabecalhoArquivo extends RegistroArquivo {
 
     public CabecalhoArquivo sequencialArquivo(Integer i) {
         setValue(fsequencialArquivo().nome, i);
+        return this;
+    }
+
+    public CabecalhoArquivo numeroRemessa(Integer i) {
+        setValue(fnumeroRemessa().nome, i);
         return this;
     }
 
