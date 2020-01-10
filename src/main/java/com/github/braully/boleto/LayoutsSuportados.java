@@ -581,7 +581,7 @@ public class LayoutsSuportados {
            07.0 BB5 Campo reservado BB 51 52 2 Alfanumérico Informar brancos.
          */
         cabecalho.insert(fconvenioCabecalho,
-                field("cobrancaCedente").value("0014"),
+                field("cobrancaCedente").valLen("0014"),
                 field("carteira").length(2),
                 field("variacaoCarteira").length(3),
                 fbranco().length(2));
