@@ -583,7 +583,7 @@ public class LayoutsSuportados {
         cabecalho.insert(fconvenioCabecalho,
                 field("cobrancaCedente").valLen("0014"),
                 field("carteira").length(2),
-                field("variacaoCarteira").length(3),
+                field("variacao").length(3),
                 fbranco().length(2));
 
         TagLayout cabecalhoLote = _LAYOUT_BB_CNAB240.get(cabecalhoLote());
@@ -598,7 +598,7 @@ public class LayoutsSuportados {
         cabecalhoLote.insert(fconvenioCabecalhoLote,
                 field("cobrancaCedente").value("0014"),
                 field("carteira").length(2),
-                field("variacaoCarteira").length(3),
+                field("variacao").length(3),
                 /*informar brancos; ou para tratamento de arquivo teste:
                     cliente, antes de realizar os procedimentos abaixo,entre em contato
                     com sua agência, pois a situação de seu intercâmbio eletrônico de

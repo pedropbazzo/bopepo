@@ -113,6 +113,14 @@ public class RegistroArquivo extends Record {
         return setValue(carteira);
     }
 
+    public RegistroArquivo variacao(String variacao) {
+        return setValue(variacao);
+    }
+
+    public RegistroArquivo modalidade(String modalidade) {
+        return setValue(modalidade);
+    }
+
     public String convenio() {
         return getValue(fconvenio().nome);
     }
