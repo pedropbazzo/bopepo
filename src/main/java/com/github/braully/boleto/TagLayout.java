@@ -19,6 +19,7 @@ import java.io.Serializable;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -972,6 +973,10 @@ public class TagLayout implements Serializable {
             return tagin().withValue(banco);
         }
 
+        public static TagLayout banco(String banco) {
+            return tagin().withValue(banco);
+        }
+
         public static TagLayout servico(CNABServico servico) {
             return tagin().withValue(servico);
         }
@@ -1114,6 +1119,7 @@ public class TagLayout implements Serializable {
         return setAttr(len);
     }
 
+    //TODO: Unificar com o field Value
     public TagLayout value(Object len) {
         return setAttr(len);
     }
@@ -1135,6 +1141,16 @@ public class TagLayout implements Serializable {
         if (filhos != null) {
             for (TagLayout filho : filhos) {
                 this.filhos.add(filho);
+            }
+        }
+        return this;
+    }
+
+    public TagLayout insert(TagLayout holder, TagLayout... filhos) {
+        if (holder != null && filhos != null) {
+            int indexOf = this.filhos.indexOf(holder);
+            if (indexOf > 0) {
+                this.filhos.addAll(indexOf, Arrays.asList(filhos));
             }
         }
         return this;
@@ -1192,4 +1208,8 @@ public class TagLayout implements Serializable {
         return true;
     }
 
+    @Override
+    public String toString() {
+        return "Tag{" + nome + "=" + value + " filhos=" + filhos + '}';
+    }
 }

@@ -100,8 +100,17 @@ public class RegistroArquivo extends Record {
         return this;
     }
 
+    public RegistroArquivo convenio(String convenio, String carteira, String agencia, String conta, String dac) {
+        this.convenio(convenio).carteira(carteira).agencia(agencia).conta(conta).dac(dac);
+        return this;
+    }
+
     public RegistroArquivo convenio(String convenio) {
         return setValue(convenio);
+    }
+
+    public RegistroArquivo carteira(String carteira) {
+        return setValue(carteira);
     }
 
     public String convenio() {
