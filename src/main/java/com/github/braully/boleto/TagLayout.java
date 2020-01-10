@@ -1146,7 +1146,17 @@ public class TagLayout implements Serializable {
         return this;
     }
 
-    public TagLayout insert(TagLayout holder, TagLayout... filhos) {
+    public TagLayout insertAfter(TagLayout holder, TagLayout... filhos) {
+        if (holder != null && filhos != null) {
+            int indexOf = this.filhos.indexOf(holder);
+            if (indexOf >= 0) {
+                this.filhos.addAll(indexOf+1, Arrays.asList(filhos));
+            }
+        }
+        return this;
+    }
+
+    public TagLayout insertBefore(TagLayout holder, TagLayout... filhos) {
         if (holder != null && filhos != null) {
             int indexOf = this.filhos.indexOf(holder);
             if (indexOf > 0) {

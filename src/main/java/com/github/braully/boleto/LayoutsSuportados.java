@@ -580,10 +580,10 @@ public class LayoutsSuportados {
            07.0 BB4 Número da variação da carteira de 48 50 3 Numérico Informar o número da variação da carteira de cobrança cobrança BB
            07.0 BB5 Campo reservado BB 51 52 2 Alfanumérico Informar brancos.
          */
-        cabecalho.insert(fconvenioCabecalho,
+        cabecalho.insertAfter(fconvenioCabecalho,
                 field("cobrancaCedente").valLen("0014"),
                 field("carteira").length(2),
-                field("variacao").length(3),
+                field("variacao").length(3).filler(Fillers.ZERO_LEFT),
                 fbranco().length(2));
 
         TagLayout cabecalhoLote = _LAYOUT_BB_CNAB240.get(cabecalhoLote());
@@ -595,10 +595,10 @@ public class LayoutsSuportados {
         11.1 BB3 Número da carteira de cobrança BB 47 48 2 Numérico Informar o número da carteira de cobrança
         11.1 BB4 Número da variação da carteira de 49 51 3 Numérico Informar o número da variação da carteira de cobrança
          */
-        cabecalhoLote.insert(fconvenioCabecalhoLote,
-                field("cobrancaCedente").value("0014"),
+        cabecalhoLote.insertAfter(fconvenioCabecalhoLote,
+                field("cobrancaCedente").valLen("0014"),
                 field("carteira").length(2),
-                field("variacao").length(3),
+                field("variacao").length(3).filler(Fillers.ZERO_LEFT),
                 /*informar brancos; ou para tratamento de arquivo teste:
                     cliente, antes de realizar os procedimentos abaixo,entre em contato
                     com sua agência, pois a situação de seu intercâmbio eletrônico de
