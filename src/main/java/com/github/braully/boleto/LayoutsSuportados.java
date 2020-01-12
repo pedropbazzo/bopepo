@@ -619,6 +619,11 @@ public class LayoutsSuportados {
                     substituir os espaços em branco (posições 52 e 53) por "TS".
                     Caso não queira realizar os testes, informe brancos*/
                 fbranco().length(2));
+        
+//        TagLayout detalheSegmentoP = _LAYOUT_BB_CNAB240.get(detalheSegmentoP());
+//        TagLayout fnossoNumeroDetalhe = detalheSegmentoP.get(fnossoNumero());
+//        fnossoNumeroDetalhe.length(11);
+//        detalheSegmentoP.insertBefore(fnossoNumeroDetalhe, fconvenio().length(9));
     }
 
     static final TagLayout _LAYOUT_SANTANDER_CNAB240 = _LAYOUT_FEBRABAN_CNAB240.clone();
