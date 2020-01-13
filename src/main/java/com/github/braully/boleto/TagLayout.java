@@ -570,7 +570,7 @@ public class TagLayout implements Serializable {
          * @return
          */
         public static TagLayout fcodigoDesconto() {
-            return field("codigoDesconto").length(1).value(2);
+            return field("codigoDesconto").length(1).value(0);
         }
 
         /**
@@ -689,11 +689,11 @@ public class TagLayout implements Serializable {
         }
 
         public static TagLayout fnossoNumero() {
-            return field("nossoNumero").type(Number.class).padding(Fillers.ZERO_LEFT);
+            return field("nossoNumero").type(Number.class).filler(Fillers.ZERO_LEFT);
         }
 
         public static TagLayout fsequencialRegistro() {
-            return field("sequencialRegistro").length(5).type(Number.class).padding(Fillers.ZERO_LEFT);
+            return field("sequencialRegistro").length(5).type(Number.class).filler(Fillers.ZERO_LEFT);
         }
 
         /**
@@ -876,11 +876,11 @@ public class TagLayout implements Serializable {
         }
 
         public static TagLayout fdataAcrescimo() {
-            return fdata().nome("dataAcrescimo").filler(Fillers.ZERO_LEFT);
+            return fdata().nome("dataAcrescimo").filler(Fillers.ZERO_LEFT).value(0);
         }
 
         public static TagLayout fdataDesconto() {
-            return fdata().nome("dataDesconto").filler(Fillers.ZERO_LEFT);
+            return fdata().nome("dataDesconto").filler(Fillers.ZERO_LEFT).value(0);
         }
 
         public static TagLayout fdataGeracao() {

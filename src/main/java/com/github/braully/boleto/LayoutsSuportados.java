@@ -46,7 +46,7 @@ public class LayoutsSuportados {
                     //Uso Exclusivo FEBRABAN / CNAB9179-AlfaBrancosG004
                     fbranco().length(9),
                     ftipoInscricao().value("2"),
-                    fcedenteCnpj().length(14).padding(Fillers.ZERO_LEFT),
+                    fcedenteCnpj().length(14).filler(Fillers.ZERO_LEFT),
                     //ConvênioCódigo do Convênio no Banco335220-Alfa*G007
                     //Código adotado pelo Banco para identificar o Contrato entre este e a Empresa Cliente.
                     fconvenio().length(20),
@@ -78,7 +78,7 @@ public class LayoutsSuportados {
                     fsequencialArquivo().length(6),
                     field("versaoLayoutArquivo").valLen("103"),
                     //Densidade de gravação (BPI), do arquivo encaminhado. Domínio:1600 BPI ou 6250 BPI
-                    field("densidadeArquivo").value(0).length(5).padding(Fillers.ZERO_LEFT),
+                    field("densidadeArquivo").value(0).length(5).filler(Fillers.ZERO_LEFT),
                     //Para Uso Reservado do Banco17219120-AlfaG021
                     fbranco().length(20),
                     //Para Uso Reservado da Empresa19221120-AlfaG022
@@ -396,7 +396,7 @@ public class LayoutsSuportados {
                     fdataVencimento(),
                     fvalor(),
                     field("agenciaCobradora")
-                            .length(6).padding(Fillers.ZERO_LEFT)
+                            .length(6).filler(Fillers.ZERO_LEFT)
                             .value(0),
                     fespecieTitulo(),
                     faceite(),
@@ -451,7 +451,7 @@ public class LayoutsSuportados {
                     field("numeroInscricaoAvalista")
                             .length(15).filler(Fillers.ZERO_LEFT)
                             .value(0),
-                    field("nomeAvalista").padding(Fillers.WHITE_SPACE_RIGHT)
+                    field("nomeAvalista").filler(Fillers.WHITE_SPACE_RIGHT)
                             .length(40).value(""),
                     fbancoCodigo()
                             .nome("bancoCodigoCorrespondente")
@@ -516,12 +516,12 @@ public class LayoutsSuportados {
                     //04.5 CNAB Uso Exclusivo FEBRABAN/CNAB 9 17 9 - Alfa Brancos G004
                     fbranco().length(9),
                     //Quantidade de Registros do Lote 18 23 6 - Num *G057
-                    fquantidadeRegistros().length(6), fvalorTotalRegistros().length(18),
+                    fquantidadeRegistros().length(6).value(0), fvalorTotalRegistros().length(18).value(0),
                     //Qtde de Moeda Somatória de Quantidade de Moedas 42 59 13 5 Num G058
                     //G058 Somatória de Quantidade de Moedas
                     //Valor obtido pela somatória das quantidades de moeda dos registros de detalhe
                     //(Registro = '3' / Código de Segmento = {'A' / 'J'}).
-                    field("qtedMoedas").length(18).padding(Fillers.ZERO_LEFT).value(1),
+                    field("qtedMoedas").length(18).filler(Fillers.ZERO_LEFT).value(1),
                     //08.5 Número Aviso Débito Número Aviso Débito 60 65 6 - Num G066
                     //Número do Aviso de Débito
                     //Número atribuído pelo Banco para identificar um Débito efetuado na Conta Corrente a
@@ -538,9 +538,9 @@ public class LayoutsSuportados {
                     //Uso Exclusivo FEBRABAN/CNAB9179-AlfaBrancosG004
                     fbranco().length(9),
                     //Qtde. de LotesQuantidade de Lotes do Arquivo18236-NumG049
-                    field("qtdeLotes").value(1).padding(Fillers.ZERO_LEFT).length(6),
+                    field("qtdeLotes").value(1).filler(Fillers.ZERO_LEFT).length(6),
                     //Qtde. de RegistrosQuantidade de Registros do Arquivo24296-NumG0
-                    fquantidadeRegistros().length(6),
+                    fquantidadeRegistros().length(6).value(0),
                     //Qtde. de Contas Concil.Qtde de Contas p/ Conc. (Lotes)30356-Num*G037
                     /**
                      * Número indicativo de lotes de Conciliação Bancária
@@ -548,7 +548,7 @@ public class LayoutsSuportados {
                      * Tipo de Operação = 'E'. Campo específico para o serviço
                      * de Conciliação Bancária
                      */
-                    field("qtedContas").value(0).padding(Fillers.ZERO_LEFT).length(6),
+                    field("qtedContas").value(0).filler(Fillers.ZERO_LEFT).length(6),
                     //Uso Exclusivo FEBRABAN/CNAB9179-AlfaBrancosG004
                     fbranco().length(205)
             )
@@ -620,13 +620,15 @@ public class LayoutsSuportados {
                     Caso não queira realizar os testes, informe brancos*/
                 fbranco().length(2));
 
-        
         TagLayout detalheSegmentoP = _LAYOUT_BB_CNAB240.get(detalheSegmentoP());
         //Importante:todos os "nosso número" devem ser alinhados à esquerda com brancos à direita. 
         TagLayout fnossoNumeroDetalhe = detalheSegmentoP.get(fnossoNumero());
-        fnossoNumeroDetalhe.filler(Fillers.WHITE_SPACE_RIGHT);
+        fnossoNumeroDetalhe.type(String.class).filler(Fillers.WHITE_SPACE_RIGHT);
 //        fnossoNumeroDetalhe.length(11);
 //        detalheSegmentoP.insertBefore(fnossoNumeroDetalhe, fconvenio().length(9));
+        System.out.println(detalheSegmentoP);
+        System.out.println(fnossoNumeroDetalhe);
+
     }
 
     static final TagLayout _LAYOUT_SANTANDER_CNAB240 = _LAYOUT_FEBRABAN_CNAB240.clone();
