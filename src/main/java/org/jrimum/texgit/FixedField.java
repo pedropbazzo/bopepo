@@ -49,15 +49,7 @@ public class FixedField<G> extends Field<G> implements IFixedField<G> {
      * Tamanho da string de escrita do campo.
      * </p>
      */
-    private Integer instantLength;
-
-    /**
-     * <p>
-     * Ao ultrapassar o tamanho, define se pode truncar ou se dispara uma
-     * exceção.
-     * </p>
-     */
-    private boolean truncate;
+    protected Integer instantLength;
 
     /**
      *
@@ -136,32 +128,17 @@ public class FixedField<G> extends Field<G> implements IFixedField<G> {
      */
     @Override
     public String write() {
-
         String str = fill(super.write());
-
         instantLength = str.length();
-
         if (isTruncate() && instantLength > getFixedLength()) {
             str = str.substring(0, getFixedLength());
             instantLength = getFixedLength();
         }
-
         isFixedAsDefined();
-
-        return str;
-    }
-
-    private String fill(String str) {
-
-        if (isNotNull(filler)) {
-            str = filler.fill(str, length);
-        }
-
         return str;
     }
 
     public boolean isFixedAsDefined() throws IllegalStateException {
-
         if (instantLength.equals(getFixedLength())) {
             return true;
         } else {

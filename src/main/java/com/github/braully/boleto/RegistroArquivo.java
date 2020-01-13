@@ -22,14 +22,9 @@ import static com.github.braully.boleto.TagLayout.TagCreator.fcedenteCnpj;
 import static com.github.braully.boleto.TagLayout.TagCreator.fcedenteNome;
 import static com.github.braully.boleto.TagLayout.TagCreator.fconta;
 import static com.github.braully.boleto.TagLayout.TagCreator.fconvenio;
-import static com.github.braully.boleto.TagLayout.TagCreator.fforma;
-import static com.github.braully.boleto.TagLayout.TagCreator.foperacao;
-import static com.github.braully.boleto.TagLayout.TagCreator.fsequencialArquivo;
 import static com.github.braully.boleto.TagLayout.TagCreator.fsequencialRegistro;
-import static com.github.braully.boleto.TagLayout.TagCreator.fservico;
 import java.text.Format;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import org.jrimum.texgit.FixedField;
 import org.jrimum.texgit.IFiller;
@@ -249,6 +244,9 @@ public class RegistroArquivo extends Record {
         filler = (IFiller) l.getObj("padding");
         if (Objects.isNotNull(filler)) {
             fixedField.setFiller(filler);
+        }
+        if (l.isAttr("truncate")) {
+            fixedField.setTruncate(true);
         }
         if (l.isAttr("id")) {
             if (this.getIdType() == null) {

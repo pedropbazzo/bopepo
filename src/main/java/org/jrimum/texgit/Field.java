@@ -94,6 +94,14 @@ public class Field<G> implements org.jrimum.texgit.IField<G>, TextStream {
     private boolean blankAccepted;
 
     /**
+     * <p>
+     * Ao ultrapassar o tamanho, define se pode truncar ou se dispara uma
+     * exceção.
+     * </p>
+     */
+    protected boolean truncate;
+
+    /**
      *
      */
     public Field() {
@@ -290,7 +298,14 @@ public class Field<G> implements org.jrimum.texgit.IField<G>, TextStream {
         }
     }
 
-    private String fill(String str) {
+    protected String truncate(String str) {
+        if (truncate && length != null && str.length() > length) {
+            str = str.substring(0, length);
+        }
+        return str;
+    }
+
+    protected String fill(String str) {
         if (length != null && isNotNull(filler)) {
             str = filler.fill(str, length);
         }
@@ -312,8 +327,10 @@ public class Field<G> implements org.jrimum.texgit.IField<G>, TextStream {
             }
             str = fill(str);
             if (length != null && str.length() != length) {
-                throw new IllegalArgumentException("O campo [ " + str
-                        + " ] é incompatível com o especificado [" + length + "]!");
+                if (!truncate) {
+                    throw new IllegalArgumentException("O campo [ " + str
+                            + " ] é incompatível com o especificado [" + length + "]!");
+                }
             }
             return StringUtil.eliminateAccent(str).toUpperCase();
         } catch (Exception e) {

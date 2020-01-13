@@ -124,27 +124,27 @@ public class TagLayout implements Serializable {
          * @return
          */
         public static TagLayout fsacadoNome() {
-            return field("sacadoNome").padding(Fillers.WHITE_SPACE_RIGHT).length(30);
+            return field("sacadoNome").truncate(true).padding(Fillers.WHITE_SPACE_RIGHT).length(30);
         }
 
         public static TagLayout fendereco() {
-            return field("endereco").padding(Fillers.WHITE_SPACE_RIGHT).length(40);
+            return field("endereco").truncate(true).padding(Fillers.WHITE_SPACE_RIGHT).length(40);
         }
 
         public static TagLayout fbairro() {
-            return field("bairro").padding(Fillers.WHITE_SPACE_RIGHT).length(40);
+            return field("bairro").truncate(true).padding(Fillers.WHITE_SPACE_RIGHT).length(40);
         }
 
         public static TagLayout fcep() {
-            return field("cep").padding(Fillers.ZERO_RIGHT).length(8);
+            return field("cep").truncate(true).padding(Fillers.ZERO_RIGHT).length(8);
         }
 
         public static TagLayout fcidade() {
-            return field("cidade").padding(Fillers.WHITE_SPACE_RIGHT).length(15);
+            return field("cidade").truncate(true).padding(Fillers.WHITE_SPACE_RIGHT).length(15);
         }
 
         public static TagLayout fuf() {
-            return field("uf").length(2).padding(Fillers.WHITE_SPACE_RIGHT);
+            return field("uf").truncate(true).length(2).padding(Fillers.WHITE_SPACE_RIGHT);
         }
 
         /**
@@ -230,7 +230,7 @@ public class TagLayout implements Serializable {
         }
 
         public static TagLayout fcedenteNome() {
-            return field("cedenteNome").padding(Fillers.WHITE_SPACE_RIGHT).length(30);
+            return field("cedenteNome").truncate(true).padding(Fillers.WHITE_SPACE_RIGHT).length(30);
         }
 
         public static TagLayout fquantidadeRegistros() {
@@ -504,7 +504,7 @@ public class TagLayout implements Serializable {
         }
 
         public static TagLayout fvalor() {
-            return field("valor").length(15).type(Number.class).padding(Fillers.ZERO_LEFT);
+            return field("valor").length(15).type(Number.class).filler(Fillers.ZERO_LEFT);
         }
 
         public static TagLayout fvalorPagamento() {
@@ -551,7 +551,7 @@ public class TagLayout implements Serializable {
          * @return
          */
         public static TagLayout fcodigoAcrescimo() {
-            return field("codigoAcrescimo").length(1).value(2);
+            return field("codigoAcrescimo").length(1).value(3);
         }
 
         /**
@@ -604,10 +604,11 @@ public class TagLayout implements Serializable {
         public static TagLayout fnumeroDocumento() {
             return field("numeroDocumento").type(Number.class).padding(Fillers.ZERO_LEFT);
         }
-        
+
         /**
          * Número Remessa/Retorno: G079
-         * @return 
+         *
+         * @return
          */
         public static TagLayout fnumeroRemessa() {
             return field("numeroRemessa").type(Number.class).padding(Fillers.ZERO_LEFT);
@@ -1119,6 +1120,10 @@ public class TagLayout implements Serializable {
         return setAttr(bol);
     }
 
+    public TagLayout truncate(boolean bol) {
+        return setAttr(bol);
+    }
+
     public TagLayout length(int len) {
         return setAttr(len);
     }
@@ -1158,7 +1163,7 @@ public class TagLayout implements Serializable {
         if (holder != null && filhos != null) {
             int indexOf = this.filhos.indexOf(holder);
             if (indexOf >= 0) {
-                this.filhos.addAll(indexOf+1, Arrays.asList(filhos));
+                this.filhos.addAll(indexOf + 1, Arrays.asList(filhos));
             }
         }
         return this;

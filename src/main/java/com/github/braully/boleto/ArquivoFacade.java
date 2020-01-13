@@ -15,18 +15,10 @@
  */
 package com.github.braully.boleto;
 
-import java.text.Format;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import static com.github.braully.boleto.TagLayout.TagCreator.*;
-import java.util.logging.Level;
 import org.apache.log4j.Logger;
-import org.jrimum.texgit.FixedField;
-import org.jrimum.texgit.IFiller;
-import org.jrimum.texgit.Record;
 import org.jrimum.utilix.FileUtil;
-import org.jrimum.utilix.Objects;
 
 /**
  *

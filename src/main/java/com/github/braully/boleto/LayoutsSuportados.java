@@ -445,7 +445,7 @@ public class LayoutsSuportados {
                     fendereco().length(40).value(""),
                     fbairro().length(15).value(""),
                     fcep().length(8).value(0),
-                    fcidade().length(15).value(""),
+                    fcidade().truncate(true).length(15).value(""),
                     fuf().length(2).value(""),
                     field("tipoInscricaoAvalista").length(1).value(0),
                     field("numeroInscricaoAvalista")
@@ -619,9 +619,12 @@ public class LayoutsSuportados {
                     substituir os espaços em branco (posições 52 e 53) por "TS".
                     Caso não queira realizar os testes, informe brancos*/
                 fbranco().length(2));
+
         
-//        TagLayout detalheSegmentoP = _LAYOUT_BB_CNAB240.get(detalheSegmentoP());
-//        TagLayout fnossoNumeroDetalhe = detalheSegmentoP.get(fnossoNumero());
+        TagLayout detalheSegmentoP = _LAYOUT_BB_CNAB240.get(detalheSegmentoP());
+        //Importante:todos os "nosso número" devem ser alinhados à esquerda com brancos à direita. 
+        TagLayout fnossoNumeroDetalhe = detalheSegmentoP.get(fnossoNumero());
+        fnossoNumeroDetalhe.filler(Fillers.WHITE_SPACE_RIGHT);
 //        fnossoNumeroDetalhe.length(11);
 //        detalheSegmentoP.insertBefore(fnossoNumeroDetalhe, fconvenio().length(9));
     }
