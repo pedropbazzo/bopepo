@@ -884,7 +884,10 @@ public class TagLayout implements Serializable {
         }
 
         public static TagLayout fdataGeracao() {
-            return field("dataGeracao").type(Date.class).format(new SimpleDateFormat("ddMMyyyy")).length(8);
+            return field("dataGeracao").type(Date.class)
+                    .format(new SimpleDateFormat("ddMMyyyy"))
+                    .length(8)
+                    .filler(Fillers.ZERO_LEFT).value(0);
         }
 
         public static TagLayout fdataOcorrencia() {
