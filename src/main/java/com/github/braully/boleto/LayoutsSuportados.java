@@ -623,7 +623,7 @@ public class LayoutsSuportados {
         TagLayout detalheSegmentoP = _LAYOUT_BB_CNAB240.get(detalheSegmentoP());
         //Importante:todos os "nosso número" devem ser alinhados à esquerda com brancos à direita. 
         TagLayout fnossoNumeroDetalhe = detalheSegmentoP.get(fnossoNumero());
-        fnossoNumeroDetalhe.type(String.class).filler(Fillers.WHITE_SPACE_RIGHT);
+        fnossoNumeroDetalhe.filler(Fillers.WHITE_SPACE_RIGHT);
 //        fnossoNumeroDetalhe.length(11);
 //        detalheSegmentoP.insertBefore(fnossoNumeroDetalhe, fconvenio().length(9));
         //System.out.println(detalheSegmentoP);
