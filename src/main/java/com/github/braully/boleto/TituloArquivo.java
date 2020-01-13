@@ -112,7 +112,7 @@ public class TituloArquivo extends RegistroArquivo {
     }
 
     public TituloArquivo nossoNumero(Object string) {
-        return (TituloArquivo) setValue(string);
+        return (TituloArquivo) setValue("nossoNumero", string);
     }
 
     public String nossoNumero() {
