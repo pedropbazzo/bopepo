@@ -538,7 +538,7 @@ public class LayoutsSuportados {
                     //Uso Exclusivo FEBRABAN/CNAB9179-AlfaBrancosG004
                     fbranco().length(9),
                     //Qtde. de LotesQuantidade de Lotes do Arquivo18236-NumG049
-                    field("qtdeLotes").value(1).filler(Fillers.ZERO_LEFT).length(6),
+                    field("qtdeLotes").padding(Fillers.ZERO_LEFT).length(6).value(1),
                     //Qtde. de RegistrosQuantidade de Registros do Arquivo24296-NumG0
                     fquantidadeRegistros().length(6).value(0),
                     //Qtde. de Contas Concil.Qtde de Contas p/ Conc. (Lotes)30356-Num*G037
@@ -626,8 +626,8 @@ public class LayoutsSuportados {
         fnossoNumeroDetalhe.type(String.class).filler(Fillers.WHITE_SPACE_RIGHT);
 //        fnossoNumeroDetalhe.length(11);
 //        detalheSegmentoP.insertBefore(fnossoNumeroDetalhe, fconvenio().length(9));
-        System.out.println(detalheSegmentoP);
-        System.out.println(fnossoNumeroDetalhe);
+        //System.out.println(detalheSegmentoP);
+        //System.out.println(fnossoNumeroDetalhe);
 
     }
 
