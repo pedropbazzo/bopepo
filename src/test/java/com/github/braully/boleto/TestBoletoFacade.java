@@ -1,10 +1,8 @@
 package com.github.braully.boleto;
 
-import java.math.BigDecimal;
 import org.jrimum.bopepo.parametro.ParametroBancoSicredi;
 import org.jrimum.bopepo.parametro.ParametroCaixaEconomicaFederal;
 import org.jrimum.bopepo.view.BoletoViewer;
-import org.jrimum.domkee.banco.ParametrosBancariosMap;
 import org.junit.Test;
 
 /*
