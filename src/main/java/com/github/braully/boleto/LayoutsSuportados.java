@@ -481,23 +481,44 @@ public class LayoutsSuportados {
                     //Valor ou percentual de desconto a ser concedido sobre o título de cobrança.
                     fvalorDesconto().nome("valorDescontoExtra"),
                     //Multa/Juros
-                    fcodigoAcrescimo(),
+                    /**
+                     * G073: Código adotado pela FEBRABAN para identificação do
+                     * critério de pagamento de pena pecuniária, a ser aplicada
+                     * pelo atraso do pagamento do Título. Domínio:'1' = Valor
+                     * Fixo'2' = Percentual
+                     */
+                    fcodigoAcrescimo().value(0),
+                    /**
+                     * Caso não tenha multa, informar 'zeros'. Sistema aceita a
+                     * mesma data do vencimento, ou dia seguinte.
+                     */
                     fdataAcrescimo(),
+                    /**
+                     * Caso não tenha multa, informar 'zeros'. Sistema aceita a
+                     * mesma data do vencimento, ou dia seguinte.
+                     */
                     fvalorAcrescimo(),
-                    field("infoPagador").length(10),
-                    field("mensagem3").length(40),
-                    field("mensagem4").length(40),
+                    /**
+                     * Informação ao PagadorTexto de observações destinado ao
+                     * envio de informações do Beneficiário ao Pagador.Este
+                     * campo só poderá ser utilizado, caso haja troca de
+                     * arquivos magnéticos entre o Banco e o Pagador.
+                     */
+                    field("infoPagador").length(10).filler(Fillers.WHITE_SPACE_RIGHT).value(""),
+                    field("mensagem3").length(40).filler(Fillers.WHITE_SPACE_RIGHT).value(""),
+                    field("mensagem4").length(40).filler(Fillers.WHITE_SPACE_RIGHT).value(""),
                     fbranco().length(20),
                     //C038: Código da Ocorrência do Pagador
                     //Código adotado pela FEBRABAN para identificar a ocorrência do Pagador (Descrição A001) 
                     // a(s) qual(is) o Beneficiário não concorda.
                     //Somente será utilizado para o Código de Movimento '30' (Descrição C004).
-                    fcodigoOcorrencia().nome("codigoOcorrenciaPagador").length(8),
+                    fcodigoOcorrencia().nome("codigoOcorrenciaPagador").length(8)
+                            .filler(Fillers.ZERO_LEFT).value(0),
                     //Dados para debito
-                    fbancoCodigo().nome("bancoCodigoDebito"),
-                    fagencia().nome("agenciaDebito"),
-                    fconta().nome("contaDebito"),
-                    fdac().nome("dacDebito"),
+                    fbancoCodigo().nome("bancoCodigoDebito").value(0),
+                    fagencia().nome("agenciaDebito").value(0),
+                    fconta().nome("contaDebito").value(0),
+                    fdac().nome("dacDebito").value(0),
                     //C0039: Aviso para Débito Automático Código adotado pela FEBRABAN para 
                     //identificação da emissão do aviso de débito automático em conta corrente.
                     //Domínio: '01' = Emite o Aviso com o Endereço Informado no Arquivo Remessa
