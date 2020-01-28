@@ -872,7 +872,7 @@ public class TagLayout implements Serializable {
          * @return
          */
         public static TagLayout fdata() {
-            return field("data").length(8).format(new SimpleDateFormat("ddMMyyyy"));
+            return field("data").filler(Fillers.ZERO_LEFT).length(8).format(new SimpleDateFormat("ddMMyyyy"));
         }
 
         public static TagLayout fdataAcrescimo() {

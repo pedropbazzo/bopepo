@@ -22,7 +22,6 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.jrimum.bopepo.BancosSuportados;
 import org.jrimum.bopepo.Boleto;
 import org.jrimum.bopepo.LinhaDigitavel;
-import org.jrimum.bopepo.parametro.ParametroBancoSicredi;
 import org.jrimum.domkee.banco.Agencia;
 import org.jrimum.domkee.banco.Carteira;
 import org.jrimum.domkee.banco.Cedente;

@@ -22,6 +22,8 @@ import static com.github.braully.boleto.TagLayout.TagCreator.fcodigoBarras;
 import static com.github.braully.boleto.TagLayout.TagCreator.fdataDesconto;
 import static com.github.braully.boleto.TagLayout.TagCreator.fdataOcorrencia;
 import static com.github.braully.boleto.TagLayout.TagCreator.fendereco;
+import static com.github.braully.boleto.TagLayout.TagCreator.fmovimentoCodigo;
+import static com.github.braully.boleto.TagLayout.TagCreator.fnossoNumero;
 import static com.github.braully.boleto.TagLayout.TagCreator.fnumeroDocumento;
 import static com.github.braully.boleto.TagLayout.TagCreator.focorrencias;
 import static com.github.braully.boleto.TagLayout.TagCreator.fsacadoCpf;
@@ -112,7 +114,14 @@ public class TituloArquivo extends RegistroArquivo {
     }
 
     public TituloArquivo nossoNumero(Object string) {
-        return (TituloArquivo) setValue("nossoNumero", string);
+        return (TituloArquivo) setValue(fnossoNumero().nome, string);
+    }
+
+    /**
+     * @see com.​github.​braully.​boleto.​TagLayout.​TagCreator.fmovimentoCodigo()
+     */
+    public TituloArquivo movimentoCodigo(Object string) {
+        return (TituloArquivo) setValue(fmovimentoCodigo().nome, string);
     }
 
     public String nossoNumero() {
