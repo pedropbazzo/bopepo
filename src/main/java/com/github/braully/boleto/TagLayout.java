@@ -179,7 +179,9 @@ public class TagLayout implements Serializable {
          * Alteração do Valor Máximo/Percentual
          */
         public static TagLayout fmovimentoCodigo() {
-            return field("movimentoCodigo").filler(Fillers.ZERO_LEFT).length(2);
+            return field("movimentoCodigo")
+                    .padding(Fillers.ZERO_LEFT)
+                    .length(2);
         }
 
         /**
