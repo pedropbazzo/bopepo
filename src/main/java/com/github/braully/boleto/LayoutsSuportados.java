@@ -145,9 +145,10 @@ public class LayoutsSuportados {
                             '98' = Pagamentos Diversos                     
                      */
                     fservico(),
-                    //Código adotado pela FEBRABAN para identificar a operação que está contida no lote.
-                    fforma(),
-                    field("versaoLayoutLote").value("040").length(3),
+                    //Uso Exclusivo FEBRABAN/CNAB
+                    fbranco().length(2),
+                    //Nº da Versão do Layout do Lote
+                    field("versaoLayoutLote").value("060").length(3),
                     //Uso Exclusivo da FEBRABAN/CNAB 17 17 1 - Alfa Brancos G004
                     fbranco().length(1),
                     ftipoInscricao().value("2"),
