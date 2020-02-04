@@ -145,9 +145,10 @@ public class LayoutsSuportados {
                             '98' = Pagamentos Diversos                     
                      */
                     fservico(),
-                    //Código adotado pela FEBRABAN para identificar a operação que está contida no lote.
-                    fforma(),
-                    field("versaoLayoutLote").value("040").length(3),
+                    //Uso Exclusivo FEBRABAN/CNAB
+                    fbranco().length(2),
+                    //Nº da Versão do Layout do Lote
+                    field("versaoLayoutLote").value("060").length(3),
                     //Uso Exclusivo da FEBRABAN/CNAB 17 17 1 - Alfa Brancos G004
                     fbranco().length(1),
                     ftipoInscricao().value("2"),
@@ -259,7 +260,7 @@ public class LayoutsSuportados {
                     //Código adotado pela FEBRABAN, para identificar o tipo de movimentação enviado nos
                     //registros do arquivo de remessa.
                     //Cada Banco definirá os campos a serem alterados para o código de movimento '31'
-                    fmovimentoCodigo().value("00"),
+                    fmovimentoCodigo().value("01"),
                     //08.4.J52 Código Reg. Opcional Identificação Registro Opcional 18 19 2 - Num “52” G067
                     fidOpcional().id(true).value("52"),
                     //DADOS DO PAGADOR
@@ -437,7 +438,7 @@ public class LayoutsSuportados {
                     fsegmento().id(true).value("Q"),
                     fbranco().length(1),
                     //*C004
-                    fmovimentoCodigo().value(1),//Default 1
+                    fmovimentoCodigo().value("01"),//Default '01' = Entrada de Títulos
                     //Tipo de Inscrição 
                     ftipoInscricao().value(1),
                     fsacadoCpf().length(15),
@@ -469,7 +470,7 @@ public class LayoutsSuportados {
                     fsegmento().id(true).value("R"),
                     fbranco().length(1),
                     //*C004
-                    fmovimentoCodigo().value(1),
+                    fmovimentoCodigo().value("01"),//Default '01' = Entrada de Títulos
                     //Desconto 2
                     fcodigoDesconto(),
                     fdataDesconto(),

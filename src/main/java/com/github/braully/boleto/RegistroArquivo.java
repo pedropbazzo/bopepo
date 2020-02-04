@@ -73,7 +73,7 @@ public class RegistroArquivo extends Record {
     }
 
     public RegistroArquivo banco(String codigo, String nome) {
-        setValue(fbancoCodigo().nome, codigo).setValue(fbancoNome().nome, nome);
+        setValue(fbancoCodigo().nome, codigo).setValue(fbancoNome().nome, nome.toUpperCase());
         return this;
     }
 
