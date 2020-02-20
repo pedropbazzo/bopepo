@@ -22,6 +22,7 @@ import static com.github.braully.boleto.TagLayout.TagCreator.fcedenteCnpj;
 import static com.github.braully.boleto.TagLayout.TagCreator.fcedenteNome;
 import static com.github.braully.boleto.TagLayout.TagCreator.fconta;
 import static com.github.braully.boleto.TagLayout.TagCreator.fconvenio;
+import static com.github.braully.boleto.TagLayout.TagCreator.fsequencialArquivo;
 import static com.github.braully.boleto.TagLayout.TagCreator.fsequencialRegistro;
 import java.text.Format;
 import java.util.ArrayList;
@@ -75,6 +76,10 @@ public class RegistroArquivo extends Record {
     public RegistroArquivo banco(String codigo, String nome) {
         setValue(fbancoCodigo().nome, codigo).setValue(fbancoNome().nome, nome.toUpperCase());
         return this;
+    }
+
+    public Integer sequencialArquivo() {
+        return getValueAsInteger(fsequencialArquivo().nome);
     }
 
     public String bancoCodigo() {
