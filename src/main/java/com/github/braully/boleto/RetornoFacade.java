@@ -47,6 +47,17 @@ public class RetornoFacade extends ArquivoFacade {
         return regs;
     }
 
+    public List<TituloArquivo> detalhesAsTitulos() {
+        List<TituloArquivo> regs = new ArrayList<>();
+        //Melhorar isso, indexar via Map
+        for (RegistroArquivo reg : registros) {
+            if (reg.getName().toLowerCase().startsWith("detalhe")) {
+                regs.add(new TituloArquivo(reg));
+            }
+        }
+        return regs;
+    }
+
     public RegistroArquivo rodapeLote() {
         return this.get("rodapeLote");
     }

@@ -47,21 +47,21 @@ import org.jrimum.utilix.Objects;
 @SuppressWarnings("serial")
 public class Record extends BlockOfFields implements IRecord {
 
-    private String name;
+    protected String name;
 
-    private String description;
+    protected String description;
 
-    private FixedField<String> idType;
+    protected FixedField<String> idType;
 
-    private FixedField<Long> sequencialNumber;
+    protected FixedField<Long> sequencialNumber;
 
-    private boolean headOfGroup;
+    protected boolean headOfGroup;
 
-    private List<IRecord> innerRecords;
+    protected List<IRecord> innerRecords;
 
-    private Set<String> repitablesRecords;
+    protected Set<String> repitablesRecords;
 
-    private List<String> declaredInnerRecords;
+    protected List<String> declaredInnerRecords;
 
     public Record() {
         super();

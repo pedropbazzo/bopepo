@@ -359,7 +359,7 @@ public class LayoutsSuportados {
                     fsacadoCpf().length(15),
                     fsacadoNome().length(40),
                     field("numeroContrato").length(10),
-                    field("valorTarifaCustas").length(15),
+                    fvalorTarifaCustas().length(15),
                     frejeicoes().length(10),
                     field("CNAB").length(17)
             ),
