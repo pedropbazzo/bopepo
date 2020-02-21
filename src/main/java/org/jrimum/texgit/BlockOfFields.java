@@ -168,7 +168,8 @@ public class BlockOfFields extends AbstractStringOfFields<FixedField<?>> impleme
             return true;
         } else {
             throw new IllegalStateException(
-                    format("O comprimento da string [%s] é incompátivel com o definido [%s] no layout do registro!", length, getFixedLength())
+                    format("O comprimento da string [%s] é incompátivel com o definido [%s] no layout do registro!",
+                            length, getFixedLength())
             );
         }
     }

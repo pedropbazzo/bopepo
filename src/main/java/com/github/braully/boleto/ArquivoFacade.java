@@ -62,6 +62,11 @@ public class ArquivoFacade {
         }
 
         for (String linha : linhas) {
+            if (linha == null) {
+                continue;
+            }
+            //Remove new line character
+            linha = linha.replace("\r", "").replace("\n", "");
             RegistroArquivo regLido = null;
             for (RegistroArquivo reg : registrosLayout) {
                 RegistroArquivo clone = reg.clone();
