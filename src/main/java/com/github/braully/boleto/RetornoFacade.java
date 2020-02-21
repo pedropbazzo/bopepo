@@ -28,15 +28,15 @@ public class RetornoFacade extends ArquivoFacade {
         this.template = template;
     }
 
-    RegistroArquivo cabecalho() {
+    public RegistroArquivo cabecalho() {
         return this.get("cabecalho");
     }
 
-    RegistroArquivo cabecalhoLote() {
+    public RegistroArquivo cabecalhoLote() {
         return this.get("cabecalhoLote");
     }
 
-    List<RegistroArquivo> detalhes() {
+    public List<RegistroArquivo> detalhes() {
         List<RegistroArquivo> regs = new ArrayList<>();
         //Melhorar isso, indexar via Map
         for (RegistroArquivo reg : registros) {
@@ -47,11 +47,22 @@ public class RetornoFacade extends ArquivoFacade {
         return regs;
     }
 
-    RegistroArquivo rodapeLote() {
+    public List<TituloArquivo> detalhesAsTitulos() {
+        List<TituloArquivo> regs = new ArrayList<>();
+        //Melhorar isso, indexar via Map
+        for (RegistroArquivo reg : registros) {
+            if (reg.getName().toLowerCase().startsWith("detalhe")) {
+                regs.add(new TituloArquivo(reg));
+            }
+        }
+        return regs;
+    }
+
+    public RegistroArquivo rodapeLote() {
         return this.get("rodapeLote");
     }
 
-    RegistroArquivo rodape() {
+    public RegistroArquivo rodape() {
         return this.get("rodape");
     }
 }

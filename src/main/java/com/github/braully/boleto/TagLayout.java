@@ -533,6 +533,10 @@ public class TagLayout implements Serializable {
             return fvalor().nome("valorLiquido").value(0);
         }
 
+        public static TagLayout fvalorTarifaCustas() {
+            return fvalor().nome("valorTarifaCustas").value(0);
+        }
+
         public static TagLayout fvalorOutrasDespesas() {
             return fvalor().nome("valorOutrasDespesas").value(0);
         }

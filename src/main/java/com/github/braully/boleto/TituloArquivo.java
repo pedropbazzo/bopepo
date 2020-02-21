@@ -26,13 +26,20 @@ import static com.github.braully.boleto.TagLayout.TagCreator.fmovimentoCodigo;
 import static com.github.braully.boleto.TagLayout.TagCreator.fnossoNumero;
 import static com.github.braully.boleto.TagLayout.TagCreator.fnumeroDocumento;
 import static com.github.braully.boleto.TagLayout.TagCreator.focorrencias;
+import static com.github.braully.boleto.TagLayout.TagCreator.frejeicoes;
 import static com.github.braully.boleto.TagLayout.TagCreator.fsacadoCpf;
 import static com.github.braully.boleto.TagLayout.TagCreator.fsacadoNome;
+import static com.github.braully.boleto.TagLayout.TagCreator.fsegmento;
 import static com.github.braully.boleto.TagLayout.TagCreator.fuf;
 import static com.github.braully.boleto.TagLayout.TagCreator.fvalor;
 import static com.github.braully.boleto.TagLayout.TagCreator.fvalorAcrescimo;
 import static com.github.braully.boleto.TagLayout.TagCreator.fvalorDesconto;
+import static com.github.braully.boleto.TagLayout.TagCreator.fvalorLiquido;
 import static com.github.braully.boleto.TagLayout.TagCreator.fvalorOcorrencia;
+import static com.github.braully.boleto.TagLayout.TagCreator.fvalorPagamento;
+import static com.github.braully.boleto.TagLayout.TagCreator.fvalorTarifaCustas;
+import java.util.ArrayList;
+import org.jrimum.texgit.FixedField;
 
 /**
  *
@@ -42,6 +49,16 @@ public class TituloArquivo extends RegistroArquivo {
 
     public TituloArquivo(TagLayout get) {
         super(get);
+    }
+
+    public TituloArquivo(RegistroArquivo reg) {
+        this.name = reg.getName();
+        this.description = reg.getDescricaoLayout();
+        this.declaredInnerRecords = reg.getDeclaredInnerRecords();
+        this.idType = reg.getIdType();
+        this.extraIds = reg.extraIds;
+        this.fields = (ArrayList<FixedField<?>>) reg.getFields();
+        this.layoutRegistro = reg.layoutRegistro;
     }
 
     /* 
@@ -118,7 +135,8 @@ public class TituloArquivo extends RegistroArquivo {
     }
 
     /**
-     * @see com.​github.​braully.​boleto.​TagLayout.​TagCreator.fmovimentoCodigo()
+     * @see
+     * com.​github.​braully.​boleto.​TagLayout.​TagCreator.fmovimentoCodigo()
      */
     public TituloArquivo movimentoCodigo(Object string) {
         return (TituloArquivo) setValue(fmovimentoCodigo().nome, string);
@@ -150,6 +168,10 @@ public class TituloArquivo extends RegistroArquivo {
 
     public String ocorrencias(Object string) {
         return getValue(focorrencias().nome);
+    }
+
+    public String segmento() {
+        return getValue(fsegmento().nome);
     }
 
     public TituloArquivo carteira(String string) {
@@ -187,5 +209,28 @@ public class TituloArquivo extends RegistroArquivo {
 
     public TituloArquivo instrucao(String string) {
         return (TituloArquivo) setValue(string);
+    }
+
+    public String valorPagamento() {
+        return getValue(fvalorPagamento().nome);
+    }
+
+    public String valorLiquido() {
+        return getValue(fvalorLiquido().nome);
+    }
+
+    public String dataOcorrencia() {
+        return getValue(fdataOcorrencia().nome);
+    }
+
+//    public String valorDesconto() {
+//        return getValue(fvalorDesconto().nome);
+//    }
+    public String rejeicoes() {
+        return getValue(frejeicoes().nome);
+    }
+
+    public String valorTarifaCustas() {
+        return getValue(fvalorTarifaCustas().nome);
     }
 }
