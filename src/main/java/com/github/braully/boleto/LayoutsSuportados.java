@@ -879,7 +879,91 @@ public class LayoutsSuportados {
             fbranco().length(211)
         )
     );
+
+    private static final TagLayout _LAYOUT_BRADESCO_CNAB400_REMESSA = flatfile(
+        layout(nome("Layout Padrão Bradesco CNAB400 Remessa"),
+            cnab(CNAB_400),
+            banco("237"),
+            tag("url").value("https://banco.bradesco/assets/pessoajuridica/pdf/4008-524-0121-layout-cobranca-versao-portugues.pdf"),
+            versao("15")
+        ),
+        cabecalho(
+            fcodigoRegistro().length(1).value("0"),
+            fcodigoArquivo().length(1).value("1"),
+            fliteralRemessa().length(7).value("REMESSA"),
+            fservico().length(2),
+            fliteralServico().length(15).value("COBRANCA"),
+            fconvenio().length(20),
+            fcedenteNome().length(30),
+            fbancoCodigo().length(3).value("237"),
+            fbancoNome().length(15).value("BRADESCO"),
+            fdataGeracao().length(6).format(new SimpleDateFormat("ddMMyy")),
+            fbranco().length(8),
+            field("identificacaoSistema").length(2).value("MX"),
+            fsequencialArquivo().length(7).filler(Fillers.ZERO_LEFT),
+            fbranco().length(277),
+            fsequencialRegistro().length(6)
+        ),
+        detalhe(
+            fcodigoRegistro().length(1).value("1"),
+            field("agenciaDebito").length(5).filler(Fillers.ZERO_LEFT).value(0),
+            field("digitoAgenciaDebito").length(1).value(0),
+            field("razaoContaCorrente").length(5).filler(Fillers.ZERO_LEFT).value(0),
+            field("contaCorrente").length(7).filler(Fillers.ZERO_LEFT).value(0),
+            field("digitoContaCorrente").length(1).value(0),
+            fzero().length(1),
+            fcarteira().length(3).filler(Fillers.ZERO_LEFT),
+            fagencia().length(5).filler(Fillers.ZERO_LEFT),
+            fconta().length(8).filler(Fillers.ZERO_LEFT),
+            field("numeroControleParticipante").length(25).filler(Fillers.ZERO_LEFT).value(0),
+            fbancoCodigo().length(3).value("237"),
+            field("campoMulta").length(1).value(0),
+            field("percentualMulta").length(4).filler(Fillers.ZERO_LEFT).value(0),
+            fnossoNumero().length(11).filler(Fillers.ZERO_LEFT),
+            field("digitoNossoNumero").length(1),
+            field("descontoBonificacaoDia").length(10).filler(Fillers.ZERO_LEFT).value(0),
+            field("codicaoEmissaoPapeladaCobranca").length(1).value(2),
+            field("identificacaoBoletoDebito").length(1).value("N"),
+            fbranco().length(10),
+            field("rateioCredito").length(1).value(" "),
+            field("avisoDebitoAutomatico").length(1).value(2),
+            field("quantidadePagamentos").length(2).filler(Fillers.WHITE_SPACE_RIGHT).value(" "),
+            fcodigoOcorrencia().length(2).value("01"),
+            fnumeroDocumento().length(10).filler(Fillers.ZERO_LEFT),
+            fdataVencimento().length(6).format(new SimpleDateFormat("ddMMyy")),
+            fvalor().length(13).filler(Fillers.ZERO_LEFT),
+            fzero().length(3),
+            fzero().length(5),
+            fespecieTitulo().length(2).value("01"),
+            field("identificacao").length(1).value("N"),
+            fdataGeracao().length(6).format(new SimpleDateFormat("ddMMyy")),
+            field("instrucao1").length(2).filler(Fillers.ZERO_LEFT).value(0),
+            field("instrucao2").length(2).filler(Fillers.ZERO_LEFT).value(0),
+            field("moraDiaria").length(13).filler(Fillers.ZERO_LEFT).value(0),
+            fdataDesconto().length(6).format(new SimpleDateFormat("ddMMyy")).value(0),
+            fvalorDesconto().length(13).filler(Fillers.ZERO_LEFT).value(0),
+            fvalorIOF().length(13).filler(Fillers.ZERO_LEFT).value(0),
+            fvalorAbatimento().length(13).filler(Fillers.ZERO_LEFT).value(0),
+            ftipoInscricao().length(2).value("01"),
+            fsacadoCpf().length(14).filler(Fillers.ZERO_LEFT),
+            fsacadoNome().length(40).filler(Fillers.WHITE_SPACE_RIGHT),
+            fendereco().length(40).filler(Fillers.WHITE_SPACE_RIGHT),
+            field("mensagem1").length(12).filler(Fillers.WHITE_SPACE_RIGHT).value(" "),
+            field("sacadoCep").length(8),
+            field("mensagem2").length(60).filler(Fillers.WHITE_SPACE_RIGHT).value(" "),
+            fsequencialRegistro().length(6).filler(Fillers.ZERO_LEFT)
+        ),
+        rodape(
+            fcodigoRegistro().length(1).value("9"),
+            fbranco().length(393),
+            fsequencialRegistro().length(6).filler(Fillers.ZERO_LEFT)
+        )
+    );
     
+    private static final TagLayout _LAYOUT_BRADESCO_CNAB400_RETORNO = flatfile(
+        
+    );
+
     static final TagLayout _LAYOUT_SICREDI_CNAB240 = _LAYOUT_FEBRABAN_CNAB240.clone();
 
     static {
@@ -969,12 +1053,6 @@ public class LayoutsSuportados {
         //TODO: Fazer personalizações Itau
     }
 
-    public static final TagLayout _LAYOUT_BRADESCO_CNAB240 = _LAYOUT_FEBRABAN_CNAB240.clone();
-
-    static {
-        //TODO: Fazer personalizações Bradesco
-    }
-
     public static final TagLayout LAYOUT_FEBRABAN_CNAB240
             = _LAYOUT_FEBRABAN_CNAB240.cloneReadonly();
 
@@ -989,9 +1067,6 @@ public class LayoutsSuportados {
 
     public static final TagLayout LAYOUT_ITAU_CNAB240
             = _LAYOUT_ITAU_CNAB240.cloneReadonly();
-
-    public static final TagLayout LAYOUT_BRADESCO_CNAB240
-            = _LAYOUT_BRADESCO_CNAB240.cloneReadonly();
 
     private static final TagLayout _LAYOUT_FEBRABAN_CNAB240_COBRANCA_REMESSA
             = _LAYOUT_FEBRABAN_CNAB240.clone();
@@ -1011,8 +1086,8 @@ public class LayoutsSuportados {
     private static final TagLayout _LAYOUT_CAIXA_CNAB240_COBRANCA_REMESSA
             = _LAYOUT_CAIXA_CNAB240_REMESSA.clone();
 
-    private static final TagLayout _LAYOUT_BRADESCO_CNAB240_COBRANCA_REMESSA
-            = _LAYOUT_BRADESCO_CNAB240.clone();
+    private static final TagLayout _LAYOUT_BRADESCO_CNAB400_COBRANCA_REMESSA
+            = _LAYOUT_BRADESCO_CNAB400_REMESSA.clone();
 
     static {
         _LAYOUT_FEBRABAN_CNAB240_COBRANCA_REMESSA.get(cabecalho())
@@ -1036,7 +1111,7 @@ public class LayoutsSuportados {
         _LAYOUT_ITAU_CNAB240_COBRANCA_REMESSA.get(cabecalho())
         	.get(fcodigoArquivo()).value('1');
         
-        _LAYOUT_BRADESCO_CNAB240_COBRANCA_REMESSA.get(cabecalho())
+        _LAYOUT_BRADESCO_CNAB400_COBRANCA_REMESSA.get(cabecalho())
         	.get(fcodigoArquivo()).value('1');
     }
 
@@ -1058,8 +1133,8 @@ public class LayoutsSuportados {
     public static final TagLayout LAYOUT_CAIXA_CNAB240_COBRANCA_REMESSA
             = _LAYOUT_CAIXA_CNAB240_COBRANCA_REMESSA.cloneReadonly();
 
-    public static final TagLayout LAYOUT_BRADESCO_CNAB240_COBRANCA_REMESSA
-            = _LAYOUT_BRADESCO_CNAB240_COBRANCA_REMESSA.cloneReadonly();
+    public static final TagLayout LAYOUT_BRADESCO_CNAB400_COBRANCA_REMESSA
+            = _LAYOUT_BRADESCO_CNAB400_COBRANCA_REMESSA.cloneReadonly();
 
     private static final TagLayout _LAYOUT_FEBRABAN_CNAB240_COBRANCA_RETORNO
             = _LAYOUT_FEBRABAN_CNAB240.clone();
@@ -1079,11 +1154,10 @@ public class LayoutsSuportados {
     private static final TagLayout _LAYOUT_CAIXA_CNAB240_COBRANCA_RETORNO
             = _LAYOUT_CAIXA_CNAB240_RETORNO.clone();
 
-    private static final TagLayout _LAYOUT_BRADESCO_CNAB240_COBRANCA_RETORNO
-            = _LAYOUT_BRADESCO_CNAB240.clone();
+    private static final TagLayout _LAYOUT_BRADESCO_CNAB400_COBRANCA_RETORNO
+            = _LAYOUT_BRADESCO_CNAB400_RETORNO.clone();
 
     static {
-
         _LAYOUT_FEBRABAN_CNAB240_COBRANCA_RETORNO.get(cabecalho())
                 .get(fcodigoArquivo()).value('2');
 
@@ -1101,9 +1175,10 @@ public class LayoutsSuportados {
 
         _LAYOUT_ITAU_CNAB240_COBRANCA_RETORNO.get(cabecalho())
                 .get(fcodigoArquivo()).value('2');
-
-        _LAYOUT_BRADESCO_CNAB240_COBRANCA_RETORNO.get(cabecalho())
+        /*
+        _LAYOUT_BRADESCO_CNAB400_COBRANCA_RETORNO.get(cabecalho())
                 .get(fcodigoArquivo()).value('2');
+        */
     }
 
     public static final TagLayout LAYOUT_FEBRABAN_CNAB240_COBRANCA_RETORNO
@@ -1124,10 +1199,9 @@ public class LayoutsSuportados {
     public static final TagLayout LAYOUT_CAIXA_CNAB240_COBRANCA_RETORNO
             = _LAYOUT_CAIXA_CNAB240_COBRANCA_RETORNO.cloneReadonly();
 
-    public static final TagLayout LAYOUT_BRADESCO_CNAB240_COBRANCA_RETORNO
-            = _LAYOUT_BRADESCO_CNAB240_COBRANCA_RETORNO.cloneReadonly();
+    public static final TagLayout LAYOUT_BRADESCO_CNAB400_COBRANCA_RETORNO
+            = _LAYOUT_BRADESCO_CNAB400_COBRANCA_RETORNO.cloneReadonly();
 
-    
     private static final List<TagLayout> layoutsSuportados;
 
     static {
@@ -1151,9 +1225,8 @@ public class LayoutsSuportados {
         layoutsSuportadosTmp.add(LAYOUT_ITAU_CNAB240_COBRANCA_RETORNO);
         layoutsSuportadosTmp.add(LAYOUT_CAIXA_CNAB240_COBRANCA_REMESSA);
         layoutsSuportadosTmp.add(LAYOUT_CAIXA_CNAB240_COBRANCA_RETORNO);
-        layoutsSuportadosTmp.add(LAYOUT_BRADESCO_CNAB240);
-        layoutsSuportadosTmp.add(LAYOUT_BRADESCO_CNAB240_COBRANCA_REMESSA);
-        layoutsSuportadosTmp.add(LAYOUT_BRADESCO_CNAB240_COBRANCA_RETORNO);
+        layoutsSuportadosTmp.add(LAYOUT_BRADESCO_CNAB400_COBRANCA_REMESSA);
+        layoutsSuportadosTmp.add(LAYOUT_BRADESCO_CNAB400_COBRANCA_RETORNO);
 
         /* */
         layoutsSuportados = Collections.unmodifiableList(layoutsSuportadosTmp);
