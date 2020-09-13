@@ -504,7 +504,11 @@ public class TagLayout implements Serializable {
         public static TagLayout fcodigoCarteira() {
             return field("codigoCarteira").length(1).type(Number.class);
         }
-
+        
+        public static TagLayout fcarteira() {
+            return field("carteira").length(3).type(Number.class).filler(Fillers.ZERO_LEFT);
+        }
+        
         public static TagLayout fvalor() {
             return field("valor").length(15).type(Number.class).filler(Fillers.ZERO_LEFT);
         }
@@ -606,7 +610,15 @@ public class TagLayout implements Serializable {
         public static TagLayout fcodigoBaixa() {
             return field("codigoBaixa").length(1).value(2);
         }
-
+        
+        public static TagLayout fliteralRemessa() {
+            return field("literalRemessa").length(7).truncate(true).padding(Fillers.WHITE_SPACE_RIGHT).value("REMESSA");
+        }
+        
+        public static TagLayout fliteralServico() {
+            return field("literalServico").length(15).truncate(true).padding(Fillers.WHITE_SPACE_RIGHT).value("COBRANCA");
+        }
+        
         public static TagLayout fnumeroDocumento() {
             return field("numeroDocumento").type(Number.class).padding(Fillers.ZERO_LEFT);
         }
@@ -959,6 +971,10 @@ public class TagLayout implements Serializable {
             return tagin().with(filhos);
         }
 
+        public static TagLayout detalhe(TagLayout... filhos) {
+            return tagin().with(filhos);
+        }
+        
         public static TagLayout rodape(TagLayout... filhos) {
             return tagin().with(filhos);
         }
