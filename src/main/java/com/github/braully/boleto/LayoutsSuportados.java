@@ -961,7 +961,109 @@ public class LayoutsSuportados {
     );
     
     private static final TagLayout _LAYOUT_BRADESCO_CNAB400_RETORNO = flatfile(
-        
+        layout(nome("Layout Padrão Bradesco CNAB400 Retorno"),
+            cnab(CNAB_400),
+            banco("237"),
+            tag("url").value("https://banco.bradesco/assets/pessoajuridica/pdf/4008-524-0121-layout-cobranca-versao-portugues.pdf"),
+            versao("15")
+        ),
+        cabecalho(
+            fcodigoRegistro().value("0"),
+            fcodigoArquivo(),
+            fliteralRetorno().length(7),
+            fservico().length(2),
+            fliteralServico().length(15),
+            fconvenio().length(20),
+            fcedenteNome().length(30),
+            fbancoCodigo(),
+            fbancoNome().length(15),
+            fdataGeracao().length(6),
+            field("densidadeArquivo").length(8),
+            field("numeroAvisoBancario").length(5),
+            fbranco().length(266),
+            fdataCredito().length(6),
+            fbranco().length(9),
+            fsequencialRegistro().length(6)
+        ),
+        detalhe(
+            fcodigoRegistro().value("1"),
+            ftipoInscricaoCedente().length(2),
+            fcedenteCnpj().length(14),
+            fzero().length(3),
+            fzero().length(1),
+            fcarteira().length(3),
+            fagencia().length(5),
+            fconta().length(8),
+            field("numeroControleParticipante").length(25),
+            fzero().length(8),
+            fnossoNumero().length(11),
+            field("digitoNossoNumero").length(1),
+            fzero().length(22),
+            field("rateioCredito").length(1),
+            field("quantidadePagamentos").length(2),
+            fcodigoCarteira().length(1),
+            fmovimentoCodigo().length(2),
+            fdataOcorrencia().length(6),
+            fnumeroDocumento().length(10),
+            field("identificacaoTituloBanco").length(20),
+            fdataVencimento().length(6),
+            fvalor().length(13),
+            field("bancoCobrador").length(3),
+            field("agenciaCobradora").length(5),
+            fespecieTitulo().length(2),
+            fvalorTarifaCustas().length(13),
+            fvalorOutrasDespesas().length(13),
+            field("jurosOperacaoAtraso").length(13),
+            fvalorIOF().length(13),
+            fvalorAbatimento().length(13),
+            fvalorDesconto().length(13),
+            fvalorPagamento().length(13),
+            fvalorAcrescimo().length(13),
+            fvalorOutrasReceitas().length(13),
+            fbranco().length(2),
+            field("codigoOcorrenciaProtesto").length(1),
+            fdataCredito().length(6),
+            field("origemPagamento").length(3),
+            fbranco().length(10),
+            field("codigoBanco").length(4),
+            field("motivoRejeicao").length(10),
+            fbranco().length(40),
+            field("numeroCartorio").length(2),
+            field("numeroProtocolo").length(10),
+            fbranco().length(14),
+            fsequencialRegistro().length(6)
+        ),
+        rodape(
+            fcodigoRegistro().value("9"),
+            fcodigoArquivo(),
+            field("identificacaoTipoRegistro").length(2),
+            fbancoCodigo(),
+            fbranco().length(10),
+            field("quantidadeTitulosCobranca").length(8),
+            field("valorTotalCobranca").length(14),
+            field("numeroAvisoBancario").length(8),
+            fbranco().length(10),
+            field("quantidadeRegistrosEntradaConfirmada").length(5),
+            field("valorRegistrosEntradaConfirmada").length(12),
+            field("valorRegistrosLiquidacao").length(12),
+            field("quantidadeRegistrosLiquidacao").length(5),
+            field("valorRegistrosLiquidacao").length(12),
+            field("quantidadeRegistrosBaixados").length(5),
+            field("valorRegistrosBaixados").length(12),
+            field("quantidadeRegistrosAbatimentoCancelado").length(5),
+            field("valorRegistrosAbatimentoCancelado").length(12),
+            field("quantidadeRegistrosVencimentoAlterado").length(5),
+            field("valorRegistrosVencimentoAlterado").length(12),
+            field("quantidadeRegistrosAbatimentoConcedido").length(5),
+            field("valorRegistrosAbatimentoConcedido").length(12),
+            field("quantidadeRegistrosConfirmacaoProtesto").length(5),
+            field("valorRegistrosConfirmacaoProtesto").length(12),
+            fbranco().length(174),
+            field("valorTotalRateios").length(15),
+            field("quantidadeRateios").length(8),
+            fbranco().length(9),
+            fsequencialRegistro().length(6)
+        )
     );
 
     static final TagLayout _LAYOUT_SICREDI_CNAB240 = _LAYOUT_FEBRABAN_CNAB240.clone();
@@ -1094,13 +1196,13 @@ public class LayoutsSuportados {
                 .get(fcodigoArquivo()).value('1');
         
         _LAYOUT_SICREDI_CNAB240_COBRANCA_REMESSA.get(cabecalho())
-        		.get(fcodigoArquivo()).value('1');
+                .get(fcodigoArquivo()).value('1');
         
         _LAYOUT_BB_CNAB240_COBRANCA_REMESSA.get(cabecalho())
         	.get(fcodigoArquivo()).value('1');
         
     	_LAYOUT_CAIXA_CNAB240_COBRANCA_REMESSA.get(cabecalho())
-			.get(fcodigoArquivo()).value('1');
+                .get(fcodigoArquivo()).value('1');
     	
         _LAYOUT_SANTANDER_CNAB240_COBRANCA_REMESSA.get(cabecalho())
         	.get(fcodigoArquivo()).value('1');
@@ -1175,10 +1277,9 @@ public class LayoutsSuportados {
 
         _LAYOUT_ITAU_CNAB240_COBRANCA_RETORNO.get(cabecalho())
                 .get(fcodigoArquivo()).value('2');
-        /*
+        
         _LAYOUT_BRADESCO_CNAB400_COBRANCA_RETORNO.get(cabecalho())
                 .get(fcodigoArquivo()).value('2');
-        */
     }
 
     public static final TagLayout LAYOUT_FEBRABAN_CNAB240_COBRANCA_RETORNO
