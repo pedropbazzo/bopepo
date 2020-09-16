@@ -183,7 +183,7 @@ public class TagLayout implements Serializable {
                     .padding(Fillers.ZERO_LEFT)
                     .length(2);
         }
-
+        
         /**
          * Na maioria das vezes o sacado ou o pagador é uma pessoa fisica, por
          * tanto esse metodo de alias.
@@ -613,6 +613,10 @@ public class TagLayout implements Serializable {
         
         public static TagLayout fliteralRemessa() {
             return field("literalRemessa").length(7).truncate(true).padding(Fillers.WHITE_SPACE_RIGHT).value("REMESSA");
+        }
+        
+        public static TagLayout fliteralRetorno() {
+            return field("literalRetorno").length(7).truncate(true).padding(Fillers.WHITE_SPACE_RIGHT).value("RETORNO");
         }
         
         public static TagLayout fliteralServico() {
