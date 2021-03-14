@@ -56,6 +56,9 @@ public class CabecalhoArquivo extends RegistroArquivo {
     public CabecalhoArquivo dataGeracao(Date data) {
         return (CabecalhoArquivo) setValue(data);
     }
+    public CabecalhoArquivo horaGeracao(Date hora) {
+        return (CabecalhoArquivo) setValue(hora);
+    }
 
     public CabecalhoArquivo cedenteCnpj(String string) {
         return (CabecalhoArquivo) setValue(string);

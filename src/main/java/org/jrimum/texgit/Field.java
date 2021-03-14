@@ -1,6 +1,6 @@
 /*
  * Copyright 2008 JRimum Project
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required by
@@ -8,13 +8,13 @@
  * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS
  * OF ANY KIND, either express or implied. See the License for the specific
  * language governing permissions and limitations under the License.
- * 
+ *
  * Created at: 26/07/2008 - 12:44:41
- * 
+ *
  * ================================================================================
- * 
+ *
  * Direitos autorais 2008 JRimum Project
- * 
+ *
  * Licenciado sob a Licença Apache, Versão 2.0 ("LICENÇA"); você não pode usar
  * esse arquivo exceto em conformidade com a esta LICENÇA. Você pode obter uma
  * cópia desta LICENÇA em http://www.apache.org/licenses/LICENSE-2.0 A menos que
@@ -22,9 +22,9 @@
  * esta LICENÇA se dará “COMO ESTÁ”, SEM GARANTIAS OU CONDIÇÕES DE QUALQUER
  * TIPO, sejam expressas ou tácitas. Veja a LICENÇA para a redação específica a
  * reger permissões e limitações sob esta LICENÇA.
- * 
+ *
  * Criado em: 26/07/2008 - 12:44:41
- * 
+ *
  */
 package org.jrimum.texgit;
 
@@ -36,6 +36,7 @@ import java.lang.reflect.Type;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.Format;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Date;
 
@@ -100,6 +101,13 @@ public class Field<G> implements org.jrimum.texgit.IField<G>, TextStream {
      * </p>
      */
     protected boolean truncate;
+
+    /**
+     * <p>
+     * Quando definido, todos os caracteres não numericos são desprezados/removidos
+     * </p>
+     */
+    protected boolean apenasDigitos;
 
     /**
      *
@@ -325,7 +333,14 @@ public class Field<G> implements org.jrimum.texgit.IField<G>, TextStream {
             } else {
                 str = value.toString();
             }
+
+            if (this.apenasDigitos) {
+            	str = StringUtil.eliminateSymbols(str);
+            }
+
             str = fill(str);
+
+
             if (length != null && str.length() != length) {
                 if (!truncate) {
                     throw new IllegalArgumentException("O campo [ " + str
@@ -343,6 +358,11 @@ public class Field<G> implements org.jrimum.texgit.IField<G>, TextStream {
 
         if (value instanceof BigDecimal) {
             BigDecimal decimalValue = (BigDecimal) value;
+
+            if (formatter ==  null) {
+            	formatter = NumberFormat.getInstance();
+            }
+
             decimalValue = decimalValue.movePointRight(((DecimalFormat) formatter).getMaximumFractionDigits());
             ret = decimalValue.toString();
         } else if (value instanceof Number && formatter != null) {
@@ -455,9 +475,10 @@ public class Field<G> implements org.jrimum.texgit.IField<G>, TextStream {
     @Override
     public String toString() {
 
-        return format("Field [name=\"%s\", value=\"%s\", isBlankAccepted=%s, formatter=%s]",
+        return format("Field [name=\"%s\", value=\"%s\", isBlankAccepted=%s, apenasDigitos=%s, formatter=%s]",
                 Objects.whenNull(this.name, EMPTY),
                 Objects.whenNull(this.value, EMPTY),
+                this.apenasDigitos,
                 Objects.whenNull(this.isBlankAccepted(), EMPTY),
                 Objects.whenNull(this.formatter, EMPTY));
 

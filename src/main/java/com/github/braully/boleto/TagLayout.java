@@ -89,7 +89,11 @@ public class TagLayout implements Serializable {
          * @return
          */
         public static TagLayout fagencia() {
-            return field("agencia").length(6).padding(Fillers.ZERO_LEFT);
+            return field("agencia").length(6).padding(Fillers.ZERO_LEFT).apenasDigitos(true);
+        }
+
+        public static TagLayout favorecidoAgencia() {
+            return field("favorecidoAgencia").length(6).padding(Fillers.ZERO_LEFT).apenasDigitos(true);
         }
 
         /**
@@ -127,8 +131,17 @@ public class TagLayout implements Serializable {
             return field("sacadoNome").truncate(true).padding(Fillers.WHITE_SPACE_RIGHT).length(30);
         }
 
+
         public static TagLayout fendereco() {
             return field("endereco").truncate(true).padding(Fillers.WHITE_SPACE_RIGHT).length(40);
+        }
+
+        public static TagLayout fcomplemento() {
+            return field("complemento").truncate(true).padding(Fillers.WHITE_SPACE_RIGHT).length(15);
+        }
+
+        public static TagLayout fnumero() {
+            return field("numero").truncate(true).padding(Fillers.WHITE_SPACE_RIGHT).length(5);
         }
 
         public static TagLayout fbairro() {
@@ -136,7 +149,7 @@ public class TagLayout implements Serializable {
         }
 
         public static TagLayout fcep() {
-            return field("cep").truncate(true).padding(Fillers.ZERO_RIGHT).length(8);
+            return field("cep").truncate(true).padding(Fillers.ZERO_RIGHT).length(8).apenasDigitos(true);
         }
 
         public static TagLayout fcidade() {
@@ -183,7 +196,7 @@ public class TagLayout implements Serializable {
                     .padding(Fillers.ZERO_LEFT)
                     .length(2);
         }
-        
+
         /**
          * Na maioria das vezes o sacado ou o pagador é uma pessoa fisica, por
          * tanto esse metodo de alias.
@@ -202,7 +215,7 @@ public class TagLayout implements Serializable {
          * @return
          */
         public static TagLayout fconvenio() {
-            return field("convenio").padding(Fillers.ZERO_LEFT);
+            return field("convenio").apenasDigitos(true).padding(Fillers.ZERO_LEFT);
         }
 
         /**
@@ -224,24 +237,70 @@ public class TagLayout implements Serializable {
         }
 
         /**
+         * Tipo de Inscrição: '0' = Isento / Não Informado '1' = CPF '2' = CGC /
+         * CNPJ '3' = PIS / PASEP '9' = Outros
+         *
+         * @return
+         */
+        public static TagLayout favorecidoTipoInscricao() {
+            return field("favorecidoTipoInscricao").length(1).padding(Fillers.ZERO_LEFT);
+        }
+
+        public static TagLayout favorecidoInscricao() {
+            return field("favorecidoInscricao").padding(Fillers.ZERO_LEFT).length(14).apenasDigitos(true);
+        }
+
+
+        /**
          * Alias para facilidade, quase sempre o Favorecido é uma Pessoa
          * Juridica.
          */
         public static TagLayout fcedenteCnpj() {
-            return field("cedenteCnpj").padding(Fillers.ZERO_LEFT).length(14);
+            return field("cedenteCnpj").padding(Fillers.ZERO_LEFT).length(14).apenasDigitos(true);
         }
 
         public static TagLayout fcedenteNome() {
             return field("cedenteNome").truncate(true).padding(Fillers.WHITE_SPACE_RIGHT).length(30);
         }
 
+        public static TagLayout ffavorecidoNome() {
+            return field("favorecidoNome").truncate(true).padding(Fillers.WHITE_SPACE_RIGHT).length(30);
+        }
+
+        public static TagLayout ffavorecidoCPFCNPJ() {
+            return field("favorecidoCPFCNPJ").truncate(true).padding(Fillers.ZERO_LEFT).length(20).apenasDigitos(true);
+        }
+
+        public static TagLayout ffavorecidoCodigoBanco() {
+            return fdata().nome("favorecidoCodigoBanco").filler(Fillers.ZERO_LEFT).value(0).apenasDigitos(true);
+        }
+
+        public static TagLayout ffavorecidoAgencia() {
+            return fdata().nome("favorecidoAgencia").filler(Fillers.ZERO_LEFT).value(0).apenasDigitos(true);
+        }
+
+        public static TagLayout ffavorecidoConta() {
+            return fdata().nome("favorecidoConta").filler(Fillers.ZERO_LEFT).value(0).apenasDigitos(true);
+        }
+
+
         public static TagLayout fquantidadeRegistros() {
             return field("quantidadeRegistros").type(Number.class).padding(Fillers.ZERO_LEFT);
+        }
+
+        public static TagLayout fquantidadeLotes() {
+            return field("quantidadeLotes").type(Number.class).padding(Fillers.ZERO_LEFT);
         }
 
         public static TagLayout fvalorTotalRegistros() {
             return field("valorTotalRegistros").type(Number.class).padding(Fillers.ZERO_LEFT);
         }
+
+        public static TagLayout fformaDeTransferencia() {
+            return field("formaDeTransferencia").type(Number.class).padding(Fillers.ZERO_LEFT);
+        }
+
+
 
         /**
          *
@@ -504,11 +563,11 @@ public class TagLayout implements Serializable {
         public static TagLayout fcodigoCarteira() {
             return field("codigoCarteira").length(1).type(Number.class);
         }
-        
+
         public static TagLayout fcarteira() {
             return field("carteira").length(3).type(Number.class).filler(Fillers.ZERO_LEFT);
         }
-        
+
         public static TagLayout fvalor() {
             return field("valor").length(15).type(Number.class).filler(Fillers.ZERO_LEFT);
         }
@@ -610,19 +669,19 @@ public class TagLayout implements Serializable {
         public static TagLayout fcodigoBaixa() {
             return field("codigoBaixa").length(1).value(2);
         }
-        
+
         public static TagLayout fliteralRemessa() {
             return field("literalRemessa").length(7).truncate(true).padding(Fillers.WHITE_SPACE_RIGHT).value("REMESSA");
         }
-        
+
         public static TagLayout fliteralRetorno() {
             return field("literalRetorno").length(7).truncate(true).padding(Fillers.WHITE_SPACE_RIGHT).value("RETORNO");
         }
-        
+
         public static TagLayout fliteralServico() {
             return field("literalServico").length(15).truncate(true).padding(Fillers.WHITE_SPACE_RIGHT).value("COBRANCA");
         }
-        
+
         public static TagLayout fnumeroDocumento() {
             return field("numeroDocumento").type(Number.class).padding(Fillers.ZERO_LEFT);
         }
@@ -812,7 +871,11 @@ public class TagLayout implements Serializable {
          * @return
          */
         public static TagLayout fconta() {
-            return field("conta").length(13).padding(Fillers.ZERO_LEFT);
+            return field("conta").length(13).padding(Fillers.ZERO_LEFT).apenasDigitos(true);
+        }
+
+        public static TagLayout favorecidoConta() {
+            return field("favorecidoConta").length(13).padding(Fillers.ZERO_LEFT).apenasDigitos(true);
         }
 
         /**
@@ -905,6 +968,17 @@ public class TagLayout implements Serializable {
             return fdata().nome("dataDesconto").filler(Fillers.ZERO_LEFT).value(0);
         }
 
+        /**
+         * Data Pagamento Data do Pagamento 145 152 8 - Num P009 Data do
+         * Pagamento Data do pagamento do compromisso. Utilizar o formato
+         * DDMMAAAA, onde: DD = dia MM = mês AAAA = ano
+         *
+         * @return
+         */
+        public static TagLayout fdataPagamento() {
+            return fdata().nome("dataPgamento").filler(Fillers.ZERO_LEFT).value(0);
+        }
+
         public static TagLayout fdataGeracao() {
             return field("dataGeracao").type(Date.class)
                     .format(new SimpleDateFormat("ddMMyyyy"))
@@ -924,17 +998,6 @@ public class TagLayout implements Serializable {
             return field("dataVencimento").length(8).format(new SimpleDateFormat("ddMMyyyy"));
         }
 
-        /**
-         * Data Pagamento Data do Pagamento 145 152 8 - Num P009 Data do
-         * Pagamento Data do pagamento do compromisso. Utilizar o formato
-         * DDMMAAAA, onde: DD = dia MM = mês AAAA = ano
-         *
-         * @return
-         */
-        public static TagLayout fdataPagamento() {
-            return field("dataPagamento").filler(Fillers.ZERO_LEFT).length(8).format(new SimpleDateFormat("ddMMyyyy"));
-        }
-
         public static TagLayout cabecalho(TagLayout... filhos) {
             return tagin().with(filhos);
         }
@@ -944,6 +1007,14 @@ public class TagLayout implements Serializable {
         }
 
         public static TagLayout titulo(TagLayout... filhos) {
+            return tagin().with(filhos);
+        }
+
+        public static TagLayout detalheSegmentoA(TagLayout... filhos) {
+            return tagin().with(filhos);
+        }
+
+        public static TagLayout detalheSegmentoB(TagLayout... filhos) {
             return tagin().with(filhos);
         }
 
@@ -978,7 +1049,7 @@ public class TagLayout implements Serializable {
         public static TagLayout detalhe(TagLayout... filhos) {
             return tagin().with(filhos);
         }
-        
+
         public static TagLayout rodape(TagLayout... filhos) {
             return tagin().with(filhos);
         }
@@ -1150,6 +1221,10 @@ public class TagLayout implements Serializable {
     }
 
     public TagLayout truncate(boolean bol) {
+        return setAttr(bol);
+    }
+
+    public TagLayout apenasDigitos(boolean bol) {
         return setAttr(bol);
     }
 

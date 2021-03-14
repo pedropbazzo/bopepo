@@ -15,8 +15,30 @@
  */
 package com.github.braully.boleto;
 
-import static com.github.braully.boleto.TagLayout.TagCreator.*;
+import static com.github.braully.boleto.TagLayout.TagCreator.banco;
+import static com.github.braully.boleto.TagLayout.TagCreator.cabecalho;
+import static com.github.braully.boleto.TagLayout.TagCreator.cnab;
+import static com.github.braully.boleto.TagLayout.TagCreator.descricao;
+import static com.github.braully.boleto.TagLayout.TagCreator.fagencia;
+import static com.github.braully.boleto.TagLayout.TagCreator.fbranco;
+import static com.github.braully.boleto.TagLayout.TagCreator.fcodigoRegistro;
+import static com.github.braully.boleto.TagLayout.TagCreator.fcodigoRetorno;
+import static com.github.braully.boleto.TagLayout.TagCreator.fconta;
+import static com.github.braully.boleto.TagLayout.TagCreator.fdataGeracao;
+import static com.github.braully.boleto.TagLayout.TagCreator.flatfile;
+import static com.github.braully.boleto.TagLayout.TagCreator.fquantidadeRegistros;
+import static com.github.braully.boleto.TagLayout.TagCreator.fvalorTotalRegistros;
+import static com.github.braully.boleto.TagLayout.TagCreator.fzero;
+import static com.github.braully.boleto.TagLayout.TagCreator.layout;
+import static com.github.braully.boleto.TagLayout.TagCreator.nome;
+import static com.github.braully.boleto.TagLayout.TagCreator.rodape;
+import static com.github.braully.boleto.TagLayout.TagCreator.servico;
+import static com.github.braully.boleto.TagLayout.TagCreator.titulo;
+import static com.github.braully.boleto.TagLayout.TagCreator.versao;
+
+import java.math.BigDecimal;
 import java.util.Date;
+
 import org.jrimum.bopepo.BancosSuportados;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -264,6 +286,158 @@ public class TestRemessaFacade {
         System.err.println(remessaStr);
 //        assertEquals(remessaStr, "");
     }
+
+
+
+	@Test
+	public void testGetLayoutCNAB240PagamentoRemessa() {
+
+		System.out.println(LayoutsSuportados.getLayoutCNAB240PagamentoRemessa("033"));
+		System.out.println(LayoutsSuportados.getLayoutCNAB240PagamentoRemessa("001"));
+		System.out.println(LayoutsSuportados.getLayoutCNAB240PagamentoRemessa("237"));
+		System.out.println(LayoutsSuportados.getLayoutCNAB240PagamentoRemessa("341"));
+
+	}
+
+	@Test
+	public void testRemessaPagamentoSantander240() {
+		RemessaFacade remessa = new RemessaFacade(LayoutsSuportados.getLayoutCNAB240PagamentoRemessa("033"));
+
+		String razaoSocial = "ACME S.A LTDA.";
+		String cnpj = "111.222.33.0001/44";
+
+		String numeroConvenio = "1234567890-1234567890";
+		//testando preenchimento automatico do digito veriricador como 0
+		String agenciaComDigito = "0123";
+		String contaComDigito = "0000123-4";
+		String DAC = " ";
+		int sequencialRegistro = 1;
+
+		remessa.addNovoCabecalho()
+		.dataGeracao(new Date())
+		.horaGeracao(new Date())
+		.sequencialArquivo(22)
+		.cedente(razaoSocial, cnpj)
+		.convenio(numeroConvenio, agenciaComDigito, contaComDigito, DAC);
+
+		remessa.addNovoCabecalhoLote()
+				.forma(1)// 1 = Crédito em Conta Corrente mesmo banco 3 = doc/ted outro banco
+				.convenio(numeroConvenio, agenciaComDigito, contaComDigito, DAC)
+				.cedente(razaoSocial, cnpj)
+				.endereco("Rua XYZ","123","","São Paulo","12345-123", "SP");
+
+
+		BigDecimal valorPagamento = new BigDecimal(5.82).multiply(new BigDecimal(100)).setScale(0,BigDecimal.ROUND_HALF_UP);
+
+		remessa.addNovoDetalheSegmentoA()
+		.numeroDocumento("1")
+		.formaDeTransferencia("000")
+		.favorecidoCodigoBanco("033")
+		.favorecidoAgencia("1234-5")
+		.favorecidoConta("1234-5")
+		 //testando sanitize remover acentos e transformar em maiusculo
+		.favorecidoNome("José da Silva")
+		.dataPagamento(new Date())
+		.valor(valorPagamento)
+		.sequencialRegistro(sequencialRegistro);
+
+		remessa.addNovoDetalheSegmentoB()
+		.numeroDocumento(1)
+		.favorecidoTipoInscricao("1")
+		 //testando sanitize apenasNumeros
+		.favorecidoCPFCNPJ("111.222.33/4-----55")
+		.valor(valorPagamento.toString())
+		.sequencialRegistro(sequencialRegistro)
+		.setValue("data",new Date())
+		.setValue("lote",1);
+
+
+		remessa.addNovoRodapeLote()
+		.quantidadeRegistros(24)
+		.valorTotalRegistros(valorPagamento.toString())
+		.cedente(razaoSocial, cnpj)
+		.convenio(numeroConvenio, agenciaComDigito, contaComDigito, DAC)
+		.setValue("lote",1);
+
+		remessa.addNovoRodape()
+		.quantidadeRegistros(14)
+		.quantidadeLotes(1);
+
+		String remessaStr = remessa.render();
+		System.out.println(remessaStr);
+	}
+
+	@Test
+	public void testRemessaPagamentoBB240() {
+		RemessaFacade remessa = new RemessaFacade(LayoutsSuportados.getLayoutCNAB240PagamentoRemessa("001"));
+
+		String razaoSocial = "ACME S.A LTDA.";
+		String cnpj = "111.222.33.0001/44";
+
+		String numeroConvenio = "12345678";
+		String agenciaComDigito = "0123-4";
+		String contaComDigito = "0000123-4";
+		String DAC = " ";
+		int sequencialRegistro = 1;
+
+		remessa.addNovoCabecalho()
+		.dataGeracao(new Date())
+		.horaGeracao(new Date())
+		.sequencialArquivo(22)
+		.cedente(razaoSocial, cnpj)
+		.convenio(numeroConvenio, agenciaComDigito, contaComDigito, DAC);
+
+		remessa.addNovoCabecalhoLote()
+		.forma(1)// 1 = Crédito em Conta Corrente mesmo banco 3 = doc/ted outro banco
+		.convenio(numeroConvenio, agenciaComDigito, contaComDigito, DAC)
+		.cedente(razaoSocial, cnpj)
+		.endereco("Rua XYZ","123","","São Paulo","12345-123", "SP");
+
+
+		BigDecimal valorPagamento = new BigDecimal(5.82).multiply(new BigDecimal(100)).setScale(0,BigDecimal.ROUND_HALF_UP);
+
+		remessa.addNovoDetalheSegmentoA()
+		.numeroDocumento("1")
+		.formaDeTransferencia("000")
+		.favorecidoCodigoBanco("033")
+		.favorecidoAgencia("1234-5")
+		.favorecidoConta("1234-5")
+		 //testando sanitize remover acentos e transformar em maiusculo
+		.favorecidoNome("José da Silva")
+		.dataPagamento(new Date())
+		.valor(valorPagamento)
+		.sequencialRegistro(sequencialRegistro);
+
+		sequencialRegistro++;
+		remessa.addNovoDetalheSegmentoB()
+		.numeroDocumento(1)
+		.favorecidoTipoInscricao("1")
+		 //testando sanitize apenasNumeros
+		.favorecidoCPFCNPJ("111.222.33/4-----55")
+		.valor(valorPagamento.toString())
+		.sequencialRegistro(sequencialRegistro)
+		.setValue("data",new Date())
+		.setValue("lote",1);
+
+
+
+		remessa.addNovoRodapeLote()
+		.quantidadeRegistros(24)
+		.valorTotalRegistros(valorPagamento.toString())
+		.cedente(razaoSocial, cnpj)
+		.convenio(numeroConvenio, agenciaComDigito, contaComDigito, DAC)
+		.setValue("lote",1)
+		;
+
+		remessa.addNovoRodape()
+		.quantidadeRegistros(18)
+		.quantidadeLotes(1);
+
+		String remessaStr = remessa.render();
+		System.out.println(remessaStr);
+	}
+
+
 
     public TagLayout layoutGenericoTest() {
         TagLayout flatfileLayout = flatfile(

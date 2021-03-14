@@ -25,9 +25,11 @@ import static com.github.braully.boleto.TagLayout.TagCreator.fconvenio;
 import static com.github.braully.boleto.TagLayout.TagCreator.fmovimentoCodigo;
 import static com.github.braully.boleto.TagLayout.TagCreator.fsequencialArquivo;
 import static com.github.braully.boleto.TagLayout.TagCreator.fsequencialRegistro;
+
 import java.text.Format;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.jrimum.texgit.FixedField;
 import org.jrimum.texgit.IFiller;
 import org.jrimum.texgit.Record;
@@ -60,7 +62,7 @@ public class RegistroArquivo extends Record {
 
     public String render() {
 //            StringBuilder sb = new StringBuilder();
-//            return sb.toString(); 
+//            return sb.toString();
         return this.write();
     }
 
@@ -97,12 +99,30 @@ public class RegistroArquivo extends Record {
     }
 
     public RegistroArquivo convenio(String convenio, String agencia, String conta, String dac) {
-        this.convenio(convenio).agencia(agencia).conta(conta).dac(dac);
+
+        this.convenio(convenio)
+        .agencia(agencia)
+        .conta(conta)
+        .dac(dac);
         return this;
     }
 
     public RegistroArquivo convenio(String convenio, String carteira, String agencia, String conta, String dac) {
         this.convenio(convenio).carteira(carteira).agencia(agencia).conta(conta).dac(dac);
+        return this;
+    }
+
+    public RegistroArquivo endereco(String endereco) {
+        return setValue(endereco);
+    }
+
+    public RegistroArquivo endereco(String logradouro, String numero, String complemento,String nomeCidade, String cep, String uf) {
+        this.setValue(logradouro)
+        .setValue("numero",numero)
+		.setValue("complemento",complemento == null ? "" : complemento)
+		.setValue("cidade",nomeCidade)
+		.setValue("cep",cep)
+		.setValue("uf", uf);
         return this;
     }
 
@@ -126,7 +146,14 @@ public class RegistroArquivo extends Record {
         return getValue(fconvenio().nome);
     }
 
-    public RegistroArquivo agencia(String agencia) {
+    //não pode ser marcado como String pois Strings são immmutable, o que faz com que se perca mudanças de sanitize
+    public RegistroArquivo agencia(Object agencia) {
+
+     	if (agencia != null && ((String)agencia).length()== 4 ) {
+    		//caso o usuario não tenha informado o digito verificador, assumir que é 0
+    		agencia = agencia + "-0";
+    	}
+
         return setValue(agencia);
     }
 
@@ -217,6 +244,7 @@ public class RegistroArquivo extends Record {
     protected RegistroArquivo setValue(Object valor) {
         //TODO: Melhorar isso; perda de performance
         String nomeMetodoAnterior = Thread.currentThread().getStackTrace()[2].getMethodName();
+
         /* Propriedade a ser setada é o nome do metodo que chamou */
         this.setValue(nomeMetodoAnterior, valor);
         return this;
@@ -254,6 +282,12 @@ public class RegistroArquivo extends Record {
         if (l.isAttr("truncate")) {
             fixedField.setTruncate(true);
         }
+
+        if (l.isAttr("apenasDigitos")) {
+            fixedField.setApenasDigitos(true);
+        }
+
+
         if (l.isAttr("id")) {
             if (this.getIdType() == null) {
                 setIdType(fixedField);
