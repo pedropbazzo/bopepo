@@ -1,5 +1,4 @@
-# JRimum: BOPEPO
-> Fork por Braully Rocha
+# JRimum: BOPEPO -- Fork por Braully Rocha
 
 
 ## Objetivos desse fork
@@ -22,23 +21,23 @@
 
 ### Suporte para remessa de boletos CNAB 240
 
-- Febraban 240 versão 5.0 (https://portal.febraban.org.br/pagina/3053/33/pt-br/layout-240)
-- Banco do Brasil 240 - 2019 (https://www.bb.com.br/docs/pub/emp/empl/dwn/CNAB240SegPQRSTY.pdf)
-- Bradesco
-- Caixa
-- Itau
-- Santander
-- Sicredi
+- Febraban Cnab 240 - versão 5.0 (https://portal.febraban.org.br/pagina/3053/33/pt-br/layout-240)
+- Banco do Brasil Cnab  240 - 2019 (https://www.bb.com.br/docs/pub/emp/empl/dwn/CNAB240SegPQRSTY.pdf)
+- Bradesco Cnab 400 - versão 15 por @EdsonIsaac (https://banco.bradesco/assets/pessoajuridica/pdf/4008-524-0121-layout-cobranca-versao-portugues.pdf)
+- Caixa Cnag 240 - por @EdsonIsaac http://www.caixa.gov.br/Downloads/cobranca-caixa/Manual_de_Leiaute_de_Arquivo_Eletronico_CNAB_240.pdf
+- Itaiu - Febraban Cnab 240 (necessário fazer personalizações especificas do banco)
+- Santander - Febraban Cnab 240 (necessário fazer personalizações especificas do banco)
+- Sicredi - Febraban Cnab 240 (necessário fazer personalizações especificas do banco)
 
 ###  Suporte para retorno de boletos CNAB 240
 
-- Febraban 240 versão 5.0 (https://portal.febraban.org.br/pagina/3053/33/pt-br/layout-240)
-- Banco do Brasil 240 - 2019 (https://www.bb.com.br/docs/pub/emp/empl/dwn/CNAB240SegPQRSTY.pdf)
-- Bradesco 
-- Caixa
-- Itau
-- Santander
-- Sicredi
+- Febraban Cnab 240 - versão 5.0 (https://portal.febraban.org.br/pagina/3053/33/pt-br/layout-240)
+- Banco do Brasil Cnab  240 - 2019 (https://www.bb.com.br/docs/pub/emp/empl/dwn/CNAB240SegPQRSTY.pdf)
+- Bradesco Cnab 400 - versão 15 by @EdsonIsaac (https://banco.bradesco/assets/pessoajuridica/pdf/4008-524-0121-layout-cobranca-versao-portugues.pdf)
+- Caixa Cnag 240 - by @EdsonIsaac http://www.caixa.gov.br/Downloads/cobranca-caixa/Manual_de_Leiaute_de_Arquivo_Eletronico_CNAB_240.pdf
+- Itau - Febraban Cnab 240 (necessário fazer personalizações especificas do banco)
+- Santander - Febraban Cnab 240 (necessário fazer personalizações especificas do banco)
+- Sicredi - Febraban Cnab 240 (necessário fazer personalizações especificas do banco)
 
 ### Fusão das branches 
 
@@ -220,6 +219,45 @@ Saída:
 ```
 
 
-### Criar um novo layout de remessa ou de retorno:
-TODO: Documentar
+### Criar um novo layout de remessa ou de retorno
 
+```
+import com.github.braully.boleto.TagLayout;
+import static com.github.braully.boleto.TagLayout.TagCreator.*;
+import java.text.SimpleDateFormat;
+
+public class ExemploLayoutSimples {
+
+    /*
+     * Ver exemplo mais detalhado em:
+     * com.github.braully.boleto.LayoutsSuportados._LAYOUT_FEBRABAN_CNAB240
+     */
+    public static void main(String... args) {
+        TagLayout arquivo = tag("arquivo");
+        arquivo.with(
+                tag("cabecalho").with(
+                        //a linha de cabeçalho será ignorada
+                        tag("branco").length(240)
+                ),
+                tag("detalhe").with(
+                        tag("codigoBanco").length(3),
+                        //Val é usado para setar um campo literal fixo: espaçoes em branco, codigos, literais e etc
+                        tag("branco").val("  "),
+                        tag("codigoMoeda").val("09"),
+                        //As tags com id são importantes pra determinar o tipo da linha no layout de retorno
+                        tag("codigoRegistro").length(1).id(true),
+                        tag("segmento").id(true).value("D"),
+                        //Alguns campos podemo precisar de formatação ou parser personalizado, exemplo data
+                        tag("dataVencimento").length(8).format(new SimpleDateFormat("ddMMyyyy"))
+                ),
+                tag("rodape").with(
+                        //a linha de rodape será ignorada
+                        tag("branco").length(240)
+                )
+        );
+
+        //
+        System.out.println(arquivo);
+    }
+}
+```
