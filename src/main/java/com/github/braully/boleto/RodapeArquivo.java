@@ -29,11 +29,15 @@ public class RodapeArquivo extends RegistroArquivo {
         return (RodapeArquivo) setValue(valorQuantidade);
     }
 
+    public RodapeArquivo quantidadeLotes(Number quantidade) {
+        return (RodapeArquivo) setValue(quantidade);
+    }
+
     public Number quantidadeRegistros() {
         return getValueAsNumber();
     }
 
-    public RodapeArquivo valorTotalRegistros(Number valorTotal) {
+    public RodapeArquivo valorTotalRegistros(Object valorTotal) {
         return (RodapeArquivo) setValue(valorTotal);
     }
 }

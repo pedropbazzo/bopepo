@@ -58,6 +58,14 @@ public class RemessaFacade extends ArquivoFacade {
         return titulo;
     }
 
+    public TituloArquivo addNovoDetalheSegmentoA() {
+        return addNovoDetalhe("A");
+    }
+
+    public TituloArquivo addNovoDetalheSegmentoB() {
+        return addNovoDetalhe("B");
+    }
+
     public TituloArquivo addNovoDetalheSegmentoJ() {
         return addNovoDetalhe("J");
     }
@@ -81,7 +89,7 @@ public class RemessaFacade extends ArquivoFacade {
     public TituloArquivo addNovoDetalheTransacao() {
         return addNovoDetalhe();
     }
-    
+
     public TituloArquivo novoTitulo(String tipoTitulo) {
         TituloArquivo titulo = new TituloArquivo(template.get(tipoTitulo));
         return titulo;
