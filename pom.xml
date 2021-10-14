@@ -25,12 +25,12 @@
     </organization>
 
     <issueManagement>
-        <url>http://github.com/jrimum/bopepo/issues</url>
+        <url>http://github.com/braully/bopepo/issues</url>
         <system>GitHub</system>
     </issueManagement>
 
     <scm>
-        <url>http://github.com/jrimum/bopepo</url>
+        <url>http://github.com/braully/bopepo</url>
     </scm>
 	
     <developers>
@@ -141,34 +141,25 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.14.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-1.2-api</artifactId>
+            <version>2.14.1</version>
+        </dependency>
+        <!--        <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>1.2.17</version>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>3.8.1</version>
         </dependency>
-        <!--        <dependency>
-            <groupId>com.lowagie</groupId>
-            <artifactId>itext</artifactId>
-            <version>4.2.1</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>bouncycastle</groupId>
-                    <artifactId>bcmail-jdk14</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>bouncycastle</groupId>
-                    <artifactId>bcprov-jdk14</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>bouncycastle</groupId>
-                    <artifactId>bctsp-jdk14</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>-->
         <dependency>
             <groupId>com.itextpdf</groupId>
             <artifactId>itextpdf</artifactId>
@@ -223,26 +214,4 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
-    <repositories>
-        <repository>
-            <id>jrimum.org</id>
-            <url>http://jrimum.org/maven/content/groups/public/</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
-
-    <distributionManagement>
-        <snapshotRepository>
-            <id>org.jrimum.snapshots</id>
-            <url>http://jrimum.org/maven/content/repositories/org.jrimum.snapshots/</url>
-        </snapshotRepository>
-        <repository>
-            <id>org.jrimum.releases</id>
-            <url>http://jrimum.org/maven/content/repositories/org.jrimum.releases/</url>
-        </repository>
-    </distributionManagement>
-	
 </project>
