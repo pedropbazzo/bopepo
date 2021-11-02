@@ -21,11 +21,11 @@ import org.apache.log4j.Logger;
  *
  * @author braully
  */
-public class RemessaFacade extends ArquivoFacade {
+public class RemessaArquivo extends ArquivoFacade {
 
     public static Logger logger = Logger.getLogger(ArquivoFacade.class);
 
-    public RemessaFacade(TagLayout template) {
+    public RemessaArquivo(TagLayout template) {
         this.template = template;
     }
 

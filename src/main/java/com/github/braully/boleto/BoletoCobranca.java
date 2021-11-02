@@ -41,11 +41,11 @@ import org.jrimum.utilix.DateUtil;
  *
  * @author braully
  */
-public class BoletoFacade extends Boleto {
+public class BoletoCobranca extends Boleto {
 
     public static final String SEPARADOR_DIGITO_VERIFICADOR = "-";
 
-    public BoletoFacade() {
+    public BoletoCobranca() {
         super();
     }
 
@@ -59,7 +59,7 @@ public class BoletoFacade extends Boleto {
     }
 
     /* Metodos da API Publica */
-    public BoletoFacade banco(String numeroBanco) {
+    public BoletoCobranca banco(String numeroBanco) {
         String numeroBancoCompleto = this.completaCodigoBanco(numeroBanco);
         this.getContaBancaria().setBanco(BancosSuportados.instancia(numeroBancoCompleto));
         return this;
@@ -72,7 +72,7 @@ public class BoletoFacade extends Boleto {
      * @param strNumero
      * @return o proprio boleto, para facilidades de utilização.
      */
-    public BoletoFacade agencia(String strNumero) {
+    public BoletoCobranca agencia(String strNumero) {
         Pair<Integer, String> numeroDV = quebraNumeroDV(strNumero);
 
         Integer numero = numeroDV.getLeft();
@@ -94,7 +94,7 @@ public class BoletoFacade extends Boleto {
      * @param strconta
      * @return o proprio boleto, para facilidades de utilização.
      */
-    public BoletoFacade conta(String strconta) {
+    public BoletoCobranca conta(String strconta) {
         Pair<Integer, String> numeroDV = quebraNumeroDV(strconta);
         Integer numero = numeroDV.getLeft();
         String dv = numeroDV.getRight();
@@ -107,35 +107,35 @@ public class BoletoFacade extends Boleto {
         return this;
     }
 
-    public BoletoFacade sacado(String nomeSacado) {
+    public BoletoCobranca sacado(String nomeSacado) {
         this.getSacado().setNome(nomeSacado);
         return this;
     }
 
-    public BoletoFacade sacadoCpf(String cpf) {
+    public BoletoCobranca sacadoCpf(String cpf) {
         String completaCpf = this.completaCpf(cpf);
         this.getSacado().setCPRF(new CPF(completaCpf));
         return this;
     }
 
-    public BoletoFacade sacadoCnpj(String cnpj) {
+    public BoletoCobranca sacadoCnpj(String cnpj) {
         String completaCnpj = this.completaCnpj(cnpj);
         this.getSacado().setCPRF(new CNPJ(completaCnpj));
         return this;
     }
 
-    public BoletoFacade cedente(String nomeSacado) {
+    public BoletoCobranca cedente(String nomeSacado) {
         this.getCedente().setNome(nomeSacado);
         return this;
     }
 
-    public BoletoFacade cedenteCnpj(String cnpj) {
+    public BoletoCobranca cedenteCnpj(String cnpj) {
         cnpj = completaCnpj(cnpj);
         this.getCedente().setCPRF(new CNPJ(cnpj));
         return this;
     }
 
-    public BoletoFacade nossoNumero(String nossoNumero) {
+    public BoletoCobranca nossoNumero(String nossoNumero) {
         Pair<String, String> numeroDV = quebraStringDV(nossoNumero);
 
         String numero = numeroDV.getLeft();
@@ -149,52 +149,52 @@ public class BoletoFacade extends Boleto {
         return this;
     }
 
-    public BoletoFacade valor(BigDecimal big) {
+    public BoletoCobranca valor(BigDecimal big) {
         this.getTitulo().setValor(big);
         return this;
     }
 
-    public BoletoFacade valor(Double valor) {
+    public BoletoCobranca valor(Double valor) {
         this.getTitulo().setValor(BigDecimal.valueOf(valor));
         return this;
     }
 
-    public BoletoFacade valor(long val) {
+    public BoletoCobranca valor(long val) {
         this.getTitulo().setValor(BigDecimal.valueOf(val));
         return this;
     }
 
-    public BoletoFacade dataVencimento(String strDate) {
+    public BoletoCobranca dataVencimento(String strDate) {
         this.getTitulo().setDataDoVencimento(DateUtil.parse(strDate, "dd/MM/yyyy"));
         return this;
     }
 
-    public BoletoFacade dataVencimento(Date datavencimento) {
+    public BoletoCobranca dataVencimento(Date datavencimento) {
         this.getTitulo().setDataDoVencimento(datavencimento);
         return this;
     }
 
-    public BoletoFacade numeroDocumento(Number num) {
+    public BoletoCobranca numeroDocumento(Number num) {
         this.getTitulo().setNumeroDoDocumento("" + num);
         return this;
     }
 
-    public BoletoFacade numeroDocumento(String string) {
+    public BoletoCobranca numeroDocumento(String string) {
         this.getTitulo().setNumeroDoDocumento(string);
         return this;
     }
 
-    public BoletoFacade carteira(String string) {
+    public BoletoCobranca carteira(String string) {
         this.getCarteira().setCodigo(parseInt(string));
         return this;
     }
 
     //Alias
-    public BoletoFacade cobrancaRegistrada(Boolean registrado) {
+    public BoletoCobranca cobrancaRegistrada(Boolean registrado) {
         return carteiraCobrancaRegistrada(registrado);
     }
 
-    public BoletoFacade carteiraCobrancaRegistrada(Boolean registrado) {
+    public BoletoCobranca carteiraCobrancaRegistrada(Boolean registrado) {
         if (registrado) {
             this.getCarteira().setTipoCobranca(TipoDeCobranca.COM_REGISTRO);
         } else {
@@ -203,9 +203,6 @@ public class BoletoFacade extends Boleto {
         return this;
     }
 
-//    public BoletoFacade convenio(String string) {
-//        return this;
-//    }
     /* Metodos internos */
     private String completaCodigoBanco(String banco) {
         String fill = Filler.ZERO_LEFT.fill(banco, 3);
@@ -311,12 +308,12 @@ public class BoletoFacade extends Boleto {
         return Pair.of(numero, dv);
     }
 
-    public BoletoFacade gerarLinhaDigitavel() {
+    public BoletoCobranca gerarLinhaDigitavel() {
         this.processFromTitulo(titulo);
         return this;
     }
 
-    public BoletoFacade parametroBancario(ParametroBancario parametroBancario, Object val) {
+    public BoletoCobranca parametroBancario(ParametroBancario parametroBancario, Object val) {
         ParametrosBancariosMap parametrosBancarios = this.getParametrosBancarios();
         Number valor = null;
         if (val != null) {

@@ -83,23 +83,23 @@ $ ./sh/compile.sh
 
 ### Criar um boleto simples:
 ```
-import com.github.braully.boleto.BoletoFacade;
+import com.github.braully.boleto.BoletoCobranca;
 import org.jrimum.bopepo.view.BoletoViewer;
 
 public class ExemploBoletoSimples {
 
     public static void main(String... args) {
-        BoletoFacade boletoFacade = new BoletoFacade();
-        boletoFacade.sacado("Sacado da Silva Sauro").sacadoCpf("1");
-        boletoFacade.banco("1").agencia("1").conta("1");
-        boletoFacade.cedente("Cedente da Silva Sauro").cedenteCnpj("1");
-        boletoFacade.carteira("1");
-        boletoFacade.numeroDocumento("1")
+        BoletoCobranca BoletoCobranca = new BoletoCobranca();
+        BoletoCobranca.sacado("Sacado da Silva Sauro").sacadoCpf("1");
+        BoletoCobranca.banco("1").agencia("1").conta("1");
+        BoletoCobranca.cedente("Cedente da Silva Sauro").cedenteCnpj("1");
+        BoletoCobranca.carteira("1");
+        BoletoCobranca.numeroDocumento("1")
                 .nossoNumero("1234567890")
                 .valor(100.23).dataVencimento("01/01/2019");
 
-        boletoFacade.gerarLinhaDigitavel();
-        BoletoViewer create = BoletoViewer.create(boletoFacade);
+        BoletoCobranca.gerarLinhaDigitavel();
+        BoletoViewer create = BoletoViewer.create(BoletoCobranca);
         create.getPdfAsFile("./target/teste.pdf");
     }
 }
@@ -109,13 +109,13 @@ public class ExemploBoletoSimples {
 ### Criar um arquivo de remessa de boleto CNAB 240:
 ```
 import com.github.braully.boleto.LayoutsSuportados;
-import com.github.braully.boleto.RemessaFacade;
+import com.github.braully.boleto.RemessaArquivo;
 import java.util.Date;
 
 public class ExemploRemessaSimles {
 
     public static void main(String... args) {
-        RemessaFacade remessa = new RemessaFacade(LayoutsSuportados.LAYOUT_BB_CNAB240_COBRANCA_REMESSA);
+        RemessaArquivo remessa = new RemessaArquivo(LayoutsSuportados.LAYOUT_BB_CNAB240_COBRANCA_REMESSA);
         remessa.addNovoCabecalho()
                 .sequencialArquivo(1)
                 .dataGeracao(new Date()).setVal("horaGeracao", new Date())
@@ -189,7 +189,7 @@ Saída:
 ### Ler um arquivo de retorno de boleto CNAB 240:
 ```
 
-    RetornoFacade retorno = new RetornoFacade(LayoutsSuportados.LAYOUT_FEBRABAN_CNAB240);
+    RetornoArquivo retorno = new RetornoArquivo(LayoutsSuportados.LAYOUT_FEBRABAN_CNAB240);
 
     String[] arrLinhas = BB_EXEMPLO_RETORNO.split("\n");
 

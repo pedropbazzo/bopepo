@@ -29,7 +29,7 @@ public class TestRetornoFacade {
     @Ignore
     @Test
     public void testRetornoCobancaGenericaFebraban240V5() {
-        RetornoFacade retorno = new RetornoFacade(LayoutsSuportados.LAYOUT_FEBRABAN_CNAB240);
+        RetornoArquivo retorno = new RetornoArquivo(LayoutsSuportados.LAYOUT_FEBRABAN_CNAB240);
 
 
         RegistroArquivo cabecalho = retorno.cabecalho();

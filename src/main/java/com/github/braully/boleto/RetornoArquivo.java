@@ -22,9 +22,9 @@ import java.util.List;
  *
  * @author braully
  */
-public class RetornoFacade extends ArquivoFacade {
+public class RetornoArquivo extends ArquivoFacade {
 
-    public RetornoFacade(TagLayout template) {
+    public RetornoArquivo(TagLayout template) {
         this.template = template;
     }
 

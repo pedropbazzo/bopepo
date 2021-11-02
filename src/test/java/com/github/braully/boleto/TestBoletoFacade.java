@@ -28,7 +28,7 @@ public class TestBoletoFacade {
 
     @Test
     public void testBoletoSimples() {
-        BoletoFacade boletoFacade = new BoletoFacade();
+        BoletoCobranca boletoFacade = new BoletoCobranca();
         boletoFacade.sacado("Sacado da Silva Sauro").sacadoCpf("1");
         boletoFacade.banco("1").agencia("1").conta("1");
         boletoFacade.cedente("Cedente da Silva Sauro").cedenteCnpj("1");
@@ -47,7 +47,7 @@ public class TestBoletoFacade {
     //https://github.com/jrimum/bopepo/blob/b0168a10c234b73e6eab681c4d508397208b477b/src/examples/java/org/jrimum/bopepo/exemplo/banco/sicredi/BoletoSicrediExemplo.java
     @Test
     public void testBoletoSicredi() {
-        BoletoFacade boletoFacade = new BoletoFacade();
+        BoletoCobranca boletoFacade = new BoletoCobranca();
         boletoFacade.sacado("Sacado da Silva Sauro").sacadoCpf("1");
         boletoFacade.banco("748").agencia("1").conta("1").carteira("1");
         boletoFacade.cedente("Cedente da Silva Sauro").cedenteCnpj("1");
@@ -70,7 +70,7 @@ public class TestBoletoFacade {
 
     @Test
     public void testBoletoBancoBradesco() {
-        BoletoFacade boletoFacade = new BoletoFacade();
+        BoletoCobranca boletoFacade = new BoletoCobranca();
         boletoFacade.sacado("Teste da silva Sauro")
                 .sacadoCpf("1");
         boletoFacade.banco("237").agencia("4534-9").conta("188-999");
@@ -87,7 +87,7 @@ public class TestBoletoFacade {
 
     @Test
     public void testBoletoBancoSantander() {
-        BoletoFacade boletoFacade = new BoletoFacade();
+        BoletoCobranca boletoFacade = new BoletoCobranca();
         boletoFacade.sacado("Teste do banco santander")
                 .sacadoCpf("04895540162");
         boletoFacade.banco("033").agencia("4536").conta("10008-6");
@@ -103,7 +103,7 @@ public class TestBoletoFacade {
 
     @Test
     public void testBoletoBancoCaixa() {
-        BoletoFacade boletoFacade = new BoletoFacade();
+        BoletoCobranca boletoFacade = new BoletoCobranca();
         boletoFacade.sacado("Sacado da Silva Sauro").sacadoCpf("1");
         boletoFacade.banco("104").agencia("1").conta("1");
         boletoFacade.cedente("Cedente da Silva Sauro").cedenteCnpj("1");
@@ -122,7 +122,7 @@ public class TestBoletoFacade {
 
     @Test
     public void testBoletoBancoItau() {
-        BoletoFacade boletoFacade = new BoletoFacade();
+        BoletoCobranca boletoFacade = new BoletoCobranca();
         boletoFacade.sacado("Sacado da Silva Sauro").sacadoCpf("1");
         boletoFacade.banco("341").agencia("1").conta("1");
         boletoFacade.cedente("Cedente da Silva Sauro").cedenteCnpj("1");

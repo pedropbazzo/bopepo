@@ -52,7 +52,7 @@ public class TestRemessaFacade {
     @Ignore
     @Test
     public void testRemessaCobancaGenericaFebraban240V5SegmentoPQ() {
-        RemessaFacade remessa = new RemessaFacade(LayoutsSuportados.LAYOUT_FEBRABAN_CNAB240_COBRANCA_REMESSA);
+        RemessaArquivo remessa = new RemessaArquivo(LayoutsSuportados.LAYOUT_FEBRABAN_CNAB240_COBRANCA_REMESSA);
         remessa.addNovoCabecalho()
                 .sequencialArquivo(1)
                 .dataGeracao(new Date()).setVal("horaGeracao", new Date())
@@ -103,7 +103,7 @@ public class TestRemessaFacade {
 
     @Test
     public void testRemessaCobancaBBFebraban240V5SegmentoPQ() {
-        RemessaFacade remessa = new RemessaFacade(LayoutsSuportados.LAYOUT_BB_CNAB240_COBRANCA_REMESSA);
+        RemessaArquivo remessa = new RemessaArquivo(LayoutsSuportados.LAYOUT_BB_CNAB240_COBRANCA_REMESSA);
         remessa.addNovoCabecalho()
                 .sequencialArquivo(1)
                 .dataGeracao(new Date()).setVal("horaGeracao", new Date())
@@ -164,7 +164,7 @@ public class TestRemessaFacade {
     @Ignore
     @Test
     public void testRemessaCobancaGenericaFebraban240V5() {
-        RemessaFacade remessa = new RemessaFacade(LayoutsSuportados.LAYOUT_FEBRABAN_CNAB240_COBRANCA_REMESSA);
+        RemessaArquivo remessa = new RemessaArquivo(LayoutsSuportados.LAYOUT_FEBRABAN_CNAB240_COBRANCA_REMESSA);
         remessa.addNovoCabecalho()
                 .sequencialArquivo(1)
                 .dataGeracao(new Date()).setVal("horaGeracao", new Date())
@@ -214,7 +214,7 @@ public class TestRemessaFacade {
     @Ignore
     @Test
     public void testRemessaCobancaGenericaSicredi240V5() {
-        RemessaFacade remessa = new RemessaFacade(LayoutsSuportados.LAYOUT_FEBRABAN_CNAB240_COBRANCA_REMESSA);
+        RemessaArquivo remessa = new RemessaArquivo(LayoutsSuportados.LAYOUT_FEBRABAN_CNAB240_COBRANCA_REMESSA);
         remessa.addNovoCabecalho()
                 .sequencialArquivo(1)
                 .dataGeracao(new Date()).setVal("horaGeracao", new Date())
@@ -264,7 +264,7 @@ public class TestRemessaFacade {
     @Ignore
     @Test
     public void testRemessaVazia() {
-        RemessaFacade remessa = new RemessaFacade(layoutGenericoTest());
+        RemessaArquivo remessa = new RemessaArquivo(layoutGenericoTest());
         remessa.addNovoCabecalho().agencia("1")
                 .conta("1").numeroConvenio("1")
                 .cedente("ACME S.A LTDA.").cedenteCnpj("1")
@@ -301,7 +301,7 @@ public class TestRemessaFacade {
 
 	@Test
 	public void testRemessaPagamentoSantander240() {
-		RemessaFacade remessa = new RemessaFacade(LayoutsSuportados.getLayoutCNAB240PagamentoRemessa("033"));
+		RemessaArquivo remessa = new RemessaArquivo(LayoutsSuportados.getLayoutCNAB240PagamentoRemessa("033"));
 
 		String razaoSocial = "ACME S.A LTDA.";
 		String cnpj = "111.222.33.0001/44";
@@ -369,7 +369,7 @@ public class TestRemessaFacade {
 
 	@Test
 	public void testRemessaPagamentoBB240() {
-		RemessaFacade remessa = new RemessaFacade(LayoutsSuportados.getLayoutCNAB240PagamentoRemessa("001"));
+		RemessaArquivo remessa = new RemessaArquivo(LayoutsSuportados.getLayoutCNAB240PagamentoRemessa("001"));
 
 		String razaoSocial = "ACME S.A LTDA.";
 		String cnpj = "111.222.33.0001/44";
