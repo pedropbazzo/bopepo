@@ -3,13 +3,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.jrimum</groupId>
-    <artifactId>jrimum-bopepo</artifactId>
+    <groupId>io.github.braully</groupId>
+    <artifactId>bopepo-cobranca</artifactId>
     <packaging>jar</packaging>
-    <name>Projeto Bopepo</name>
-    <version>0.2.3.brs-alpha-SNAPSHOT</version>
-    <description>Projeto open source de componentes de software para o domínio de negócios do Brasil.</description>
-    <url>http://www.jrimum.org/bopepo</url>
+    <version>1.0.0-SNAPSHOT</version>
+    <description>This is a fork from Jrimum-Bopepo http://www.jrimum.org </description>
+    <url>http://github.com/braully/bopepo</url>
 
     <licenses>
         <license>
@@ -18,11 +17,6 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
-
-    <organization>
-        <name>Projeto JRimum</name>
-        <url>http://www.jrimum.org</url>
-    </organization>
 
     <issueManagement>
         <url>http://github.com/braully/bopepo/issues</url>
@@ -34,6 +28,11 @@
     </scm>
 	
     <developers>
+        <developer>
+            <name>Braully Rocha da Silva</name>
+            <email>braully@gmail.com</email>
+        </developer>
+        <!--Original developers from project: JRimum Bopepo --> 
         <developer>
             <name>Gilmar P. S. L.</name>
             <email>gilmatryx@gmail.com</email>
@@ -53,8 +52,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
 
-    <build>
-	
+    <build>	
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
@@ -74,30 +72,6 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
-            <!--            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>animal-sniffer-maven-plugin</artifactId>
-                <version>1.6</version>
-                <configuration>
-                    <signature>
-                        <groupId>org.codehaus.mojo.signature</groupId>
-                        <artifactId>java18</artifactId>
-                        <version>1.0</version>
-                    </signature>
-                    <ignores>
-                        <ignore>java.nio.*</ignore>
-                    </ignores>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>animal-sniffer</id>
-                        <phase>compile</phase>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>-->
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <version>2.4</version>
@@ -150,11 +124,6 @@
             <artifactId>log4j-1.2-api</artifactId>
             <version>2.14.1</version>
         </dependency>
-        <!--        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.17</version>
-        </dependency>-->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
