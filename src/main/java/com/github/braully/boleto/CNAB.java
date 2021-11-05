@@ -35,4 +35,4 @@ public enum CNAB {
     public String toString() {
         return len;
     }
-}
+} 
